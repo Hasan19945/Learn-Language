@@ -181,6 +181,12 @@ button.chip{border:0}
 .lit{font-style:italic;color:var(--muted);font-size:.92rem}
 .flash{min-height:320px}
 @media (max-width:420px){.pic{width:64px;font-size:2rem;border-radius:16px}.pic.big{width:104px;font-size:3.1rem}}
+.tok{border:1.5px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 12px;font-weight:700;font-size:1rem}
+.tok:disabled{cursor:default}
+.tok.used{visibility:hidden}
+.built{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-height:58px;padding:10px;border:1.5px dashed var(--line);border-radius:12px}
+.built.right,.input.right{border:1.5px solid var(--ok);background:var(--ok-soft)}
+.built.wrong,.input.wrong{border:1.5px solid var(--bad);background:var(--bad-soft)}
 </style>
 <div id="app"></div>
 <script>// A0 curriculum for Turkish speakers. Bokmål. Every quiz item has a correct answer index (a) and explanation (e).
@@ -1676,7 +1682,7 @@ const NO_PLACEMENT = {
 const COURSES = {
   no: {
     id: "no", name: "Norsk", lang: "Norveççe", yourLang: "Norveççen", key: "adim-adim-norsk-v1", doc: "progress",
-    voice: /^(nb|no|nn)([-_]|$)/i, voiceName: "Norsk bokmål",
+    voice: /^(nb|no|nn)([-_]|$)/i, voiceName: "Norsk bokmål", letters: ["æ", "ø", "å"],
     hero: "Norveççeyi sıfırdan, adım adım öğren.",
     sub: "Açıklamalar Türkçe, örnekler Norveççe (Bokmål)",
     about: "Bu sürüm Türkçe konuşanlar için hazırlandı. Dersler Türkçe ile Norveççe arasındaki farkları özellikle gösteriyor.",
@@ -1710,7 +1716,7 @@ const PASS = 0.8;
 const GOALS = [{ v: 10, t: "Rahat", d: "Günde 10 alıştırma · ~5 dk" }, { v: 20, t: "Düzenli", d: "Günde 20 alıştırma · ~10 dk" }, { v: 40, t: "Yoğun", d: "Günde 40 alıştırma · ~20 dk" }];
 const LEVELS = [{ v: "a0", t: "Hiç bilmiyorum", d: "Her ders: öğren → kartlar → test" }, { v: "a0plus", t: "Biraz biliyorum", d: "Seviye testiyle uygun seviyeni bul" }];
 const FLOW = [{ v: "a0", t: "Adım adım", d: "Her derste sırayla: öğren → kartlar → test" }, { v: "a0plus", t: "Serbest", d: "Kartları atlayıp doğrudan teste geçebilirsin" }];
-const fresh = () => ({ profile: null, lessons: {}, learned: {}, days: {} });
+const fresh = () => ({ profile: null, lessons: {}, learned: {}, days: {}, srs: {} });
 
 // ---------- accounts & saving ----------
 // Five fixed accounts. Passwords are checked as SHA-256 hashes; this keeps people out of each
@@ -1776,6 +1782,14 @@ function streak() {
   while ((S.days[d.toLocaleDateString("sv")] || 0) >= g) { n++; d.setDate(d.getDate() - 1); }
   return n;
 }
+const IV = [1, 3, 7, 14, 30, 60], RV_MAX = 20;
+const addDays = n => { const d = new Date(); d.setDate(d.getDate() + n); return d.toLocaleDateString("sv"); };
+function schedule(id, right) {
+  const c = S.srs[id];
+  if (right && c && c.due > today()) return;
+  const n = right ? Math.min((c?.n || 0) + 1, IV.length) : 0;
+  S.srs[id] = { n, due: addDays(right ? IV[n - 1] : 1) };
+}
 const LV = L => LEVEL_INFO.findIndex(x => x.id === L.level);
 const startLv = () => S.startLevel || 0;
 // A lesson opens when the previous one is passed, when its level is below the placement level,
@@ -1835,6 +1849,8 @@ const interestWords = () => (S.profile?.interests || []).flatMap(k => INTERESTS[
 const lessonWords = L => L.pack === "words" ? [...L.words, ...interestWords()] : L.words;
 const allWords = () => [...LESSONS.flatMap(L => L.words), ...Object.values(INTERESTS).flatMap(P => P.words)];
 const forms = w => w.g ? `<span class="g ${w.g}">${w.g}</span>` : "";
+const upTo = id => LESSONS.slice(0, LESSONS.findIndex(L => L.id === id) + 1).flatMap(L => L.words);
+const dueWords = () => allWords().filter(w => S.srs[w.id]?.due <= today()).sort((a, b) => S.srs[a.id].due.localeCompare(S.srs[b.id].due));
 
 // ---------- components ----------
 // Idiom picture: an emoji scene of the literal meaning. Size shrinks with the number of pictures.
@@ -1945,6 +1961,7 @@ function path() {
   const g = S.profile.goal, done = S.days[today()] || 0, st = streak();
   return `<main class="wrap fade"><header class="top"><span class="brand">Adım Adım <b>${esc(C.name)}</b></span><span class="row" style="gap:6px"><button class="chip acc" data-act="go" data-v="course" aria-label="Dili değiştir">${esc(C.lang)}</button><span class="chip">${LEVEL_INFO[currentLevel()].id}</span><button class="chip acc" data-act="go" data-v="settings" aria-label="Hesap ayarları">${esc(accName(ACC))}</button></span></header>
   <section class="panel goal">${ring(done, g)}<div><h3>Bugünkü hedef: ${Math.min(done, g)} / ${g}</h3><p class="muted">${done >= g ? "Hedef tamam. Bravo!" : `${g - done} alıştırma kaldı.`}${st ? ` · ${st} gün üst üste hedef` : ""}</p></div></section>
+  ${reviewCard()}
   ${placementCard()}
   <section class="stack">${LEVEL_INFO.map((info, li) => levelBlock(info, li)).join("")}
   ${V.lockMsg ? `<p class="panel muted fade">${V.lockMsg}</p>` : ""}
@@ -1968,6 +1985,13 @@ function levelBlock(info, li) {
 function placementCard() {
   const last = (S.placements || []).at(-1);
   return `<section class="panel row" style="justify-content:space-between"><div style="flex:1;min-width:200px"><p class="eyebrow">Seviye testi</p><p>${last ? `Son sonucun: <b>${LEVEL_INFO[last.rec].id}</b> (${esc(last.date)}). İstediğin zaman tekrar ölçebilirsin.` : "Seviyeni bilmiyor musun? Kısa bir testle sana uygun seviyeyi bul."}</p></div><button class="btn" data-act="go" data-v="placement">${last ? "Yeniden ölç" : "Seviyemi ölç"}</button></section>`;
+}
+
+function reviewCard() {
+  const n = dueWords().length, dues = Object.values(S.srs).map(x => x.due).sort();
+  if (!n && !dues.length) return "";
+  const next = dues.length && new Date(dues[0] + "T00:00").toLocaleDateString("tr", { day: "numeric", month: "long" });
+  return `<section class="panel row" style="justify-content:space-between"><div style="flex:1;min-width:200px"><p class="eyebrow">Günlük tekrar</p><p>${n ? `<b>${n}</b> kelimenin tekrar zamanı geldi. Unutmadan önce tekrar etmek, kelimeyi kalıcı hale getirir.` : `Bugün tekrar edilecek kelime yok. Sıradaki tekrar: ${esc(next)}.`}</p></div>${n ? `<button class="btn" data-act="rvStart">Tekrar et</button>` : ""}</section>`;
 }
 
 // ---------- placement test ----------
@@ -2049,6 +2073,7 @@ function cardsStep(L, s) {
 }
 
 // ---------- quiz ----------
+const explain = w => `${w.g ? w.g + " " : ""}${w.no}${w.lit ? ` (“${w.lit}”)` : ""} = ${w.tr}. Örnek: ${w.ex[0]} — ${w.ex[1]}`;
 function vocabQ(w, pool) {
   if (w.pic && Math.random() < 0.5) {
     const opts = shuffle([w, ...pick(pool.filter(x => x.id !== w.id && x.no !== w.no), 3)]);
@@ -2058,12 +2083,36 @@ function vocabQ(w, pool) {
   const others = pick(pool.filter(x => x.id !== w.id && x.tr !== w.tr && x.no !== w.no), 3);
   const key = dir === "no" ? "tr" : "no";
   const opts = shuffle([w, ...others]);
-  return { wid: w.id, q: dir === "no" ? `“${w.no}” ne demek?` : `“${w.tr}” ${C.lang} nasıl söylenir?`, o: opts.map(x => x[key]), a: opts.indexOf(w), e: `${w.g ? w.g + " " : ""}${w.no}${w.lit ? ` (“${w.lit}”)` : ""} = ${w.tr}. Örnek: ${w.ex[0]} — ${w.ex[1]}`, speak: dir === "no" ? tts(w) : null };
+  return { wid: w.id, q: dir === "no" ? `“${w.no}” ne demek?` : `“${w.tr}” ${C.lang} nasıl söylenir?`, o: opts.map(x => x[key]), a: opts.indexOf(w), e: explain(w), speak: dir === "no" ? tts(w) : null };
+}
+const norm = s => s.toLowerCase().normalize("NFC").replace(/[’‘]/g, "'").replace(/[.,!?;:«»"“”¿¡]/g, "").replace(/\s+/g, " ").trim();
+const typable = w => !w.pic && !/\.\.\.|…|\/|\(/.test(w.no) && w.no.split(" ").length <= 4;
+function typeQ(w, pool) {
+  const ok = [w, ...pool.filter(x => x !== w && norm(x.tr) === norm(w.tr))].flatMap(x => [x.no, x.g && x.g + " " + x.no]).filter(Boolean).map(norm);
+  return { type: "type", wid: w.id, q: `“${w.tr}” ${C.lang} nasıl yazılır?`, ok, show: w.no, a: 0, e: explain(w), speak: null };
+}
+function dist(a, b) {
+  const d = Array.from({ length: b.length + 1 }, (_, j) => j);
+  for (let i = 1; i <= a.length; i++) {
+    let p = d[0]; d[0] = i;
+    for (let j = 1; j <= b.length; j++) { const t = d[j]; d[j] = Math.min(d[j] + 1, d[j - 1] + 1, p + (a[i - 1] !== b[j - 1])); p = t; }
+  }
+  return d[b.length];
+}
+const sentences = L => [...new Map([...L.dialogue.map(([, no, tr]) => [no, tr]), ...L.words.map(w => w.ex)].map(s => [s[0], s])).values()]
+  .filter(([no]) => !/\.\.\.|…/.test(no) && no.split(" ").length >= 3 && no.split(" ").length <= 8);
+function orderQ([no, tr]) {
+  const words = no.replace(/[.!?]+$/, "").split(" ");
+  let mix = shuffle(words);
+  for (let k = 0; k < 5 && mix.join(" ") === words.join(" "); k++) mix = shuffle(words);
+  return { type: "order", q: `Cümleyi sırala: “${tr}”`, words, mix, show: no, a: 0, e: `${no} — ${tr}`, speak: null };
 }
 function shuffleQ(q) { const idx = shuffle(q.o.map((_, i) => i)); return { ...q, o: idx.map(i => q.o[i]), a: idx.indexOf(q.a) }; }
+const newQuiz = (qs, x = {}) => ({ queue: qs, total: qs.length, pos: 0, first: 0, picked: null, retry: 0, built: [], typed: "", typo: false, ...x });
 function buildQuiz(i) {
   const L = LESSONS[i], own = L.words, prev = LESSONS.slice(0, i).flatMap(x => x.words);
-  const qs = pick(own, 7).map(w => vocabQ(w, own.length >= 4 ? own : [...own, ...prev]));
+  const qs = pick(own, 7).map((w, k) => k < 2 && typable(w) ? typeQ(w, own) : vocabQ(w, own.length >= 4 ? own : [...own, ...prev]));
+  qs.push(...pick(sentences(L), 2).map(orderQ));
   qs.push(...L.quiz.map(q => shuffleQ(q)));
   if (prev.length) { // spaced review: prefer words not yet answered correctly
     const fresh = prev.filter(w => !S.learned[w.id]);
@@ -2076,19 +2125,39 @@ function buildQuiz(i) {
     pick(ints, 2).forEach(k => { const s = pick(INTERESTS[k].sentences, 1)[0], opts = shuffle([s, ...pick(all.filter(x => x !== s), 2)]);
       qs.push({ q: `“${s[0]}” ne demek?`, o: opts.map(x => x[1]), a: opts.indexOf(s), e: `${s[0]} = ${s[1]}`, speak: s[0] }); });
   }
-  const queue = shuffle(qs);
-  return { queue, total: queue.length, pos: 0, first: 0, picked: null, retry: 0 };
+  return newQuiz(shuffle(qs));
 }
-function quizStep(L, s) {
-  const z = V.quiz;
-  if (z.pos >= z.queue.length) return resultView(L, s);
-  const q = z.queue[z.pos], ans = z.picked !== null, right = ans && z.picked === q.a;
+function buildReview() {
+  const qs = shuffle(dueWords().slice(0, RV_MAX)).map(w => {
+    const pool = [...upTo(w.lesson), ...interestWords()];
+    return typable(w) && Math.random() < 0.4 ? typeQ(w, pool) : vocabQ(w, pool);
+  });
+  return newQuiz(qs, { rev: true });
+}
+function typeBody(z, ans, right) {
+  const letters = C.letters || [];
+  return `<form id="typeForm" class="stack"><input id="ans" class="input ${ans ? (right ? "right" : "wrong") : ""}" value="${esc(z.typed)}" placeholder="Cevabını yaz" aria-label="Cevabın" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" ${ans ? "disabled" : "required"}>
+    ${ans ? "" : `${letters.length ? `<div class="row">${letters.map(t => `<button type="button" class="tok" data-act="ins" data-t="${t}" aria-label="${t} harfini ekle">${t}</button>`).join("")}</div>` : ""}
+    <div class="row"><button type="button" class="btn ghost" data-act="tSkip">Bilmiyorum</button><button class="btn" style="flex:1">Kontrol et</button></div>`}</form>`;
+}
+function orderBody(q, z, ans, right) {
+  return `<div class="built ${ans ? (right ? "right" : "wrong") : ""}" aria-label="Kurduğun cümle">${z.built.map((k, p) => `<button class="tok" data-act="oDel" data-i="${p}" ${ans ? "disabled" : ""}>${esc(q.mix[k])}</button>`).join("") || `<span class="muted">Kelimelere sırayla dokunarak cümleyi kur</span>`}</div>
+    ${ans ? "" : `<div class="row">${q.mix.map((t, k) => z.built.includes(k) ? `<button class="tok used" disabled aria-hidden="true">${esc(t)}</button>` : `<button class="tok" data-act="oAdd" data-i="${k}">${esc(t)}</button>`).join("")}</div>
+    <button class="btn block" data-act="oCheck" ${z.built.length === q.mix.length ? "" : "disabled"}>Kontrol et</button>`}`;
+}
+function question(z) {
+  const q = z.queue[z.pos], ans = z.picked !== null, right = ans && z.picked === q.a, shown = q.show ?? q.o[q.a];
+  const body = q.type === "type" ? typeBody(z, ans, right) : q.type === "order" ? orderBody(q, z, ans, right)
+    : `<div class="opts">${q.o.map((o, i) => `<button class="opt ${ans && i === q.a ? "right" : ans && i === z.picked ? "wrong" : ""}" data-act="answer" data-i="${i}" ${ans ? "disabled" : ""}>${esc(o)}</button>`).join("")}</div>`;
   return `<div class="row" style="justify-content:space-between"><span class="muted">Soru ${Math.min(z.pos + 1, z.queue.length)} / ${z.queue.length}${z.retry ? ` · ${z.retry} tekrar sorusu` : ""}</span><span class="muted">İlk denemede doğru: ${z.first}</span></div>${bar(z.pos / z.queue.length)}
   <section class="stack fade" aria-live="polite">${q.review ? `<p class="eyebrow">Önceki derslerden tekrar</p>` : q.again ? `<p class="eyebrow">Tekrar deneyelim</p>` : ""}
     ${q.pic ? picTile(q, "big") : ""}<div class="row" style="flex-wrap:nowrap"><h2 style="flex:1">${esc(q.q)}</h2>${q.speak ? sayBtn(q.speak) : ""}</div>
-    <div class="opts">${q.o.map((o, i) => `<button class="opt ${ans && i === q.a ? "right" : ans && i === z.picked ? "wrong" : ""}" data-act="answer" data-i="${i}" ${ans ? "disabled" : ""}>${esc(o)}</button>`).join("")}</div>
-    ${ans ? `<div class="fb ${right ? "ok" : "bad"}"><h3>${right ? "Doğru!" : `Doğru cevap: ${esc(q.o[q.a])}`}</h3><p>${esc(q.e)}</p>${right ? "" : `<p class="muted" style="font-size:.88rem;margin-top:6px">Bu soru testin sonunda tekrar sorulacak.</p>`}</div><button class="btn block" data-act="next">Devam</button>` : ""}
+    ${body}
+    ${ans ? `<div class="fb ${right ? "ok" : "bad"}"><h3>${right ? (z.typo ? "Neredeyse doğru!" : "Doğru!") : `Doğru cevap: ${esc(shown)}`}</h3>${right && z.typo ? `<p>Küçük bir yazım hatası var. Doğrusu: <b>${esc(shown)}</b></p>` : ""}<p>${esc(q.e)}</p>${right ? "" : `<p class="muted" style="font-size:.88rem;margin-top:6px">Bu soru ${z.rev ? "bu tekrarın" : "testin"} sonunda tekrar sorulacak.</p>`}</div><button class="btn block" data-act="next">Devam</button>` : ""}
   </section>`;
+}
+function quizStep(L, s) {
+  return V.quiz.pos >= V.quiz.queue.length ? resultView(L, s) : question(V.quiz);
 }
 function resultView(L, s) {
   const z = V.quiz, p = z.first / z.total, pass = p >= PASS, i = V.lesson, next = LESSONS[i + 1];
@@ -2099,6 +2168,17 @@ function resultView(L, s) {
   <div class="stack">${pass && next ? `<button class="btn block" data-act="open" data-i="${i + 1}">Sonraki ders: ${esc(next.title)}</button>` : ""}
   <button class="btn ${pass ? "ghost" : ""} block" data-act="retry">Testi yeniden çöz</button>
   <button class="btn ghost block" data-act="step" data-s="learn">Konuyu tekrar oku</button></div>`;
+}
+
+// ---------- review ----------
+function review() {
+  const z = V.quiz, header = `<header class="top"><button class="icon-btn" data-act="go" data-v="path" aria-label="Öğrenme yoluna dön">${icon("back")}</button><div style="flex:1;min-width:0"><p class="eyebrow">Günlük tekrar</p><h2>Öğrendiğin kelimeleri tekrar et</h2></div></header>`;
+  if (z.pos < z.queue.length) return `<main class="wrap fade">${header}${question(z)}</main>`;
+  const left = dueWords().length;
+  return `<main class="wrap fade">${header}<section class="panel stack fade" style="text-align:center"><p class="eyebrow">Tekrar bitti</p><p class="score">%${Math.round(z.first / z.total * 100)}</p>
+    <p>${z.first} / ${z.total} kelimeyi ilk denemede doğru hatırladın.</p>
+    <p class="muted">Doğru hatırladığın kelimeler daha ileri bir tarihte tekrar sorulacak. Yanlış yaptıkların yarın tekrar karşına çıkacak.</p></section>
+  <div class="stack">${left ? `<button class="btn block" data-act="rvStart">Devam et (${left} kelime daha)</button>` : ""}<button class="btn ${left ? "ghost" : ""} block" data-act="go" data-v="path">Öğrenme yoluna dön</button></div></main>`;
 }
 
 // ---------- progress ----------
@@ -2140,8 +2220,17 @@ function settings() {
 
 // ---------- render & events ----------
 function render() {
-  $app.innerHTML = { login, course, onboard, path, lesson, progress, settings, placement }[V.view]();
+  $app.innerHTML = { login, course, onboard, path, lesson, progress, settings, placement, review }[V.view]();
   if (V.view === "login" && V.pick && !V.busy) document.getElementById("pw")?.focus();
+  const a = document.getElementById("ans"); if (a && !a.disabled) a.focus();
+}
+function grade(right) {
+  const z = V.quiz, q = z.queue[z.pos];
+  if (right && !q.again) z.first++;
+  if (q.wid && !q.again) schedule(q.wid, right);
+  if (right && q.wid) S.learned[q.wid] = true;
+  if (!right) { z.queue.push({ ...(q.o ? shuffleQ(q) : q), again: true, review: false }); z.retry++; }
+  bump();
 }
 function openLesson(i) {
   V.view = "lesson"; V.lesson = i; V.lockMsg = ""; V.openLv = LV(LESSONS[i]); const s = LS(LESSONS[i].id);
@@ -2183,17 +2272,16 @@ const A = {
   know: () => { const f = V.fc; f.deck.shift(); f.known++; f.flipped = false; bump(); if (!f.deck.length) { LS(LESSONS[V.lesson].id).cards = true; save(); } },
   cardsAgain: () => startCards(LESSONS[V.lesson]),
   toQuiz: () => A.step({ s: "quiz" }),
-  answer: d => {
-    const z = V.quiz, q = z.queue[z.pos]; if (z.picked !== null) return;
-    z.picked = +d.i; bump();
-    const right = z.picked === q.a;
-    if (right && !q.again) z.first++;
-    if (right && q.wid) { S.learned[q.wid] = true; save(); }
-    if (!right) { z.queue.push({ ...shuffleQ(q), again: true, review: false }); z.retry++; }
-  },
+  answer: d => { const z = V.quiz; if (z.picked !== null) return; z.picked = +d.i; grade(z.picked === z.queue[z.pos].a); },
+  tSkip: () => { const z = V.quiz; if (z.picked !== null) return; z.typed = ""; z.picked = 1; grade(false); },
+  ins: d => { const i = document.getElementById("ans"); if (!i) return; i.setRangeText(d.t, i.selectionStart, i.selectionEnd, "end"); i.focus(); },
+  oAdd: d => { const z = V.quiz; if (z.picked === null && !z.built.includes(+d.i)) z.built.push(+d.i); },
+  oDel: d => { const z = V.quiz; if (z.picked === null) z.built.splice(+d.i, 1); },
+  oCheck: () => { const z = V.quiz, q = z.queue[z.pos]; if (z.picked !== null) return; const right = z.built.map(k => q.mix[k]).join(" ") === q.words.join(" "); z.picked = right ? 0 : 1; grade(right); },
+  rvStart: () => { V.quiz = buildReview(); V.view = "review"; scrollTo(0, 0); },
   next: () => {
-    const z = V.quiz; z.pos++; z.picked = null;
-    if (z.pos >= z.queue.length) { const s = LS(LESSONS[V.lesson].id), p = z.first / z.total; s.attempts++; s.best = Math.max(s.best, p); if (p >= PASS) s.done = true; save(); }
+    const z = V.quiz; z.pos++; z.picked = null; z.built = []; z.typed = ""; z.typo = false;
+    if (z.pos >= z.queue.length && !z.rev) { const s = LS(LESSONS[V.lesson].id), p = z.first / z.total; s.attempts++; s.best = Math.max(s.best, p); if (p >= PASS) s.done = true; save(); }
     scrollTo(0, 0);
   },
   retry: () => { V.quiz = buildQuiz(V.lesson); scrollTo(0, 0); },
@@ -2208,7 +2296,16 @@ const A = {
 };
 document.addEventListener("click", e => {
   const b = e.target.closest("[data-act]"); if (!b || b.disabled) return;
-  if (A[b.dataset.act](b.dataset) !== "async" && b.dataset.act !== "speak") render();
+  if (A[b.dataset.act](b.dataset) !== "async" && b.dataset.act !== "speak" && b.dataset.act !== "ins") render();
+});
+document.addEventListener("submit", e => {
+  if (e.target.id !== "typeForm") return;
+  e.preventDefault();
+  const z = V.quiz, q = z.queue[z.pos]; if (z.picked !== null) return;
+  const v = e.target.querySelector("#ans").value, t = norm(v);
+  const exact = q.ok.includes(t), close = !exact && q.ok.some(o => o.length >= 5 && dist(t, o) <= 1);
+  z.typed = v; z.typo = close; z.picked = exact || close ? 0 : 1; grade(z.picked === 0);
+  render(); document.querySelector('[data-act="next"]')?.focus();
 });
 const remembered = store.get(CUR);
 if (ACCOUNTS.some(a => a.id === remembered)) enter(remembered, false); else render();
