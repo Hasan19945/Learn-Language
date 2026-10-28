@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Adım Adım Norsk</title>
+<title>Adım Adım</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&display=swap">
@@ -50,7 +50,7 @@ p{margin:0}
 .icon-btn svg{width:18px;height:18px}
 
 /* header / nav */
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .brand{font-family:var(--display);font-weight:700;font-size:1.1rem;letter-spacing:-.01em}
 .brand b{color:var(--ei)}
 .nav{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));z-index:5}
@@ -190,7 +190,7 @@ const N = (g, no, def, pl, tr, say, exNo, exTr) => W(no, tr, say, exNo, exTr, { 
 // Idiom: lit = word-for-word Turkish, pic = emoji scene that shows the literal image (memory hook).
 const I = (no, tr, lit, pic, exNo, exTr) => W(no, tr, "", exNo, exTr, { lit, pic });
 
-const LESSONS = [
+const NO_LESSONS = [
 {
   id: "l1", title: "Selamlaşma", no: "Hilsener", icon: "chat",
   intro: "Norveççe seslerle ve günlük selamlaşmalarla başlıyoruz. Bu ifadeleri Norveç'te her gün duyacaksın.",
@@ -408,7 +408,7 @@ const LESSONS = [
 ];
 
 // Optional interest paths. Words attach to lesson 5 (nouns), sentences to lesson 6 (verbs/word order).
-const INTERESTS = {
+const NO_INTERESTS = {
   tech: { label: "Teknoloji", words: [
     N("en", "datamaskin", "datamaskinen", "datamaskiner", "bilgisayar", "datamaşin", "Jeg har en datamaskin.", "Bir bilgisayarım var."),
     N("en", "app", "appen", "apper", "uygulama", "ap", "Det er en app.", "Bu bir uygulama."),
@@ -447,7 +447,7 @@ const INTERESTS = {
     sentences: [["Jeg kjøper brød i butikken.", "Marketten ekmek alıyorum."], ["Vi bor i en leilighet.", "Bir dairede oturuyoruz."]] }
 };
 
-LESSONS.forEach(L => (L.level = "A0"));
+NO_LESSONS.forEach(L => (L.level = "A0"));
 
 // A1 and A2 lessons. Same shape as A0 (see data.js).
 const A1 = [
@@ -855,7 +855,7 @@ const A2 = [
 }
 ];
 A1.forEach(L => (L.level = "A1")); A2.forEach(L => (L.level = "A2"));
-LESSONS.push(...A1, ...A2);
+NO_LESSONS.push(...A1, ...A2);
 
 // B1 and B2 lessons. From B1 on the Turkish-letter pronunciation guide is omitted (say: "").
 const B1 = [
@@ -1253,10 +1253,10 @@ const B2 = [
 }
 ];
 B1.forEach(L => (L.level = "B1")); B2.forEach(L => (L.level = "B2"));
-LESSONS.push(...B1, ...B2);
+NO_LESSONS.push(...B1, ...B2);
 
 // Extra B2 vocabulary, a second B2 idiom lesson, and the C1 level.
-const addWords = (id, ...ws) => LESSONS.find(L => L.id === id).words.push(...ws);
+const addWords = (id, ...ws) => NO_LESSONS.find(L => L.id === id).words.push(...ws);
 
 addWords("b2-1",
   N("en", "henvendelse", "henvendelsen", "henvendelser", "başvuru, talep (yazılı)", "", "Takk for henvendelsen din.", "Talebiniz için teşekkürler."),
@@ -1596,11 +1596,11 @@ const C1 = [
 }
 ];
 B2X.forEach(L => (L.level = "B2")); C1.forEach(L => (L.level = "C1"));
-LESSONS.push(...B2X, ...C1);
+NO_LESSONS.push(...B2X, ...C1);
 
 // Placement test: 8 questions per level; each run asks 5 random ones per level, in order A0 → B2.
 // A level counts as passed with at least PT_PASS correct; the test stops at the first level not passed.
-const LEVEL_INFO = [
+const NO_LEVELS = [
   { id: "A0", title: "Başlangıç", d: "Alfabe, selamlaşma, temel cümleler" },
   { id: "A1", title: "Temel", d: "Aile, alışveriş, saat, ev, ulaşım" },
   { id: "A2", title: "Temel üstü", d: "Geçmiş zaman, doktor, iş, ev sahibi, planlar" },
@@ -1610,7 +1610,7 @@ const LEVEL_INFO = [
 ];
 const PT_PER = 5, PT_PASS = 4;
 const Q = (q, o, e) => ({ q, o, a: 0, e });
-const PLACEMENT = {
+const NO_PLACEMENT = {
   A0: [
     Q("\"Teşekkürler\" Norveççe nasıl söylenir?", ["takk", "hei", "unnskyld", "ja"], "takk = teşekkürler."),
     Q("\"Jeg ___ student.\"", ["er", "har", "bor", "heter"], "er = -dir (olmak): Jeg er student."),
@@ -1673,13 +1673,39 @@ const PLACEMENT = {
   ]
 };
 
-// Assign stable ids (after all levels are loaded)
-LESSONS.forEach(L => L.words.forEach(w => (w.id = L.id + ":" + w.no, w.lesson = L.id)));
-Object.entries(INTERESTS).forEach(([k, P]) => P.words.forEach(w => (w.id = "i:" + k + ":" + w.no, w.lesson = "l5", w.interest = k)));
-if (typeof module !== "undefined") module.exports = { LESSONS, INTERESTS, LEVEL_INFO, PLACEMENT, PT_PER, PT_PASS };
+const COURSES = {
+  no: {
+    id: "no", name: "Norsk", lang: "Norveççe", yourLang: "Norveççen", key: "adim-adim-norsk-v1", doc: "progress",
+    voice: /^(nb|no|nn)([-_]|$)/i, voiceName: "Norsk bokmål",
+    hero: "Norveççeyi sıfırdan, adım adım öğren.",
+    sub: "Açıklamalar Türkçe, örnekler Norveççe (Bokmål)",
+    about: "Bu sürüm Türkçe konuşanlar için hazırlandı. Dersler Türkçe ile Norveççe arasındaki farkları özellikle gösteriyor.",
+    sentenceNote: "Yeni fiiller: ser (izler), spiller (oynar), betaler (öder), kjøper (satın alır). Hepsi mastar + r kuralına uyar.",
+    lessons: NO_LESSONS, interests: NO_INTERESTS, levels: NO_LEVELS, placement: NO_PLACEMENT
+  }
+};
+if (typeof module !== "undefined") module.exports = { COURSES, PT_PER, PT_PASS };
 </script>
+<script src="en/course.js"></script>
+<script src="en/a0.js"></script>
+<script src="en/a1.js"></script>
+<script src="en/a2.js"></script>
+<script src="en/b1.js"></script>
+<script src="en/b2.js"></script>
+<script src="en/c1.js"></script>
 <script>// ---------- state ----------
-const KEY = "adim-adim-norsk-v1";
+Object.values(COURSES).forEach(c => {
+  const wl = c.lessons.find(L => L.pack === "words").id;
+  c.lessons.forEach(L => L.words.forEach(w => (w.id = L.id + ":" + w.no, w.lesson = L.id)));
+  Object.entries(c.interests).forEach(([k, P]) => P.words.forEach(w => (w.id = "i:" + k + ":" + w.no, w.lesson = wl, w.interest = k)));
+});
+let C = COURSES.no, LESSONS = C.lessons, INTERESTS = C.interests, LEVEL_INFO = C.levels, PLACEMENT = C.placement;
+function useCourse(id) {
+  C = COURSES[id] || COURSES.no;
+  ({ lessons: LESSONS, interests: INTERESTS, levels: LEVEL_INFO, placement: PLACEMENT } = C);
+  document.title = "Adım Adım " + C.name;
+  voice = null; findVoice();
+}
 const PASS = 0.8;
 const GOALS = [{ v: 10, t: "Rahat", d: "Günde 10 alıştırma · ~5 dk" }, { v: 20, t: "Düzenli", d: "Günde 20 alıştırma · ~10 dk" }, { v: 40, t: "Yoğun", d: "Günde 40 alıştırma · ~20 dk" }];
 const LEVELS = [{ v: "a0", t: "Hiç bilmiyorum", d: "Her ders: öğren → kartlar → test" }, { v: "a0plus", t: "Biraz biliyorum", d: "Seviye testiyle uygun seviyeni bul" }];
@@ -1698,7 +1724,7 @@ const ACCOUNTS = [
 ];
 const accName = id => ACCOUNTS.find(a => a.id === id)?.name || "";
 const store = { get: k => { try { return localStorage.getItem(k); } catch { return null; } }, set: (k, v) => { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch {} } };
-const localKey = id => KEY + ":" + id, CUR = KEY + ":current";
+const localKey = id => C.key + ":" + id, CUR = "adim-adim-norsk-v1:current", CUR_COURSE = "adim-adim:course";
 let S = fresh(), ACC = null, db = null;
 // sync: "wait" (checking) | "cloud" (saved online) | "local" (only this device) | "readonly" (no write access) | "error"
 let sync = "wait";
@@ -1713,7 +1739,7 @@ async function loadAccount(id) {
   let remote = null, local = null;
   try { local = JSON.parse(store.get(localKey(id))); } catch {}
   if (db) {
-    try { const s = await db.doc("progress/" + id).get(); if (s.exists) remote = s.data(); sync = "cloud"; }
+    try { const s = await db.doc(C.doc + "/" + id).get(); if (s.exists) remote = s.data(); sync = "cloud"; }
     catch { sync = "error"; }
   } else sync = "local";
   const useLocal = local && (!remote || (local.updatedAt || 0) > (remote.updatedAt || 0));
@@ -1733,7 +1759,7 @@ async function flush() {
   if (!db || !dirty || writing || !ACC) return;
   writing = true; dirty = false;
   const before = sync;
-  try { await db.doc("progress/" + ACC).set(JSON.parse(JSON.stringify(S))); sync = "cloud"; }
+  try { await db.doc(C.doc + "/" + ACC).set(JSON.parse(JSON.stringify(S))); sync = "cloud"; }
   catch (e) { if (e?.code === "invalid_argument") sync = "readonly"; else { sync = "error"; dirty = true; } }
   writing = false;
   if (dirty && sync === "error") timer = setTimeout(flush, 5000);
@@ -1792,7 +1818,7 @@ const icon = (n, cls = "") => `<svg class="${cls}" viewBox="0 0 24 24" fill="non
 let voice = null;
 function findVoice() {
   if (!("speechSynthesis" in window)) return;
-  const v = speechSynthesis.getVoices().find(x => /^(nb|no|nn)([-_]|$)/i.test(x.lang));
+  const v = speechSynthesis.getVoices().find(x => C.voice.test(x.lang));
   if (v && !voice) { voice = v; render(); }
 }
 if ("speechSynthesis" in window) { findVoice(); speechSynthesis.onvoiceschanged = findVoice; }
@@ -1839,7 +1865,7 @@ function nav() {
 // ---------- login ----------
 function login() {
   if (V.busy) return `<main class="wrap fade"><p class="muted">İlerleme yükleniyor…</p></main>`;
-  return `<main class="wrap fade"><header class="top"><span class="brand">Adım Adım <b>Norsk</b></span></header>
+  return `<main class="wrap fade"><header class="top"><span class="brand">Adım <b>Adım</b></span></header>
   <div class="stack"><h1>Hesabını seç</h1><p class="muted">Her hesabın kendi ilerlemesi var. Hangi cihazdan girersen gir, kaldığın yerden devam edersin.</p></div>
   <div class="choices two">${ACCOUNTS.map(a => `<button class="choice" data-act="pick" data-val="${a.id}" aria-pressed="${V.pick === a.id}"><strong>${esc(a.name)}</strong></button>`).join("")}</div>
   ${V.pick ? `<form class="panel stack fade" id="loginForm"><label for="pw"><strong>${esc(accName(V.pick))}</strong> şifresi</label>
@@ -1848,12 +1874,27 @@ function login() {
     <button class="btn block" type="submit">Giriş yap</button></form>` : ""}
   </main>`;
 }
-async function enter(id, remember) {
-  V.busy = true; render();
-  ACC = id; if (remember) store.set(CUR, id);
-  await loadAccount(id);
-  Object.assign(V, { busy: false, pick: null, loginErr: "", ob: 0, openLv: null, pt: null, draft: { lang: "tr", level: null, goal: null, interests: [] }, view: S.profile ? "path" : "onboard" });
+async function enter(id, fromLogin) {
+  ACC = id;
+  if (!fromLogin) return openCourse(store.get(CUR_COURSE) || "no");
+  store.set(CUR, id);
+  Object.assign(V, { view: "course", pick: null, loginErr: "" });
   render();
+}
+async function openCourse(id) {
+  await flush();
+  V.busy = true; render();
+  useCourse(id); store.set(CUR_COURSE, C.id); sync = "wait";
+  await loadAccount(ACC);
+  Object.assign(V, { busy: false, pick: null, loginErr: "", ob: 0, openLv: null, pt: null, lesson: null, quiz: null, fc: null, lockMsg: "", confirmReset: false, draft: { lang: "tr", level: null, goal: null, interests: [] }, view: S.profile ? "path" : "onboard" });
+  render();
+}
+function course() {
+  if (V.busy) return `<main class="wrap fade"><p class="muted">İlerleme yükleniyor…</p></main>`;
+  const back = S.profile ? `<button class="icon-btn" data-act="go" data-v="path" aria-label="Öğrenme yoluna dön">${icon("back")}</button>` : "";
+  return `<main class="wrap fade"><header class="top">${back}<span class="brand" style="flex:1">Adım <b>Adım</b></span><button class="chip acc" data-act="logout">${esc(accName(ACC))} · Çıkış</button></header>
+  <div class="stack"><h1>Hangi dili öğrenmek istiyorsun?</h1><p class="muted">Her dilin ilerlemesi ayrı kaydedilir. Dili istediğin zaman üst köşedeki düğmeden ya da Ayarlar'dan değiştirebilirsin.</p></div>
+  <div class="choices">${Object.values(COURSES).map(c => `<button class="choice" data-act="course" data-val="${c.id}" aria-pressed="${!!S.profile && C.id === c.id}"><strong>${esc(c.lang)}</strong><small>${esc(c.sub)} · ${c.lessons.length} ders</small></button>`).join("")}</div></main>`;
 }
 async function logout() {
   await flush();
@@ -1879,13 +1920,13 @@ function onboard() {
   let body = "", ok = true;
   if (s === 0) {
     body = `<div class="hero-flag" aria-hidden="true">${[30, 46, 22, 38, 46, 30].map((h, i) => `<span style="height:${h}px;background:var(--${["en", "ei", "accent", "et", "en", "ei"][i]});animation-delay:${i * 60}ms"></span>`).join("")}</div>
-      <h1>Norveççeyi sıfırdan, adım adım öğren.</h1>
+      <h1>${esc(C.hero)}</h1>
       <p class="muted">Kısa dersler, Türkçe açıklamalar ve günlük hayatta işine yarayacak cümleler. Önce birkaç soru soracağız.</p>
       <h2>Ana dilin hangisi?</h2>
-      <div class="choices">${choice("lang", "tr", "Türkçe", "Açıklamalar Türkçe, örnekler Norveççe (Bokmål)")}</div>
-      <p class="muted" style="font-size:.9rem">Bu sürüm Türkçe konuşanlar için hazırlandı. Dersler Türkçe ile Norveççe arasındaki farkları özellikle gösteriyor.</p>`;
+      <div class="choices">${choice("lang", "tr", "Türkçe", esc(C.sub))}</div>
+      <p class="muted" style="font-size:.9rem">${esc(C.about)}</p>`;
   } else if (s === 1) {
-    body = `<h2>Norveççen ne durumda?</h2><div class="choices">${LEVELS.map(l => choice("level", l.v, l.t, l.d)).join("")}</div>
+    body = `<h2>${esc(C.yourLang)} ne durumda?</h2><div class="choices">${LEVELS.map(l => choice("level", l.v, l.t, l.d)).join("")}</div>
       <p class="muted" style="font-size:.9rem">Biraz biliyorsan kurulumdan sonra kısa bir seviye testine girersin ve sana uygun seviye gösterilir. Bir sonraki derse geçmek için ders testini en az %${PASS * 100} ile geçmen gerekir.</p>`;
     ok = !!d.level;
   } else if (s === 2) {
@@ -1902,7 +1943,7 @@ function onboard() {
 // ---------- path ----------
 function path() {
   const g = S.profile.goal, done = S.days[today()] || 0, st = streak();
-  return `<main class="wrap fade"><header class="top"><span class="brand">Adım Adım <b>Norsk</b></span><span class="row" style="gap:6px"><span class="chip">${LEVEL_INFO[currentLevel()].id}</span><button class="chip acc" data-act="go" data-v="settings" aria-label="Hesap ayarları">${esc(accName(ACC))}</button></span></header>
+  return `<main class="wrap fade"><header class="top"><span class="brand">Adım Adım <b>${esc(C.name)}</b></span><span class="row" style="gap:6px"><button class="chip acc" data-act="go" data-v="course" aria-label="Dili değiştir">${esc(C.lang)}</button><span class="chip">${LEVEL_INFO[currentLevel()].id}</span><button class="chip acc" data-act="go" data-v="settings" aria-label="Hesap ayarları">${esc(accName(ACC))}</button></span></header>
   <section class="panel goal">${ring(done, g)}<div><h3>Bugünkü hedef: ${Math.min(done, g)} / ${g}</h3><p class="muted">${done >= g ? "Hedef tamam. Bravo!" : `${g - done} alıştırma kaldı.`}${st ? ` · ${st} gün üst üste hedef` : ""}</p></div></section>
   ${placementCard()}
   <section class="stack">${LEVEL_INFO.map((info, li) => levelBlock(info, li)).join("")}
@@ -1979,7 +2020,7 @@ function lesson() {
 function learnStep(L) {
   const ints = S.profile.interests || [];
   const extra = L.pack === "words" && ints.length ? `<section class="panel stack"><p class="eyebrow">İlgi alanların</p><h3>Ek kelimeler</h3><div class="words">${interestWords().map(wordRow).join("")}</div></section>`
-    : L.pack === "sentences" && ints.length ? `<section class="panel stack"><p class="eyebrow">İlgi alanların</p><h3>Örnek cümleler</h3><div class="dlg">${ints.flatMap(k => INTERESTS[k].sentences.map(([no, tr]) => `<div class="line"><span class="who" title="${esc(INTERESTS[k].label)}">${esc(INTERESTS[k].label[0])}</span><div><p class="no">${esc(no)}</p><p class="tr">${esc(tr)}</p></div>${sayBtn(no)}</div>`)).join("")}</div><p class="muted" style="font-size:.88rem">Yeni fiiller: ser (izler), spiller (oynar), betaler (öder), kjøper (satın alır). Hepsi mastar + r kuralına uyar.</p></section>` : "";
+    : L.pack === "sentences" && ints.length ? `<section class="panel stack"><p class="eyebrow">İlgi alanların</p><h3>Örnek cümleler</h3><div class="dlg">${ints.flatMap(k => INTERESTS[k].sentences.map(([no, tr]) => `<div class="line"><span class="who" title="${esc(INTERESTS[k].label)}">${esc(INTERESTS[k].label[0])}</span><div><p class="no">${esc(no)}</p><p class="tr">${esc(tr)}</p></div>${sayBtn(no)}</div>`)).join("")}</div><p class="muted" style="font-size:.88rem">${esc(C.sentenceNote)}</p></section>` : "";
   return `<p>${esc(L.intro)}</p>
   ${L.notes.map(n => `<section class="panel note"><h3>${esc(n.h)}</h3><p>${esc(n.p)}</p>${n.table ? table(n.table) : ""}</section>`).join("")}
   <aside class="tip"><p class="eyebrow">Türkçe konuşanlar için dikkat</p><p>${esc(L.tip)}</p></aside>
@@ -1999,7 +2040,7 @@ function cardsStep(L, s) {
   const tr = `<span class="big">${esc(w.tr)}</span>`;
   const backInfo = `${w.lit ? `<p class="lit">“${esc(w.lit)}”</p>` : ""}<p class="muted" style="font-size:.92rem"><b class="no">${esc(w.ex[0])}</b><br>${esc(w.ex[1])}</p>${w.g ? `<p class="muted" style="font-size:.85rem">belirli: ${esc(w.def)}${w.pl ? ` · çoğul: ${esc(w.pl)}` : ""}</p>` : ""}`;
   return `<div class="row" style="justify-content:space-between"><span class="muted">${f.known} / ${f.total} biliniyor</span>
-    <button class="btn ghost" style="padding:8px 14px" data-act="dir">${front ? "Norveççe → Türkçe" : "Türkçe → Norveççe"}</button></div>${bar(f.known / f.total)}
+    <button class="btn ghost" style="padding:8px 14px" data-act="dir">${front ? `${esc(C.lang)} → Türkçe` : `Türkçe → ${esc(C.lang)}`}</button></div>${bar(f.known / f.total)}
   <div class="card-wrap"><button class="flash ${f.flipped ? "flipped" : ""}" data-act="flip" aria-label="Kartı çevir">
     <div class="face">${front ? no : tr}<span class="hint">Çevirmek için dokun</span></div>
     <div class="face back">${front ? `<span class="say">${forms(w)} ${esc(w.no)}${w.say ? ` [${esc(w.say)}]` : ""}</span>${tr}` : no}${backInfo}</div></button></div>
@@ -2017,7 +2058,7 @@ function vocabQ(w, pool) {
   const others = pick(pool.filter(x => x.id !== w.id && x.tr !== w.tr && x.no !== w.no), 3);
   const key = dir === "no" ? "tr" : "no";
   const opts = shuffle([w, ...others]);
-  return { wid: w.id, q: dir === "no" ? `“${w.no}” ne demek?` : `“${w.tr}” Norveççe nasıl söylenir?`, o: opts.map(x => x[key]), a: opts.indexOf(w), e: `${w.g ? w.g + " " : ""}${w.no}${w.lit ? ` (“${w.lit}”)` : ""} = ${w.tr}. Örnek: ${w.ex[0]} — ${w.ex[1]}`, speak: dir === "no" ? tts(w) : null };
+  return { wid: w.id, q: dir === "no" ? `“${w.no}” ne demek?` : `“${w.tr}” ${C.lang} nasıl söylenir?`, o: opts.map(x => x[key]), a: opts.indexOf(w), e: `${w.g ? w.g + " " : ""}${w.no}${w.lit ? ` (“${w.lit}”)` : ""} = ${w.tr}. Örnek: ${w.ex[0]} — ${w.ex[1]}`, speak: dir === "no" ? tts(w) : null };
 }
 function shuffleQ(q) { const idx = shuffle(q.o.map((_, i) => i)); return { ...q, o: idx.map(i => q.o[i]), a: idx.indexOf(q.a) }; }
 function buildQuiz(i) {
@@ -2087,18 +2128,19 @@ function settings() {
   }[sync];
   return `<main class="wrap fade"><header><p class="eyebrow">Ayarlar</p><h1>Öğrenme tercihlerin</h1></header>
   <section class="panel stack"><div class="row" style="justify-content:space-between"><h3>${esc(accName(ACC))}</h3><span class="chip ${sync === "cloud" ? "ok" : ""}">${sync === "cloud" ? "Çevrim içi" : "Bu cihazda"}</span></div><p class="muted">${syncText}</p><button class="btn ghost" data-act="logout">Çıkış yap</button></section>
+  <section class="panel stack"><h3>Öğrenilen dil</h3><p class="muted">Şu an <b>${esc(C.lang)}</b> öğreniyorsun. Her dilin ilerlemesi ayrı kaydedilir; dil değiştirince diğer dildeki ilerlemen silinmez.</p><button class="btn ghost" data-act="go" data-v="course">Dili değiştir</button></section>
   <section class="stack"><h3>İlgi alanları</h3><p class="muted">Ders 5 ve 6'daki ek kelimeleri, cümleleri ve test sorularını değiştirir.</p><div class="choices two">${Object.entries(INTERESTS).map(([k, P]) => opt("pToggle", "interests", k, P.label, "", p.interests.includes(k))).join("")}</div></section>
   <section class="stack"><h3>Günlük hedef</h3><div class="choices">${GOALS.map(g => opt("pSet", "goal", g.v, g.t, g.d, p.goal === g.v)).join("")}</div></section>
   <section class="stack"><h3>Ders akışı</h3><div class="choices">${FLOW.map(l => opt("pSet", "level", l.v, l.t, l.d, p.level === l.v)).join("")}</div></section>
   ${placementCard()}
-  <section class="panel stack"><h3>Sesli telaffuz</h3><p class="muted">${voice ? `Norveççe ses bulundu (${esc(voice.name)}). Hoparlör düğmelerine dokunarak dinleyebilirsin.` : "Bu cihazda Norveççe bir ses bulunamadı. Yanlış telaffuz öğretmemek için başka dildeki sesleri kullanmıyoruz; köşeli parantezdeki Türkçe okunuş rehberini kullan. Cihazının dil ayarlarından \"Norsk bokmål\" sesini yüklersen düğmeler otomatik görünür."}</p></section>
-  <section class="panel stack"><h3>İlerlemeyi sıfırla</h3><p class="muted">Sadece ${esc(accName(ACC))} hesabının ilerlemesi silinir: tamamlanan dersler, öğrenilen kelimeler ve günlük kayıtlar. Diğer hesaplar etkilenmez.</p>
+  <section class="panel stack"><h3>Sesli telaffuz</h3><p class="muted">${voice ? `${esc(C.lang)} ses bulundu (${esc(voice.name)}). Hoparlör düğmelerine dokunarak dinleyebilirsin.` : `Bu cihazda ${esc(C.lang)} bir ses bulunamadı. Yanlış telaffuz öğretmemek için başka dildeki sesleri kullanmıyoruz; köşeli parantezdeki Türkçe okunuş rehberini kullan. Cihazının dil ayarlarından "${esc(C.voiceName)}" sesini yüklersen düğmeler otomatik görünür.`}</p></section>
+  <section class="panel stack"><h3>İlerlemeyi sıfırla</h3><p class="muted">Sadece ${esc(accName(ACC))} hesabının ${esc(C.lang)} ilerlemesi silinir: tamamlanan dersler, öğrenilen kelimeler ve günlük kayıtlar. Diğer hesaplar etkilenmez.</p>
   ${V.confirmReset ? `<div class="confirm stack"><strong>Emin misin? Bu işlem geri alınamaz.</strong><div class="row"><button class="btn danger" data-act="reset">Evet, her şeyi sil</button><button class="btn ghost" data-act="cancelReset">Vazgeç</button></div></div>` : `<button class="btn ghost" data-act="askReset">İlerlemeyi sıfırla</button>`}</section></main>${nav()}`;
 }
 
 // ---------- render & events ----------
 function render() {
-  $app.innerHTML = { login, onboard, path, lesson, progress, settings, placement }[V.view]();
+  $app.innerHTML = { login, course, onboard, path, lesson, progress, settings, placement }[V.view]();
   if (V.view === "login" && V.pick && !V.busy) document.getElementById("pw")?.focus();
 }
 function openLesson(i) {
@@ -2161,6 +2203,7 @@ const A = {
   askReset: () => V.confirmReset = true, cancelReset: () => V.confirmReset = false,
   reset: () => { const p = S.profile; S = fresh(); S.profile = p; save(); V.confirmReset = false; V.view = "path"; },
   pick: d => { V.pick = d.val; V.loginErr = ""; },
+  course: d => { openCourse(d.val); return "async"; },
   logout: () => { logout(); return "async"; }
 };
 document.addEventListener("click", e => {

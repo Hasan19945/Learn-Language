@@ -1,6 +1,11 @@
-# Adım Adım Norsk 🇳🇴
+# Adım Adım 🇳🇴 🇬🇧
 
-A step-by-step Norwegian (Bokmål) learning app for Turkish speakers.
+A step-by-step language learning app for Turkish speakers, with two courses:
+
+- **Norsk**: Norwegian (Bokmål), A0–C1
+- **English**: English, A0–C1
+
+After signing in, pick the language you want to learn. Each language keeps its own progress, and you can switch at any time from the button at the top or from Settings.
 
 ## 🔗 Open the app
 
@@ -22,7 +27,7 @@ No installation needed. It works in any browser, on both phone and computer.
 
 1. Click the green **Code** button → **Download ZIP**
 2. Unzip the file
-3. Double-click `index.html`
+3. Double-click `index.html` (keep the `en` folder next to it; it holds the English lessons)
 
 ## 📝 Note
 
