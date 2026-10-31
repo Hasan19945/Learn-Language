@@ -1,4 +1,7 @@
-const EN_C1 = [
+import { I, W, atLevel } from "../helpers";
+import type { LessonDef } from "../../types";
+
+const EN_C1: LessonDef[] = [
 {
   id: "en-c1-1", title: "Akademik dil", no: "Academic English", icon: "school",
   intro: "Raporlar, ödevler ve resmî metinler için akademik İngilizce: isimleştirme, temkinli ifadeler ve resmî bağlaçlar.",
@@ -280,5 +283,4 @@ const EN_C1 = [
   review: ["Atasözünü Türkçe karşılığıyla birlikte öğren.", "Rome wasn't built in a day = Sabırla koruk helva olur.", "not my cup of tea = bana göre değil."]
 }
 ];
-EN_C1.forEach(L => (L.level = "C1"));
-COURSES.en.lessons.push(...EN_C1);
+export default atLevel("C1", EN_C1);

@@ -1,4 +1,7 @@
-const EN_A2 = [
+import { W, atLevel } from "../helpers";
+import type { LessonDef } from "../../types";
+
+const EN_A2: LessonDef[] = [
 {
   id: "en-a2-1", title: "Geçmiş zaman", no: "Past simple", icon: "clock",
   intro: "Dün, geçen hafta ya da yıllar önce olan şeyleri anlatmayı öğreniyoruz: was / were, düzenli ve düzensiz fiiller.",
@@ -220,5 +223,4 @@ const EN_A2 = [
   review: ["will: anlık karar, söz, tahmin. won't = will not.", "be going to: önceden verilmiş karar.", "Present continuous: ayarlanmış randevu (I'm meeting Tom at six)."]
 }
 ];
-EN_A2.forEach(L => (L.level = "A2"));
-COURSES.en.lessons.push(...EN_A2);
+export default atLevel("A2", EN_A2);

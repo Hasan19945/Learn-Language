@@ -1,4 +1,7 @@
-const EN_B2 = [
+import { I, W, atLevel } from "../helpers";
+import type { LessonDef } from "../../types";
+
+const EN_B2: LessonDef[] = [
 {
   id: "en-b2-1", title: "Resmî e-posta", no: "Formal emails", icon: "mail",
   intro: "İş yerine, okula ya da kurumlara resmî e-posta yazmayı öğreniyoruz: açılış, kalıp ifadeler ve kapanış.",
@@ -247,5 +250,4 @@ const EN_B2 = [
   review: ["in the same boat, put your cards on the table: Türkçeyle neredeyse aynı.", "when pigs fly = balık kavağa çıkınca.", "the last straw = bardağı taşıran son damla."]
 }
 ];
-EN_B2.forEach(L => (L.level = "B2"));
-COURSES.en.lessons.push(...EN_B2);
+export default atLevel("B2", EN_B2);
