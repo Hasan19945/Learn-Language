@@ -1,11 +1,20 @@
-COURSES.en = {
+import { Q, W } from "../helpers";
+import type { CourseDef } from "../../types";
+import a0 from "./a0";
+import a1 from "./a1";
+import a2 from "./a2";
+import b1 from "./b1";
+import b2 from "./b2";
+import c1 from "./c1";
+
+export const english: CourseDef = {
   id: "en", name: "English", lang: "İngilizce", yourLang: "İngilizcen", key: "adim-adim-english-v1", doc: "english",
   voice: /^en([-_]|$)/i, voiceName: "English",
   hero: "İngilizceyi sıfırdan, adım adım öğren.",
   sub: "Açıklamalar Türkçe, örnekler İngilizce",
   about: "Bu sürüm Türkçe konuşanlar için hazırlandı. Dersler Türkçe ile İngilizce arasındaki farkları özellikle gösteriyor.",
   sentenceNote: "Yeni fiiller: watch (izlemek), play (oynamak), pay (ödemek), buy (satın almak). he/she/it ile hepsi -s alır: he watches, she plays.",
-  lessons: [],
+  lessons: [...a0, ...a1, ...a2, ...b1, ...b2, ...c1],
   levels: [
     { id: "A0", title: "Başlangıç", d: "Alfabe, selamlaşma, temel cümleler" },
     { id: "A1", title: "Temel", d: "Aile, alışveriş, saat, ev, ulaşım" },

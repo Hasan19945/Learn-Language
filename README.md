@@ -25,9 +25,44 @@ No installation needed. It works in any browser, on both phone and computer.
 
 ## 💻 Run it locally
 
-1. Click the green **Code** button → **Download ZIP**
-2. Unzip the file
-3. Double-click `index.html` (keep the `en` folder next to it; it holds the English lessons)
+The app is built with React, TypeScript and Vite. You need [Node.js](https://nodejs.org/) 20 or newer.
+
+```bash
+npm install
+npm run dev
+```
+
+Then open the address shown in the terminal (usually http://localhost:5173).
+
+Other commands:
+
+- `npm run build` checks the types and builds the site into `dist/`
+- `npm run preview` serves the built site
+- `npm run typecheck` only checks the types
+
+## 🗂️ Project layout
+
+```
+src/
+  main.tsx              entry point
+  App.tsx               sign-in state, loading progress, choosing the screen
+  types.ts              shared types (lessons, words, progress)
+  styles.css
+  data/
+    helpers.ts          W, N, I, Q helpers used by the lesson files
+    norwegian/          Norwegian lessons by level, interests, placement test
+    english/            English lessons by level and course settings
+    courses.ts          builds both courses
+    options.ts          daily goal and lesson flow choices
+  lib/                  logic without UI: progress, quiz building, saving, speech
+  state/AppContext.ts   shared app state for all screens
+  components/           reusable UI pieces (word rows, quiz question, nav, icons)
+  views/                one file per screen; views/lesson/ holds the lesson steps
+```
+
+## 🚀 Deploying
+
+Every push to `main` builds the site and publishes it to GitHub Pages through `.github/workflows/deploy.yml`. In the repository settings, **Pages → Source** must be set to **GitHub Actions**.
 
 ## 📝 Note
 
