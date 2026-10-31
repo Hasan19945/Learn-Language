@@ -1,4 +1,7 @@
-const EN_B1 = [
+import { W, atLevel } from "../helpers";
+import type { LessonDef } from "../../types";
+
+const EN_B1: LessonDef[] = [
 {
   id: "en-b1-1", title: "Resmî işler", no: "Forms and official matters", icon: "doc",
   intro: "Belediye, devlet daireleri ve resmî formlarla uğraşırken gereken dili ve edilgen yapıyı (passive) öğreniyoruz.",
@@ -216,5 +219,4 @@ const EN_B1 = [
   review: ["Past continuous: was/were + -ing (arka plan).", "Past perfect: had + V3 (daha önceki olay).", "used to + fiil = eskiden ...rdı; be used to = alışkın olmak."]
 }
 ];
-EN_B1.forEach(L => (L.level = "B1"));
-COURSES.en.lessons.push(...EN_B1);
+export default atLevel("B1", EN_B1);

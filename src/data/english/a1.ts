@@ -1,4 +1,7 @@
-const EN_A1 = [
+import { W, atLevel } from "../helpers";
+import type { LessonDef } from "../../types";
+
+const EN_A1: LessonDef[] = [
 {
   id: "en-a1-1", title: "Aile", no: "Family", icon: "people",
   intro: "Aileni tanıtmayı ve iyelik sözcüklerini (benim, senin, onun) öğreniyoruz.",
@@ -227,5 +230,4 @@ const EN_A1 = [
   review: ["Hava: It's sunny. It's raining.", "like / love / hate + -ing.", "Sıklık zarfı fiilin önünde, be'nin arkasında: I always walk. She is never late."]
 }
 ];
-EN_A1.forEach(L => (L.level = "A1"));
-COURSES.en.lessons.push(...EN_A1);
+export default atLevel("A1", EN_A1);
