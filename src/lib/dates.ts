@@ -8,5 +8,5 @@ export function addDays(n: number) {
   return dayKey(d);
 }
 
-export const formatDayMonth = (day: string) =>
-  new Date(day + "T00:00").toLocaleDateString("tr", { day: "numeric", month: "long" });
+export const formatDayMonth = (day: string, locale: string) =>
+  new Date(day + "T00:00").toLocaleDateString(locale, { day: "numeric", month: "long" });

@@ -15,7 +15,7 @@ interface Props {
 }
 
 export function QuizResult({ index, quiz, party, onRetry, onRead }: Props) {
-  const { course, go } = useApp();
+  const { course, go, t } = useApp();
   const score = useRef<HTMLParagraphElement>(null);
   const celebrated = useRef(false);
   const L = course.lessons[index], next = course.lessons[index + 1];
@@ -28,31 +28,31 @@ export function QuizResult({ index, quiz, party, onRetry, onRead }: Props) {
   }, [party]);
 
   const message = !pass
-    ? `Geçmek için en az %${PASS * 100} gerekiyor. Konuyu tekrar okuyup yeniden dene; sorular her seferinde karışık gelir.`
-    : !next ? `${L.level} seviyesinin son dersini de geçtin. Tebrikler!`
-    : next.level !== L.level ? `${L.level} seviyesinin son dersini geçtin. ${next.level} seviyesi açıldı!`
-    : `${next.level} · Ders ${positionInLevel(course, index + 1)} açıldı.`;
+    ? t.result.fail(PASS * 100)
+    : !next ? t.result.lastOfAll(L.level)
+    : next.level !== L.level ? t.result.lastOfLevel(L.level, next.level)
+    : t.result.opened(next.level, positionInLevel(course, index + 1));
 
   return (
     <>
       <section className="panel stack fade" style={{ textAlign: "center" }}>
-        <p className="eyebrow">Test sonucu</p>
-        <p ref={score} className={`score ${pass ? "cheer" : ""}`}>%{Math.round(p * 100)}</p>
-        <p>{quiz.first} / {quiz.total} soruyu ilk denemede doğru cevapladın.</p>
+        <p className="eyebrow">{t.result.eyebrow}</p>
+        <p ref={score} className={`score ${pass ? "cheer" : ""}`}>{t.percent(Math.round(p * 100))}</p>
+        <p>{t.result.firstTry(quiz.first, quiz.total)}</p>
         <p className="muted">{message}</p>
       </section>
       <section className="panel stack">
-        <h3>Hızlı tekrar</h3>
+        <h3>{t.result.quickReview}</h3>
         <ul style={{ margin: 0, paddingLeft: 20, display: "grid", gap: 6 }}>
           {L.review.map(r => <li key={r}>{r}</li>)}
         </ul>
       </section>
       <div className="stack">
         {pass && next && (
-          <button className="btn block" onClick={() => go({ name: "lesson", index: index + 1 })}>Sonraki ders: {next.title}</button>
+          <button className="btn block" onClick={() => go({ name: "lesson", index: index + 1 })}>{t.result.nextLesson(next.title)}</button>
         )}
-        <button className={`btn ${pass ? "ghost" : ""} block`} onClick={onRetry}>Testi yeniden çöz</button>
-        <button className="btn ghost block" onClick={onRead}>Konuyu tekrar oku</button>
+        <button className={`btn ${pass ? "ghost" : ""} block`} onClick={onRetry}>{t.result.retry}</button>
+        <button className="btn ghost block" onClick={onRead}>{t.result.reread}</button>
       </div>
     </>
   );

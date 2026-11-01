@@ -51,8 +51,11 @@ export const positionInLevel = (course: Course, i: number) =>
 
 export const allDone = (course: Course, p: Progress) => course.lessons.every(L => lessonProgress(p, L.id).done);
 
+export const nextLesson = (course: Course, p: Progress) =>
+  course.lessons.findIndex((L, j) => levelIndex(course, L) >= startLevel(p) && isUnlocked(course, p, j) && !lessonProgress(p, L.id).done);
+
 export function currentLevel(course: Course, p: Progress) {
-  const i = course.lessons.findIndex((L, j) => levelIndex(course, L) >= startLevel(p) && isUnlocked(course, p, j) && !lessonProgress(p, L.id).done);
+  const i = nextLesson(course, p);
   if (i >= 0) return levelIndex(course, course.lessons[i]);
   return Math.max(startLevel(p), allDone(course, p) ? course.levels.length - 1 : 0);
 }
@@ -76,3 +79,22 @@ export const dueWords = (course: Course, p: Progress) =>
 
 export const lessonsInLevel = (course: Course, levelId: string) =>
   course.lessons.map((L, i) => [L, i] as const).filter(([L]) => L.level === levelId);
+
+export interface CourseSummary {
+  done: number;
+  total: number;
+  level: string;
+  next: number;
+  due: number;
+}
+
+export function courseSummary(course: Course, p: Progress | null): CourseSummary | null {
+  if (!p?.profile) return null;
+  return {
+    done: course.lessons.filter(L => lessonProgress(p, L.id).done).length,
+    total: course.lessons.length,
+    level: course.levels[currentLevel(course, p)].id,
+    next: nextLesson(course, p),
+    due: dueWords(course, p).length
+  };
+}

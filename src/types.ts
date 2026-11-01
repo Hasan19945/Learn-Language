@@ -2,7 +2,8 @@ import type { IconName } from "./components/Icon";
 
 export type Gender = "en" | "ei" | "et";
 export type LevelId = "A0" | "A1" | "A2" | "B1" | "B2" | "C1";
-export type CourseId = "no" | "en";
+export type CourseId = "no" | "en" | "en-nb";
+export type Lang = "tr" | "nb";
 export type Pair = [string, string];
 
 export interface WordDef {
@@ -73,8 +74,11 @@ export type Interest = InterestDef<Word>;
 
 export interface CourseDef {
   id: CourseId;
+  native: Lang;
   name: string;
   lang: string;
+  code: string;
+  variant?: string;
   yourLang: string;
   key: string;
   doc: string;
@@ -99,7 +103,7 @@ export interface Course extends Omit<CourseDef, "lessons" | "interests"> {
 export type Flow = "a0" | "a0plus";
 
 export interface Profile {
-  lang: "tr";
+  lang: Lang;
   level: Flow;
   goal: number;
   interests: string[];

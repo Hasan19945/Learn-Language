@@ -3,10 +3,10 @@ import { useApp } from "../state/AppContext";
 import { Icon } from "./Icon";
 
 export function SayButton({ text }: { text: string }) {
-  const { voice } = useApp();
+  const { voice, t } = useApp();
   if (!voice) return null;
   return (
-    <button className="icon-btn" onClick={() => speak(voice, text)} aria-label={`Dinle: ${text}`}>
+    <button className="icon-btn" onClick={() => speak(voice, text)} aria-label={t.listen(text)}>
       <Icon name="sound" />
     </button>
   );

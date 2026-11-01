@@ -1,5 +1,6 @@
 import { createContext, useContext } from "react";
-import type { Course, CourseId, Progress } from "../types";
+import type { Strings } from "../i18n";
+import type { Course, CourseId, Lang, Progress } from "../types";
 
 export type View =
   | { name: "course" }
@@ -21,8 +22,11 @@ export interface AppContextValue {
   go: (view: View) => void;
   openLevel: number | null;
   setOpenLevel: (level: number) => void;
-  openCourse: (id: CourseId) => void;
+  openCourse: (id: CourseId, resume?: boolean) => void;
   logout: () => void;
+  t: Strings;
+  uiLang: Lang;
+  setUiLang: (lang: Lang) => void;
 }
 
 export const AppContext = createContext<AppContextValue | null>(null);

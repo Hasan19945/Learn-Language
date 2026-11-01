@@ -29,14 +29,14 @@ interface Props {
 }
 
 export function CardsStep({ deck, side, onSide, onAgain, onKnow, onFlip, onRestart, onQuiz }: Props) {
-  const { course } = useApp();
+  const { course, t } = useApp();
   if (!deck.cards.length) {
     return (
       <section className="panel stack fade" style={{ textAlign: "center" }}>
-        <h2>Kartlar tamam!</h2>
-        <p className="muted">{deck.total} kartın hepsini bildiğini işaretledin. Şimdi testte gerçekten öğrendiğini göster.</p>
-        <button className="btn" onClick={onQuiz}>Teste geç</button>
-        <button className="btn ghost" onClick={onRestart}>Kartları yeniden çalış</button>
+        <h2>{t.flash.doneTitle}</h2>
+        <p className="muted">{t.flash.doneText(deck.total)}</p>
+        <button className="btn" onClick={onQuiz}>{t.flash.toQuiz}</button>
+        <button className="btn ghost" onClick={onRestart}>{t.flash.again}</button>
       </section>
     );
   }
@@ -54,22 +54,22 @@ export function CardsStep({ deck, side, onSide, onAgain, onKnow, onFlip, onResta
     <>
       {w.lit && <p className="lit">“{w.lit}”</p>}
       <p className="muted" style={{ fontSize: ".92rem" }}><b className="no">{w.ex[0]}</b><br />{w.ex[1]}</p>
-      {w.g && <p className="muted" style={{ fontSize: ".85rem" }}>belirli: {w.def}{w.pl && ` · çoğul: ${w.pl}`}</p>}
+      {w.g && <p className="muted" style={{ fontSize: ".85rem" }}>{t.words.definite}: {w.def}{w.pl && ` · ${t.words.plural}: ${w.pl}`}</p>}
     </>
   );
 
   return (
     <>
       <div className="row" style={{ justifyContent: "space-between" }}>
-        <span className="muted">{deck.known} / {deck.total} biliniyor</span>
+        <span className="muted">{t.flash.known(deck.known, deck.total)}</span>
         <button className="btn ghost" style={{ padding: "8px 14px" }} onClick={() => onSide(front ? "tr" : "target")}>
-          {front ? `${course.lang} → Türkçe` : `Türkçe → ${course.lang}`}
+          {front ? `${course.lang} → ${t.nativeName}` : `${t.nativeName} → ${course.lang}`}
         </button>
       </div>
       <Bar value={deck.known / deck.total} />
       <div className="card-wrap">
-        <button className={`flash ${deck.flipped ? "flipped" : ""}`} onClick={onFlip} aria-label="Kartı çevir">
-          <div className="face">{front ? targetFace : trFace}<span className="hint">Çevirmek için dokun</span></div>
+        <button className={`flash ${deck.flipped ? "flipped" : ""}`} onClick={onFlip} aria-label={t.flash.flip}>
+          <div className="face">{front ? targetFace : trFace}<span className="hint">{t.flash.tapToFlip}</span></div>
           <div className="face back">
             {front
               ? <><span className="say"><GenderTag word={w} /> {w.no}{w.say && ` [${w.say}]`}</span>{trFace}</>
@@ -80,12 +80,10 @@ export function CardsStep({ deck, side, onSide, onAgain, onKnow, onFlip, onResta
       </div>
       <div className="row">
         <SayButton text={tts(w)} />
-        <button className="btn ghost" style={{ flex: 1 }} onClick={onAgain} disabled={!deck.flipped}>Tekrar göster</button>
-        <button className="btn" style={{ flex: 1 }} onClick={onKnow} disabled={!deck.flipped}>Biliyorum</button>
+        <button className="btn ghost" style={{ flex: 1 }} onClick={onAgain} disabled={!deck.flipped}>{t.flash.showAgain}</button>
+        <button className="btn" style={{ flex: 1 }} onClick={onKnow} disabled={!deck.flipped}>{t.flash.iKnow}</button>
       </div>
-      <p className="muted" style={{ fontSize: ".88rem" }}>
-        Önce cevabı kendin hatırlamaya çalış, sonra kartı çevir. "Tekrar göster" kartı destenin sonuna koyar.
-      </p>
+      <p className="muted" style={{ fontSize: ".88rem" }}>{t.flash.hint}</p>
     </>
   );
 }

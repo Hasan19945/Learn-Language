@@ -10,7 +10,7 @@ import { levels } from "./levels";
 import { placement } from "./placement";
 
 export const norwegian: CourseDef = {
-  id: "no", name: "Norsk", lang: "Norveççe", yourLang: "Norveççen", key: "adim-adim-norsk-v1", doc: "progress",
+  id: "no", native: "tr", name: "Norsk", lang: "Norveççe", code: "NO", variant: "Bokmål", yourLang: "Norveççen", key: "adim-adim-norsk-v1", doc: "progress",
   voice: /^(nb|no|nn)([-_]|$)/i, voiceName: "Norsk bokmål", letters: ["æ", "ø", "å"],
   hero: "Norveççeyi sıfırdan, adım adım öğren.",
   sub: "Açıklamalar Türkçe, örnekler Norveççe (Bokmål)",

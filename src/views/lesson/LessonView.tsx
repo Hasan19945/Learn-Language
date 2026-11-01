@@ -10,10 +10,10 @@ import { QuizResult, type Party } from "./QuizResult";
 
 type Step = "learn" | "cards" | "quiz";
 
-const TABS: [Step, string][] = [["learn", "1 · Öğren"], ["cards", "2 · Kartlar"], ["quiz", "3 · Test"]];
+const TABS: Step[] = ["learn", "cards", "quiz"];
 
 export function LessonView({ index }: { index: number }) {
-  const { course, progress, update } = useApp();
+  const { course, progress, update, t } = useApp();
   const L = course.lessons[index];
   const s = lessonProgress(progress, L.id);
   const skip = progress.profile?.level === "a0plus";
@@ -78,10 +78,10 @@ export function LessonView({ index }: { index: number }) {
 
   return (
     <main className="wrap fade">
-      <BackHeader eyebrow={`${L.level} · Ders ${positionInLevel(course, index)} · ${L.no}`} title={L.title} />
+      <BackHeader eyebrow={t.lessonEyebrow(L.level, positionInLevel(course, index), L.no)} title={L.title} />
       <div className="steps" role="tablist">
-        {TABS.map(([k, label]) => (
-          <button key={k} onClick={() => goStep(k)} aria-current={step === k ? "step" : undefined} disabled={!can[k]}>{label}</button>
+        {TABS.map(k => (
+          <button key={k} onClick={() => goStep(k)} aria-current={step === k ? "step" : undefined} disabled={!can[k]}>{t.lesson.tabs[k]}</button>
         ))}
       </div>
       {step === "learn" && <LearnStep lesson={L} onDone={finishLearn} />}

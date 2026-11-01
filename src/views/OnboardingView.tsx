@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Choice } from "../components/Choice";
-import { GOALS, START_LEVELS } from "../data/options";
+import { FLOWS, GOALS } from "../data/options";
 import { PASS } from "../lib/progress";
 import { useApp } from "../state/AppContext";
 import type { Flow } from "../types";
@@ -10,7 +10,7 @@ const BARS = [30, 46, 22, 38, 46, 30];
 const BAR_COLORS = ["en", "ei", "accent", "et", "en", "ei"];
 
 export function OnboardingView() {
-  const { course, update, go } = useApp();
+  const { course, update, go, t } = useApp();
   const [step, setStep] = useState(0);
   const [level, setLevel] = useState<Flow | null>(null);
   const [goal, setGoal] = useState<number | null>(null);
@@ -22,7 +22,7 @@ export function OnboardingView() {
   const next = () => {
     if (step < STEPS - 1) setStep(step + 1);
     else {
-      update(p => { p.profile = { lang: "tr", level: level!, goal: goal!, interests }; });
+      update(p => { p.profile = { lang: course.native, level: level!, goal: goal!, interests }; });
       go({ name: level === "a0plus" ? "placement" : "path" });
     }
     scrollTo(0, 0);
@@ -32,7 +32,7 @@ export function OnboardingView() {
 
   return (
     <main className="wrap fade">
-      <div className="dots" aria-label={`Adım ${step + 1} / ${STEPS}`}>
+      <div className="dots" aria-label={t.onboard.step(step + 1, STEPS)}>
         {Array.from({ length: STEPS }, (_, i) => <i key={i} className={i <= step ? "on" : ""} />)}
       </div>
       {step === 0 && (
@@ -43,36 +43,36 @@ export function OnboardingView() {
             ))}
           </div>
           <h1>{course.hero}</h1>
-          <p className="muted">Kısa dersler, Türkçe açıklamalar ve günlük hayatta işine yarayacak cümleler. Önce birkaç soru soracağız.</p>
-          <h2>Ana dilin hangisi?</h2>
-          <div className="choices"><Choice pressed onClick={() => undefined} title="Türkçe" sub={course.sub} /></div>
+          <p className="muted">{t.onboard.intro}</p>
+          <h2>{t.onboard.nativeQuestion}</h2>
+          <div className="choices"><Choice pressed onClick={() => undefined} title={t.nativeName} sub={course.sub} /></div>
           <p className="muted" style={{ fontSize: ".9rem" }}>{course.about}</p>
         </>
       )}
       {step === 1 && (
         <>
-          <h2>{course.yourLang} ne durumda?</h2>
+          <h2>{t.onboard.levelQuestion(course.yourLang)}</h2>
           <div className="choices">
-            {START_LEVELS.map(l => <Choice key={l.v} pressed={level === l.v} onClick={() => setLevel(l.v)} title={l.t} sub={l.d} />)}
+            {FLOWS.map(v => (
+              <Choice key={v} pressed={level === v} onClick={() => setLevel(v)} title={t.options.startLevels[v].t} sub={t.options.startLevels[v].d} />
+            ))}
           </div>
-          <p className="muted" style={{ fontSize: ".9rem" }}>
-            Biraz biliyorsan kurulumdan sonra kısa bir seviye testine girersin ve sana uygun seviye gösterilir. Bir sonraki derse geçmek için ders testini en az %{PASS * 100} ile geçmen gerekir.
-          </p>
+          <p className="muted" style={{ fontSize: ".9rem" }}>{t.onboard.levelHint(PASS * 100)}</p>
         </>
       )}
       {step === 2 && (
         <>
-          <h2>Günlük hedefin?</h2>
-          <p className="muted">Bir alıştırma = bir kart ya da bir test sorusu. Hedefi sonra değiştirebilirsin.</p>
+          <h2>{t.onboard.goalQuestion}</h2>
+          <p className="muted">{t.onboard.goalHint}</p>
           <div className="choices">
-            {GOALS.map(g => <Choice key={g.v} pressed={goal === g.v} onClick={() => setGoal(g.v)} title={g.t} sub={g.d} />)}
+            {GOALS.map(v => <Choice key={v} pressed={goal === v} onClick={() => setGoal(v)} title={t.options.goals[v].t} sub={t.options.goals[v].d} />)}
           </div>
         </>
       )}
       {step === 3 && (
         <>
-          <h2>Nelerle ilgileniyorsun?</h2>
-          <p className="muted">Seçtiğin alanlardan ek kelimeler ve örnek cümleler derslere eklenir. Ana müfredat herkes için aynıdır. İstediğin kadar seç ya da hiçbirini seçme.</p>
+          <h2>{t.onboard.interestsQuestion}</h2>
+          <p className="muted">{t.onboard.interestsHint}</p>
           <div className="choices two">
             {Object.entries(course.interests).map(([k, P]) => (
               <Choice key={k} pressed={interests.includes(k)} onClick={() => toggleInterest(k)} title={P.label}
@@ -82,9 +82,9 @@ export function OnboardingView() {
         </>
       )}
       <div className="row">
-        {step > 0 && <button className="btn ghost" onClick={() => setStep(step - 1)}>Geri</button>}
+        <button className="btn ghost" onClick={() => step > 0 ? setStep(step - 1) : go({ name: "course" })}>{t.onboard.back}</button>
         <button className="btn" style={{ flex: 1 }} onClick={next} disabled={!ok}>
-          {step === STEPS - 1 ? "Öğrenmeye başla" : "Devam"}
+          {step === STEPS - 1 ? t.onboard.start : t.continue}
         </button>
       </div>
     </main>

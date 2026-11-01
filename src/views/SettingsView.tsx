@@ -1,27 +1,25 @@
 import { useState, useSyncExternalStore } from "react";
 import { PlacementCard } from "../components/Cards";
 import { Choice } from "../components/Choice";
+import { Emphasis } from "../components/Emphasis";
 import { Nav } from "../components/Nav";
 import { FLOWS, GOALS } from "../data/options";
 import { accountName } from "../lib/accounts";
-import { freshProgress } from "../lib/progress";
-import { progressSync, type SyncStatus } from "../lib/sync";
+import { freshProgress, positionInLevel } from "../lib/progress";
+import { progressSync } from "../lib/sync";
 import { useApp } from "../state/AppContext";
 
-const SYNC_TEXT: Record<SyncStatus, string> = {
-  cloud: "İlerlemen çevrim içi kaydediliyor. Bu hesapla başka bir cihazdan girersen kaldığın yerden devam edersin.",
-  local: "İlerlemen şu an sadece bu cihazda kaydediliyor. Çevrim içi kayıt için uygulamayı claude.ai hesabınla giriş yapmış olarak aç.",
-  readonly: "Bu bağlantıda kayıt izni yok, bu yüzden ilerlemen sadece bu cihazda kaydediliyor. Uygulamanın sahibinden sana en az \"Contributor\" erişimi vermesini iste.",
-  error: "Çevrim içi kayıt şu an yapılamadı. İlerlemen bu cihazda saklandı; bağlantı düzelince tekrar denenecek.",
-  wait: "Kayıt durumu kontrol ediliyor…"
-};
-
 export function SettingsView() {
-  const { account, course, progress, update, voice, go, logout } = useApp();
+  const { account, course, progress, update, voice, go, logout, t } = useApp();
   const sync = useSyncExternalStore(progressSync.subscribe, progressSync.getStatus, progressSync.getStatus);
   const [confirmReset, setConfirmReset] = useState(false);
   const profile = progress.profile!;
-  const name = accountName(account);
+  const name = accountName(t, account);
+  const packLessons = course.lessons
+    .map((L, i) => [L, i] as const)
+    .filter(([L]) => L.pack)
+    .map(([L, i]) => t.lessonLabel(L.level, positionInLevel(course, i)))
+    .join(", ");
 
   const toggleInterest = (k: string) => update(p => {
     const a = p.profile!.interests;
@@ -38,25 +36,25 @@ export function SettingsView() {
     <>
       <main className="wrap fade">
         <header>
-          <p className="eyebrow">Ayarlar</p>
-          <h1>Öğrenme tercihlerin</h1>
+          <p className="eyebrow">{t.settings.eyebrow}</p>
+          <h1>{t.settings.title}</h1>
         </header>
         <section className="panel stack">
           <div className="row" style={{ justifyContent: "space-between" }}>
             <h3>{name}</h3>
-            <span className={`chip ${sync === "cloud" ? "ok" : ""}`}>{sync === "cloud" ? "Çevrim içi" : "Bu cihazda"}</span>
+            <span className={`chip ${sync === "cloud" ? "ok" : ""}`}>{sync === "cloud" ? t.settings.online : t.settings.device}</span>
           </div>
-          <p className="muted">{SYNC_TEXT[sync]}</p>
-          <button className="btn ghost" onClick={logout}>Çıkış yap</button>
+          <p className="muted">{t.settings.sync[sync]}</p>
+          <button className="btn ghost" onClick={logout}>{t.settings.logout}</button>
         </section>
         <section className="panel stack">
-          <h3>Öğrenilen dil</h3>
-          <p className="muted">Şu an <b>{course.lang}</b> öğreniyorsun. Her dilin ilerlemesi ayrı kaydedilir; dil değiştirince diğer dildeki ilerlemen silinmez.</p>
-          <button className="btn ghost" onClick={() => go({ name: "course" })}>Dili değiştir</button>
+          <h3>{t.settings.languageTitle}</h3>
+          <p className="muted"><Emphasis text={t.settings.languageText(course.lang)} part={course.lang} /></p>
+          <button className="btn ghost" onClick={() => go({ name: "course" })}>{t.settings.changeLanguage}</button>
         </section>
         <section className="stack">
-          <h3>İlgi alanları</h3>
-          <p className="muted">Ders 5 ve 6'daki ek kelimeleri, cümleleri ve test sorularını değiştirir.</p>
+          <h3>{t.settings.interestsTitle}</h3>
+          <p className="muted">{t.settings.interestsText(packLessons)}</p>
           <div className="choices two">
             {Object.entries(course.interests).map(([k, P]) => (
               <Choice key={k} pressed={profile.interests.includes(k)} onClick={() => toggleInterest(k)} title={P.label} />
@@ -64,43 +62,41 @@ export function SettingsView() {
           </div>
         </section>
         <section className="stack">
-          <h3>Günlük hedef</h3>
+          <h3>{t.settings.goalTitle}</h3>
           <div className="choices">
-            {GOALS.map(g => (
-              <Choice key={g.v} pressed={profile.goal === g.v} onClick={() => update(p => { p.profile!.goal = g.v; })} title={g.t} sub={g.d} />
+            {GOALS.map(v => (
+              <Choice key={v} pressed={profile.goal === v} onClick={() => update(p => { p.profile!.goal = v; })}
+                title={t.options.goals[v].t} sub={t.options.goals[v].d} />
             ))}
           </div>
         </section>
         <section className="stack">
-          <h3>Ders akışı</h3>
+          <h3>{t.settings.flowTitle}</h3>
           <div className="choices">
-            {FLOWS.map(l => (
-              <Choice key={l.v} pressed={profile.level === l.v} onClick={() => update(p => { p.profile!.level = l.v; })} title={l.t} sub={l.d} />
+            {FLOWS.map(v => (
+              <Choice key={v} pressed={profile.level === v} onClick={() => update(p => { p.profile!.level = v; })}
+                title={t.options.flows[v].t} sub={t.options.flows[v].d} />
             ))}
           </div>
         </section>
         <PlacementCard />
         <section className="panel stack">
-          <h3>Sesli telaffuz</h3>
-          <p className="muted">
-            {voice
-              ? `${course.lang} ses bulundu (${voice.name}). Hoparlör düğmelerine dokunarak dinleyebilirsin.`
-              : `Bu cihazda ${course.lang} bir ses bulunamadı. Yanlış telaffuz öğretmemek için başka dildeki sesleri kullanmıyoruz; köşeli parantezdeki Türkçe okunuş rehberini kullan. Cihazının dil ayarlarından "${course.voiceName}" sesini yüklersen düğmeler otomatik görünür.`}
-          </p>
+          <h3>{t.settings.voiceTitle}</h3>
+          <p className="muted">{voice ? t.settings.voiceFound(course.lang, voice.name) : t.settings.voiceMissing(course.lang, course.voiceName)}</p>
         </section>
         <section className="panel stack">
-          <h3>İlerlemeyi sıfırla</h3>
-          <p className="muted">Sadece {name} hesabının {course.lang} ilerlemesi silinir: tamamlanan dersler, öğrenilen kelimeler ve günlük kayıtlar. Diğer hesaplar etkilenmez.</p>
+          <h3>{t.settings.resetTitle}</h3>
+          <p className="muted">{t.settings.resetText(name, course.lang)}</p>
           {confirmReset ? (
             <div className="confirm stack">
-              <strong>Emin misin? Bu işlem geri alınamaz.</strong>
+              <strong>{t.settings.resetConfirm}</strong>
               <div className="row">
-                <button className="btn danger" onClick={reset}>Evet, her şeyi sil</button>
-                <button className="btn ghost" onClick={() => setConfirmReset(false)}>Vazgeç</button>
+                <button className="btn danger" onClick={reset}>{t.settings.resetYes}</button>
+                <button className="btn ghost" onClick={() => setConfirmReset(false)}>{t.settings.cancel}</button>
               </div>
             </div>
           ) : (
-            <button className="btn ghost" onClick={() => setConfirmReset(true)}>İlerlemeyi sıfırla</button>
+            <button className="btn ghost" onClick={() => setConfirmReset(true)}>{t.settings.reset}</button>
           )}
         </section>
       </main>

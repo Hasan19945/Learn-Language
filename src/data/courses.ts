@@ -1,5 +1,6 @@
 import type { Course, CourseDef, CourseId } from "../types";
 import { english } from "./english/course";
+import { englishNb } from "./english-nb/course";
 import { norwegian } from "./norwegian/course";
 
 function buildCourse(def: CourseDef): Course {
@@ -16,7 +17,8 @@ function buildCourse(def: CourseDef): Course {
 
 export const COURSES: Record<CourseId, Course> = {
   no: buildCourse(norwegian),
-  en: buildCourse(english)
+  en: buildCourse(english),
+  "en-nb": buildCourse(englishNb)
 };
 
-export const isCourseId = (id: string | null): id is CourseId => id === "no" || id === "en";
+export const isCourseId = (id: string | null): id is CourseId => !!id && Object.hasOwn(COURSES, id);
