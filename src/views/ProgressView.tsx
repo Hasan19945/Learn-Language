@@ -6,7 +6,7 @@ import { allWords, currentLevel, isUnlocked, lessonProgress, lessonsInLevel, pos
 import { useApp } from "../state/AppContext";
 
 export function ProgressView() {
-  const { course, progress, go } = useApp();
+  const { course, progress, go, t } = useApp();
   const words = allWords(course).filter(w => progress.learned[w.id]);
   const doneCount = course.lessons.filter(L => lessonProgress(progress, L.id).done).length;
   const groups = course.lessons
@@ -20,19 +20,19 @@ export function ProgressView() {
     <>
       <main className="wrap fade">
         <header>
-          <p className="eyebrow">İlerleme</p>
-          <h1>Ne kadar yol aldın?</h1>
+          <p className="eyebrow">{t.progress.eyebrow}</p>
+          <h1>{t.progress.title}</h1>
         </header>
         <div className="stats">
-          <div className="stat"><b>{doneCount} / {course.lessons.length}</b><span className="muted">ders tamamlandı (A0–{course.levels.at(-1)!.id})</span></div>
-          <div className="stat"><b>{words.length}</b><span className="muted">kelime öğrenildi</span></div>
-          <div className="stat"><b>{streak(progress)}</b><span className="muted">gün üst üste hedef</span></div>
-          <div className="stat"><b>{total}</b><span className="muted">toplam alıştırma</span></div>
+          <div className="stat"><b>{doneCount} / {course.lessons.length}</b><span className="muted">{t.progress.lessonsDone(course.levels.at(-1)!.id)}</span></div>
+          <div className="stat"><b>{words.length}</b><span className="muted">{t.progress.wordsLearned}</span></div>
+          <div className="stat"><b>{streak(progress)}</b><span className="muted">{t.progress.streak}</span></div>
+          <div className="stat"><b>{total}</b><span className="muted">{t.progress.exercises}</span></div>
         </div>
-        <p className="muted" style={{ fontSize: ".9rem" }}>Bir kelime, testte doğru cevapladığında "öğrenildi" sayılır. Kartlarda "Biliyorum" demek sayılmaz.</p>
+        <p className="muted" style={{ fontSize: ".9rem" }}>{t.progress.learnedHint}</p>
         <PlacementCard />
         <section className="panel stack">
-          <h3>Dersler</h3>
+          <h3>{t.progress.lessons}</h3>
           {course.levels.map(info => {
             const items = lessonsInLevel(course, info.id);
             const dn = items.filter(([L]) => lessonProgress(progress, L.id).done).length;
@@ -50,11 +50,11 @@ export function ProgressView() {
                         <div className="row" style={{ justifyContent: "space-between" }}>
                           <span><strong>{positionInLevel(course, i)}. {L.title}</strong> <span className="muted">· {L.no}</span></span>
                           <span className={`chip ${s.done ? "ok" : ""}`}>
-                            {s.done ? "Tamamlandı" : s.attempts ? `${s.attempts} deneme` : isUnlocked(course, progress, i) ? "Açık" : "Kilitli"}
+                            {s.done ? t.progress.done : s.attempts ? t.progress.attempts(s.attempts) : isUnlocked(course, progress, i) ? t.progress.open : t.locked}
                           </span>
                         </div>
                         <Bar value={s.best} />
-                        <span className="muted" style={{ fontSize: ".85rem" }}>En iyi test sonucu: %{Math.round(s.best * 100)}</span>
+                        <span className="muted" style={{ fontSize: ".85rem" }}>{t.progress.best(Math.round(s.best * 100))}</span>
                       </div>
                     );
                   })}
@@ -64,26 +64,26 @@ export function ProgressView() {
           })}
         </section>
         <section className="panel stack">
-          <h3>Öğrenilen kelimeler</h3>
+          <h3>{t.progress.learnedTitle}</h3>
           {words.length ? (
             <>
               {groups.map(({ L, i, ws }) => (
                 <div key={L.id}>
-                  <p className="eyebrow">{L.level} · Ders {positionInLevel(course, i)} · {L.title}</p>
+                  <p className="eyebrow">{t.lessonEyebrow(L.level, positionInLevel(course, i), L.title)}</p>
                   <div className="words">{ws.map(w => <ShortWordRow key={w.id} word={w} />)}</div>
                 </div>
               ))}
               {interestLearned.length > 0 && (
                 <div>
-                  <p className="eyebrow">İlgi alanların</p>
+                  <p className="eyebrow">{t.progress.interests}</p>
                   <div className="words">{interestLearned.map(w => <ShortWordRow key={w.id} word={w} />)}</div>
                 </div>
               )}
             </>
           ) : (
             <>
-              <p className="muted">Henüz öğrenilmiş kelime yok. İlk dersin testini çözdüğünde doğru cevapladığın kelimeler burada görünecek.</p>
-              <button className="btn" onClick={() => go({ name: "path" })}>Öğrenme yoluna git</button>
+              <p className="muted">{t.progress.empty}</p>
+              <button className="btn" onClick={() => go({ name: "path" })}>{t.progress.goToPath}</button>
             </>
           )}
         </section>

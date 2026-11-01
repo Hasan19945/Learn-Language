@@ -24,6 +24,17 @@ interface Target {
   localKey: string;
 }
 
+const localKey = (course: Course, account: string) => course.key + ":" + account;
+
+export function readLocalProgress(course: Course, account: string): Progress | null {
+  try {
+    const saved = JSON.parse(store.get(localKey(course, account)) || "null");
+    return saved ? { ...freshProgress(), ...saved } : null;
+  } catch {
+    return null;
+  }
+}
+
 class ProgressSync {
   status: SyncStatus = "wait";
   private db: CloudDb | null = null;
@@ -65,14 +76,10 @@ class ProgressSync {
     await this.flush();
     this.setStatus("wait");
     await this.ready;
-    this.target = { doc: course.doc + "/" + account, localKey: course.key + ":" + account };
+    this.target = { doc: course.doc + "/" + account, localKey: localKey(course, account) };
     this.latest = null;
-    let remote: Progress | null = null, local: Progress | null = null;
-    try {
-      local = JSON.parse(store.get(this.target.localKey) || "null");
-    } catch {
-      local = null;
-    }
+    let remote: Progress | null = null;
+    const local = readLocalProgress(course, account);
     if (this.db) {
       try {
         const s = await this.db.doc(this.target.doc).get();

@@ -1,5 +1,6 @@
 import { tts } from "../lib/quiz";
 import { emojiCount } from "../lib/text";
+import { useApp } from "../state/AppContext";
 import type { WordDef } from "../types";
 import { SayButton } from "./SayButton";
 
@@ -18,13 +19,14 @@ export function GenderTag({ word }: { word: WordDef }) {
 }
 
 function IdiomRow({ word }: { word: WordDef }) {
+  const { t } = useApp();
   return (
     <div className="word idiom">
       <PicTile pic={word.pic!} lit={word.lit} />
       <div className="idiom-body">
         <span className="no">{word.no}</span>
-        <p className="lit">Kelimesi kelimesine: “{word.lit}”</p>
-        <p>Anlamı: <b>{word.tr}</b></p>
+        <p className="lit">{t.words.literally}: “{word.lit}”</p>
+        <p>{t.words.meaning}: <b>{word.tr}</b></p>
         <p className="ex"><b>{word.ex[0]}</b> — {word.ex[1]}</p>
       </div>
       <SayButton text={tts(word)} />
@@ -33,6 +35,7 @@ function IdiomRow({ word }: { word: WordDef }) {
 }
 
 export function WordRow({ word }: { word: WordDef }) {
+  const { t } = useApp();
   if (word.pic) return <IdiomRow word={word} />;
   return (
     <div className="word">
@@ -45,7 +48,7 @@ export function WordRow({ word }: { word: WordDef }) {
       <SayButton text={tts(word)} />
       {word.g ? (
         <div className="forms">
-          {word.g} {word.no} · belirli: <b>{word.def}</b>{word.pl && <> · çoğul: <b>{word.pl}</b></>}
+          {word.g} {word.no} · {t.words.definite}: <b>{word.def}</b>{word.pl && <> · {t.words.plural}: <b>{word.pl}</b></>}
         </div>
       ) : word.note && <div className="forms">{word.note}</div>}
       <div className="ex"><b>{word.ex[0]}</b> — {word.ex[1]}</div>

@@ -9,6 +9,7 @@ interface Result {
   right: boolean;
   picked?: number;
   typo?: boolean;
+  sentence?: boolean;
 }
 
 interface Props {
@@ -20,7 +21,7 @@ interface Props {
 const markClass = (result: Result | null) => result ? (result.right ? "right" : "wrong") : "";
 
 export function QuestionCard({ quiz, setQuiz, onNext }: Props) {
-  const { update } = useApp();
+  const { update, t } = useApp();
   const [result, setResult] = useState<Result | null>(null);
   const q = quiz.queue[quiz.pos];
 
@@ -37,14 +38,14 @@ export function QuestionCard({ quiz, setQuiz, onNext }: Props) {
     <>
       <div className="row" style={{ justifyContent: "space-between" }}>
         <span className="muted">
-          Soru {Math.min(quiz.pos + 1, quiz.queue.length)} / {quiz.queue.length}
-          {quiz.retry > 0 && ` · ${quiz.retry} tekrar sorusu`}
+          {t.question.counter(Math.min(quiz.pos + 1, quiz.queue.length), quiz.queue.length)}
+          {quiz.retry > 0 && t.question.retries(quiz.retry)}
         </span>
-        <span className="muted">İlk denemede doğru: {quiz.first}</span>
+        <span className="muted">{t.question.firstTry(quiz.first)}</span>
       </div>
       <Bar value={quiz.pos / quiz.queue.length} />
       <section className="stack fade" aria-live="polite">
-        {q.review ? <p className="eyebrow">Önceki derslerden tekrar</p> : q.again && <p className="eyebrow">Tekrar deneyelim</p>}
+        {q.review ? <p className="eyebrow">{t.question.fromEarlier}</p> : q.again && <p className="eyebrow">{t.question.tryAgain}</p>}
         {q.pic && <PicTile pic={q.pic} lit={q.lit} big />}
         <div className="row" style={{ flexWrap: "nowrap" }}>
           <h2 style={{ flex: 1 }}>{q.q}</h2>
@@ -56,16 +57,15 @@ export function QuestionCard({ quiz, setQuiz, onNext }: Props) {
         {result && (
           <>
             <div className={`fb ${result.right ? "ok" : "bad"}`}>
-              <h3>{result.right ? (result.typo ? "Neredeyse doğru!" : "Doğru!") : `Doğru cevap: ${shown}`}</h3>
-              {result.right && result.typo && <p>Küçük bir yazım hatası var. Doğrusu: <b>{shown}</b></p>}
+              <h3>{result.right ? (result.typo ? t.question.almost : t.question.right) : t.question.correctAnswer(shown)}</h3>
+              {result.right && result.typo && <p>{t.question.typo} <b>{shown}</b></p>}
+              {result.right && result.sentence && <p>{t.question.sentence} <b>{shown}</b></p>}
               <p>{q.e}</p>
               {!result.right && (
-                <p className="muted" style={{ fontSize: ".88rem", marginTop: 6 }}>
-                  Bu soru {quiz.review ? "bu tekrarın" : "testin"} sonunda tekrar sorulacak.
-                </p>
+                <p className="muted" style={{ fontSize: ".88rem", marginTop: 6 }}>{t.question.willRepeat(quiz.review)}</p>
               )}
             </div>
-            <button className="btn block" onClick={onNext} autoFocus={q.type === "type"}>Devam</button>
+            <button className="btn block" onClick={onNext} autoFocus={q.type === "type"}>{t.continue}</button>
           </>
         )}
       </section>
@@ -93,7 +93,7 @@ function ChoiceAnswer({ q, result, submit }: AnswerProps<ChoiceQuestion>) {
 }
 
 function TypeAnswer({ q, result, submit }: AnswerProps<TypeQuestion>) {
-  const { course } = useApp();
+  const { course, t } = useApp();
   const [typed, setTyped] = useState("");
   const input = useRef<HTMLInputElement>(null);
   const letters = course.letters || [];
@@ -113,23 +113,23 @@ function TypeAnswer({ q, result, submit }: AnswerProps<TypeQuestion>) {
     <form className="stack" onSubmit={e => {
       e.preventDefault();
       const r = checkTyped(q, typed);
-      submit(r.right, { typo: r.typo });
+      submit(r.right, { typo: r.typo, sentence: r.sentence });
     }}>
       <input ref={input} className={`input ${markClass(result)}`} value={typed} onChange={e => setTyped(e.target.value)}
-        placeholder="Cevabını yaz" aria-label="Cevabın" autoComplete="off" autoCapitalize="off" autoCorrect="off"
+        placeholder={t.question.placeholder} aria-label={t.question.answerLabel} autoComplete="off" autoCapitalize="off" autoCorrect="off"
         spellCheck={false} disabled={!!result} required autoFocus />
       {!result && (
         <>
           {letters.length > 0 && (
             <div className="row">
-              {letters.map(t => (
-                <button key={t} type="button" className="tok" onClick={() => insert(t)} aria-label={`${t} harfini ekle`}>{t}</button>
+              {letters.map(l => (
+                <button key={l} type="button" className="tok" onClick={() => insert(l)} aria-label={t.question.addLetter(l)}>{l}</button>
               ))}
             </div>
           )}
           <div className="row">
-            <button type="button" className="btn ghost" onClick={() => { setTyped(""); submit(false); }}>Bilmiyorum</button>
-            <button className="btn" style={{ flex: 1 }}>Kontrol et</button>
+            <button type="button" className="btn ghost" onClick={() => { setTyped(""); submit(false); }}>{t.question.dontKnow}</button>
+            <button className="btn" style={{ flex: 1 }}>{t.question.check}</button>
           </div>
         </>
       )}
@@ -138,15 +138,16 @@ function TypeAnswer({ q, result, submit }: AnswerProps<TypeQuestion>) {
 }
 
 function OrderAnswer({ q, result, submit }: AnswerProps<OrderQuestion>) {
+  const { t } = useApp();
   const [built, setBuilt] = useState<number[]>([]);
   return (
     <>
-      <div className={`built ${markClass(result)}`} aria-label="Kurduğun cümle">
+      <div className={`built ${markClass(result)}`} aria-label={t.question.builtLabel}>
         {built.length
           ? built.map((k, p) => (
             <button key={p} className="tok" disabled={!!result} onClick={() => setBuilt(built.filter((_, i) => i !== p))}>{q.mix[k]}</button>
           ))
-          : <span className="muted">Kelimelere sırayla dokunarak cümleyi kur</span>}
+          : <span className="muted">{t.question.buildHint}</span>}
       </div>
       {!result && (
         <>
@@ -157,7 +158,7 @@ function OrderAnswer({ q, result, submit }: AnswerProps<OrderQuestion>) {
           </div>
           <button className="btn block" disabled={built.length !== q.mix.length}
             onClick={() => submit(built.map(k => q.mix[k]).join(" ") === q.words.join(" "))}>
-            Kontrol et
+            {t.question.check}
           </button>
         </>
       )}

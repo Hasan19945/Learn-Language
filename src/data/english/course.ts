@@ -8,7 +8,7 @@ import b2 from "./b2";
 import c1 from "./c1";
 
 export const english: CourseDef = {
-  id: "en", name: "English", lang: "İngilizce", yourLang: "İngilizcen", key: "adim-adim-english-v1", doc: "english",
+  id: "en", native: "tr", name: "English", lang: "İngilizce", code: "EN", yourLang: "İngilizcen", key: "adim-adim-english-v1", doc: "english",
   voice: /^en([-_]|$)/i, voiceName: "English",
   hero: "İngilizceyi sıfırdan, adım adım öğren.",
   sub: "Açıklamalar Türkçe, örnekler İngilizce",
