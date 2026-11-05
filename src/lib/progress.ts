@@ -41,6 +41,7 @@ export const startLevel = (p: Progress) => p.startLevel || 0;
 
 export function isUnlocked(course: Course, p: Progress, i: number) {
   const { lessons } = course;
+  if (lessons[i].extra) return isUnlocked(course, p, lessons.findIndex(L => L.level === lessons[i].level));
   if (i === 0 || lessonProgress(p, lessons[i - 1].id).done) return true;
   const lv = levelIndex(course, lessons[i]);
   return lv < startLevel(p) || (lv === startLevel(p) && lessons[i - 1].level !== lessons[i].level);
@@ -49,14 +50,26 @@ export function isUnlocked(course: Course, p: Progress, i: number) {
 export const positionInLevel = (course: Course, i: number) =>
   course.lessons.slice(0, i + 1).filter(x => x.level === course.lessons[i].level).length;
 
-export const allDone = (course: Course, p: Progress) => course.lessons.every(L => lessonProgress(p, L.id).done);
+export const allDone = (course: Course, p: Progress) => course.lessons.every(L => L.extra || lessonProgress(p, L.id).done);
+
+export function followingLesson(course: Course, i: number) {
+  const L = course.lessons[i], next = course.lessons[i + 1];
+  if (!next || !!next.extra !== !!L.extra) return undefined;
+  return L.extra && next.level !== L.level ? undefined : next;
+}
+
+export function lessonsBefore(course: Course, i: number) {
+  const L = course.lessons[i];
+  if (!L.extra) return course.lessons.slice(0, i);
+  return course.lessons.filter(x => !x.extra && levelIndex(course, x) <= levelIndex(course, L));
+}
 
 export const nextLesson = (course: Course, p: Progress) =>
   course.lessons.findIndex((L, j) => levelIndex(course, L) >= startLevel(p) && isUnlocked(course, p, j) && !lessonProgress(p, L.id).done);
 
 export function currentLevel(course: Course, p: Progress) {
   const i = nextLesson(course, p);
-  if (i >= 0) return levelIndex(course, course.lessons[i]);
+  if (i >= 0 && !course.lessons[i].extra) return levelIndex(course, course.lessons[i]);
   return Math.max(startLevel(p), allDone(course, p) ? course.levels.length - 1 : 0);
 }
 
@@ -69,8 +82,10 @@ export const lessonWords = (course: Course, p: Progress, L: Lesson) =>
 export const allWords = (course: Course): Word[] =>
   [...course.lessons.flatMap(L => L.words), ...Object.values(course.interests).flatMap(P => P.words)];
 
-export const wordsUpTo = (course: Course, lessonId: string) =>
-  course.lessons.slice(0, course.lessons.findIndex(L => L.id === lessonId) + 1).flatMap(L => L.words);
+export function wordsUpTo(course: Course, lessonId: string) {
+  const i = course.lessons.findIndex(L => L.id === lessonId);
+  return [...lessonsBefore(course, i), course.lessons[i]].flatMap(L => L.words);
+}
 
 export const dueWords = (course: Course, p: Progress) =>
   allWords(course)

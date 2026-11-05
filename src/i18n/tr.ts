@@ -74,6 +74,7 @@ export const tr: Strings = {
     allDoneTitle: last => `Tebrikler, bütün seviyelerdeki (A0–${last}) dersleri tamamladın!`,
     allDoneText: "Kartlarla ve testlerle tekrar yapmaya devam edebilirsin.",
     words: n => `${n} kelime ve ifade`,
+    extra: "isteğe bağlı",
     start: "Başla"
   },
   cards: {
@@ -150,6 +151,7 @@ export const tr: Strings = {
     lastOfAll: level => `${level} seviyesinin son dersini de geçtin. Tebrikler!`,
     lastOfLevel: (level, next) => `${level} seviyesinin son dersini geçtin. ${next} seviyesi açıldı!`,
     opened: (level, pos) => `${level} · Ders ${pos} açıldı.`,
+    extraDone: "Bu isteğe bağlı dersi de tamamladın. Bravo!",
     quickReview: "Hızlı tekrar",
     nextLesson: title => `Sonraki ders: ${title}`,
     retry: "Testi yeniden çöz",

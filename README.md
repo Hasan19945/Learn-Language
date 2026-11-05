@@ -24,6 +24,7 @@ No installation needed. It works in any browser, on both phone and computer.
 - Example sentences and dialogues
 - Flashcards for vocabulary
 - Practice quizzes at the end of each lesson
+- Optional health and IT lessons at B1, B2 and C1 that never block the main lesson order
 - Progress tracking
 
 ## 💻 Run it locally

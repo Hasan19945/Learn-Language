@@ -6,6 +6,7 @@ import a2 from "./a2";
 import b1 from "./b1";
 import b2 from "./b2";
 import c1 from "./c1";
+import topics from "./topics";
 
 export const englishNb: CourseDef = {
   id: "en-nb", native: "nb", name: "English", lang: "Engelsk", code: "EN", yourLang: "engelsken din", key: "adim-adim-english-nb-v1", doc: "english-nb",
@@ -14,14 +15,14 @@ export const englishNb: CourseDef = {
   sub: "Forklaringer på norsk, eksempler på engelsk",
   about: "Denne versjonen er laget for norsktalende. Leksjonene viser spesielt forskjellene mellom norsk og engelsk og de typiske feilene nordmenn gjør.",
   sentenceNote: "Nye verb: watch (se på), play (spille), pay (betale), buy (kjøpe). Med he/she/it får alle -s: he watches, she plays.",
-  lessons: [...a0, ...a1, ...a2, ...b1, ...b2, ...c1],
+  lessons: [...a0, ...a1, ...a2, ...b1, ...b2, ...c1, ...topics],
   levels: [
     { id: "A0", title: "Nybegynner", d: "Uttale, hilsener, enkle setninger" },
     { id: "A1", title: "Grunnleggende", d: "Familie, handel, klokka, hjemmet, transport" },
     { id: "A2", title: "Lett viderekommen", d: "Fortid, lege, jobb, leie bolig, planer" },
-    { id: "B1", title: "Middels", d: "Skjemaer, jobbintervju, meninger, bank" },
-    { id: "B2", title: "Øvre middels", d: "Formell e-post, argumentasjon, idiomer, arbeidsliv" },
-    { id: "C1", title: "Avansert", d: "Akademisk språk, forhandlinger, varianter, ordtak" }
+    { id: "B1", title: "Middels", d: "Skjemaer, jobbintervju, meninger, bank, helse, IT" },
+    { id: "B2", title: "Øvre middels", d: "Formell e-post, argumentasjon, idiomer, arbeidsliv, sykdommer, programvare" },
+    { id: "C1", title: "Avansert", d: "Akademisk språk, forhandlinger, varianter, ordtak, medisinsk språk, systemarkitektur" }
   ],
   interests: {
     tech: { label: "Teknologi", words: [

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { celebrate } from "../../lib/celebrate";
-import { PASS, positionInLevel } from "../../lib/progress";
+import { followingLesson, PASS, positionInLevel } from "../../lib/progress";
 import type { QuizState } from "../../lib/quiz";
 import { useApp } from "../../state/AppContext";
 
@@ -18,7 +18,7 @@ export function QuizResult({ index, quiz, party, onRetry, onRead }: Props) {
   const { course, go, t } = useApp();
   const score = useRef<HTMLParagraphElement>(null);
   const celebrated = useRef(false);
-  const L = course.lessons[index], next = course.lessons[index + 1];
+  const L = course.lessons[index], next = followingLesson(course, index);
   const p = quiz.first / quiz.total, pass = p >= PASS;
 
   useEffect(() => {
@@ -29,6 +29,7 @@ export function QuizResult({ index, quiz, party, onRetry, onRead }: Props) {
 
   const message = !pass
     ? t.result.fail(PASS * 100)
+    : L.extra ? t.result.extraDone
     : !next ? t.result.lastOfAll(L.level)
     : next.level !== L.level ? t.result.lastOfLevel(L.level, next.level)
     : t.result.opened(next.level, positionInLevel(course, index + 1));

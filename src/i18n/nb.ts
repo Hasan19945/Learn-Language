@@ -76,6 +76,7 @@ export const nb: Strings = {
     allDoneTitle: last => `Gratulerer, du har fullført alle leksjonene på alle nivåer (A0–${last})!`,
     allDoneText: "Du kan fortsette å repetere med kort og tester.",
     words: n => `${n} ord og uttrykk`,
+    extra: "valgfri",
     start: "Start"
   },
   cards: {
@@ -152,6 +153,7 @@ export const nb: Strings = {
     lastOfAll: level => `Du har bestått den siste leksjonen på ${level}-nivå også. Gratulerer!`,
     lastOfLevel: (level, next) => `Du har bestått den siste leksjonen på ${level}-nivå. ${next}-nivået er låst opp!`,
     opened: (level, pos) => `${level} · Leksjon ${pos} er låst opp.`,
+    extraDone: "Du har fullført denne valgfrie leksjonen også. Bra jobbet!",
     quickReview: "Kort oppsummering",
     nextLesson: title => `Neste leksjon: ${title}`,
     retry: "Ta testen på nytt",

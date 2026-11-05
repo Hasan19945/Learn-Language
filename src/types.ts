@@ -45,6 +45,7 @@ export interface LessonDef<W = WordDef> {
   no: string;
   icon: IconName;
   pack?: "words" | "sentences";
+  extra?: boolean;
   intro: string;
   notes: Note[];
   tip: string;

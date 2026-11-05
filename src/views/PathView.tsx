@@ -102,7 +102,7 @@ function LevelBlock({ info, isOpen, onToggle, onLocked }: LevelBlockProps) {
                 <span className="txt">
                   <span className="eyebrow">{t.lessonEyebrow(L.level, positionInLevel(course, i), L.no)}</span>
                   <strong>{L.title}</strong>
-                  <span className="muted" style={{ fontSize: ".88rem" }}>{t.path.words(L.words.length)}</span>
+                  <span className="muted" style={{ fontSize: ".88rem" }}>{t.path.words(L.words.length)}{L.extra && ` · ${t.path.extra}`}</span>
                 </span>
                 {s.done
                   ? <span className="chip ok">{t.percent(Math.round(s.best * 100))}</span>

@@ -69,6 +69,7 @@ export interface Strings {
     allDoneTitle: (last: string) => string;
     allDoneText: string;
     words: (n: number) => string;
+    extra: string;
     start: string;
   };
   cards: {
@@ -145,6 +146,7 @@ export interface Strings {
     lastOfAll: (level: string) => string;
     lastOfLevel: (level: string, next: string) => string;
     opened: (level: string, pos: number) => string;
+    extraDone: string;
     quickReview: string;
     nextLesson: (title: string) => string;
     retry: string;
