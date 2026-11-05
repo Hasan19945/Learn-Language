@@ -1,5 +1,6 @@
 import { N, Q, W, asExtra } from "../helpers";
 import type { LessonDef } from "../../types";
+import { IT_STORIES } from "./itStories";
 
 const B1: LessonDef[] = [
 {
@@ -39,7 +40,7 @@ const B1: LessonDef[] = [
   review: ["fastlege → henvisning → sykehus; mesai dışı legevakt; hayati tehlikede 113.", "Süre: Jeg har hatt feber i tre dager.", "Jeg har vondt i ..., Jeg føler meg dårlig, bestille time."]
 },
 {
-  id: "b1-it", title: "IT: bilgisayar ve yazılım", no: "IT: data og programvare", icon: "code",
+  id: "b1-it", title: "IT: bilgisayar ve yazılım", no: "IT: data og programvare", icon: "code", story: IT_STORIES.b1,
   intro: "İş yerinde ve evde bilgisayar konuşmak: dosya, şifre, güncelleme, hata mesajı ve IT desteğinden yardım istemek.",
   notes: [
     { h: "Emir kipi", p: "Talimatlarda emir kipi kullanılır. Mastarın sonundaki -e düşer: å installere → Installer! å starte → Start! å laste ned → Last ned! Sonu tek heceli olanlarda değişmez: å gå → Gå!",
@@ -115,7 +116,7 @@ const B2: LessonDef[] = [
   review: ["ha diabetes / astma; få hjerteinfarkt / hjerneslag.", "bli-passiv: ble operert, blir behandlet.", "diagnose, behandling, bivirkning, kronisk, arvelig."]
 },
 {
-  id: "b2-it", title: "IT: yazılım geliştirme", no: "IT: programvareutvikling", icon: "code",
+  id: "b2-it", title: "IT: yazılım geliştirme", no: "IT: programvareutvikling", icon: "code", story: IT_STORIES.b2,
   intro: "Yazılım ekibinde konuşmak: gereksinimler, test, kod incelemesi, sürüm. Norveççe teknik konuşmada İngilizce kelimelerin nasıl kullanıldığını da görüyoruz.",
   notes: [
     { h: "İngilizce kelimeler", p: "Norveç'te yazılımcılar pek çok İngilizce terimi aynen kullanır ve Norveççe çekimler: å deploye – deployer – deployet; å merge – merger – merget. Cinsiyet çoğunlukla en'dir: en bug, en pull request. Yazılı belgelerde Norveççe karşılığı tercih edilebilir: feil, kodegjennomgang.",
@@ -191,7 +192,7 @@ const C1: LessonDef[] = [
   review: ["Rapor dili: Pasienten ble innlagt ...; Det ble besluttet ...", "innleggelse → behandling → utskrivning → epikrise → oppfølging.", "samtykke, taushetsplikt, pårørende, prognose, godartet/ondartet."]
 },
 {
-  id: "c1-it", title: "IT: mimari ve güvenlik", no: "IT: arkitektur og sikkerhet", icon: "code",
+  id: "c1-it", title: "IT: mimari ve güvenlik", no: "IT: arkitektur og sikkerhet", icon: "code", story: IT_STORIES.c1,
   intro: "Teknik kararları tartışmak: mimari, teknik borç, güvenlik açıkları, kesintiler ve Norveç'te önemli olan kişisel veri koruması.",
   notes: [
     { h: "Teknik karar savunmak", p: "Bir kararı gerekçelendirirken: Avveiningen er at ... (Ödünleşim şu ki ...). Fordelen veier opp for ulempen. (Avantaj dezavantajı dengeliyor.) På sikt lønner det seg. (Uzun vadede karşılığını verir.) Det forutsetter at ... (... şartıyla geçerli.)" },

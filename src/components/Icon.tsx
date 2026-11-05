@@ -29,7 +29,10 @@ const ICONS = {
   test: '<path d="M9 3h6M10 3v6l-5 10a1 1 0 0 0 1 2h12a1 1 0 0 0 1-2l-5-10V3"/>',
   lock: '<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
   health: '<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/>',
-  code: '<path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/>'
+  code: '<path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/>',
+  play: '<path d="M7 4v16l13-8z" fill="currentColor"/>',
+  prev: '<path d="M6 5v14M19 5 9 12l10 7z"/>',
+  next: '<path d="M18 5v14M5 5l10 7-10 7z"/>'
 };
 
 export type IconName = keyof typeof ICONS;

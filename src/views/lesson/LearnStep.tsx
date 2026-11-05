@@ -2,6 +2,7 @@ import { DialogueLine, NoteTable, WordRow } from "../../components/Words";
 import { interestWords } from "../../lib/progress";
 import { useApp } from "../../state/AppContext";
 import type { Lesson } from "../../types";
+import { StoryVideo } from "./StoryVideo";
 
 function InterestExtras({ lesson }: { lesson: Lesson }) {
   const { course, progress, t } = useApp();
@@ -38,6 +39,7 @@ export function LearnStep({ lesson, onDone }: { lesson: Lesson; onDone: () => vo
   return (
     <>
       <p>{lesson.intro}</p>
+      {lesson.story && <StoryVideo lesson={lesson} />}
       {lesson.notes.map(n => (
         <section key={n.h} className="panel note">
           <h3>{n.h}</h3>

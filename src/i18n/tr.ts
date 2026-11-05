@@ -103,6 +103,21 @@ export const tr: Strings = {
     dialogue: "Kısa diyalog",
     toCards: "Kartlarla çalış"
   },
+  story: {
+    eyebrow: "Mira ile animasyon",
+    recap: "Bunu aklında tut",
+    play: "Oynat",
+    pause: "Duraklat",
+    again: "Yeniden izle",
+    prev: "Önceki sahne",
+    next: "Sonraki sahne",
+    showTr: "Çeviriyi göster",
+    hideTr: "Çeviriyi gizle",
+    hint: "Oynat'a bas. Mira hikâyeyi anlatırken yeni kelimeler ekranda belirecek.",
+    ended: "Bitti! Aşağıdaki hikâyeyi okuyup kelimeleri tekrar görebilirsin.",
+    noVoice: "Bu cihazda uygun ses bulunamadı. Animasyon sessiz oynar, altyazıyı takip et.",
+    storyTitle: "Hikâyeyi oku"
+  },
   flash: {
     doneTitle: "Kartlar tamam!",
     doneText: n => `${n} kartın hepsini bildiğini işaretledin. Şimdi testte gerçekten öğrendiğini göster.`,

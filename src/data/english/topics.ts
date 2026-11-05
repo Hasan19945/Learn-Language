@@ -1,5 +1,6 @@
 import { Q, W, asExtra } from "../helpers";
 import type { LessonDef } from "../../types";
+import { itStory } from "./itStories";
 
 const B1: LessonDef[] = [
 {
@@ -39,7 +40,7 @@ const B1: LessonDef[] = [
   review: ["GP → referral → hospital; çok acilse A&E / 999.", "I've had ... for / since ...: hâlâ süren şikâyet.", "have a headache / sore throat / temperature."]
 },
 {
-  id: "en-b1-it", title: "IT: bilgisayar ve yazılım", no: "IT: computers and software", icon: "code",
+  id: "en-b1-it", title: "IT: bilgisayar ve yazılım", no: "IT: computers and software", icon: "code", story: itStory("b1", "tr"),
   intro: "Bilgisayar sorunlarını anlatmak, IT desteğinden yardım istemek ve temel yazılım kelimelerini öğrenmek.",
   notes: [
     { h: "Emir kipi", p: "Talimatlar fiilin yalın haliyle verilir: Click the button. Save the file. Olumsuzu: Don't close the window. Nazik istekte: Could you restart it, please?" },
@@ -115,7 +116,7 @@ const B2: LessonDef[] = [
   review: ["have diabetes; have a heart attack; catch the flu; suffer from asthma.", "be diagnosed with; recover from; have surgery.", "diagnosis, treatment, side effect, chronic, hereditary."]
 },
 {
-  id: "en-b2-it", title: "IT: yazılım geliştirme", no: "IT: software development", icon: "code",
+  id: "en-b2-it", title: "IT: yazılım geliştirme", no: "IT: software development", icon: "code", story: itStory("b2", "tr"),
   intro: "Yazılım ekibinde çalışmak: gereksinimler, test, kod incelemesi ve yayına alma. Toplantılarda durum bildirmek için gereken İngilizce.",
   notes: [
     { h: "Durum bildirmek", p: "Günlük toplantılarda (stand-up) üç zaman birlikte kullanılır. Biten iş: I've fixed the login bug. Süren iş: I'm working on the tests. Plan: I'm going to deploy it today. Engel: I'm blocked by the database issue.",
@@ -191,7 +192,7 @@ const C1: LessonDef[] = [
   review: ["be admitted → treatment → be discharged → discharge summary → follow-up.", "present with; no abnormalities were detected; we can't rule out ...", "informed consent, next of kin, prognosis, benign / malignant."]
 },
 {
-  id: "en-c1-it", title: "IT: mimari ve güvenlik", no: "IT: architecture and security", icon: "code",
+  id: "en-c1-it", title: "IT: mimari ve güvenlik", no: "IT: architecture and security", icon: "code", story: itStory("c1", "tr"),
   intro: "Teknik kararları savunmak, kesintileri raporlamak ve güvenliği konuşmak. Kıdemli mühendislerin kullandığı dil.",
   notes: [
     { h: "Teknik karar savunmak", p: "Karşılaştırmalı konuşma kalıpları: The trade-off is that ... (Ödünleşim şu ki ...). The benefits outweigh the costs. (Faydalar maliyetlerden ağır basıyor.) In the long run, it pays off. (Uzun vadede karşılığını verir.) This assumes that ... (Bu, ... varsayımına dayanıyor.)" },

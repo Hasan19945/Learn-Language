@@ -105,6 +105,21 @@ export const nb: Strings = {
     dialogue: "Kort dialog",
     toCards: "Øv med kort"
   },
+  story: {
+    eyebrow: "Animasjon med Mira",
+    recap: "Husk dette",
+    play: "Spill av",
+    pause: "Pause",
+    again: "Se igjen",
+    prev: "Forrige scene",
+    next: "Neste scene",
+    showTr: "Vis oversettelse",
+    hideTr: "Skjul oversettelse",
+    hint: "Trykk på Spill av. Nye ord dukker opp på skjermen mens Mira forteller historien.",
+    ended: "Ferdig! Les historien nedenfor for å se ordene igjen.",
+    noVoice: "Fant ingen passende stemme på denne enheten. Animasjonen spilles uten lyd, så følg med på tekstingen.",
+    storyTitle: "Les historien"
+  },
   flash: {
     doneTitle: "Ferdig med kortene!",
     doneText: n => `Du har markert alle ${n} kortene som kjent. Vis nå i testen at du virkelig kan dem.`,
