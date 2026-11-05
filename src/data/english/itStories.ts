@@ -1,11 +1,18 @@
-import type { Lang, Story, StoryMood, StoryPlace } from "../../types";
+import type { Lang, Story, StoryHero, StoryMood, StoryPlace } from "../../types";
 
-interface Source {
+export interface StorySource {
   title: Record<Lang, string>;
   scenes: { place: StoryPlace; mood: StoryMood; text: string; tr: string; nb: string }[];
 }
 
-const STORIES: Record<"b1" | "b2" | "c1", Source> = {
+export const localizeStory = (s: StorySource, hero: StoryHero, lang: Lang, casual?: boolean): Story => ({
+  hero,
+  casual,
+  title: s.title[lang],
+  scenes: s.scenes.map(({ place, mood, text, tr, nb }) => ({ place, mood, text, tr: lang === "tr" ? tr : nb }))
+});
+
+const STORIES: Record<"b1" | "b2" | "c1", StorySource> = {
   b1: {
     title: { tr: "Mira'nın ilk iş günü", nb: "Miras første arbeidsdag" },
     scenes: [
@@ -87,10 +94,4 @@ const STORIES: Record<"b1" | "b2" | "c1", Source> = {
   }
 };
 
-export function itStory(level: keyof typeof STORIES, lang: Lang): Story {
-  const s = STORIES[level];
-  return {
-    title: s.title[lang],
-    scenes: s.scenes.map(({ place, mood, text, tr, nb }) => ({ place, mood, text, tr: lang === "tr" ? tr : nb }))
-  };
-}
+export const itStory = (level: keyof typeof STORIES, lang: Lang) => localizeStory(STORIES[level], "mira", lang);

@@ -1,10 +1,11 @@
 import { Q, W, asExtra } from "../helpers";
 import type { LessonDef } from "../../types";
+import { healthStory } from "../english/healthStories";
 import { itStory } from "../english/itStories";
 
 const B1: LessonDef[] = [
 {
-  id: "nb-b1-health", title: "Helse: lege og sykehus", no: "Health: doctors and hospitals", icon: "health",
+  id: "nb-b1-health", title: "Helse: lege og sykehus", no: "Health: doctors and hospitals", icon: "health", story: healthStory("b1", "nb"),
   intro: "Vi bestiller legetime, forklarer plagene våre og finner fram på sykehuset. Du lærer også hvordan helsevesenet heter på engelsk.",
   notes: [
     { h: "Norsk og britisk helsevesen", p: "Fastlegen tilsvarer en GP i Storbritannia, og henvisning heter referral. Legevakt har ikke ett eksakt ord; si out-of-hours doctor. Akuttmottak heter A&E (britisk) eller ER (amerikansk). Nødnummeret er 999 i Storbritannia og 911 i USA.",
@@ -79,7 +80,7 @@ const B1: LessonDef[] = [
 
 const B2: LessonDef[] = [
 {
-  id: "nb-b2-health", title: "Helse: sykdommer og behandling", no: "Health: illnesses and treatment", icon: "health",
+  id: "nb-b2-health", title: "Helse: sykdommer og behandling", no: "Health: illnesses and treatment", icon: "health", story: healthStory("b2", "nb"),
   intro: "Vi snakker om vanlige sykdommer, diagnose og behandling, slik at du kan forstå legen og stille de riktige spørsmålene.",
   notes: [
     { h: "Faste uttrykk med sykdom", p: "Mange sykdomsuttrykk ligner på norsk, men verbene varierer. Norsk «få hjerteinfarkt» heter «have a heart attack», og «få influensa» heter «catch the flu».",
@@ -156,7 +157,7 @@ const B2: LessonDef[] = [
 
 const C1: LessonDef[] = [
 {
-  id: "nb-c1-health", title: "Helse: sykehusspråk", no: "Health: hospital language", icon: "health",
+  id: "nb-c1-health", title: "Helse: sykehusspråk", no: "Health: hospital language", icon: "health", story: healthStory("c1", "nb"),
   intro: "Innleggelse, utskrivning, samtykke og språket i medisinske rapporter, slik at du kan lese kliniske tekster og snakke med leger på engelsk.",
   notes: [
     { h: "Rapportspråk", p: "Kliniske tekster er korte og passive: The patient presented with chest pain. (Pasienten kom med brystsmerter.) He was admitted for observation. (Han ble lagt inn til observasjon.) No abnormalities were detected. (Det ble ikke påvist avvik.) present with = komme med plager." },

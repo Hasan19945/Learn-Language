@@ -39,7 +39,8 @@ export interface Note {
   table?: string[][];
 }
 
-export type StoryPlace = "desk" | "servers" | "meeting" | "home";
+export type StoryPlace = "desk" | "servers" | "meeting" | "home" | "clinic" | "ward" | "emergency";
+export type StoryHero = "mira" | "emil";
 export type StoryMood = "happy" | "worried" | "surprised" | "thinking" | "proud";
 
 export interface StoryScene {
@@ -50,6 +51,8 @@ export interface StoryScene {
 }
 
 export interface Story {
+  hero: StoryHero;
+  casual?: boolean;
   title: string;
   scenes: StoryScene[];
 }

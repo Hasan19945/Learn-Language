@@ -99,7 +99,7 @@ export interface Strings {
     toCards: string;
   };
   story: {
-    eyebrow: string;
+    eyebrow: (name: string) => string;
     recap: string;
     play: string;
     pause: string;
@@ -108,7 +108,7 @@ export interface Strings {
     next: string;
     showTr: string;
     hideTr: string;
-    hint: string;
+    hint: (name: string) => string;
     ended: string;
     noVoice: string;
     storyTitle: string;

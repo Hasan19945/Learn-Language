@@ -3,7 +3,7 @@ import { Icon } from "../../components/Icon";
 import { Bar } from "../../components/Progress";
 import { StoryStage } from "../../components/StoryStage";
 import { speak } from "../../lib/speech";
-import { buildCues, markWords, readingTime } from "../../lib/story";
+import { buildCues, HERO_NAMES, markWords, readingTime } from "../../lib/story";
 import { useApp } from "../../state/AppContext";
 import type { Lesson, Word } from "../../types";
 
@@ -14,6 +14,7 @@ function Marked({ text, words }: { text: string; words: Word[] }) {
 export function StoryVideo({ lesson }: { lesson: Lesson }) {
   const { voice, t } = useApp();
   const story = lesson.story!;
+  const name = HERO_NAMES[story.hero];
   const cues = useMemo(() => buildCues(lesson), [lesson]);
   const [pos, setPos] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -63,11 +64,11 @@ export function StoryVideo({ lesson }: { lesson: Lesson }) {
   return (
     <section className="panel stack vid">
       <div>
-        <p className="eyebrow">{t.story.eyebrow}</p>
+        <p className="eyebrow">{t.story.eyebrow(name)}</p>
         <h3>{story.title}</h3>
       </div>
       <div className="vid-stage">
-        <StoryStage place={cue.place} mood={cue.mood} talking={talking} />
+        <StoryStage hero={story.hero} casual={story.casual} place={cue.place} mood={cue.mood} talking={talking} />
         {cue.kind === "line" && cue.words.length > 0 && (
           <div className="vid-cards">
             {cue.words.slice(0, 3).map(w => (
@@ -77,7 +78,7 @@ export function StoryVideo({ lesson }: { lesson: Lesson }) {
         )}
         {cue.kind === "title" && (
           <div key="title" className="vid-board">
-            <span className="eyebrow">{t.story.eyebrow}</span>
+            <span className="eyebrow">{t.story.eyebrow(name)}</span>
             <strong>{story.title}</strong>
           </div>
         )}
@@ -100,7 +101,7 @@ export function StoryVideo({ lesson }: { lesson: Lesson }) {
             <p className="no"><Marked text={cue.text} words={lesson.words} /></p>
             {showTr && <p className="muted">{cue.tr}</p>}
           </>
-        ) : <p className="muted">{ended ? t.story.ended : cue.kind === "recap" ? cue.text : t.story.hint}</p>}
+        ) : <p className="muted">{ended ? t.story.ended : cue.kind === "recap" ? cue.text : t.story.hint(name)}</p>}
       </div>
       <div className="row vid-ctl">
         <button className="icon-btn" onClick={() => jump(pos - 1)} aria-label={t.story.prev}><Icon name="prev" /></button>

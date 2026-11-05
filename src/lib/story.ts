@@ -1,4 +1,6 @@
-import type { Lesson, StoryMood, StoryPlace, Word } from "../types";
+import type { Lesson, StoryHero, StoryMood, StoryPlace, Word } from "../types";
+
+export const HERO_NAMES: Record<StoryHero, string> = { mira: "Mira", emil: "Emil" };
 
 export const splitSentences = (text: string) =>
   (text.match(/[^.!?]+[.!?]+[”"]?\s*/g) || [text]).map(s => s.trim());

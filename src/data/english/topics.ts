@@ -1,10 +1,11 @@
 import { Q, W, asExtra } from "../helpers";
 import type { LessonDef } from "../../types";
+import { healthStory } from "./healthStories";
 import { itStory } from "./itStories";
 
 const B1: LessonDef[] = [
 {
-  id: "en-b1-health", title: "Sağlık: hastane ve doktor", no: "Health: doctors and hospitals", icon: "health",
+  id: "en-b1-health", title: "Sağlık: hastane ve doktor", no: "Health: doctors and hospitals", icon: "health", story: healthStory("b1", "tr"),
   intro: "Doktordan randevu almak, şikâyetini anlatmak ve hastanede yolunu bulmak. İngiltere'deki sağlık terimlerini de öğreniyoruz.",
   notes: [
     { h: "Nereye gidilir?", p: "İngiltere'de önce GP'ye (aile hekimi) gidilir; hastaneye genellikle onun sevkiyle (referral) gidersin. Çok acil durumda A&E'ye (acil servis) gidilir veya 999 aranır. ABD'de acil servise ER, acil numarasına 911 denir.",
@@ -79,7 +80,7 @@ const B1: LessonDef[] = [
 
 const B2: LessonDef[] = [
 {
-  id: "en-b2-health", title: "Sağlık: hastalıklar ve tedavi", no: "Health: illnesses and treatment", icon: "health",
+  id: "en-b2-health", title: "Sağlık: hastalıklar ve tedavi", no: "Health: illnesses and treatment", icon: "health", story: healthStory("b2", "tr"),
   intro: "Yaygın hastalıkları, teşhis ve tedaviyi konuşmak; doktorun anlattıklarını anlamak ve doğru sorular sormak.",
   notes: [
     { h: "Hastalık kalıpları", p: "Her hastalık aynı fiille kullanılmaz. Süreğen olanlarda have veya suffer from; ani olaylarda have a; bulaşıcılarda catch denir.",
@@ -156,7 +157,7 @@ const B2: LessonDef[] = [
 
 const C1: LessonDef[] = [
 {
-  id: "en-c1-health", title: "Sağlık: hastane ve tıp dili", no: "Health: hospital language", icon: "health",
+  id: "en-c1-health", title: "Sağlık: hastane ve tıp dili", no: "Health: hospital language", icon: "health", story: healthStory("c1", "tr"),
   intro: "Hastaneye yatış, taburcu, onam ve tıbbi raporların dili. Klinik metinleri okumak ve doktorlarla ayrıntılı konuşmak için.",
   notes: [
     { h: "Rapor dili", p: "Klinik metinler kısa ve edilgendir: The patient presented with chest pain. (Hasta göğüs ağrısıyla başvurdu.) He was admitted for observation. (Gözlem için yatırıldı.) No abnormalities were detected. (Anormallik saptanmadı.) present with = şikâyetiyle başvurmak." },

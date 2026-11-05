@@ -106,7 +106,7 @@ export const nb: Strings = {
     toCards: "Øv med kort"
   },
   story: {
-    eyebrow: "Animasjon med Mira",
+    eyebrow: name => `Animasjon med ${name}`,
     recap: "Husk dette",
     play: "Spill av",
     pause: "Pause",
@@ -115,7 +115,7 @@ export const nb: Strings = {
     next: "Neste scene",
     showTr: "Vis oversettelse",
     hideTr: "Skjul oversettelse",
-    hint: "Trykk på Spill av. Nye ord dukker opp på skjermen mens Mira forteller historien.",
+    hint: name => `Trykk på Spill av. Nye ord dukker opp på skjermen mens ${name} forteller historien.`,
     ended: "Ferdig! Les historien nedenfor for å se ordene igjen.",
     noVoice: "Fant ingen passende stemme på denne enheten. Animasjonen spilles uten lyd, så følg med på tekstingen.",
     storyTitle: "Les historien"
