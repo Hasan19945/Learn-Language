@@ -12,3 +12,5 @@ export const I = (no: string, tr: string, lit: string, pic: string, exNo: string
 export const Q = (q: string, o: string[], e: string): QuizItem => ({ q, o, a: 0, e });
 
 export const atLevel = (level: LevelId, lessons: LessonDef[]) => lessons.map(L => ({ ...L, level }));
+
+export const asExtra = (level: LevelId, lessons: LessonDef[]) => lessons.map(L => ({ ...L, level, extra: true }));

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BackHeader } from "../../components/Nav";
 import { QuestionCard } from "../../components/QuestionCard";
-import { countExercise, editLesson, lessonProgress, lessonWords, PASS, positionInLevel } from "../../lib/progress";
+import { countExercise, editLesson, followingLesson, lessonProgress, lessonWords, PASS, positionInLevel } from "../../lib/progress";
 import { buildQuiz, type QuizState } from "../../lib/quiz";
 import { useApp } from "../../state/AppContext";
 import { CardsStep, newDeck, type CardSide } from "./CardsStep";
@@ -69,8 +69,8 @@ export function LessonView({ index }: { index: number }) {
         if (score >= PASS) st.done = true;
       });
       if (score >= PASS) {
-        const nx = course.lessons[index + 1];
-        setParty(!nx || nx.level !== L.level ? "big" : "small");
+        const nx = followingLesson(course, index);
+        setParty(!L.extra && (!nx || nx.level !== L.level) ? "big" : "small");
       }
     }
     scrollTo(0, 0);

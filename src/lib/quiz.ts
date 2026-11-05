@@ -1,6 +1,6 @@
 import { STRINGS } from "../i18n";
 import type { Course, Pair, Progress, Word, WordDef } from "../types";
-import { countExercise, dueWords, interestWords, REVIEW_MAX, schedule, wordsUpTo } from "./progress";
+import { countExercise, dueWords, interestWords, lessonsBefore, REVIEW_MAX, schedule, wordsUpTo } from "./progress";
 import { pick, shuffle } from "./random";
 import { canonical, editDistance, normalize } from "./text";
 
@@ -107,7 +107,7 @@ function orderQuestion(course: Course, [no, tr]: Pair): OrderQuestion {
 const newQuiz = (queue: Question[], review = false): QuizState => ({ queue, total: queue.length, pos: 0, first: 0, retry: 0, review });
 
 export function buildQuiz(course: Course, p: Progress, i: number): QuizState {
-  const L = course.lessons[i], own = L.words, prev = course.lessons.slice(0, i).flatMap(x => x.words);
+  const L = course.lessons[i], own = L.words, prev = lessonsBefore(course, i).flatMap(x => x.words);
   const qs: Question[] = pick(own, 7).map((w, k) =>
     k < 2 && typable(w) ? typeQuestion(course, w, own) : vocabQuestion(course, w, own.length >= 4 ? own : [...own, ...prev]));
   qs.push(...pick(sentencesOf(L), 2).map(s => orderQuestion(course, s)));
