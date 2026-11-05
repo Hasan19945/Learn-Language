@@ -71,7 +71,6 @@ export function PlacementView() {
   if (run.rec !== null) {
     const rec = run.rec;
     const apply = () => {
-      if (rec > startLevel(progress)) update(p => { p.startLevel = rec; });
       setOpenLevel(rec);
       go({ name: "path" });
     };
@@ -150,7 +149,7 @@ function PlacementResult({ run, rec, onApply, onRestart }: { run: Run; rec: numb
     : rec === 0
       ? t.placement.needPractice
       : t.placement.passedUpTo(levels[rec - 1].id, info.id, run.scores.at(-1)!.correct, PER_LEVEL);
-  const raises = rec > startLevel(progress);
+  const raises = rec > 0 && rec === startLevel(progress);
 
   return (
     <>
