@@ -16,11 +16,12 @@ export function useVoice(pattern: RegExp) {
   return voice;
 }
 
-export function speak(voice: SpeechSynthesisVoice, text: string) {
+export function speak(voice: SpeechSynthesisVoice, text: string, onEnd?: () => void) {
   const u = new SpeechSynthesisUtterance(text);
   u.voice = voice;
   u.lang = voice.lang;
   u.rate = 0.85;
+  if (onEnd) u.onend = onEnd;
   speechSynthesis.cancel();
   speechSynthesis.speak(u);
 }

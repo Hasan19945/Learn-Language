@@ -98,6 +98,21 @@ export interface Strings {
     dialogue: string;
     toCards: string;
   };
+  story: {
+    eyebrow: string;
+    recap: string;
+    play: string;
+    pause: string;
+    again: string;
+    prev: string;
+    next: string;
+    showTr: string;
+    hideTr: string;
+    hint: string;
+    ended: string;
+    noVoice: string;
+    storyTitle: string;
+  };
   flash: {
     doneTitle: string;
     doneText: (n: number) => string;

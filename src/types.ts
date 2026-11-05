@@ -39,6 +39,21 @@ export interface Note {
   table?: string[][];
 }
 
+export type StoryPlace = "desk" | "servers" | "meeting" | "home";
+export type StoryMood = "happy" | "worried" | "surprised" | "thinking" | "proud";
+
+export interface StoryScene {
+  place: StoryPlace;
+  mood: StoryMood;
+  text: string;
+  tr: string;
+}
+
+export interface Story {
+  title: string;
+  scenes: StoryScene[];
+}
+
 export interface LessonDef<W = WordDef> {
   id: string;
   title: string;
@@ -46,6 +61,7 @@ export interface LessonDef<W = WordDef> {
   icon: IconName;
   pack?: "words" | "sentences";
   extra?: boolean;
+  story?: Story;
   intro: string;
   notes: Note[];
   tip: string;

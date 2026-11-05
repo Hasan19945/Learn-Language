@@ -1,5 +1,6 @@
 import { Q, W, asExtra } from "../helpers";
 import type { LessonDef } from "../../types";
+import { itStory } from "../english/itStories";
 
 const B1: LessonDef[] = [
 {
@@ -39,7 +40,7 @@ const B1: LessonDef[] = [
   review: ["GP → referral → hospital; akutt: A&E / 999.", "I've had ... for / since ...: det pågår fortsatt.", "prescription = resept; receipt = kvittering."]
 },
 {
-  id: "nb-b1-it", title: "IT: data og programvare", no: "IT: computers and software", icon: "code",
+  id: "nb-b1-it", title: "IT: data og programvare", no: "IT: computers and software", icon: "code", story: itStory("b1", "nb"),
   intro: "Vi forklarer dataproblemer, ber IT-support om hjelp og lærer grunnleggende ord om programvare.",
   notes: [
     { h: "Falske venner", p: "Norsk «data» kan bety datamaskin: «Jeg sitter på data». Engelsk data betyr bare informasjon, så si computer. Norsk «program» om TV heter programme i britisk engelsk, men dataprogram skrives program overalt." },
@@ -115,7 +116,7 @@ const B2: LessonDef[] = [
   review: ["have diabetes; have a heart attack; catch the flu; suffer from asthma.", "be diagnosed with; recover from; have surgery.", "diagnosis, treatment, side effect, chronic, hereditary."]
 },
 {
-  id: "nb-b2-it", title: "IT: programvareutvikling", no: "IT: software development", icon: "code",
+  id: "nb-b2-it", title: "IT: programvareutvikling", no: "IT: software development", icon: "code", story: itStory("b2", "nb"),
   intro: "Vi jobber i et utviklingsteam: krav, testing, kodegjennomgang og utrulling. Engelsk for det daglige statusmøtet.",
   notes: [
     { h: "Status i møter", p: "I stand-up-møter brukes tre tider. Ferdig arbeid: I've fixed the login bug. Pågående: I'm working on the tests. Planer: I'm going to deploy it today. Hindring: I'm blocked by the database issue.",
@@ -191,7 +192,7 @@ const C1: LessonDef[] = [
   review: ["be admitted → treatment → be discharged → discharge summary → follow-up.", "present with; no abnormalities were detected; we can't rule out ...", "consultant = overlege; ward = sengepost; next of kin = nærmeste pårørende."]
 },
 {
-  id: "nb-c1-it", title: "IT: arkitektur og sikkerhet", no: "IT: architecture and security", icon: "code",
+  id: "nb-c1-it", title: "IT: arkitektur og sikkerhet", no: "IT: architecture and security", icon: "code", story: itStory("c1", "nb"),
   intro: "Vi begrunner tekniske valg, rapporterer om nedetid og snakker om sikkerhet og personvern, slik seniorutviklere gjør det på engelsk.",
   notes: [
     { h: "Begrunne tekniske valg", p: "The trade-off is that ... (Avveiningen er at ...). The benefits outweigh the costs. (Fordelene veier opp for kostnadene.) In the long run, it pays off. (På sikt lønner det seg.) This assumes that ... (Dette forutsetter at ...)." },
