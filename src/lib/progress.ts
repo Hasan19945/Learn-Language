@@ -37,7 +37,7 @@ export function schedule(p: Progress, id: string, right: boolean) {
 
 export const levelIndex = (course: Course, L: Lesson) => course.levels.findIndex(x => x.id === L.level);
 
-export const startLevel = (p: Progress) => p.startLevel || 0;
+export const startLevel = (p: Progress) => Math.max(p.startLevel || 0, ...(p.placements || []).map(x => x.rec));
 
 export function isUnlocked(course: Course, p: Progress, i: number) {
   const { lessons } = course;
