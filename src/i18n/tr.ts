@@ -116,7 +116,10 @@ export const tr: Strings = {
     hint: name => `Oynat'a bas. ${name} hikâyeyi anlatırken yeni kelimeler ekranda belirecek.`,
     ended: "Bitti! Aşağıdaki hikâyeyi okuyup kelimeleri tekrar görebilirsin.",
     noVoice: "Bu cihazda uygun ses bulunamadı. Animasyon sessiz oynar, altyazıyı takip et.",
-    storyTitle: "Hikâyeyi oku"
+    storyTitle: "Hikâyeyi oku",
+    talkEyebrow: "Hasta ve doktor konuşuyor",
+    talkHint: "Oynat'a bas. Hasta ile doktor konuşurken yeni kelimeler ekranda belirecek.",
+    talkTitle: "Konuşmayı oku"
   },
   flash: {
     doneTitle: "Kartlar tamam!",

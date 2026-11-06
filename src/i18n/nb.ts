@@ -118,7 +118,10 @@ export const nb: Strings = {
     hint: name => `Trykk på Spill av. Nye ord dukker opp på skjermen mens ${name} forteller historien.`,
     ended: "Ferdig! Les historien nedenfor for å se ordene igjen.",
     noVoice: "Fant ingen passende stemme på denne enheten. Animasjonen spilles uten lyd, så følg med på tekstingen.",
-    storyTitle: "Les historien"
+    storyTitle: "Les historien",
+    talkEyebrow: "Pasient og lege i samtale",
+    talkHint: "Trykk på Spill av. Nye ord dukker opp på skjermen mens pasienten og legen snakker sammen.",
+    talkTitle: "Les samtalen"
   },
   flash: {
     doneTitle: "Ferdig med kortene!",

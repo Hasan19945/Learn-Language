@@ -112,6 +112,9 @@ export interface Strings {
     ended: string;
     noVoice: string;
     storyTitle: string;
+    talkEyebrow: string;
+    talkHint: string;
+    talkTitle: string;
   };
   flash: {
     doneTitle: string;

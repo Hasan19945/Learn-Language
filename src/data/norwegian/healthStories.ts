@@ -1,9 +1,11 @@
 import type { Story } from "../../types";
+import { HEALTH_TALKS } from "./healthTalks";
 
 export const HEALTH_STORIES: Record<"b1" | "b2" | "c1", Story> = {
   b1: {
     hero: "emil",
     casual: true,
+    talk: HEALTH_TALKS.b1,
     title: "Emil'in zor haftası",
     scenes: [
       { place: "home", mood: "worried",
@@ -28,6 +30,7 @@ export const HEALTH_STORIES: Record<"b1" | "b2" | "c1", Story> = {
   },
   b2: {
     hero: "emil",
+    talk: HEALTH_TALKS.b2,
     title: "Emil'in ilk hastası",
     scenes: [
       { place: "ward", mood: "happy",
@@ -52,6 +55,7 @@ export const HEALTH_STORIES: Record<"b1" | "b2" | "c1", Story> = {
   },
   c1: {
     hero: "emil",
+    talk: HEALTH_TALKS.c1,
     title: "Uzman doktorun uzun gecesi",
     scenes: [
       { place: "emergency", mood: "worried",
