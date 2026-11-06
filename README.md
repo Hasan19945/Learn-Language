@@ -25,7 +25,7 @@ No installation needed. It works in any browser, on both phone and computer.
 - Flashcards for vocabulary
 - Practice quizzes at the end of each lesson
 - Optional health and IT lessons at B1, B2 and C1 that never block the main lesson order
-- IT lessons include an animated story with Mira, an original anime-style character, plus the same story to read
+- IT lessons include an animated story with Mira, an original anime-style character; health lessons include an animated patient and doctor conversation; both have a story to read
 - Progress tracking
 
 ## 💻 Run it locally

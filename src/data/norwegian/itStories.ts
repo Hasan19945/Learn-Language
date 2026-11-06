@@ -2,6 +2,7 @@ import type { Story } from "../../types";
 
 export const IT_STORIES: Record<"b1" | "b2" | "c1", Story> = {
   b1: {
+    hero: "mira",
     title: "Mira'nın ilk iş günü",
     scenes: [
       { place: "desk", mood: "happy",
@@ -22,6 +23,7 @@ export const IT_STORIES: Record<"b1" | "b2" | "c1", Story> = {
     ]
   },
   b2: {
+    hero: "mira",
     title: "Mira'nın ilk büyük görevi",
     scenes: [
       { place: "desk", mood: "happy",
@@ -45,6 +47,7 @@ export const IT_STORIES: Record<"b1" | "b2" | "c1", Story> = {
     ]
   },
   c1: {
+    hero: "mira",
     title: "Gece üçteki kesinti",
     scenes: [
       { place: "home", mood: "worried",

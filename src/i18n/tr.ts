@@ -104,7 +104,7 @@ export const tr: Strings = {
     toCards: "Kartlarla çalış"
   },
   story: {
-    eyebrow: "Mira ile animasyon",
+    eyebrow: name => `${name} ile animasyon`,
     recap: "Bunu aklında tut",
     play: "Oynat",
     pause: "Duraklat",
@@ -113,10 +113,13 @@ export const tr: Strings = {
     next: "Sonraki sahne",
     showTr: "Çeviriyi göster",
     hideTr: "Çeviriyi gizle",
-    hint: "Oynat'a bas. Mira hikâyeyi anlatırken yeni kelimeler ekranda belirecek.",
+    hint: name => `Oynat'a bas. ${name} hikâyeyi anlatırken yeni kelimeler ekranda belirecek.`,
     ended: "Bitti! Aşağıdaki hikâyeyi okuyup kelimeleri tekrar görebilirsin.",
     noVoice: "Bu cihazda uygun ses bulunamadı. Animasyon sessiz oynar, altyazıyı takip et.",
-    storyTitle: "Hikâyeyi oku"
+    storyTitle: "Hikâyeyi oku",
+    talkEyebrow: "Hasta ve doktor konuşuyor",
+    talkHint: "Oynat'a bas. Hasta ile doktor konuşurken yeni kelimeler ekranda belirecek.",
+    talkTitle: "Konuşmayı oku"
   },
   flash: {
     doneTitle: "Kartlar tamam!",

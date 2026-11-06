@@ -1,10 +1,11 @@
 import { N, Q, W, asExtra } from "../helpers";
 import type { LessonDef } from "../../types";
+import { HEALTH_STORIES } from "./healthStories";
 import { IT_STORIES } from "./itStories";
 
 const B1: LessonDef[] = [
 {
-  id: "b1-health", title: "Sağlık: hastane ve doktor", no: "Helse: lege og sykehus", icon: "health",
+  id: "b1-health", title: "Sağlık: hastane ve doktor", no: "Helse: lege og sykehus", icon: "health", story: HEALTH_STORIES.b1,
   intro: "Norveç sağlık sisteminde yolunu bulmak: aile hekimi, nöbetçi doktor, hastane; şikâyetini anlatmak ve randevu almak.",
   notes: [
     { h: "Nereye başvurulur?", p: "Norveç'te önce fastlege'ye (aile hekimi) gidilir. Hastaneye genellikle onun sevkiyle (henvisning) gidersin. Mesai dışında acil ama hayati olmayan durumlarda legevakt (116 117) aranır. Hayati tehlikede 113 aranır.",
@@ -79,7 +80,7 @@ const B1: LessonDef[] = [
 
 const B2: LessonDef[] = [
 {
-  id: "b2-health", title: "Sağlık: hastalıklar ve tedavi", no: "Helse: sykdommer og behandling", icon: "health",
+  id: "b2-health", title: "Sağlık: hastalıklar ve tedavi", no: "Helse: sykdommer og behandling", icon: "health", story: HEALTH_STORIES.b2,
   intro: "Yaygın hastalıkların adları, teşhis ve tedavi konuşmak; doktorun anlattığını anlamak ve doğru sorular sormak.",
   notes: [
     { h: "Hastalık adları", p: "Çoğu hastalık adı artikelsiz kullanılır: Han har diabetes. Hun har astma. Jeg har høyt blodtrykk. Ani olaylarda artikel gelir: Han fikk et hjerteinfarkt. Hun fikk hjerneslag.",
@@ -156,7 +157,7 @@ const B2: LessonDef[] = [
 
 const C1: LessonDef[] = [
 {
-  id: "c1-health", title: "Sağlık: hastane ve tıp dili", no: "Helse: sykehusspråk", icon: "health",
+  id: "c1-health", title: "Sağlık: hastane ve tıp dili", no: "Helse: sykehusspråk", icon: "health", story: HEALTH_STORIES.c1,
   intro: "Hastanede yatış, taburcu, hasta hakları ve tıbbi raporların dili. Epikriz okumak ve yakın olarak doktorla konuşmak için.",
   notes: [
     { h: "Rapor dili", p: "Tıbbi metinlerde özne çoğu kez düşer, edilgen ve isimleşmiş yapı kullanılır: Pasienten ble innlagt med brystsmerter. (Hasta göğüs ağrısıyla yatırıldı.) Det ble besluttet å operere. (Ameliyat kararı alındı.) Innleggelse skjedde via legevakten. (Yatış nöbetçi doktor üzerinden gerçekleşti.)" },

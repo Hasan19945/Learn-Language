@@ -225,6 +225,18 @@ button.chip{border:0}
 .story-p .no{font-weight:400;line-height:1.5}
 .story-p .muted{font-size:.9rem;margin-top:2px}
 .story-word{color:var(--ei);font-weight:700}
+.vid-cards.mid{top:auto;right:auto;bottom:8px;left:50%;transform:translateX(-50%);width:max-content;max-width:62%;align-items:center}
+.vid-cards.mid .vid-card{text-align:center}
+.vid-board.mid{top:auto;bottom:5%;right:auto;left:50%;width:60%;margin-left:-30%}
+.vid-big.mid{top:10px;bottom:auto;right:auto;left:50%;margin-left:-28px}
+.vid-speaker{animation:vidspeaker .9s ease-in-out infinite alternate}
+@keyframes vidspeaker{from{transform:none}to{transform:translateY(7px)}}
+.vid-pulse{stroke-dasharray:190;animation:vidpulse 2.2s linear infinite}
+.vid-drip{animation:viddrip 1.8s ease-in infinite}
+.vid-alarm{opacity:0;animation:vidalarm 1.8s ease-in-out infinite}
+@keyframes vidpulse{from{stroke-dashoffset:190}to{stroke-dashoffset:-190}}
+@keyframes viddrip{from{transform:none;opacity:1}to{transform:translateY(60px);opacity:0}}
+@keyframes vidalarm{0%,100%{opacity:0}50%{opacity:.1}}
 @keyframes vidpan{from{transform:scale(1.02)}to{transform:scale(1.09) translateX(-8px)}}
 @keyframes vidfade{from{opacity:0}to{opacity:1}}
 @keyframes miraenter{from{transform:translateY(14px) scale(.97)}to{transform:none}}
