@@ -67,6 +67,17 @@ src/
   views/                one file per screen; views/lesson/ holds the lesson steps
 ```
 
+## 🔐 Email accounts
+
+Email sign-up, sign-in and syncing between devices use Firebase. They stay hidden until `FIREBASE_CONFIG` in `src/lib/firebaseConfig.ts` is filled in; the app works without them. To turn them on:
+
+1. Create a Firebase project and add a web app.
+2. Under **Authentication**, enable **Email/Password**, and add `hasan19945.github.io` to the authorized domains.
+3. Create a **Firestore** database and publish the rules from `firestore.rules`.
+4. Copy the web app's config into `src/lib/firebaseConfig.ts`.
+
+New accounts must verify their email before they can use the app or read and write cloud data; the Firestore rules enforce this too. The config values are public by design; the Firestore rules are what protect each user's data. Accounts 1–5 keep working as before and stay on the device.
+
 ## 🚀 Deploying
 
 Every push to `main` builds the site and publishes it to GitHub Pages through `.github/workflows/deploy.yml`. In the repository settings, **Pages → Source** must be set to **GitHub Actions**.

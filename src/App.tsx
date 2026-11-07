@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { COURSES, isCourseId } from "./data/courses";
 import { browserLang, isLang, STRINGS } from "./i18n";
 import { isAccountId } from "./lib/accounts";
+import { currentUser, emailAuthEnabled, signOutUser } from "./lib/auth";
 import { freshProgress, levelIndex, nextLesson } from "./lib/progress";
 import { useVoice } from "./lib/speech";
 import { CURRENT_ACCOUNT_KEY, CURRENT_COURSE_KEY, store, UI_LANG_KEY } from "./lib/storage";
@@ -17,11 +18,14 @@ import { PlacementView } from "./views/PlacementView";
 import { ProgressView } from "./views/ProgressView";
 import { ReviewView } from "./views/ReviewView";
 import { SettingsView } from "./views/SettingsView";
+import { VerifyEmail } from "./views/VerifyEmail";
 
 const rememberedAccount = () => {
   const id = store.get(CURRENT_ACCOUNT_KEY);
-  return isAccountId(id) ? id : null;
+  return isAccountId(id) || (emailAuthEnabled && id) ? id : null;
 };
+
+const ALL_COURSES = Object.values(COURSES);
 
 const rememberedCourse = (): CourseId => {
   const id = store.get(CURRENT_COURSE_KEY);
@@ -45,6 +49,7 @@ export function App() {
   const [progress, setProgress] = useState<Progress>(freshProgress);
   const [view, setView] = useState<View>({ name: "course" });
   const [busy, setBusy] = useState(() => account !== null);
+  const [pending, setPending] = useState(false);
   const [openLevel, setOpenLevel] = useState<number | null>(null);
   const [uiLang, setUiLangState] = useState<Lang>(rememberedLang);
   const progressRef = useRef(progress);
@@ -81,14 +86,59 @@ export function App() {
 
   useEffect(() => {
     const acc = rememberedAccount();
-    if (acc) void loadCourse(rememberedCourse(), acc);
+    if (!acc) return;
+    void (async () => {
+      if (!isAccountId(acc)) {
+        const user = await currentUser().catch(() => ({ uid: acc, verified: true }));
+        if (user?.uid !== acc) {
+          store.set(CURRENT_ACCOUNT_KEY, null);
+          setAccount(null);
+          setBusy(false);
+          return;
+        }
+        if (!user.verified) {
+          setPending(true);
+          setBusy(false);
+          return;
+        }
+        await progressSync.pullAll(ALL_COURSES, acc);
+      }
+      await loadCourse(rememberedCourse(), acc);
+    })();
   }, [loadCourse]);
 
-  const login = (id: string) => {
+  const login = async (id: string) => {
     store.set(CURRENT_ACCOUNT_KEY, id);
+    setBusy(true);
     setAccount(id);
     setView({ name: "course" });
+    if (!isAccountId(id)) {
+      const user = await currentUser().catch(() => null);
+      if (user && !user.verified) {
+        setPending(true);
+        setBusy(false);
+        return;
+      }
+    }
+    await progressSync.pullAll(ALL_COURSES, id);
+    setBusy(false);
   };
+
+  const verified = useCallback(async () => {
+    const acc = store.get(CURRENT_ACCOUNT_KEY);
+    setPending(false);
+    setBusy(true);
+    setView({ name: "course" });
+    if (acc) await progressSync.pullAll(ALL_COURSES, acc);
+    setBusy(false);
+  }, []);
+
+  const leave = useCallback(() => {
+    store.set(CURRENT_ACCOUNT_KEY, null);
+    progressRef.current = freshProgress();
+    setProgress(progressRef.current);
+    setAccount(null);
+  }, []);
 
   const value = useMemo<AppContextValue | null>(() => {
     if (!account) return null;
@@ -109,17 +159,23 @@ export function App() {
         scrollTo(0, 0);
       },
       openCourse: (id, resume) => void loadCourse(id, account, resume),
-      logout: () => {
+      logout: () => void (async () => {
+        await progressSync.flush();
         progressSync.close();
-        store.set(CURRENT_ACCOUNT_KEY, null);
-        progressRef.current = freshProgress();
-        setProgress(progressRef.current);
-        setAccount(null);
+        if (!isAccountId(account)) await signOutUser().catch(() => undefined);
+        leave();
+      })(),
+      afterDelete: () => {
+        progressSync.discard();
+        leave();
       }
     };
-  }, [account, course, progress, voice, view, openLevel, t, uiLang, setUiLang, loadCourse]);
+  }, [account, course, progress, voice, view, openLevel, t, uiLang, setUiLang, loadCourse, leave]);
 
   if (!value) return <LoginView t={t} uiLang={uiLang} setUiLang={setUiLang} onLogin={login} />;
+  if (pending) {
+    return <VerifyEmail t={t} onVerified={verified} onLogout={() => { setPending(false); value.logout(); }} />;
+  }
   if (busy) return <Loading text={t.loading} />;
 
   return (

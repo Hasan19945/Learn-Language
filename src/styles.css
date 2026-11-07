@@ -250,5 +250,7 @@ button.chip{border:0}
 @keyframes vidcloud{from{transform:none}to{transform:translateX(44px)}}
 @keyframes vidsteam{from{opacity:.25;transform:none}to{opacity:.85;transform:translateY(-5px)}}
 @keyframes vidcard{from{transform:translateY(6px) scale(.92);opacity:0}to{transform:none;opacity:1}}
+.link{border:0;background:none;padding:4px 0;color:var(--accent);font-weight:700;font-size:.9rem;text-decoration:underline}
+.chip.acc{max-width:100%;overflow:hidden;text-overflow:ellipsis}
 .group-head{display:flex;align-items:center;gap:8px}
 .flag{flex:none;border-radius:3px;box-shadow:0 0 0 1px var(--line)}

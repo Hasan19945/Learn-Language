@@ -1,4 +1,5 @@
 import type { Strings } from "../i18n";
+import { EMAIL_KEY, store } from "./storage";
 
 export interface Account {
   id: string;
@@ -15,7 +16,7 @@ export const ACCOUNTS: Account[] = [
 
 export const accountName = (t: Strings, id: string | null) => {
   const i = ACCOUNTS.findIndex(a => a.id === id);
-  return i < 0 ? "" : t.account(i + 1);
+  return i < 0 ? (store.get(EMAIL_KEY) || "").split("@")[0] : t.account(i + 1);
 };
 
 export const isAccountId = (id: string | null) => ACCOUNTS.some(a => a.id === id);

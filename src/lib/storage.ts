@@ -19,3 +19,4 @@ export const store = {
 export const CURRENT_ACCOUNT_KEY = "adim-adim-norsk-v1:current";
 export const CURRENT_COURSE_KEY = "adim-adim:course";
 export const UI_LANG_KEY = "adim-adim:ui";
+export const EMAIL_KEY = "adim-adim:email";

@@ -4,10 +4,11 @@ import { Choice } from "../components/Choice";
 import { Emphasis } from "../components/Emphasis";
 import { Nav } from "../components/Nav";
 import { FLOWS, GOALS } from "../data/options";
-import { accountName } from "../lib/accounts";
+import { accountName, isAccountId } from "../lib/accounts";
 import { freshProgress, positionInLevel } from "../lib/progress";
 import { progressSync } from "../lib/sync";
 import { useApp } from "../state/AppContext";
+import { AccountPanels } from "./AccountPanels";
 
 export function SettingsView() {
   const { account, course, progress, update, voice, go, logout, t } = useApp();
@@ -99,6 +100,7 @@ export function SettingsView() {
             <button className="btn ghost" onClick={() => setConfirmReset(true)}>{t.settings.reset}</button>
           )}
         </section>
+        {!isAccountId(account) && <AccountPanels />}
       </main>
       <Nav />
     </>

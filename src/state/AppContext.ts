@@ -24,6 +24,7 @@ export interface AppContextValue {
   setOpenLevel: (level: number) => void;
   openCourse: (id: CourseId, resume?: boolean) => void;
   logout: () => void;
+  afterDelete: () => void;
   t: Strings;
   uiLang: Lang;
   setUiLang: (lang: Lang) => void;

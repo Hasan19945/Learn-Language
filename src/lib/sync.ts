@@ -1,4 +1,6 @@
 import type { Course, Progress } from "../types";
+import { isAccountId } from "./accounts";
+import { cloudDb } from "./auth";
 import { freshProgress } from "./progress";
 import { store } from "./storage";
 
@@ -9,7 +11,7 @@ interface CloudDoc {
   set(value: Progress): Promise<void>;
 }
 
-interface CloudDb {
+export interface CloudDb {
   doc(path: string): CloudDoc;
 }
 
@@ -35,8 +37,35 @@ export function readLocalProgress(course: Course, account: string): Progress | n
   }
 }
 
+export function copyLegacyProgress(courses: Course[], from: string, to: string) {
+  let copied = 0;
+  for (const c of courses) {
+    const old = readLocalProgress(c, from);
+    if (!old?.profile) continue;
+    const current = readLocalProgress(c, to);
+    if (current && (current.updatedAt || 0) >= (old.updatedAt || 0)) continue;
+    store.set(localKey(c, to), JSON.stringify(old));
+    copied++;
+  }
+  return copied;
+}
+
+export function removeLocalProgress(courses: Course[], account: string) {
+  courses.forEach(c => store.set(localKey(c, account), null));
+}
+
+const dbFor = async (account: string, shared: CloudDb | null) => {
+  if (isAccountId(account)) return shared;
+  try {
+    return await cloudDb(account);
+  } catch {
+    return null;
+  }
+};
+
 class ProgressSync {
   status: SyncStatus = "wait";
+  private shared: CloudDb | null = null;
   private db: CloudDb | null = null;
   private ready: Promise<void>;
   private listeners = new Set<() => void>();
@@ -50,7 +79,7 @@ class ProgressSync {
     const use = window.claude?.use;
     this.ready = (use ? use("db") : Promise.resolve(null)).then(
       db => {
-        this.db = db;
+        this.shared = db;
         if (!db && this.status === "wait") this.setStatus("local");
       },
       () => this.setStatus("local")
@@ -76,6 +105,7 @@ class ProgressSync {
     await this.flush();
     this.setStatus("wait");
     await this.ready;
+    this.db = await dbFor(account, this.shared);
     this.target = { doc: course.doc + "/" + account, localKey: localKey(course, account) };
     this.latest = null;
     let remote: Progress | null = null;
@@ -96,6 +126,30 @@ class ProgressSync {
       this.queueRemote();
     }
     return progress;
+  }
+
+  async pullAll(courses: Course[], account: string) {
+    if (isAccountId(account)) return;
+    const db = await dbFor(account, null);
+    if (!db) return;
+    await Promise.all(courses.map(async c => {
+      try {
+        const s = await db.doc(c.doc + "/" + account).get();
+        if (!s.exists) return;
+        const remote = s.data(), local = readLocalProgress(c, account);
+        if (!local || (remote.updatedAt || 0) > (local.updatedAt || 0)) store.set(localKey(c, account), JSON.stringify(remote));
+      } catch {
+        return;
+      }
+    }));
+  }
+
+  discard() {
+    clearTimeout(this.timer);
+    this.dirty = false;
+    this.latest = null;
+    this.target = null;
+    this.db = null;
   }
 
   save(progress: Progress) {
