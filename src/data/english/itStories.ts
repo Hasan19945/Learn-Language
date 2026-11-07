@@ -1,11 +1,13 @@
 import type { Lang, Story, StoryHero, StoryMood, StoryPlace } from "../../types";
 
+export type HelpLang = Exclude<Lang, "en">;
+
 export interface StorySource {
-  title: Record<Lang, string>;
+  title: Record<HelpLang, string>;
   scenes: { place: StoryPlace; mood: StoryMood; text: string; tr: string; nb: string }[];
 }
 
-export const localizeStory = (s: StorySource, hero: StoryHero, lang: Lang, casual?: boolean): Story => ({
+export const localizeStory = (s: StorySource, hero: StoryHero, lang: HelpLang, casual?: boolean): Story => ({
   hero,
   casual,
   title: s.title[lang],
@@ -94,4 +96,4 @@ const STORIES: Record<"b1" | "b2" | "c1", StorySource> = {
   }
 };
 
-export const itStory = (level: keyof typeof STORIES, lang: Lang) => localizeStory(STORIES[level], "mira", lang);
+export const itStory = (level: keyof typeof STORIES, lang: HelpLang) => localizeStory(STORIES[level], "mira", lang);

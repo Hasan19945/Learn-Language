@@ -1,7 +1,5 @@
-import { STRINGS } from "../i18n";
+import { LANGS, STRINGS } from "../i18n";
 import type { Lang } from "../types";
-
-const LANGS: Lang[] = ["tr", "nb"];
 
 export function LangSwitch({ value, onChange, label }: { value: Lang; onChange: (lang: Lang) => void; label: string }) {
   return (

@@ -58,7 +58,7 @@ export async function signIn(email: string, password: string) {
 
 export async function resetPassword(email: string, lang: Lang) {
   const { auth, authMod } = await load();
-  auth.languageCode = lang === "nb" ? "no" : "tr";
+  auth.languageCode = lang === "nb" ? "no" : lang;
   await authMod.sendPasswordResetEmail(auth, email);
 }
 

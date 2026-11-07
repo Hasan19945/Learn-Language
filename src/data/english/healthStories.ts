@@ -1,6 +1,5 @@
-import type { Lang } from "../../types";
 import { healthTalk } from "./healthTalks";
-import { localizeStory, type StorySource } from "./itStories";
+import { localizeStory, type HelpLang, type StorySource } from "./itStories";
 
 const STORIES: Record<"b1" | "b2" | "c1", StorySource> = {
   b1: {
@@ -92,7 +91,7 @@ const STORIES: Record<"b1" | "b2" | "c1", StorySource> = {
   }
 };
 
-export const healthStory = (level: keyof typeof STORIES, lang: Lang) => ({
+export const healthStory = (level: keyof typeof STORIES, lang: HelpLang) => ({
   ...localizeStory(STORIES[level], "emil", lang, level === "b1"),
   talk: healthTalk(level, lang)
 });

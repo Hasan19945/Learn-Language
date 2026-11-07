@@ -5,13 +5,13 @@ import { LangSwitch } from "../components/LangSwitch";
 import { Logo } from "../components/Logo";
 import { Bar } from "../components/Progress";
 import { COURSES, isCourseId } from "../data/courses";
-import { STRINGS, type Strings } from "../i18n";
+import { LANGS, STRINGS, type Strings } from "../i18n";
 import { accountName } from "../lib/accounts";
 import { courseSummary, positionInLevel, type CourseSummary } from "../lib/progress";
 import { CURRENT_COURSE_KEY, store } from "../lib/storage";
 import { readLocalProgress } from "../lib/sync";
 import { useApp } from "../state/AppContext";
-import type { Course, Lang } from "../types";
+import type { Course } from "../types";
 
 const ALL = Object.values(COURSES);
 
@@ -27,7 +27,7 @@ export function CourseView() {
   const lastId = store.get(CURRENT_COURSE_KEY);
   const last = isCourseId(lastId) ? COURSES[lastId] : null;
   const lastSummary = last && summaries.get(last.id);
-  const groups = ([uiLang, ...(["tr", "nb"] as Lang[]).filter(l => l !== uiLang)])
+  const groups = [uiLang, ...LANGS.filter(l => l !== uiLang)]
     .map(lang => ({ lang, courses: ALL.filter(c => c.native === lang) }))
     .filter(g => g.courses.length);
 
