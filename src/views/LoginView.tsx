@@ -5,7 +5,9 @@ import { LangSwitch } from "../components/LangSwitch";
 import { Logo } from "../components/Logo";
 import type { Strings } from "../i18n";
 import { accountName, ACCOUNTS, checkPassword } from "../lib/accounts";
+import { emailAuthEnabled } from "../lib/auth";
 import type { Lang } from "../types";
+import { EmailAuth } from "./EmailAuth";
 
 interface Props {
   t: Strings;
@@ -42,8 +44,17 @@ export function LoginView({ t, uiLang, setUiLang, onLogin }: Props) {
       </header>
       <div className="stack">
         <h1>{t.login.title}</h1>
-        <p className="muted">{t.login.intro}</p>
+        <p className="muted">{emailAuthEnabled ? t.login.introEmail : t.login.intro}</p>
       </div>
+      {emailAuthEnabled && (
+        <>
+          <EmailAuth t={t} uiLang={uiLang} onLogin={onLogin} />
+          <div className="stack" style={{ gap: 4 }}>
+            <h3>{t.login.legacyTitle}</h3>
+            <p className="muted" style={{ fontSize: ".9rem" }}>{t.login.legacyText}</p>
+          </div>
+        </>
+      )}
       <div className="choices two">
         {ACCOUNTS.map(a => <Choice key={a.id} pressed={picked === a.id} onClick={() => choose(a.id)} title={accountName(t, a.id)} />)}
       </div>
