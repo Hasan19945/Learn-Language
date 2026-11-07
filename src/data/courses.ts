@@ -2,6 +2,7 @@ import type { Course, CourseDef, CourseId } from "../types";
 import { english } from "./english/course";
 import { englishNb } from "./english-nb/course";
 import { norwegian } from "./norwegian/course";
+import { norwegianEn } from "./norwegian-en/course";
 
 function buildCourse(def: CourseDef): Course {
   const wordLesson = def.lessons.find(L => L.pack === "words")!.id;
@@ -18,7 +19,8 @@ function buildCourse(def: CourseDef): Course {
 export const COURSES: Record<CourseId, Course> = {
   no: buildCourse(norwegian),
   en: buildCourse(english),
-  "en-nb": buildCourse(englishNb)
+  "en-nb": buildCourse(englishNb),
+  "no-en": buildCourse(norwegianEn)
 };
 
 export const isCourseId = (id: string | null): id is CourseId => !!id && Object.hasOwn(COURSES, id);

@@ -11,6 +11,17 @@ export function Flag({ lang }: { lang: Lang }) {
       </svg>
     );
   }
+  if (lang === "en") {
+    return (
+      <svg className="flag" viewBox="0 0 60 30" width={32} height={16} aria-hidden="true">
+        <rect width="60" height="30" fill="#012169" />
+        <path d="M0 0 60 30M60 0 0 30" stroke="#fff" strokeWidth="6" />
+        <path d="M0 0 60 30M60 0 0 30" stroke="#c8102e" strokeWidth="2" />
+        <path d="M30 0V30M0 15H60" stroke="#fff" strokeWidth="10" />
+        <path d="M30 0V30M0 15H60" stroke="#c8102e" strokeWidth="6" />
+      </svg>
+    );
+  }
   return (
     <svg className="flag" viewBox="0 0 22 16" width={22} height={16} aria-hidden="true">
       <rect width="22" height="16" fill="#ba0c2f" />

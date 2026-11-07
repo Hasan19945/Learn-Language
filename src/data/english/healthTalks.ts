@@ -1,4 +1,5 @@
-import type { Lang, StoryHero, StoryMood, StoryPlace, Talk } from "../../types";
+import type { StoryHero, StoryMood, StoryPlace, Talk } from "../../types";
+import type { HelpLang } from "./itStories";
 
 type Line = [who: 0 | 1, mood: StoryMood, text: string, tr: string, nb: string, place?: StoryPlace];
 
@@ -75,7 +76,7 @@ const TALKS: Record<"b1" | "b2" | "c1", TalkSource> = {
   }
 };
 
-export function healthTalk(level: keyof typeof TALKS, lang: Lang): Talk {
+export function healthTalk(level: keyof typeof TALKS, lang: HelpLang): Talk {
   const { cast, place, lines } = TALKS[level];
   return {
     cast,

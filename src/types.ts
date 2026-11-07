@@ -2,8 +2,8 @@ import type { IconName } from "./components/Icon";
 
 export type Gender = "en" | "ei" | "et";
 export type LevelId = "A0" | "A1" | "A2" | "B1" | "B2" | "C1";
-export type CourseId = "no" | "en" | "en-nb";
-export type Lang = "tr" | "nb";
+export type CourseId = "no" | "en" | "en-nb" | "no-en";
+export type Lang = "tr" | "nb" | "en";
 export type Pair = [string, string];
 
 export interface WordDef {

@@ -1,12 +1,13 @@
 # Adım Adım 🇳🇴 🇬🇧
 
-A step-by-step language learning app with three courses:
+A step-by-step language learning app with four courses:
 
 - **Norsk**: Norwegian (Bokmål) for Turkish speakers, A0–C1
 - **English**: English for Turkish speakers, A0–C1
 - **Engelsk**: English for Norwegian speakers, A0–C1
+- **Norwegian**: Norwegian (Bokmål) for English speakers, A0–C1
 
-The app's buttons and menus follow the language of the course's explanations: Turkish for the first two courses, Norwegian for the third. The sign-in and course screens have a Türkçe / Norsk switch.
+The app's buttons and menus follow the language of the course's explanations: Turkish for the first two courses, Norwegian for the third and English for the fourth. The sign-in and course screens have a Türkçe / Norsk / English switch.
 
 After signing in, pick the course you want. Each course keeps its own progress, and you can switch at any time from the button at the top or from Settings.
 
@@ -58,9 +59,10 @@ src/
     norwegian/          Norwegian lessons by level, interests, placement test
     english/            English lessons for Turkish speakers and course settings
     english-nb/         English lessons for Norwegian speakers and course settings
+    norwegian-en/       Norwegian lessons for English speakers and course settings
     courses.ts          builds all courses
     options.ts          daily goal and lesson flow choices
-  i18n/                 interface text in Turkish (tr.ts) and Norwegian (nb.ts)
+  i18n/                 interface text in Turkish (tr.ts), Norwegian (nb.ts) and English (en.ts)
   lib/                  logic without UI: progress, quiz building, saving, speech
   state/AppContext.ts   shared app state for all screens
   components/           reusable UI pieces (word rows, quiz question, nav, icons)
