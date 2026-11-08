@@ -252,5 +252,14 @@ button.chip{border:0}
 @keyframes vidcard{from{transform:translateY(6px) scale(.92);opacity:0}to{transform:none;opacity:1}}
 .link{border:0;background:none;padding:4px 0;color:var(--accent);font-weight:700;font-size:.9rem;text-decoration:underline}
 .chip.acc{max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.burst{position:fixed;left:50%;top:40%;width:116px;height:116px;margin:-58px 0 0 -58px;border-radius:50%;display:grid;place-items:center;color:#fff;z-index:30;pointer-events:none;box-shadow:0 8px 30px rgb(0 0 0/.25);animation:burstin .95s cubic-bezier(.2,1.4,.4,1) forwards}
+.burst.ok{background:var(--ok)}
+.burst.bad{background:var(--bad);animation-name:burstbad}
+.burst svg{width:64px;height:64px}
+.burst-mark{stroke-dasharray:40;stroke-dashoffset:40;animation:burstdraw .35s ease-out .12s forwards}
+@keyframes burstin{0%{transform:scale(.3);opacity:0}25%{transform:scale(1.1);opacity:1}45%{transform:scale(1)}75%{opacity:1}100%{transform:scale(.9);opacity:0}}
+@keyframes burstbad{0%{transform:scale(.3);opacity:0}20%{transform:scale(1.05);opacity:1}30%{transform:translateX(-10px)}40%{transform:translateX(10px)}50%{transform:translateX(-6px)}60%{transform:none}80%{opacity:1}100%{transform:scale(.9);opacity:0}}
+@keyframes burstdraw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.burst-mark{stroke-dashoffset:0}}
 .group-head{display:flex;align-items:center;gap:8px}
 .flag{flex:none;border-radius:3px;box-shadow:0 0 0 1px var(--line)}

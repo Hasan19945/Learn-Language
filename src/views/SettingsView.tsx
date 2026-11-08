@@ -5,6 +5,7 @@ import { Emphasis } from "../components/Emphasis";
 import { Nav } from "../components/Nav";
 import { FLOWS, GOALS } from "../data/options";
 import { accountName, isAccountId } from "../lib/accounts";
+import { playAnswer, setSoundOn, soundOn } from "../lib/feedback";
 import { freshProgress, positionInLevel } from "../lib/progress";
 import { progressSync } from "../lib/sync";
 import { useApp } from "../state/AppContext";
@@ -14,6 +15,13 @@ export function SettingsView() {
   const { account, course, progress, update, voice, go, logout, t } = useApp();
   const sync = useSyncExternalStore(progressSync.subscribe, progressSync.getStatus, progressSync.getStatus);
   const [confirmReset, setConfirmReset] = useState(false);
+  const [sound, setSound] = useState(soundOn);
+
+  const toggleSound = () => {
+    setSoundOn(!sound);
+    setSound(!sound);
+    if (!sound) playAnswer(true);
+  };
   const profile = progress.profile!;
   const name = accountName(t, account);
   const packLessons = course.lessons
@@ -84,6 +92,13 @@ export function SettingsView() {
         <section className="panel stack">
           <h3>{t.settings.voiceTitle}</h3>
           <p className="muted">{voice ? t.settings.voiceFound(course.lang, voice.name) : t.settings.voiceMissing(course.lang, course.voiceName)}</p>
+        </section>
+        <section className="panel stack">
+          <div className="row" style={{ justifyContent: "space-between" }}>
+            <h3>{t.settings.soundTitle}</h3>
+            <button className={`chip ${sound ? "ok" : ""}`} aria-pressed={sound} onClick={toggleSound}>{sound ? t.settings.soundOn : t.settings.soundOff}</button>
+          </div>
+          <p className="muted">{t.settings.soundText}</p>
         </section>
         <section className="panel stack">
           <h3>{t.settings.resetTitle}</h3>

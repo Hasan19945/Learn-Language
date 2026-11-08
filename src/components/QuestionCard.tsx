@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import { answerQuiz, checkTyped, correctAnswer, recordAnswer, type ChoiceQuestion, type OrderQuestion, type QuizState, type TypeQuestion } from "../lib/quiz";
+import { playAnswer } from "../lib/feedback";
 import { useApp } from "../state/AppContext";
+import { AnswerBurst } from "./AnswerBurst";
 import { Bar } from "./Progress";
 import { SayButton } from "./SayButton";
 import { PicTile } from "./Words";
@@ -10,6 +12,7 @@ interface Result {
   picked?: number;
   typo?: boolean;
   sentence?: boolean;
+  skipped?: boolean;
 }
 
 interface Props {
@@ -28,6 +31,7 @@ export function QuestionCard({ quiz, setQuiz, onNext }: Props) {
   const submit = (right: boolean, extra: Omit<Result, "right"> = {}) => {
     if (result) return;
     setResult({ right, ...extra });
+    if (!extra.skipped) playAnswer(right);
     setQuiz(answerQuiz(quiz, right));
     update(p => recordAnswer(p, q, right));
   };
@@ -56,6 +60,7 @@ export function QuestionCard({ quiz, setQuiz, onNext }: Props) {
           : <ChoiceAnswer q={q} result={result} submit={submit} />}
         {result && (
           <>
+            {!result.skipped && <AnswerBurst right={result.right} />}
             <div className={`fb ${result.right ? "ok" : "bad"}`}>
               <h3>{result.right ? (result.typo ? t.question.almost : t.question.right) : t.question.correctAnswer(shown)}</h3>
               {result.right && result.typo && <p>{t.question.typo} <b>{shown}</b></p>}
@@ -128,7 +133,7 @@ function TypeAnswer({ q, result, submit }: AnswerProps<TypeQuestion>) {
             </div>
           )}
           <div className="row">
-            <button type="button" className="btn ghost" onClick={() => { setTyped(""); submit(false); }}>{t.question.dontKnow}</button>
+            <button type="button" className="btn ghost" onClick={() => { setTyped(""); submit(false, { skipped: true }); }}>{t.question.dontKnow}</button>
             <button className="btn" style={{ flex: 1 }}>{t.question.check}</button>
           </div>
         </>

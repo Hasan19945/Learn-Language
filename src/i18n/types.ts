@@ -276,6 +276,10 @@ export interface Strings {
     interestsText: (lessons: string) => string;
     goalTitle: string;
     flowTitle: string;
+    soundTitle: string;
+    soundText: string;
+    soundOn: string;
+    soundOff: string;
     voiceTitle: string;
     voiceFound: (lang: string, name: string) => string;
     voiceMissing: (lang: string, voiceName: string) => string;

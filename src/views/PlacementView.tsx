@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { AnswerBurst } from "../components/AnswerBurst";
 import { BackHeader } from "../components/Nav";
 import { Bar } from "../components/Progress";
 import { today } from "../lib/dates";
+import { playAnswer } from "../lib/feedback";
 import { countExercise, startLevel } from "../lib/progress";
 import { shuffleChoices } from "../lib/quiz";
 import { pick } from "../lib/random";
@@ -86,6 +88,7 @@ export function PlacementView() {
 
   const answer = (i: number) => {
     if (answered) return;
+    if (i >= 0) playAnswer(i === q.a);
     setRun({ ...run, picked: i, correct: run.correct + (i === q.a ? 1 : 0) });
     update(countExercise);
   };
@@ -126,6 +129,7 @@ export function PlacementView() {
         </div>
         {answered ? (
           <>
+            {run.picked! >= 0 && <AnswerBurst key={`${run.lv}-${run.pos}`} right={right} />}
             <div className={`fb ${right ? "ok" : "bad"}`}>
               <h3>{right ? t.question.right : run.picked! < 0 ? t.placement.answer(q.o[q.a]) : t.question.correctAnswer(q.o[q.a])}</h3>
               <p>{q.e}</p>
