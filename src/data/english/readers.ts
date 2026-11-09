@@ -76,4 +76,44 @@ const A1: LessonDef[] = [
 }
 ];
 
-export default [...asExtra("A0", A0), ...asExtra("A1", A1)];
+const A2: LessonDef[] = [
+{
+  id: "en-a2-story", title: "Altı kısa hikâye", no: "Six short stories", icon: "spark", stories: readingStories("a2", "tr"),
+  intro: "A2'de öğrendiklerinle altı hikâye: Mira'nın hafta sonu, Emil'in İngiltere'deki iki yılı, doktor, yeni bir iş, daire aramak ve yaz planları.",
+  notes: [
+    { h: "Hikâyelerde neleri tekrar ediyorsun?", p: "Geçmiş zaman: was, went, ate, called. Present perfect: has lived, has learned, has never been. because ile sebep: because he doesn't get many breaks. if (-ip -mediğini): asks if the flat is available. Gelecek: is going to travel, it is going to rain." },
+    { h: "Nasıl çalışmalı?", p: "Her hikâyeyi önce çeviriyle izle, sonra çeviriyi gizleyip tekrar izle. En son yüksek sesle oku. Kırmızı kelimeler bu dersin kelimeleri." }
+  ],
+  tip: "\"İki yıldır burada yaşıyor\" İngilizcede şimdiki zamanla değil, present perfect ile söylenir: He has lived here for two years. \"He lives here since two years\" yanlıştır.",
+  words: [
+    W("was", "-di (olmak, geçmiş)", "woz", "Mira was in Brighton.", "Mira Brighton'daydı.", { note: "be – was – been" }),
+    W("went", "gitti", "went", "She went to the cinema.", "Sinemaya gitti.", { note: "go – went – gone" }),
+    W("yesterday", "dün", "yestırdey", "Yesterday she came home.", "Dün eve döndü."),
+    W("weekend", "hafta sonu", "wiikend", "It was a great weekend.", "Harika bir hafta sonuydu."),
+    W("has lived", "-dir yaşıyor", "hez livd", "Emil has lived in Bristol for two years.", "Emil iki yıldır Bristol'da yaşıyor."),
+    W("never", "hiç, asla", "nevır", "He has never been to Scotland.", "İskoçya'ya hiç gitmedi."),
+    W("doctor", "doktor", "doktır", "She called the doctor.", "Doktoru aradı."),
+    W("fever", "ateş", "fiivır", "She also had a fever.", "Ateşi de vardı."),
+    W("sore throat", "boğaz ağrısı", "sor trout", "She woke up with a sore throat.", "Boğaz ağrısıyla uyandı."),
+    W("because", "çünkü", "bikoz", "He likes the job because he learns a lot.", "İşi seviyor, çünkü çok şey öğreniyor."),
+    W("boss", "patron", "bos", "His boss is nice.", "Patronu nazik biri."),
+    W("tired", "yorgun", "tayırd", "He is often tired.", "Sık sık yoruluyor."),
+    W("available", "boş, müsait", "ıveylıbıl", "Is the flat available?", "Daire boş mu?"),
+    W("rent", "kira", "rent", "She pays eight hundred pounds in rent.", "Kira olarak sekiz yüz sterlin ödüyor."),
+    W("going to", "-ecek (plan, tahmin)", "goving tu", "It is going to rain a little.", "Biraz yağmur yağacak."),
+    W("holiday", "tatil", "holıdey", "Emil is looking forward to the holiday.", "Emil tatili dört gözle bekliyor.")
+  ],
+  dialogue: [["A", "What did you do at the weekend?", "Hafta sonu ne yaptın?"], ["B", "I went to the cinema. And you?", "Sinemaya gittim. Ya sen?"], ["A", "I stayed at home, because I had a fever.", "Evde kaldım, çünkü ateşim vardı."], ["B", "Oh no! I hope you feel better now.", "Eyvah! Umarım şimdi daha iyisindir."]],
+  quiz: [
+    Q("Mira sinemaya ne zaman gitti?", ["on Saturday", "on Sunday", "yesterday"], "On Saturday she went to the cinema with a friend."),
+    Q("\"Dün eve döndü.\"", ["Yesterday she came home.", "Yesterday she has come home.", "Yesterday she comes home."], "yesterday ile geçmiş zaman (came) kullanılır."),
+    Q("Emil kaç yıldır Bristol'da yaşıyor?", ["two years", "three years", "one year"], "Emil has lived in Bristol for two years."),
+    Q("\"İki yıldır burada yaşıyor.\"", ["He has lived here for two years.", "He lives here since two years.", "He is living here for two years."], "Süren durum: present perfect + for."),
+    Q("\"Dairenin boş olup olmadığını soruyor.\"", ["She asks if the flat is available.", "She asks is the flat available.", "She asks that the flat available."], "-ip -mediğini = if + özne + fiil."),
+    Q("Tahmin: \"Biraz yağmur yağacak.\"", ["It is going to rain a little.", "It going to rain a little.", "It is go to rain a little."], "be + going to + fiil.")
+  ],
+  review: ["Geçmiş: was, went, ate. Present perfect: has lived, has never been.", "because ile sebep; if ile -ip -mediğini.", "Plan ve tahmin: is going to."]
+}
+];
+
+export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2)];

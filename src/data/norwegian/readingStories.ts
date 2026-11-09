@@ -9,7 +9,7 @@ interface Source {
   scenes: { place: StoryPlace; mood: StoryMood; text: string; tr: string; en: string }[];
 }
 
-const STORIES: Record<"a0" | "a1", Source[]> = {
+const STORIES: Record<"a0" | "a1" | "a2", Source[]> = {
   a0: [
     {
       hero: "mira",
@@ -154,6 +154,143 @@ const STORIES: Record<"a0" | "a1", Source[]> = {
           text: "På søndag er det sol. Emil liker å gå på ski, så han drar på tur med en venn.",
           tr: "Pazar günü hava güneşli. Emil kayak yapmayı seviyor, bu yüzden bir arkadaşıyla doğaya çıkıyor.",
           en: "On Sunday, it's sunny. Emil likes skiing, so he goes on a trip with a friend." }
+      ]
+    }
+  ],
+  a2: [
+    {
+      hero: "mira",
+      title: { tr: "Mira'nın hafta sonu", en: "Mira's weekend" },
+      scenes: [
+        { place: "desk", mood: "happy",
+          text: "I helgen var Mira i Bergen. På lørdag gikk hun på kino med en venn.",
+          tr: "Hafta sonu Mira Bergen'deydi. Cumartesi bir arkadaşıyla sinemaya gitti.",
+          en: "At the weekend, Mira was in Bergen. On Saturday she went to the cinema with a friend." },
+        { place: "desk", mood: "happy",
+          text: "Etterpå spiste de pizza og snakket lenge.",
+          tr: "Sonra pizza yediler ve uzun uzun konuştular.",
+          en: "Afterwards they ate pizza and talked for a long time." },
+        { place: "home", mood: "thinking",
+          text: "På søndag regnet det hele dagen, så hun var hjemme og leste.",
+          tr: "Pazar günü bütün gün yağmur yağdı, bu yüzden evde kalıp kitap okudu.",
+          en: "On Sunday it rained all day, so she stayed at home and read." },
+        { place: "home", mood: "proud",
+          text: "I går kom hun hjem til Oslo. Det var en fin helg.",
+          tr: "Dün Oslo'ya döndü. Güzel bir hafta sonuydu.",
+          en: "Yesterday she came home to Oslo. It was a nice weekend." }
+      ]
+    },
+    {
+      hero: "emil",
+      casual: true,
+      title: { tr: "Emil'in Norveç'teki iki yılı", en: "Emil's two years in Norway" },
+      scenes: [
+        { place: "home", mood: "happy",
+          text: "Emil har bodd i Bergen i to år. Han har lært mye norsk.",
+          tr: "Emil iki yıldır Bergen'de yaşıyor. Çok Norveççe öğrendi.",
+          en: "Emil has lived in Bergen for two years. He has learned a lot of Norwegian." },
+        { place: "home", mood: "thinking",
+          text: "Han har sett nordlyset én gang, men han har aldri vært i Tromsø.",
+          tr: "Kuzey ışıklarını bir kez gördü ama Tromsø'ya hiç gitmedi.",
+          en: "He has seen the northern lights once, but he has never been to Tromsø." },
+        { place: "home", mood: "happy",
+          text: "I fjor var han i Lofoten med familien.",
+          tr: "Geçen yıl ailesiyle Lofoten'deydi.",
+          en: "Last year he was in Lofoten with his family." },
+        { place: "home", mood: "proud",
+          text: "Neste år skal han endelig reise til Tromsø.",
+          tr: "Gelecek yıl sonunda Tromsø'ya gidecek.",
+          en: "Next year he is finally going to travel to Tromsø." }
+      ]
+    },
+    {
+      hero: "mira",
+      title: { tr: "Mira doktorda", en: "Mira at the doctor's" },
+      scenes: [
+        { place: "home", mood: "worried",
+          text: "I går våknet Mira med vondt i halsen. Hun hadde også feber.",
+          tr: "Dün Mira boğaz ağrısıyla uyandı. Ateşi de vardı.",
+          en: "Yesterday Mira woke up with a sore throat. She also had a fever." },
+        { place: "home", mood: "thinking",
+          text: "Hun ringte legen og bestilte time.",
+          tr: "Doktoru arayıp randevu aldı.",
+          en: "She called the doctor and booked an appointment." },
+        { place: "clinic", mood: "thinking",
+          text: "Legen sa at hun måtte hvile i tre dager.",
+          tr: "Doktor üç gün dinlenmesi gerektiğini söyledi.",
+          en: "The doctor said she had to rest for three days." },
+        { place: "home", mood: "proud",
+          text: "Nå føler hun seg mye bedre.",
+          tr: "Şimdi kendini çok daha iyi hissediyor.",
+          en: "Now she feels much better." }
+      ]
+    },
+    {
+      hero: "emil",
+      casual: true,
+      title: { tr: "Emil'in yeni işi", en: "Emil's new job" },
+      scenes: [
+        { place: "meeting", mood: "happy",
+          text: "Emil har en ny jobb på et kontor. Sjefen hans er hyggelig.",
+          tr: "Emil'in bir ofiste yeni bir işi var. Patronu nazik biri.",
+          en: "Emil has a new job in an office. His boss is nice." },
+        { place: "meeting", mood: "happy",
+          text: "Han liker jobben fordi han lærer mye.",
+          tr: "İşi seviyor, çünkü çok şey öğreniyor.",
+          en: "He likes the job because he learns a lot." },
+        { place: "meeting", mood: "worried",
+          text: "Men han er ofte sliten, fordi han ikke får mange pauser.",
+          tr: "Ama sık sık yoruluyor, çünkü fazla molası olmuyor.",
+          en: "But he is often tired, because he doesn't get many breaks." },
+        { place: "meeting", mood: "proud",
+          text: "Han sier til sjefen at han trenger en pause hver dag. Sjefen er enig.",
+          tr: "Patronuna her gün bir molaya ihtiyacı olduğunu söylüyor. Patronu da aynı fikirde.",
+          en: "He tells his boss that he needs a break every day. The boss agrees." }
+      ]
+    },
+    {
+      hero: "mira",
+      title: { tr: "Mira daire arıyor", en: "Mira looks for a flat" },
+      scenes: [
+        { place: "home", mood: "thinking",
+          text: "Mira leter etter en ny leilighet. Hun ser en annonse på nettet.",
+          tr: "Mira yeni bir daire arıyor. İnternette bir ilan görüyor.",
+          en: "Mira is looking for a new flat. She sees an advert online." },
+        { place: "home", mood: "happy",
+          text: "Hun ringer og spør om leiligheten er ledig.",
+          tr: "Arayıp dairenin boş olup olmadığını soruyor.",
+          en: "She calls and asks if the flat is available." },
+        { place: "home", mood: "surprised",
+          text: "Hun må betale 11 000 kroner i husleie, og strøm er inkludert.",
+          tr: "Kira olarak 11 000 kron ödemesi gerekiyor ve elektrik dahil.",
+          en: "She has to pay 11,000 kroner in rent, and electricity is included." },
+        { place: "home", mood: "proud",
+          text: "I mars flytter hun inn.",
+          tr: "Martta taşınıyor.",
+          en: "In March she moves in." }
+      ]
+    },
+    {
+      hero: "emil",
+      casual: true,
+      title: { tr: "Emil'in yaz planları", en: "Emil's summer plans" },
+      scenes: [
+        { place: "home", mood: "happy",
+          text: "I sommer skal Emil reise til Lofoten med familien.",
+          tr: "Bu yaz Emil ailesiyle Lofoten'e gidecek.",
+          en: "This summer, Emil is going to travel to Lofoten with his family." },
+        { place: "home", mood: "thinking",
+          text: "Han håper at det blir sol, men det kommer til å regne litt.",
+          tr: "Güneşli olmasını umuyor ama biraz yağmur yağacak.",
+          en: "He hopes it will be sunny, but it's going to rain a bit." },
+        { place: "home", mood: "worried",
+          text: "Hvis det regner, skal de lese bøker og spille kort.",
+          tr: "Yağmur yağarsa kitap okuyup kart oynayacaklar.",
+          en: "If it rains, they will read books and play cards." },
+        { place: "home", mood: "proud",
+          text: "Emil gleder seg til ferien!",
+          tr: "Emil tatili dört gözle bekliyor!",
+          en: "Emil is looking forward to the holiday!" }
       ]
     }
   ]

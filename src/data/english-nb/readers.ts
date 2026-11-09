@@ -76,4 +76,44 @@ const A1: LessonDef[] = [
 }
 ];
 
-export default [...asExtra("A0", A0), ...asExtra("A1", A1)];
+const A2: LessonDef[] = [
+{
+  id: "nb-a2-story", title: "Seks korte historier", no: "Six short stories", icon: "spark", stories: readingStories("a2", "nb"),
+  intro: "Seks historier med det du har lært på A2: helgen til Mira, Emils to år i England, et legebesøk, en ny jobb, å finne leilighet og sommerplaner.",
+  notes: [
+    { h: "Hva øver du på i historiene?", p: "Fortid: was, went, ate, called. Present perfect: has lived, has learned, has never been. Årsak med because: because he doesn't get many breaks. if (om): asks if the flat is available. Framtid: is going to travel, it is going to rain." },
+    { h: "Slik øver du", p: "Se hver historie med oversettelse først, skjul så oversettelsen og se den igjen. Til slutt leser du høyt. De røde ordene er ordene i denne leksjonen." }
+  ],
+  tip: "«Han har bodd her i to år» blir «He has lived here for two years», med for, ikke in. Og norsk «spør om» blir «asks if»: She asks if the flat is available.",
+  words: [
+    W("was", "var", "wåz", "Mira was in Brighton.", "Mira var i Brighton.", { note: "be – was – been" }),
+    W("went", "gikk, dro", "went", "She went to the cinema.", "Hun gikk på kino.", { note: "go – went – gone" }),
+    W("yesterday", "i går", "jesterdei", "Yesterday she came home.", "I går kom hun hjem."),
+    W("weekend", "helg", "wiikend", "It was a great weekend.", "Det var en flott helg."),
+    W("has lived", "har bodd", "hæs livd", "Emil has lived in Bristol for two years.", "Emil har bodd i Bristol i to år."),
+    W("never", "aldri", "never", "He has never been to Scotland.", "Han har aldri vært i Skottland."),
+    W("doctor", "lege", "dåkter", "She called the doctor.", "Hun ringte legen."),
+    W("fever", "feber", "fiiver", "She also had a fever.", "Hun hadde også feber."),
+    W("sore throat", "vondt i halsen", "sår thrått", "She woke up with a sore throat.", "Hun våknet med vondt i halsen."),
+    W("because", "fordi", "bikåz", "He likes the job because he learns a lot.", "Han liker jobben fordi han lærer mye."),
+    W("boss", "sjef", "bås", "His boss is nice.", "Sjefen hans er hyggelig."),
+    W("tired", "sliten", "taierd", "He is often tired.", "Han er ofte sliten."),
+    W("available", "ledig", "aveilebel", "Is the flat available?", "Er leiligheten ledig?"),
+    W("rent", "husleie", "rent", "She pays eight hundred pounds in rent.", "Hun betaler åtte hundre pund i husleie."),
+    W("going to", "skal, kommer til å", "gouing tu", "It is going to rain a little.", "Det kommer til å regne litt."),
+    W("holiday", "ferie", "hålidei", "Emil is looking forward to the holiday.", "Emil gleder seg til ferien.")
+  ],
+  dialogue: [["A", "What did you do at the weekend?", "Hva gjorde du i helgen?"], ["B", "I went to the cinema. And you?", "Jeg gikk på kino. Og du?"], ["A", "I stayed at home, because I had a fever.", "Jeg var hjemme, fordi jeg hadde feber."], ["B", "Oh no! I hope you feel better now.", "Å nei! Jeg håper du føler deg bedre nå."]],
+  quiz: [
+    Q("Når gikk Mira på kino?", ["on Saturday", "on Sunday", "yesterday"], "On Saturday she went to the cinema with a friend."),
+    Q("«I går kom hun hjem.»", ["Yesterday she came home.", "Yesterday she has come home.", "Yesterday she comes home."], "yesterday tar fortid (came)."),
+    Q("Hvor lenge har Emil bodd i Bristol?", ["two years", "three years", "one year"], "Emil has lived in Bristol for two years."),
+    Q("«Han har bodd her i to år.»", ["He has lived here for two years.", "He lives here since two years.", "He has lived here in two years."], "Present perfect + for + tid."),
+    Q("«Hun spør om leiligheten er ledig.»", ["She asks if the flat is available.", "She asks is the flat available.", "She asks that the flat available."], "spør om = asks if + subjekt + verb."),
+    Q("Spådom: «Det kommer til å regne litt.»", ["It is going to rain a little.", "It going to rain a little.", "It is go to rain a little."], "be + going to + verb.")
+  ],
+  review: ["Fortid: was, went, ate. Present perfect: has lived, has never been.", "because = fordi; asks if = spør om.", "Planer og spådommer: is going to."]
+}
+];
+
+export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2)];
