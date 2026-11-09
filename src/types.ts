@@ -39,7 +39,8 @@ export interface Note {
   table?: string[][];
 }
 
-export type StoryPlace = "desk" | "servers" | "meeting" | "home" | "clinic" | "ward" | "emergency";
+export type StoryPlace = "desk" | "servers" | "meeting" | "home" | "clinic" | "ward" | "emergency"
+  | "office" | "interview" | "bank" | "classroom" | "station" | "kitchen" | "mountain" | "shop";
 export type StoryHero = "mira" | "emil" | "sara" | "hansen" | "berg";
 export type StoryMood = "happy" | "worried" | "surprised" | "thinking" | "proud";
 

@@ -9,7 +9,7 @@ interface Source {
   scenes: { place: StoryPlace; mood: StoryMood; text: string; tr: string; en: string }[];
 }
 
-const STORIES: Record<"a0" | "a1" | "a2", Source[]> = {
+const STORIES: Record<"a0" | "a1" | "a2" | "b1", Source[]> = {
   a0: [
     {
       hero: "mira",
@@ -291,6 +291,188 @@ const STORIES: Record<"a0" | "a1" | "a2", Source[]> = {
           text: "Emil gleder seg til ferien!",
           tr: "Emil tatili dört gözle bekliyor!",
           en: "Emil is looking forward to the holiday!" }
+      ]
+    }
+  ],
+  b1: [
+    {
+      hero: "mira",
+      title: { tr: "Mira NAV'da", en: "Mira at NAV" },
+      scenes: [
+        { place: "office", mood: "worried",
+          text: "Mira mistet jobben sin forrige måned. Derfor gikk hun til NAV for å få hjelp.",
+          tr: "Mira geçen ay işini kaybetti. Bu yüzden yardım almak için NAV'a gitti.",
+          en: "Mira lost her job last month. So she went to NAV to get help." },
+        { place: "office", mood: "thinking",
+          text: "Hun trakk en kølapp og ventet i tjue minutter. Saksbehandleren som hjalp henne, var veldig vennlig.",
+          tr: "Sıra numarası aldı ve yirmi dakika bekledi. Ona yardım eden memur çok nazikti.",
+          en: "She took a queue ticket and waited for twenty minutes. The caseworker who helped her was very friendly." },
+        { place: "office", mood: "surprised",
+          text: "Hun måtte fylle ut et langt skjema på nettet. Selv om det var vanskelig, ga hun ikke opp.",
+          tr: "İnternette uzun bir form doldurması gerekti. Zor olmasına rağmen pes etmedi.",
+          en: "She had to fill in a long form online. Even though it was difficult, she didn't give up." },
+        { place: "office", mood: "proud",
+          text: "Etter to uker fikk hun svar på søknaden. Den ble godkjent!",
+          tr: "İki hafta sonra başvurusuna cevap aldı. Başvurusu onaylandı!",
+          en: "After two weeks she got an answer to her application. It was approved!" }
+      ]
+    },
+    {
+      hero: "emil",
+      casual: true,
+      title: { tr: "Emil'in iş görüşmesi", en: "Emil's job interview" },
+      scenes: [
+        { place: "interview", mood: "worried",
+          text: "Emil hadde søkt på en stilling som lærer ved en skole i Bergen. I dag skal han på intervju.",
+          tr: "Emil Bergen'deki bir okulda öğretmenlik pozisyonuna başvurmuştu. Bugün mülakata gidecek.",
+          en: "Emil had applied for a position as a teacher at a school in Bergen. Today he has an interview." },
+        { place: "interview", mood: "thinking",
+          text: "Rektoren spurte hvorfor han ville jobbe der. Emil svarte at han liker å jobbe med barn.",
+          tr: "Müdür neden orada çalışmak istediğini sordu. Emil çocuklarla çalışmayı sevdiğini söyledi.",
+          en: "The head teacher asked why he wanted to work there. Emil answered that he likes working with children." },
+        { place: "interview", mood: "happy",
+          text: "Han fortalte også om erfaringen sin. Han har jobbet som lærer i fem år.",
+          tr: "Deneyiminden de bahsetti. Beş yıldır öğretmen olarak çalışıyor.",
+          en: "He also talked about his experience. He has worked as a teacher for five years." },
+        { place: "interview", mood: "proud",
+          text: "Tre dager senere ringte rektoren. Emil fikk jobben!",
+          tr: "Üç gün sonra müdür aradı. Emil işi aldı!",
+          en: "Three days later the head teacher called. Emil got the job!" }
+      ]
+    },
+    {
+      hero: "mira",
+      title: { tr: "Mira bankada", en: "Mira at the bank" },
+      scenes: [
+        { place: "bank", mood: "thinking",
+          text: "Mira vil spare penger til en lang reise. Hun går i banken for å få gode råd.",
+          tr: "Mira uzun bir yolculuk için para biriktirmek istiyor. İyi tavsiyeler almak için bankaya gidiyor.",
+          en: "Mira wants to save money for a long trip. She goes to the bank to get some good advice." },
+        { place: "bank", mood: "happy",
+          text: "Rådgiveren forklarer at en sparekonto gir mer rente enn en vanlig konto.",
+          tr: "Danışman, birikim hesabının normal bir hesaptan daha fazla faiz verdiğini açıklıyor.",
+          en: "The adviser explains that a savings account gives more interest than an ordinary account." },
+        { place: "bank", mood: "worried",
+          text: "Men Mira bruker for mye penger på mat og klær. Hun må lage et budsjett.",
+          tr: "Ama Mira yemeğe ve kıyafete çok fazla para harcıyor. Bir bütçe yapması gerekiyor.",
+          en: "But Mira spends too much money on food and clothes. She has to make a budget." },
+        { place: "bank", mood: "proud",
+          text: "Nå sparer hun to tusen kroner hver måned. Jo mer hun sparer, jo gladere blir hun.",
+          tr: "Artık her ay iki bin kron biriktiriyor. Ne kadar çok biriktirirse o kadar mutlu oluyor.",
+          en: "Now she saves two thousand kroner every month. The more she saves, the happier she gets." }
+      ]
+    },
+    {
+      hero: "emil",
+      casual: true,
+      title: { tr: "Emil'in Norveççe sınavı", en: "Emil's Norwegian test" },
+      scenes: [
+        { place: "classroom", mood: "worried",
+          text: "Emil skal ta norskprøven på B1-nivå neste uke. Han er nervøs, fordi han ikke har øvd nok.",
+          tr: "Emil gelecek hafta B1 seviyesindeki Norveççe sınavına girecek. Gergin, çünkü yeterince çalışmadı.",
+          en: "Emil is taking the Norwegian test at B1 level next week. He's nervous, because he hasn't practised enough." },
+        { place: "classroom", mood: "thinking",
+          text: "Læreren sier at han bør lese avisen og snakke norsk hver dag. Mens barna sover, leser han og skriver.",
+          tr: "Öğretmen her gün gazete okuması ve Norveççe konuşması gerektiğini söylüyor. Çocuklar uyurken o okuyor ve yazıyor.",
+          en: "The teacher says he should read the newspaper and speak Norwegian every day. While the children are sleeping, he reads and writes." },
+        { place: "classroom", mood: "surprised",
+          text: "Prøven var lettere enn han hadde trodd. Den muntlige delen gikk spesielt bra.",
+          tr: "Sınav sandığından daha kolaydı. Sözlü bölüm özellikle iyi geçti.",
+          en: "The test was easier than he had thought. The oral part went especially well." },
+        { place: "classroom", mood: "proud",
+          text: "En måned senere fikk han resultatet. Han hadde bestått!",
+          tr: "Bir ay sonra sonucu aldı. Sınavı geçmişti!",
+          en: "A month later he got the result. He had passed!" }
+      ]
+    },
+    {
+      hero: "mira",
+      title: { tr: "Tren rötarlı", en: "The train is delayed" },
+      scenes: [
+        { place: "station", mood: "happy",
+          text: "Mira skulle besøke ei venninne i Trondheim. Toget skulle gå klokka sju om morgenen.",
+          tr: "Mira Trondheim'daki bir kız arkadaşını ziyaret edecekti. Tren sabah saat yedide kalkacaktı.",
+          en: "Mira was going to visit a friend in Trondheim. The train was supposed to leave at seven in the morning." },
+        { place: "station", mood: "worried",
+          text: "Da hun kom til stasjonen, var toget forsinket. Det var signalfeil, og ingen visste hvor lenge det ville ta.",
+          tr: "İstasyona vardığında tren rötarlıydı. Sinyal arızası vardı ve kimse bunun ne kadar süreceğini bilmiyordu.",
+          en: "When she got to the station, the train was delayed. There was a signal fault, and nobody knew how long it would take." },
+        { place: "station", mood: "thinking",
+          text: "Mira synes at togene i Norge burde være mer punktlige. Likevel er tog bedre for miljøet enn fly.",
+          tr: "Mira, Norveç'teki trenlerin daha dakik olması gerektiğini düşünüyor. Yine de tren çevre için uçaktan daha iyi.",
+          en: "Mira thinks the trains in Norway ought to be more punctual. Still, trains are better for the environment than planes." },
+        { place: "station", mood: "proud",
+          text: "Etter to timer kom toget endelig. Hun fikk pengene for billetten tilbake.",
+          tr: "İki saat sonra tren sonunda geldi. Biletinin parasını geri aldı.",
+          en: "After two hours the train finally came. She got the money for her ticket back." }
+      ]
+    },
+    {
+      hero: "emil",
+      casual: true,
+      title: { tr: "Emil mutfakta", en: "Emil in the kitchen" },
+      scenes: [
+        { place: "kitchen", mood: "happy",
+          text: "På lørdag skal Emil lage middag til naboene sine. Han har funnet en oppskrift på fiskesuppe.",
+          tr: "Cumartesi Emil komşularına akşam yemeği yapacak. Balık çorbası için bir tarif buldu.",
+          en: "On Saturday Emil is going to make dinner for his neighbours. He has found a recipe for fish soup." },
+        { place: "kitchen", mood: "thinking",
+          text: "Først skjærer han grønnsakene, og så koker han fisken i tjue minutter. Suppen må røres hele tiden.",
+          tr: "Önce sebzeleri doğruyor, sonra balığı yirmi dakika pişiriyor. Çorbanın sürekli karıştırılması gerekiyor.",
+          en: "First he chops the vegetables, and then he cooks the fish for twenty minutes. The soup has to be stirred all the time." },
+        { place: "kitchen", mood: "surprised",
+          text: "Plutselig ringer det på døra, og suppen koker over! Emil hadde glemt å skru ned varmen.",
+          tr: "Birden kapı çalıyor ve çorba taşıyor! Emil ocağı kısmayı unutmuştu.",
+          en: "Suddenly the doorbell rings, and the soup boils over! Emil had forgotten to turn down the heat." },
+        { place: "kitchen", mood: "proud",
+          text: "Heldigvis smakte suppen nydelig. Naboene ba om oppskriften.",
+          tr: "Neyse ki çorbanın tadı harikaydı. Komşular tarifi istedi.",
+          en: "Luckily the soup tasted wonderful. The neighbours asked for the recipe." }
+      ]
+    },
+    {
+      hero: "mira",
+      title: { tr: "Dağda kar", en: "Snow in the mountains" },
+      scenes: [
+        { place: "mountain", mood: "happy",
+          text: "I høstferien dro Mira på fjelltur med to kolleger. De gikk opp til ei hytte som ligger ved et vann.",
+          tr: "Sonbahar tatilinde Mira iki iş arkadaşıyla dağ yürüyüşüne çıktı. Bir gölün kıyısındaki bir kulübeye kadar yürüdüler.",
+          en: "In the autumn holiday Mira went on a mountain hike with two colleagues. They walked up to a cabin that lies by a lake." },
+        { place: "mountain", mood: "worried",
+          text: "Etter en time begynte det å snø, og det ble vanskelig å se stien. Mira var redd for å gå seg vill.",
+          tr: "Bir saat sonra kar yağmaya başladı ve patikayı görmek zorlaştı. Mira kaybolmaktan korkuyordu.",
+          en: "After an hour it started to snow, and it became hard to see the path. Mira was afraid of getting lost." },
+        { place: "mountain", mood: "thinking",
+          text: "Heldigvis hadde de kart og kompass i sekken. De bestemte seg for å følge de røde merkene på steinene.",
+          tr: "Neyse ki sırt çantasında harita ve pusula vardı. Taşların üzerindeki kırmızı işaretleri takip etmeye karar verdiler.",
+          en: "Luckily they had a map and compass in the backpack. They decided to follow the red marks on the stones." },
+        { place: "mountain", mood: "proud",
+          text: "Da de kom fram til hytta, tente de bål og drakk varm kakao. Turen ble et eventyr som hun aldri kommer til å glemme.",
+          tr: "Kulübeye vardıklarında ateş yaktılar ve sıcak kakao içtiler. Bu yürüyüş, asla unutmayacağı bir macera oldu.",
+          en: "When they reached the cabin, they lit a fire and drank hot cocoa. The trip became an adventure that she will never forget." }
+      ]
+    },
+    {
+      hero: "emil",
+      casual: true,
+      title: { tr: "Emil şikâyet ediyor", en: "Emil makes a complaint" },
+      scenes: [
+        { place: "shop", mood: "worried",
+          text: "Emil kjøpte en vinterjakke for to uker siden. Nå har glidelåsen gått i stykker.",
+          tr: "Emil iki hafta önce bir kış montu aldı. Şimdi fermuarı bozuldu.",
+          en: "Emil bought a winter jacket two weeks ago. Now the zip has broken." },
+        { place: "shop", mood: "thinking",
+          text: "Han tar med kvitteringen og går tilbake til butikken. Han vil klage og bytte jakken.",
+          tr: "Fişi yanına alıp mağazaya geri gidiyor. Şikâyet edip montu değiştirmek istiyor.",
+          en: "He takes the receipt and goes back to the shop. He wants to complain and exchange the jacket." },
+        { place: "shop", mood: "surprised",
+          text: "Ekspeditøren sier at jakken har to års garanti. Emil kan velge mellom en ny jakke og å få pengene tilbake.",
+          tr: "Satış görevlisi montun iki yıl garantisi olduğunu söylüyor. Emil yeni bir mont ile parasını geri almak arasında seçim yapabilir.",
+          en: "The shop assistant says that the jacket has a two-year guarantee. Emil can choose between a new jacket and getting his money back." },
+        { place: "shop", mood: "proud",
+          text: "Han velger en ny jakke som er både varmere og lettere. Han er fornøyd med servicen.",
+          tr: "Hem daha sıcak hem daha hafif olan yeni bir mont seçiyor. Hizmetten memnun.",
+          en: "He chooses a new jacket that is both warmer and lighter. He is satisfied with the service." }
       ]
     }
   ]

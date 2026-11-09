@@ -234,6 +234,12 @@ button.chip{border:0}
 .vid-pulse{stroke-dasharray:190;animation:vidpulse 2.2s linear infinite}
 .vid-drip{animation:viddrip 1.8s ease-in infinite}
 .vid-alarm{opacity:0;animation:vidalarm 1.8s ease-in-out infinite}
+.vid-train{animation:vidtrain 10s linear infinite}
+.vid-snow{animation:vidsnow 6s linear infinite}
+.vid-tick{animation:vidtick 10s linear infinite;transform-box:fill-box;transform-origin:center}
+@keyframes vidtrain{0%{transform:translateX(380px)}60%,100%{transform:translateX(-1000px)}}
+@keyframes vidsnow{from{transform:translateY(-60px)}to{transform:translateY(400px)}}
+@keyframes vidtick{to{transform:rotate(360deg)}}
 @keyframes vidpulse{from{stroke-dashoffset:190}to{stroke-dashoffset:-190}}
 @keyframes viddrip{from{transform:none;opacity:1}to{transform:translateY(60px);opacity:0}}
 @keyframes vidalarm{0%,100%{opacity:0}50%{opacity:.1}}

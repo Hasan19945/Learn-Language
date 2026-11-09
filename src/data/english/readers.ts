@@ -116,4 +116,51 @@ const A2: LessonDef[] = [
 }
 ];
 
-export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2)];
+const B1: LessonDef[] = [
+{
+  id: "en-b1-story", title: "Hayattan sekiz hikâye", no: "Eight stories from life", icon: "spark", stories: readingStories("b1", "tr"),
+  intro: "B1'de öğrendiklerinle sekiz hikâye: iş ve işçi bulma kurumu, iş görüşmesi, banka, İngilizce sınavı, rötarlı tren, mutfak, dağda kar ve mağazada şikâyet.",
+  notes: [
+    { h: "Hikâyelerde neleri tekrar ediyorsun?", p: "who / which ile ilgi cümlesi: the adviser who helped her, a jacket which is warmer. although ve however: Although it was difficult, she didn't give up. while ve when: While the children are sleeping… When she arrived… Past perfect: had applied, had expected, had forgotten. Edilgen: was approved, has to be stirred. Dolaylı soru: asked why he wanted to work there. the more … the happier." },
+    { h: "Nasıl çalışmalı?", p: "Her hikâyeyi önce çeviriyle izle, sonra çeviriyi gizleyip tekrar izle. En son yüksek sesle oku. Kırmızı kelimeler bu dersin kelimeleri." }
+  ],
+  tip: "Dolaylı soruda soru düzeni bozulur: \"He asked why he wanted to work there.\" \"why did he want\" demek yanlıştır. although bir cümleyi bağlar, however ise yeni cümleye başlar: \"However, trains are better.\"",
+  words: [
+    W("application", "başvuru", "ıplikeyşın", "She got an answer to her application.", "Başvurusuna cevap aldı."),
+    W("approved", "onaylandı, onaylı", "ıpruuvd", "Her application was approved.", "Başvurusu onaylandı.", { note: "was approved = onaylandı (edilgen)" }),
+    W("although", "-e rağmen, -se de", "olzou", "Although it was difficult, she didn't give up.", "Zor olmasına rağmen pes etmedi."),
+    W("position", "pozisyon, kadro", "pızişın", "He applied for a position as a teacher.", "Öğretmenlik pozisyonuna başvurdu."),
+    W("experience", "deneyim", "ikspiiriıns", "He talked about his experience.", "Deneyiminden bahsetti."),
+    W("interest", "faiz", "intrıst", "A savings account pays more interest.", "Birikim hesabı daha fazla faiz verir.", { note: "ayrıca: ilgi" }),
+    W("budget", "bütçe", "bacıt", "She needs to make a budget.", "Bir bütçe yapması gerekiyor."),
+    W("nervous", "gergin, heyecanlı", "nörvıs", "He is nervous before the exam.", "Sınavdan önce gergin."),
+    W("while", "-iken, sırasında", "wayl", "While the children are sleeping, he reads.", "Çocuklar uyurken o okuyor."),
+    W("passed", "geçti (sınavı)", "pást", "He had passed!", "Sınavı geçmişti!", { note: "pass – passed – passed" }),
+    W("delayed", "rötarlı, gecikmiş", "dileyd", "The train was delayed.", "Tren rötarlıydı."),
+    W("however", "ancak, yine de", "haveVır", "However, trains are better for the environment.", "Yine de tren çevre için daha iyi."),
+    W("environment", "çevre", "inVayırınmınt", "Trains are better for the environment than planes.", "Tren çevre için uçaktan daha iyi."),
+    W("recipe", "tarif", "resıpi", "He has found a recipe for fish soup.", "Balık çorbası için bir tarif buldu."),
+    W("suddenly", "birden", "sadınli", "Suddenly the doorbell rings.", "Birden kapı çalıyor."),
+    W("luckily", "neyse ki", "lakili", "Luckily, the soup tasted delicious.", "Neyse ki çorbanın tadı harikaydı."),
+    W("afraid", "korkmuş", "ıfreyd", "Mira was afraid of getting lost.", "Mira kaybolmaktan korkuyordu.", { note: "be afraid of = -den korkmak" }),
+    W("receipt", "fiş, makbuz", "risiit", "He takes the receipt.", "Fişi yanına alıyor.", { note: "p okunmaz" }),
+    W("complain", "şikâyet etmek", "kımpleyn", "He wants to complain about the jacket.", "Mont için şikâyette bulunmak istiyor."),
+    W("satisfied", "memnun", "setisfayd", "He is satisfied with the service.", "Hizmetten memnun.")
+  ],
+  dialogue: [["A", "Why were you so late?", "Neden bu kadar geç kaldın?"], ["B", "The train was delayed, and I had to wait for an hour.", "Tren rötarlıydı ve bir saat beklemek zorunda kaldım."], ["A", "How annoying! However, it's good that you came.", "Ne sinir bozucu! Yine de gelmen iyi oldu."], ["B", "Yes, and luckily I got my money back.", "Evet, ve neyse ki paramı geri aldım."]],
+  quiz: [
+    Q("Mira'nın başvurusuna ne oldu?", ["It was approved.", "It was lost.", "It arrived too late."], "Two weeks later, she got an answer to her application. It was approved!"),
+    Q("\"Müdür neden orada çalışmak istediğini sordu.\"", ["The head teacher asked why he wanted to work there.", "The head teacher asked why did he want to work there.", "The head teacher asked why wanted he to work there."], "Dolaylı soruda soru düzeni yoktur: why he wanted."),
+    Q("Birikim hesabı neden daha iyi?", ["It pays more interest.", "It is free.", "It has a budget."], "A savings account pays more interest than a normal account."),
+    Q("\"Sınav beklediğinden daha kolaydı.\"", ["The exam was easier than he had expected.", "The exam was easier than he has expected.", "The exam was more easy than he had expected."], "Geçmişten daha önceki bir an: had + expected."),
+    Q("Mira istasyona vardığında trenin durumu neydi?", ["It was delayed.", "It was full.", "It had left."], "When she arrived at the station, the train was delayed."),
+    Q("Çorba neden taştı?", ["Emil had forgotten to turn down the heat.", "The neighbours came too early.", "The recipe was wrong."], "Emil had forgotten to turn down the heat."),
+    Q("Kaybolmamak için ne yaptılar?", ["They followed the red marks.", "They called a friend.", "They went back home."], "They decided to follow the red marks on the stones."),
+    Q("Emil mağazaya ne götürdü?", ["the receipt", "the budget", "the recipe"], "He takes the receipt and goes back to the shop."),
+    Q("\"Zor olmasına rağmen pes etmedi.\"", ["Although it was difficult, she didn't give up.", "However it was difficult, she didn't give up.", "Although it was difficult, but she didn't give up."], "although + cümle; ikinci cümlede but kullanılmaz.")
+  ],
+  review: ["who / which, although, while, when ile cümle bağlamak.", "Past perfect: had applied, had forgotten.", "Edilgen: was approved, has to be stirred."]
+}
+];
+
+export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2), ...asExtra("B1", B1)];

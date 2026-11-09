@@ -116,4 +116,51 @@ const A2: LessonDef[] = [
 }
 ];
 
-export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2)];
+const B1: LessonDef[] = [
+{
+  id: "nb-b1-story", title: "Åtte historier fra livet", no: "Eight stories from life", icon: "spark", stories: readingStories("b1", "nb"),
+  intro: "Åtte historier med det du har lært på B1: jobbsenteret, et jobbintervju, banken, en engelskeksamen, et forsinket tog, kjøkkenet, snø på fjellet og en klage i butikken.",
+  notes: [
+    { h: "Hva øver du på i historiene?", p: "Relativsetninger med who / which: the adviser who helped her, a jacket which is warmer. although og however: Although it was difficult, she didn't give up. while og when: While the children are sleeping… When she arrived… Past perfect: had applied, had expected, had forgotten. Passiv: was approved, has to be stirred. Indirekte spørsmål: asked why he wanted to work there. the more … the happier." },
+    { h: "Slik øver du", p: "Se hver historie med oversettelse først, skjul så oversettelsen og se den igjen. Til slutt leser du høyt. De røde ordene er ordene i denne leksjonen." }
+  ],
+  tip: "Norsk «selv om» er although, og «likevel» er however: «Although it was difficult…», «However, trains are better.» I indirekte spørsmål er ordstillingen som i en vanlig setning: «He asked why he wanted to work there», ikke «why did he want».",
+  words: [
+    W("application", "søknad", "æplikeisjen", "She got an answer to her application.", "Hun fikk svar på søknaden."),
+    W("approved", "godkjent", "æpruuvd", "Her application was approved.", "Søknaden hennes ble godkjent.", { note: "was approved = ble godkjent (passiv)" }),
+    W("although", "selv om", "åldhåu", "Although it was difficult, she didn't give up.", "Selv om det var vanskelig, ga hun ikke opp."),
+    W("position", "stilling", "pesisjen", "He applied for a position as a teacher.", "Han søkte på en stilling som lærer."),
+    W("experience", "erfaring", "ikspiirriens", "He talked about his experience.", "Han fortalte om erfaringen sin."),
+    W("interest", "rente", "intrest", "A savings account pays more interest.", "En sparekonto gir mer rente.", { note: "også: interesse" }),
+    W("budget", "budsjett", "badsjit", "She needs to make a budget.", "Hun må lage et budsjett."),
+    W("nervous", "nervøs", "nørves", "He is nervous before the exam.", "Han er nervøs før eksamenen."),
+    W("while", "mens", "wail", "While the children are sleeping, he reads.", "Mens barna sover, leser han."),
+    W("passed", "bestått", "paast", "He had passed!", "Han hadde bestått!", { note: "pass – passed – passed" }),
+    W("delayed", "forsinket", "dileid", "The train was delayed.", "Toget var forsinket."),
+    W("however", "likevel, men", "hauevver", "However, trains are better for the environment.", "Likevel er tog bedre for miljøet."),
+    W("environment", "miljø", "envairenment", "Trains are better for the environment than planes.", "Tog er bedre for miljøet enn fly."),
+    W("recipe", "oppskrift", "ressipi", "He has found a recipe for fish soup.", "Han har funnet en oppskrift på fiskesuppe."),
+    W("suddenly", "plutselig", "saddenli", "Suddenly the doorbell rings.", "Plutselig ringer det på døra."),
+    W("luckily", "heldigvis", "lakkili", "Luckily, the soup tasted delicious.", "Heldigvis smakte suppen nydelig."),
+    W("afraid", "redd", "efreid", "Mira was afraid of getting lost.", "Mira var redd for å gå seg vill.", { note: "be afraid of = være redd for" }),
+    W("receipt", "kvittering", "risiit", "He takes the receipt.", "Han tar med kvitteringen.", { note: "p uttales ikke" }),
+    W("complain", "klage", "kempleinn", "He wants to complain about the jacket.", "Han vil klage på jakken."),
+    W("satisfied", "fornøyd", "sætisfaid", "He is satisfied with the service.", "Han er fornøyd med servicen.")
+  ],
+  dialogue: [["A", "Why were you so late?", "Hvorfor kom du så sent?"], ["B", "The train was delayed, and I had to wait for an hour.", "Toget var forsinket, og jeg måtte vente i en time."], ["A", "How annoying! However, it's good that you came.", "Så irriterende! Likevel er det bra at du kom."], ["B", "Yes, and luckily I got my money back.", "Ja, og heldigvis fikk jeg pengene tilbake."]],
+  quiz: [
+    Q("Hva skjedde med søknaden til Mira?", ["It was approved.", "It was lost.", "It arrived too late."], "Two weeks later, she got an answer to her application. It was approved!"),
+    Q("«Rektoren spurte hvorfor han ville jobbe der.»", ["The head teacher asked why he wanted to work there.", "The head teacher asked why did he want to work there.", "The head teacher asked why wanted he to work there."], "Indirekte spørsmål har vanlig ordstilling: why he wanted."),
+    Q("Hvorfor er en sparekonto bedre?", ["It pays more interest.", "It is free.", "It has a budget."], "A savings account pays more interest than a normal account."),
+    Q("«Eksamenen var lettere enn han hadde trodd.»", ["The exam was easier than he had expected.", "The exam was easier than he has expected.", "The exam was more easy than he had expected."], "Lenger tilbake i fortiden: had + expected."),
+    Q("Hva var galt med toget da Mira kom til stasjonen?", ["It was delayed.", "It was full.", "It had left."], "When she arrived at the station, the train was delayed."),
+    Q("Hvorfor kokte suppen over?", ["Emil had forgotten to turn down the heat.", "The neighbours came too early.", "The recipe was wrong."], "Emil had forgotten to turn down the heat."),
+    Q("Hva gjorde de for ikke å gå seg vill?", ["They followed the red marks.", "They called a friend.", "They went back home."], "They decided to follow the red marks on the stones."),
+    Q("Hva tok Emil med til butikken?", ["the receipt", "the budget", "the recipe"], "He takes the receipt and goes back to the shop."),
+    Q("«Selv om det var vanskelig, ga hun ikke opp.»", ["Although it was difficult, she didn't give up.", "However it was difficult, she didn't give up.", "Although it was difficult, but she didn't give up."], "although + setning; ikke but i den andre delen.")
+  ],
+  review: ["Bind setninger med who / which, although, while, when.", "Past perfect: had applied, had forgotten.", "Passiv: was approved, has to be stirred."]
+}
+];
+
+export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2), ...asExtra("B1", B1)];

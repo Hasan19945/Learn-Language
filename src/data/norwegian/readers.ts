@@ -117,4 +117,51 @@ const A2: LessonDef[] = [
 }
 ];
 
-export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2)];
+const B1: LessonDef[] = [
+{
+  id: "b1-story", title: "Hayattan sekiz hikâye", no: "Åtte historier fra livet", icon: "spark", stories: readingStories("b1", "tr"),
+  intro: "B1'de öğrendiklerinle sekiz hikâye: NAV, iş görüşmesi, banka, Norveççe sınavı, rötarlı tren, mutfak, dağda kar ve mağazada şikâyet.",
+  notes: [
+    { h: "Hikâyelerde neleri tekrar ediyorsun?", p: "som ile ilgi cümlesi: saksbehandleren som hjalp henne. selv om ve likevel: Selv om det var vanskelig, ga hun ikke opp. mens ve da: Mens barna sover… Da hun kom til stasjonen… Pluskvamperfektum: hadde søkt, hadde trodd, hadde glemt. Edilgen: ble godkjent, må røres. Dolaylı soru: spurte hvorfor han ville jobbe der. jo … jo: Jo mer hun sparer, jo gladere blir hun." },
+    { h: "Nasıl çalışmalı?", p: "Her hikâyeyi önce çeviriyle izle, sonra çeviriyi gizleyip tekrar izle. En son yüksek sesle oku. Kırmızı kelimeler bu dersin kelimeleri." }
+  ],
+  tip: "Yan cümle başta olunca ana cümlede fiil hemen gelir: \"Selv om det var vanskelig, ga hun ikke opp.\" \"Mens barna sover, leser han.\" \"hun ga\" ya da \"han leser\" demek yanlış olur.",
+  words: [
+    N("en", "søknad", "søknaden", "søknader", "başvuru", "sökna", "Hun fikk svar på søknaden.", "Başvurusuna cevap aldı."),
+    N("et", "skjema", "skjemaet", "skjemaer", "form", "şeema", "Hun måtte fylle ut et skjema.", "Bir form doldurması gerekti."),
+    W("selv om", "-e rağmen, -se de", "sel om", "Selv om det var vanskelig, ga hun ikke opp.", "Zor olmasına rağmen pes etmedi."),
+    W("godkjent", "onaylandı, onaylı", "gutşent", "Søknaden ble godkjent.", "Başvuru onaylandı.", { note: "ble godkjent = onaylandı (edilgen)" }),
+    N("en", "stilling", "stillingen", "stillinger", "pozisyon, kadro", "stilling", "Han søkte på en stilling som lærer.", "Öğretmenlik pozisyonuna başvurdu."),
+    N("en", "erfaring", "erfaringen", "erfaringer", "deneyim", "ærfaaring", "Han fortalte om erfaringen sin.", "Deneyiminden bahsetti."),
+    N("en", "rente", "renten", "renter", "faiz", "rente", "En sparekonto gir mer rente.", "Birikim hesabı daha fazla faiz verir."),
+    N("et", "budsjett", "budsjettet", "budsjetter", "bütçe", "büdşett", "Hun må lage et budsjett.", "Bir bütçe yapması gerekiyor."),
+    W("mens", "-iken, sırasında", "mens", "Mens barna sover, leser han.", "Çocuklar uyurken o okuyor."),
+    W("bestått", "geçti (sınavı)", "bestot", "Han hadde bestått!", "Sınavı geçmişti!", { note: "bestå – besto – har bestått" }),
+    W("forsinket", "rötarlı, gecikmiş", "foşinket", "Toget var forsinket.", "Tren rötarlıydı."),
+    W("likevel", "yine de", "likevel", "Likevel er tog bedre for miljøet.", "Yine de tren çevre için daha iyi."),
+    N("et", "miljø", "miljøet", "miljøer", "çevre", "milyö", "Tog er bedre for miljøet enn fly.", "Tren çevre için uçaktan daha iyi."),
+    N("en", "oppskrift", "oppskriften", "oppskrifter", "tarif", "opskrift", "Han har funnet en oppskrift på fiskesuppe.", "Balık çorbası için bir tarif buldu."),
+    W("plutselig", "birden", "plütseli", "Plutselig ringer det på døra.", "Birden kapı çalıyor."),
+    W("heldigvis", "neyse ki", "heldivis", "Heldigvis smakte suppen nydelig.", "Neyse ki çorbanın tadı harikaydı."),
+    W("redd", "korkmuş", "redd", "Mira var redd for å gå seg vill.", "Mira kaybolmaktan korkuyordu.", { note: "være redd for = -den korkmak" }),
+    N("en", "kvittering", "kvitteringen", "kvitteringer", "fiş, makbuz", "kvitering", "Han tar med kvitteringen.", "Fişi yanına alıyor."),
+    W("klage", "şikâyet etmek", "klaage", "Han vil klage på jakken.", "Mont için şikâyette bulunmak istiyor."),
+    W("fornøyd", "memnun", "fornöyd", "Han er fornøyd med servicen.", "Hizmetten memnun.")
+  ],
+  dialogue: [["A", "Hvorfor kom du så sent?", "Neden bu kadar geç geldin?"], ["B", "Toget var forsinket, og jeg måtte vente i en time.", "Tren rötarlıydı ve bir saat beklemek zorunda kaldım."], ["A", "Så kjedelig! Likevel er det bra at du kom.", "Ne sıkıcı! Yine de gelmen iyi oldu."], ["B", "Ja, og heldigvis fikk jeg pengene tilbake.", "Evet, ve neyse ki paramı geri aldım."]],
+  quiz: [
+    Q("Mira'nın NAV'daki başvurusuna ne oldu?", ["Den ble godkjent.", "Den ble borte.", "Den kom for sent."], "Etter to uker fikk hun svar på søknaden. Den ble godkjent!"),
+    Q("\"Müdür neden orada çalışmak istediğini sordu.\"", ["Rektoren spurte hvorfor han ville jobbe der.", "Rektoren spurte hvorfor ville han jobbe der.", "Rektoren spurte hvorfor han jobbe ville der."], "Dolaylı soruda özne fiilden önce gelir: hvorfor han ville."),
+    Q("Birikim hesabı neden daha iyi?", ["Den gir mer rente.", "Den er gratis.", "Den har et budsjett."], "En sparekonto gir mer rente enn en vanlig konto."),
+    Q("\"Sınav sandığından daha kolaydı.\"", ["Prøven var lettere enn han hadde trodd.", "Prøven var lettere enn han har trodd.", "Prøven var mer lett enn han hadde trodd."], "Geçmişten daha önceki bir an: hadde + trodd."),
+    Q("Mira istasyona vardığında tren neden yoktu?", ["Det var forsinket.", "Det var fullt.", "Det hadde gått."], "Da hun kom til stasjonen, var toget forsinket."),
+    Q("Çorba neden taştı?", ["Emil hadde glemt å skru ned varmen.", "Naboene kom for tidlig.", "Oppskriften var feil."], "Emil hadde glemt å skru ned varmen."),
+    Q("Dağda kaybolmamak için ne yaptılar?", ["De fulgte de røde merkene.", "De ringte en venn.", "De gikk hjem igjen."], "De bestemte seg for å følge de røde merkene på steinene."),
+    Q("Emil mağazaya ne götürdü?", ["kvitteringen", "budsjettet", "oppskriften"], "Han tar med kvitteringen og går tilbake til butikken."),
+    Q("\"Zor olmasına rağmen pes etmedi.\"", ["Selv om det var vanskelig, ga hun ikke opp.", "Selv om det var vanskelig, hun ga ikke opp.", "Likevel det var vanskelig, ga hun ikke opp."], "selv om'lu cümleden sonra fiil önce gelir: ga hun.")
+  ],
+  review: ["som, selv om, mens, da: yan cümleden sonra fiil önce gelir.", "hadde + fiil: hadde søkt, hadde glemt.", "Edilgen: ble godkjent, må røres."]
+}
+];
+
+export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2), ...asExtra("B1", B1)];
