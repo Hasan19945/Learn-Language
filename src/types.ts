@@ -80,6 +80,7 @@ export interface LessonDef<W = WordDef> {
   pack?: "words" | "sentences";
   extra?: boolean;
   story?: Story;
+  stories?: Story[];
   intro: string;
   notes: Note[];
   tip: string;

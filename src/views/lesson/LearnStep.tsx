@@ -39,7 +39,7 @@ export function LearnStep({ lesson, onDone }: { lesson: Lesson; onDone: () => vo
   return (
     <>
       <p>{lesson.intro}</p>
-      {lesson.story && <StoryVideo lesson={lesson} />}
+      {[lesson.story, ...(lesson.stories || [])].map((s, i) => s && <StoryVideo key={i} lesson={lesson} story={s} />)}
       {lesson.notes.map(n => (
         <section key={n.h} className="panel note">
           <h3>{n.h}</h3>
