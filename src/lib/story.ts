@@ -1,4 +1,4 @@
-import type { Lesson, StoryHero, StoryMood, StoryPlace, Talk, Word } from "../types";
+import type { Lesson, Story, StoryHero, StoryMood, StoryPlace, Talk, Word } from "../types";
 
 export const HERO_NAMES: Record<StoryHero, string> = { mira: "Mira", emil: "Emil", sara: "Dr. Sara", hansen: "Hansen", berg: "Berg" };
 
@@ -43,7 +43,7 @@ export type Cue = {
 
 const wordsIn = (text: string, words: Word[]) => [...new Set(markWords(text, words).flatMap(p => p.word ? [p.word] : []))];
 
-function buildTalkCues(lesson: Lesson, talk: Talk): Cue[] {
+function buildTalkCues(lesson: Lesson, talk: Talk, title: string): Cue[] {
   let moods: [StoryMood, StoryMood] = ["happy", "happy"];
   const lines = talk.lines.map((l): Cue => {
     moods = l.who ? [moods[0], l.mood] : [l.mood, moods[1]];
@@ -53,13 +53,13 @@ function buildTalkCues(lesson: Lesson, talk: Talk): Cue[] {
   const recap = lesson.review.map((text): Cue => (
     { kind: "recap", scene: -1, place: last.place, mood: "proud", text, tr: "", words: [], moods: ["proud", "proud"] }
   ));
-  const opening: Cue = { kind: "title", scene: -1, place: lines[0].place, mood: "happy", text: lesson.story!.title, tr: "", words: [], moods: ["happy", "happy"] };
+  const opening: Cue = { kind: "title", scene: -1, place: lines[0].place, mood: "happy", text: title, tr: "", words: [], moods: ["happy", "happy"] };
   return [opening, ...lines, ...recap];
 }
 
-export function buildCues(lesson: Lesson): Cue[] {
-  const { title, scenes, talk } = lesson.story!;
-  if (talk) return buildTalkCues(lesson, talk);
+export function buildCues(lesson: Lesson, story: Story = lesson.story!): Cue[] {
+  const { title, scenes, talk } = story;
+  if (talk) return buildTalkCues(lesson, talk, title);
   const first = scenes[0], end = scenes.length - 1;
   const lines = scenes.flatMap((s, scene) => {
     const tr = splitSentences(s.tr);

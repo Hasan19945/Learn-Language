@@ -5,19 +5,18 @@ import { StoryStage } from "../../components/StoryStage";
 import { speak } from "../../lib/speech";
 import { buildCues, HERO_NAMES, HERO_PITCH, markWords, readingTime } from "../../lib/story";
 import { useApp } from "../../state/AppContext";
-import type { Lesson, Word } from "../../types";
+import type { Lesson, Story, Word } from "../../types";
 
 function Marked({ text, words }: { text: string; words: Word[] }) {
   return <>{markWords(text, words).map((p, i) => p.word ? <b key={i} className="story-word">{p.text}</b> : <span key={i}>{p.text}</span>)}</>;
 }
 
-export function StoryVideo({ lesson }: { lesson: Lesson }) {
+export function StoryVideo({ lesson, story }: { lesson: Lesson; story: Story }) {
   const { voice, t } = useApp();
-  const story = lesson.story!;
   const name = HERO_NAMES[story.hero];
   const talk = story.talk;
   const eyebrow = talk ? t.story.talkEyebrow : t.story.eyebrow(name);
-  const cues = useMemo(() => buildCues(lesson), [lesson]);
+  const cues = useMemo(() => buildCues(lesson, story), [lesson, story]);
   const [pos, setPos] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [ended, setEnded] = useState(false);

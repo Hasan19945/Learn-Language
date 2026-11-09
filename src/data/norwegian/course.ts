@@ -8,6 +8,7 @@ import c1 from "./c1";
 import { interests } from "./interests";
 import { levels } from "./levels";
 import { placement } from "./placement";
+import capstone from "./capstone";
 import topics from "./topics";
 
 export const norwegian: CourseDef = {
@@ -17,6 +18,6 @@ export const norwegian: CourseDef = {
   sub: "Açıklamalar Türkçe, örnekler Norveççe (Bokmål)",
   about: "Bu sürüm Türkçe konuşanlar için hazırlandı. Dersler Türkçe ile Norveççe arasındaki farkları özellikle gösteriyor.",
   sentenceNote: "Yeni fiiller: ser (izler), spiller (oynar), betaler (öder), kjøper (satın alır). Hepsi mastar + r kuralına uyar.",
-  lessons: [...a0, ...a1, ...a2, ...b1, ...b2, ...c1, ...topics],
+  lessons: [...a0, ...a1, ...a2, ...b1, ...b2, ...c1, ...topics, ...capstone],
   interests, levels, placement
 };
