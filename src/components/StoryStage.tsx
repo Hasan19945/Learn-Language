@@ -347,7 +347,289 @@ function Skyline({ y = 150 }: { y?: number }) {
   );
 }
 
+function Clock({ x, y, r = 28, rim = "#4a4a55" }: { x: number; y: number; r?: number; rim?: string }) {
+  return (
+    <g>
+      <circle cx={x} cy={y} r={r} fill="#fff" stroke={rim} strokeWidth="5" />
+      {[0, 90, 180, 270].map(a => (
+        <path key={a} d={`M${x} ${y - r + 5} V${y - r + 11}`} stroke={rim} strokeWidth="3" transform={`rotate(${a} ${x} ${y})`} />
+      ))}
+      <path d={`M${x} ${y} L${x + r * 0.45} ${y + r * 0.2}`} stroke={INK} strokeWidth="4" strokeLinecap="round" />
+      <g className="vid-tick">
+        <circle cx={x} cy={y} r={r - 6} fill="transparent" />
+        <path d={`M${x} ${y} V${y - r + 8}`} stroke="#c2183a" strokeWidth="3" strokeLinecap="round" />
+      </g>
+      <circle cx={x} cy={y} r="3.5" fill={INK} />
+    </g>
+  );
+}
+
+function Jacket({ x, color }: { x: number; color: string }) {
+  return (
+    <g>
+      <path d={`M${x} 112 q0 -10 8 -12`} fill="none" stroke="#6b6f78" strokeWidth="2.5" />
+      <path d={`M${x - 20} 124 L${x} 116 L${x + 20} 124 L${x + 24} 196 H${x - 24}Z`} fill={color} />
+      <path d={`M${x - 20} 124 L${x - 30} 176 L${x - 22} 178 L${x - 16} 140`} fill={color} />
+      <path d={`M${x + 20} 124 L${x + 30} 176 L${x + 22} 178 L${x + 16} 140`} fill={color} />
+      <path d={`M${x} 118 V196`} stroke="#fff" strokeWidth="2" opacity=".6" />
+    </g>
+  );
+}
+
+function Pine({ x, y, s = 1 }: { x: number; y: number; s?: number }) {
+  return (
+    <g transform={`translate(${x} ${y}) scale(${s})`}>
+      <path d="M0 -60 L18 -24 H8 L24 4 H-24 L-8 -24 H-18Z" fill="#2f5d46" />
+      <path d="M0 -60 L8 -44 L-2 -40Z" fill="#fff" opacity=".85" />
+      <rect x="-4" y="4" width="8" height="12" fill="#6b4a30" />
+    </g>
+  );
+}
+
 function Backdrop({ place }: { place: StoryPlace }) {
+  if (place === "office") {
+    return (
+      <g>
+        <rect width="640" height="360" fill="#e6edf5" />
+        <path d="M0 296 H640 V360 H0Z" fill="#a3b4c9" />
+        <rect x="0" y="290" width="640" height="6" fill="#fff" />
+        <rect x="300" y="30" width="160" height="80" rx="8" fill="#16213a" stroke="#5d6f8f" strokeWidth="4" />
+        <text x="356" y="86" textAnchor="middle" fontSize="40" fontWeight="700" fill="#ff6b5d" fontFamily="monospace">042</text>
+        <path d="M404 56 L418 70 L404 84" fill="none" stroke="#46f0b4" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+        <text x="440" y="86" textAnchor="middle" fontSize="40" fontWeight="700" fill="#46f0b4" fontFamily="monospace">3</text>
+        <circle className="vid-led" cx="314" cy="44" r="4" fill="#ff6b5d" />
+        <rect x="486" y="118" width="60" height="178" rx="10" fill="#c7302f" />
+        <rect x="496" y="132" width="40" height="30" rx="4" fill="#bfe3ff" />
+        <path d="M502 142 H530M502 150 H522" stroke="#5d6f8f" strokeWidth="3" />
+        <rect x="502" y="178" width="28" height="7" rx="2" fill="#3a1414" />
+        <rect x="506" y="185" width="20" height="26" rx="2" fill="#fff" />
+        <path d="M510 193 H522M510 200 H518" stroke="#c7302f" strokeWidth="2" />
+        {[300, 348, 396].map(x => (
+          <g key={x}>
+            <rect x={x} y="226" width="42" height="36" rx="7" fill="#4a7bd0" />
+            <rect x={x - 2} y="260" width="46" height="9" rx="3" fill="#355ea6" />
+            <path d={`M${x + 6} 269 V292M${x + 36} 269 V292`} stroke="#5d6f8f" strokeWidth="4" />
+          </g>
+        ))}
+        <rect x="566" y="36" width="60" height="84" rx="4" fill="#fff" stroke="#9fb1c8" strokeWidth="3" />
+        <rect x="576" y="48" width="40" height="8" rx="2" fill="#c7302f" />
+        <path d="M576 66 H616M576 76 H610M576 86 H616M576 96 H604" stroke="#9fb1c8" strokeWidth="3" />
+        <rect x="576" y="104" width="9" height="9" fill="none" stroke="#5d6f8f" strokeWidth="2" />
+        <path d="M577 108 L580 111 L586 102" fill="none" stroke="#2c9c5a" strokeWidth="2.5" />
+        <path d="M574 292 L568 256 H614 L608 292Z" fill="#e8755a" />
+        <path d="M590 256 C580 226 560 220 552 204 C576 206 588 222 590 240 C594 216 608 204 626 200 C622 224 606 240 594 256Z" fill="#46b078" />
+      </g>
+    );
+  }
+  if (place === "interview") {
+    return (
+      <g>
+        <rect width="640" height="360" fill="#efe6dc" />
+        <path d="M0 300 H640 V360 H0Z" fill="#b48a64" />
+        <clipPath id="vid-window"><rect x="300" y="34" width="180" height="140" /></clipPath>
+        <rect x="300" y="34" width="180" height="140" fill="#bfe2ff" />
+        <ellipse className="vid-cloud" cx="350" cy="62" rx="24" ry="8" fill="#fff" />
+        <g clipPath="url(#vid-window)"><g transform="translate(300 64) scale(.74)"><Skyline y={150} /></g></g>
+        <rect x="300" y="34" width="180" height="140" fill="none" stroke="#fff" strokeWidth="8" />
+        <path d="M390 34 V174" stroke="#fff" strokeWidth="5" />
+        <Clock x={560} y={68} rim="#6b5440" />
+        <rect x="508" y="116" width="96" height="66" rx="3" fill="#fffaf0" stroke="#c9a227" strokeWidth="5" />
+        <path d="M522 134 H590M528 146 H584M534 158 H566" stroke="#8c7a68" strokeWidth="3" />
+        <circle cx="584" cy="164" r="8" fill="#c2183a" />
+        <rect x="500" y="204" width="124" height="96" fill="#8a5a3a" />
+        <path d="M500 250 H624" stroke="#6b4228" strokeWidth="5" />
+        {[[508, "#3a6ea8", 40], [522, "#e8755a", 36], [536, "#2c7a54", 42], [552, "#ffd34d", 34], [568, "#8d7bf0", 40]].map(([x, c, h]) => (
+          <rect key={x} x={x as number} y={248 - (h as number)} width="12" height={h as number} fill={c as string} />
+        ))}
+        {[[510, "#c2183a", 36], [526, "#59c8ff", 40], [586, "#46b078", 38], [602, "#f28da0", 34]].map(([x, c, h]) => (
+          <rect key={x} x={x as number} y={296 - (h as number)} width="14" height={h as number} fill={c as string} />
+        ))}
+      </g>
+    );
+  }
+  if (place === "bank") {
+    return (
+      <g>
+        <rect width="640" height="360" fill="#e9f1ec" />
+        <path d="M0 300 H640 V360 H0Z" fill="#9ab8a8" />
+        <rect x="300" y="28" width="170" height="44" rx="8" fill="#1f6b4f" />
+        <circle cx="328" cy="50" r="14" fill="#ffd34d" stroke="#e8a92a" strokeWidth="3" />
+        <path d="M322 50 H334M328 44 V56" stroke="#a8761a" strokeWidth="3" />
+        <path d="M352 42 H452M352 56 H430" stroke="#bfe8d4" strokeWidth="5" strokeLinecap="round" />
+        <rect x="300" y="92" width="170" height="120" rx="6" fill="#fff" stroke="#1f6b4f" strokeWidth="4" />
+        {[0, 1, 2, 3, 4].map(i => <rect key={i} x={318 + i * 28} y={190 - (i + 1) * 16} width="18" height={(i + 1) * 16} fill={i === 4 ? "#2c9c5a" : "#9fd8bc"} />)}
+        <path d="M318 168 L374 140 L402 150 L452 104" fill="none" stroke="#c2183a" strokeWidth="4" strokeLinejoin="round" />
+        <path d="M440 104 H454 V118" fill="none" stroke="#c2183a" strokeWidth="4" strokeLinecap="round" />
+        <text x="320" y="118" fontSize="20" fontWeight="700" fill="#1f6b4f">%</text>
+        <rect x="492" y="58" width="122" height="238" rx="12" fill="#3c4a5c" />
+        <rect x="506" y="76" width="94" height="66" rx="6" fill="#59c8ff" />
+        <path d="M516 92 H578M516 106 H562M516 120 H586" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
+        {[0, 1, 2].flatMap(r => [0, 1, 2].map(c => <rect key={`${r}${c}`} x={514 + c * 22} y={156 + r * 20} width="16" height="13" rx="3" fill="#dfe6ee" />))}
+        <rect x="584" y="156" width="20" height="13" rx="3" fill="#2c9c5a" />
+        <rect x="584" y="176" width="20" height="13" rx="3" fill="#ffd34d" />
+        <rect x="584" y="196" width="20" height="13" rx="3" fill="#ff5d73" />
+        <rect x="520" y="230" width="66" height="8" rx="3" fill="#141a24" />
+        <rect x="534" y="252" width="40" height="5" rx="2" fill="#141a24" />
+        <circle className="vid-led" cx="600" cy="244" r="4" fill="#46f0b4" />
+      </g>
+    );
+  }
+  if (place === "classroom") {
+    return (
+      <g>
+        <rect width="640" height="360" fill="#f6efd9" />
+        <path d="M0 300 H640 V360 H0Z" fill="#c9a77a" />
+        <rect x="296" y="30" width="250" height="150" rx="6" fill="#2f5d46" stroke="#8a5a3a" strokeWidth="8" />
+        <text x="346" y="96" textAnchor="middle" fontSize="46" fontWeight="700" fill="#fff" opacity=".92" fontFamily="cursive">B1</text>
+        <path d="M400 62 H520M400 82 H500M400 102 H514" stroke="#fff" strokeWidth="4" strokeLinecap="round" opacity=".75" />
+        <path d="M320 136 L334 150 L362 120" fill="none" stroke="#ffd34d" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M384 140 H520" stroke="#fff" strokeWidth="3" strokeDasharray="10 8" opacity=".6" />
+        <rect x="292" y="180" width="258" height="8" fill="#8a5a3a" />
+        <rect x="470" y="174" width="26" height="6" rx="2" fill="#fff" />
+        <Clock x={596} y={64} rim="#8a5a3a" />
+        <path d="M596 270 V292M572 296 H620" stroke="#6b4a30" strokeWidth="6" strokeLinecap="round" />
+        <path d="M566 236 A32 32 0 0 0 624 254" fill="none" stroke="#c9a227" strokeWidth="4" />
+        <circle cx="596" cy="238" r="28" fill="#59a8e8" />
+        <path d="M582 220 q10 -4 14 6 q-2 10 -12 8 q-8 -6 -2 -14Z M600 236 q12 -2 14 8 q-4 12 -14 8 q-6 -8 0 -16Z" fill="#46b078" />
+        <rect x="560" y="116" width="66" height="44" rx="3" fill="#fff" stroke="#c9a77a" strokeWidth="3" />
+        <text x="593" y="146" textAnchor="middle" fontSize="20" fontWeight="700" fill="#c2183a">Aa</text>
+      </g>
+    );
+  }
+  if (place === "station") {
+    return (
+      <g>
+        <rect width="640" height="360" fill="#cfe3f5" />
+        <ellipse className="vid-cloud" cx="420" cy="150" rx="40" ry="11" fill="#fff" opacity=".9" />
+        <path d="M0 0 H640 V36 L0 54Z" fill="#5b6676" />
+        {[120, 300, 480].map(x => <path key={x} d={`M${x} 0 V300`} stroke="#7c8696" strokeWidth="10" />)}
+        <rect x="0" y="232" width="640" height="44" fill="#6b6f78" />
+        <path d="M0 246 H640M0 264 H640" stroke="#c9ccd2" strokeWidth="4" />
+        <g className="vid-train">
+          {[0, 320].map(dx => (
+            <g key={dx}>
+              <rect x={300 + dx} y="152" width="310" height="88" rx="18" fill="#d6283d" />
+              <rect x={300 + dx} y="214" width="310" height="10" fill="#fff" opacity=".85" />
+              {[0, 1, 2, 3, 4].map(i => <rect key={i} x={320 + dx + i * 56} y="170" width="40" height="30" rx="6" fill="#bfe3ff" />)}
+              <circle cx={340 + dx} cy="244" r="9" fill="#2b2f38" />
+              <circle cx={570 + dx} cy="244" r="9" fill="#2b2f38" />
+            </g>
+          ))}
+        </g>
+        <path d="M0 274 H640 V360 H0Z" fill="#b8bcc4" />
+        <path d="M0 282 H640" stroke="#ffd34d" strokeWidth="6" strokeDasharray="22 10" />
+        <rect x="320" y="58" width="210" height="84" rx="6" fill="#111a2c" stroke="#7c8696" strokeWidth="4" />
+        {[0, 1, 2].map(i => (
+          <g key={i}>
+            <rect x="334" y={72 + i * 22} width="40" height="10" rx="2" fill="#ffd34d" />
+            <rect x="384" y={72 + i * 22} width="86" height="10" rx="2" fill="#ffd34d" opacity=".75" />
+            <rect className={i === 0 ? "vid-led" : undefined} x="480" y={72 + i * 22} width="36" height="10" rx="2" fill={i === 0 ? "#ff5d5d" : "#46f0b4"} />
+          </g>
+        ))}
+        <path d="M592 36 V54" stroke="#4a4a55" strokeWidth="4" />
+        <Clock x={592} y={82} />
+      </g>
+    );
+  }
+  if (place === "kitchen") {
+    return (
+      <g>
+        <rect width="640" height="360" fill="#fdf1e3" />
+        <path d="M0 300 H640 V360 H0Z" fill="#c98f5e" />
+        {[180, 210, 240, 270].map(y => <path key={y} d={`M0 ${y} H640`} stroke="#f0d9c0" strokeWidth="2" />)}
+        {[30, 90, 150, 210, 270, 330, 390, 450, 510, 570, 630].map(x => <path key={x} d={`M${x} 170 V300`} stroke="#f0d9c0" strokeWidth="2" />)}
+        <rect x="300" y="30" width="130" height="100" rx="6" fill="#bfe2ff" stroke="#fff" strokeWidth="7" />
+        <path d="M365 30 V130M300 80 H430" stroke="#fff" strokeWidth="5" />
+        <ellipse className="vid-cloud" cx="340" cy="56" rx="20" ry="7" fill="#fff" />
+        <path d="M300 152 H430" stroke="#8a5a3a" strokeWidth="5" strokeLinecap="round" />
+        <path d="M320 152 V176 a10 10 0 1 0 6 0 V152" fill="none" stroke="#7c8696" strokeWidth="4" />
+        <path d="M356 152 V170 M348 170 h16 v14 h-16z" fill="#7c8696" stroke="#7c8696" strokeWidth="4" />
+        <path d="M392 152 V172 M386 172 q6 14 12 0" fill="none" stroke="#7c8696" strokeWidth="4" />
+        <path d="M460 92 H624" stroke="#8a5a3a" strokeWidth="7" strokeLinecap="round" />
+        {[[470, "#e8755a"], [506, "#ffd34d"], [542, "#46b078"], [578, "#a8324d"]].map(([x, c]) => (
+          <g key={x}>
+            <rect x={x as number} y="56" width="28" height="34" rx="5" fill="#fff" stroke="#c9b8a5" strokeWidth="2" />
+            <rect x={(x as number) + 3} y="68" width="22" height="20" rx="3" fill={c as string} opacity=".8" />
+            <rect x={(x as number) - 1} y="50" width="30" height="8" rx="2" fill="#8a5a3a" />
+          </g>
+        ))}
+        <rect x="452" y="192" width="172" height="108" rx="6" fill="#e8e8ee" stroke="#b8bcc4" strokeWidth="3" />
+        <rect x="470" y="226" width="136" height="60" rx="5" fill="#2b2f38" />
+        <rect x="482" y="236" width="112" height="8" rx="3" fill="#4a4f5c" />
+        {[478, 506, 570, 598].map(x => <circle key={x} cx={x} cy="208" r="6" fill="#4a4f5c" />)}
+        <rect x="488" y="180" width="18" height="12" fill="#2b2f38" />
+        <rect x="570" y="180" width="18" height="12" fill="#2b2f38" />
+        <path d="M498 140 H578 V180 Q578 192 566 192 H510 Q498 192 498 180Z" fill="#c2183a" />
+        <path d="M490 150 H498M578 150 H586" stroke="#8a1029" strokeWidth="6" strokeLinecap="round" />
+        <ellipse cx="538" cy="140" rx="42" ry="7" fill="#e04b63" />
+        <g className="vid-steam" stroke="#fff" strokeWidth="4" fill="none" opacity=".9">
+          <path d="M520 130 Q512 116 522 102" />
+          <path d="M540 128 Q532 112 542 96" />
+          <path d="M560 130 Q552 116 562 102" />
+        </g>
+      </g>
+    );
+  }
+  if (place === "mountain") {
+    return (
+      <g>
+        <defs>
+          <linearGradient id="vid-sky-cold" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#8fa8cc" />
+            <stop offset="1" stopColor="#e6eef7" />
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="url(#vid-sky-cold)" />
+        <path d="M160 250 L330 66 L440 190 L520 104 L680 250Z" fill="#6c7fa0" />
+        <path d="M330 66 L372 112 L352 106 L336 124 L318 104 L296 112Z" fill="#fff" />
+        <path d="M520 104 L556 140 L540 136 L526 150 L512 136 L494 138Z" fill="#fff" />
+        <path d="M-20 260 Q180 222 360 248 T660 244 V360 H-20Z" fill="#f4f7fb" />
+        <path d="M300 360 Q340 300 400 280 T480 248" fill="none" stroke="#c9b8a5" strokeWidth="6" strokeDasharray="12 10" strokeLinecap="round" />
+        <Pine x={330} y={262} s={0.8} />
+        <Pine x={372} y={256} s={1} />
+        <Pine x={610} y={258} s={1.1} />
+        <rect x="474" y="200" width="96" height="56" fill="#a33b2c" />
+        <path d="M462 204 L522 166 L582 204Z" fill="#3a2a24" />
+        <path d="M462 204 L522 168 L582 204" fill="none" stroke="#fff" strokeWidth="5" />
+        <rect x="490" y="216" width="22" height="18" fill="#ffd36b" stroke="#fff" strokeWidth="3" />
+        <rect x="530" y="222" width="20" height="34" fill="#5a2a1e" stroke="#fff" strokeWidth="3" />
+        <rect x="548" y="160" width="12" height="28" fill="#5a4a44" />
+        <g className="vid-steam" stroke="#e6eef7" strokeWidth="6" fill="none" opacity=".9" strokeLinecap="round">
+          <path d="M554 154 Q546 140 556 126" />
+          <path d="M558 128 Q568 114 560 100" />
+        </g>
+        {Array.from({ length: 18 }, (_, i) => (
+          <circle key={i} className="vid-snow" style={{ animationDelay: `${-(i * 0.73) % 6}s` }} cx={(i * 97 + 20) % 640} cy={(i * 41) % 60} r={i % 3 ? 3 : 4.5} fill="#fff" />
+        ))}
+      </g>
+    );
+  }
+  if (place === "shop") {
+    return (
+      <g>
+        <rect width="640" height="360" fill="#f4eefa" />
+        <path d="M0 300 H640 V360 H0Z" fill="#cbbfdc" />
+        <rect x="310" y="22" width="120" height="50" rx="10" fill="#e23b5a" />
+        <path d="M340 22 V8M400 22 V8" stroke="#8c7a9c" strokeWidth="3" />
+        <text x="370" y="56" textAnchor="middle" fontSize="28" fontWeight="700" fill="#fff">-30%</text>
+        <path d="M296 104 H480" stroke="#7c8696" strokeWidth="6" strokeLinecap="round" />
+        <path d="M300 104 V296M476 104 V296" stroke="#7c8696" strokeWidth="5" />
+        {[[326, "#3a6ea8"], [370, "#2c7a54"], [414, "#e8755a"], [454, "#8d7bf0"]].map(([x, c]) => <Jacket key={x} x={x as number} color={c as string} />)}
+        <rect x="318" y="226" width="140" height="70" rx="4" fill="#fff" stroke="#b9a5d8" strokeWidth="3" />
+        {[[326, "#ffd34d"], [372, "#59c8ff"], [418, "#f28da0"]].map(([x, c]) => (
+          <g key={x}>
+            <rect x={x as number} y="248" width="34" height="14" rx="3" fill={c as string} />
+            <rect x={x as number} y="264" width="34" height="14" rx="3" fill={c as string} opacity=".75" />
+          </g>
+        ))}
+        <ellipse cx="566" cy="150" rx="42" ry="84" fill="#dff3ff" stroke="#b9a5d8" strokeWidth="7" />
+        <path d="M546 106 L560 92M548 130 L578 100" stroke="#fff" strokeWidth="5" strokeLinecap="round" />
+        <path d="M546 238 L536 296M586 238 L596 296" stroke="#b9a5d8" strokeWidth="6" strokeLinecap="round" />
+        <path d="M500 60 L520 60 L528 74 L520 88 H500Z" fill="#ffd34d" stroke="#e8a92a" strokeWidth="2" />
+        <circle cx="506" cy="74" r="3" fill="#fff" />
+      </g>
+    );
+  }
   if (place === "clinic") {
     return (
       <g>
@@ -513,6 +795,128 @@ function Foreground({ place }: { place: StoryPlace }) {
         </g>
         <path d="M570 312 L560 270 H606 L596 312Z" fill="#e8755a" />
         <path d="M583 270 C572 240 548 232 540 216 C566 216 582 232 584 252 C588 226 604 212 622 208 C618 232 602 248 588 270Z" fill="#46b078" />
+      </g>
+    );
+  }
+  if (place === "office") {
+    return (
+      <g>
+        <rect x="330" y="316" width="310" height="12" fill="#d0d8e4" />
+        <rect x="330" y="328" width="310" height="32" fill="#b3bfcf" />
+        <rect x="380" y="294" width="62" height="24" fill="#fff" stroke="#9fb1c8" strokeWidth="2" transform="rotate(-6 411 306)" />
+        <rect x="400" y="296" width="62" height="22" fill="#fff" stroke="#9fb1c8" strokeWidth="2" />
+        <path d="M408 304 H452M408 311 H444" stroke="#9fb1c8" strokeWidth="2" />
+        <path d="M478 312 L520 292" stroke="#3a6ea8" strokeWidth="6" strokeLinecap="round" />
+        <path d="M478 312 L474 316" stroke="#241c4f" strokeWidth="3" strokeLinecap="round" />
+        <rect x="560" y="300" width="20" height="16" rx="2" fill="#fff" stroke="#c7302f" strokeWidth="2" />
+        <text x="570" y="312" textAnchor="middle" fontSize="8" fontWeight="700" fill="#c7302f">042</text>
+      </g>
+    );
+  }
+  if (place === "interview") {
+    return (
+      <g>
+        <rect x="300" y="312" width="340" height="14" fill="#8a5a3a" />
+        <rect x="300" y="326" width="340" height="34" fill="#6b4228" />
+        <rect x="350" y="290" width="74" height="24" fill="#fff" stroke="#c9b8a5" strokeWidth="2" transform="rotate(-4 387 302)" />
+        <rect x="358" y="294" width="14" height="14" fill="#9fb1c8" />
+        <path d="M378 297 H414M378 303 H408M378 309 H412" stroke="#8c7a68" strokeWidth="2" />
+        <path d="M452 270 L456 312 H476 L480 270Z" fill="#dff3ff" stroke="#9fb1c8" strokeWidth="2" opacity=".9" />
+        <path d="M455 286 H477" stroke="#59c8ff" strokeWidth="10" opacity=".55" />
+        <path d="M520 312 L530 290 H600 L610 312Z" fill="#2b2f38" />
+        <path d="M540 302 H590" stroke="#c9a227" strokeWidth="3" />
+      </g>
+    );
+  }
+  if (place === "bank") {
+    return (
+      <g>
+        <rect x="300" y="314" width="340" height="12" fill="#cfe0d6" />
+        <rect x="300" y="326" width="340" height="34" fill="#1f6b4f" />
+        {[0, 1, 2, 3, 4].map(i => <ellipse key={i} cx="360" cy={308 - i * 7} rx="16" ry="5" fill="#ffd34d" stroke="#c9a227" strokeWidth="2" />)}
+        {[0, 1, 2].map(i => <ellipse key={i} cx="398" cy={308 - i * 7} rx="16" ry="5" fill="#ffd34d" stroke="#c9a227" strokeWidth="2" />)}
+        <ellipse cx="490" cy="290" rx="38" ry="26" fill="#f28da0" />
+        <circle cx="524" cy="282" r="12" fill="#f28da0" />
+        <ellipse cx="532" cy="284" rx="6" ry="5" fill="#e06b84" />
+        <path d="M470 268 L476 256 L484 266Z" fill="#e06b84" />
+        <rect x="478" y="262" width="22" height="4" rx="2" fill="#a8324d" />
+        <path d="M470 312 V302M506 312 V302" stroke="#e06b84" strokeWidth="8" strokeLinecap="round" />
+        <circle cx="516" cy="278" r="2.5" fill="#241c4f" />
+        <rect x="560" y="294" width="56" height="20" rx="4" fill="#3a6ea8" transform="rotate(-8 588 304)" />
+        <rect x="566" y="298" width="12" height="8" rx="2" fill="#ffd34d" transform="rotate(-8 588 304)" />
+      </g>
+    );
+  }
+  if (place === "classroom") {
+    return (
+      <g>
+        <rect x="300" y="314" width="340" height="12" fill="#b9835a" />
+        <rect x="300" y="326" width="340" height="34" fill="#8f6240" />
+        <rect x="340" y="300" width="70" height="14" rx="2" fill="#3a6ea8" />
+        <rect x="346" y="288" width="62" height="12" rx="2" fill="#c2183a" />
+        <rect x="342" y="276" width="66" height="12" rx="2" fill="#2c7a54" />
+        <path d="M430 314 L472 304 L514 314 L514 312 L472 300 L430 310Z" fill="#fff" stroke="#c9b8a5" strokeWidth="2" />
+        <path d="M440 309 L466 303M480 303 L506 309" stroke="#9fb1c8" strokeWidth="2" />
+        <path d="M532 310 L588 296" stroke="#ffd34d" strokeWidth="7" strokeLinecap="round" />
+        <path d="M588 296 L598 294" stroke="#f6c7b4" strokeWidth="7" strokeLinecap="round" />
+        <circle cx="612" cy="300" r="14" fill="#d6283d" />
+        <path d="M612 286 Q614 280 620 278" fill="none" stroke="#6b4a30" strokeWidth="3" />
+      </g>
+    );
+  }
+  if (place === "station") {
+    return (
+      <g>
+        <rect x="530" y="270" width="64" height="56" rx="8" fill="#3a6ea8" />
+        <path d="M548 270 V258 H576 V270" fill="none" stroke="#241c4f" strokeWidth="5" />
+        <path d="M546 278 V320M578 278 V320" stroke="#2b5585" strokeWidth="4" />
+        <circle cx="542" cy="330" r="5" fill="#241c4f" />
+        <circle cx="582" cy="330" r="5" fill="#241c4f" />
+        <rect x="552" y="290" width="22" height="12" rx="2" fill="#ffd34d" />
+      </g>
+    );
+  }
+  if (place === "kitchen") {
+    return (
+      <g>
+        <rect x="300" y="314" width="340" height="12" fill="#e8d2b4" />
+        <rect x="300" y="326" width="340" height="34" fill="#a8764e" />
+        <rect x="350" y="300" width="130" height="14" rx="5" fill="#d9a46c" />
+        <path d="M370 302 L420 294 L424 300 L374 308Z" fill="#ff8a3d" />
+        <path d="M418 294 l10 -6 M420 296 l12 -2" stroke="#46b078" strokeWidth="3" strokeLinecap="round" />
+        {[440, 452, 464].map(x => <ellipse key={x} cx={x} cy="304" rx="5" ry="3" fill="#ff8a3d" stroke="#e86c1f" strokeWidth="1.5" />)}
+        <path d="M486 312 L540 298 L546 304 L492 314Z" fill="#c9ccd2" />
+        <path d="M540 298 L566 292 L568 298 L546 304Z" fill="#3a2a24" />
+        <circle cx="590" cy="300" r="15" fill="#e23b3b" />
+        <path d="M584 286 l6 4 6 -4" fill="none" stroke="#2c7a54" strokeWidth="3" strokeLinecap="round" />
+      </g>
+    );
+  }
+  if (place === "mountain") {
+    return (
+      <g>
+        <path d="M520 360 L534 300 Q560 280 600 290 L640 304 V360Z" fill="#8c95a6" />
+        <path d="M534 300 Q560 280 600 290 L640 304" fill="none" stroke="#fff" strokeWidth="6" strokeLinecap="round" />
+        <text x="580" y="336" textAnchor="middle" fontSize="28" fontWeight="700" fill="#d6283d">T</text>
+        <rect x="430" y="284" width="56" height="70" rx="14" fill="#e86c1f" />
+        <rect x="438" y="312" width="40" height="26" rx="6" fill="#c9561a" />
+        <path d="M444 284 Q458 266 472 284" fill="none" stroke="#7a3410" strokeWidth="5" />
+        <rect x="436" y="296" width="44" height="6" fill="#7a3410" />
+      </g>
+    );
+  }
+  if (place === "shop") {
+    return (
+      <g>
+        <rect x="320" y="312" width="320" height="14" fill="#e6dcf3" />
+        <rect x="320" y="326" width="320" height="34" fill="#8d7bf0" />
+        <path d="M380 312 L390 270 H470 L480 312Z" fill="#3c4a5c" />
+        <rect x="398" y="256" width="62" height="20" rx="3" fill="#2b2f38" />
+        <rect x="404" y="260" width="38" height="12" rx="2" fill="#46f0b4" />
+        {[0, 1, 2].map(i => <rect key={i} x={400 + i * 20} y="284" width="14" height="8" rx="2" fill="#dfe6ee" />)}
+        <path d="M520 312 L528 262 H590 L598 312Z" fill="#ffd34d" />
+        <path d="M542 262 Q559 236 576 262" fill="none" stroke="#c9a227" strokeWidth="5" />
+        <path d="M540 284 H578" stroke="#e23b5a" strokeWidth="6" strokeLinecap="round" />
       </g>
     );
   }

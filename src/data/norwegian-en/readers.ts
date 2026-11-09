@@ -117,4 +117,51 @@ const A2: LessonDef[] = [
 }
 ];
 
-export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2)];
+const B1: LessonDef[] = [
+{
+  id: "ne-b1-story", title: "Eight stories from life", no: "Åtte historier fra livet", icon: "spark", stories: readingStories("b1", "en"),
+  intro: "Eight stories using what you learned in B1: NAV, a job interview, the bank, a Norwegian test, a delayed train, the kitchen, snow in the mountains and a complaint in a shop.",
+  notes: [
+    { h: "What do the stories practise?", p: "Relative clauses with som: saksbehandleren som hjalp henne. selv om and likevel: Selv om det var vanskelig, ga hun ikke opp. mens and da: Mens barna sover… Da hun kom til stasjonen… The past perfect: hadde søkt, hadde trodd, hadde glemt. The passive: ble godkjent, må røres. Indirect questions: spurte hvorfor han ville jobbe der. jo … jo: Jo mer hun sparer, jo gladere blir hun." },
+    { h: "How to practise", p: "Watch each story with the translation first, then hide it and watch again. Finally, read aloud. The red words are this lesson's words." }
+  ],
+  tip: "When a clause comes first, the verb of the main clause comes straight after it: \"Selv om det var vanskelig, ga hun ikke opp.\" \"Mens barna sover, leser han.\" Saying \"hun ga\" or \"han leser\" there is wrong.",
+  words: [
+    N("en", "søknad", "søknaden", "søknader", "application", "SUHK-nahd", "Hun fikk svar på søknaden.", "She got an answer to her application."),
+    N("et", "skjema", "skjemaet", "skjemaer", "form", "SHEH-mah", "Hun måtte fylle ut et skjema.", "She had to fill in a form."),
+    W("selv om", "even though", "sel om", "Selv om det var vanskelig, ga hun ikke opp.", "Even though it was difficult, she didn't give up."),
+    W("godkjent", "approved", "GOO-shent", "Søknaden ble godkjent.", "The application was approved.", { note: "ble godkjent = was approved (passive)" }),
+    N("en", "stilling", "stillingen", "stillinger", "position, post", "STIL-ling", "Han søkte på en stilling som lærer.", "He applied for a position as a teacher."),
+    N("en", "erfaring", "erfaringen", "erfaringer", "experience", "AR-fah-ring", "Han fortalte om erfaringen sin.", "He talked about his experience."),
+    N("en", "rente", "renten", "renter", "interest (money)", "REN-teh", "En sparekonto gir mer rente.", "A savings account gives more interest."),
+    N("et", "budsjett", "budsjettet", "budsjetter", "budget", "bewd-SHET", "Hun må lage et budsjett.", "She has to make a budget."),
+    W("mens", "while", "mens", "Mens barna sover, leser han.", "While the children sleep, he reads."),
+    W("bestått", "passed (a test)", "beh-STAWT", "Han hadde bestått!", "He had passed!", { note: "bestå – besto – har bestått" }),
+    W("forsinket", "delayed, late", "for-SHIN-ket", "Toget var forsinket.", "The train was delayed."),
+    W("likevel", "still, even so", "LEE-keh-vel", "Likevel er tog bedre for miljøet.", "Still, trains are better for the environment."),
+    N("et", "miljø", "miljøet", "miljøer", "environment", "MIL-yuh", "Tog er bedre for miljøet enn fly.", "Trains are better for the environment than planes."),
+    N("en", "oppskrift", "oppskriften", "oppskrifter", "recipe", "OP-skrift", "Han har funnet en oppskrift på fiskesuppe.", "He has found a recipe for fish soup."),
+    W("plutselig", "suddenly", "PLEWT-seh-lee", "Plutselig ringer det på døra.", "Suddenly the doorbell rings."),
+    W("heldigvis", "luckily", "HEL-dee-vees", "Heldigvis smakte suppen nydelig.", "Luckily the soup tasted wonderful."),
+    W("redd", "afraid", "red", "Mira var redd for å gå seg vill.", "Mira was afraid of getting lost.", { note: "være redd for = be afraid of" }),
+    N("en", "kvittering", "kvitteringen", "kvitteringer", "receipt", "kvit-TEH-ring", "Han tar med kvitteringen.", "He takes the receipt with him."),
+    W("klage", "to complain", "KLAH-geh", "Han vil klage på jakken.", "He wants to complain about the jacket."),
+    W("fornøyd", "satisfied, pleased", "for-NOYD", "Han er fornøyd med servicen.", "He is satisfied with the service.")
+  ],
+  dialogue: [["A", "Hvorfor kom du så sent?", "Why were you so late?"], ["B", "Toget var forsinket, og jeg måtte vente i en time.", "The train was delayed, and I had to wait for an hour."], ["A", "Så kjedelig! Likevel er det bra at du kom.", "How annoying! Still, it's good that you came."], ["B", "Ja, og heldigvis fikk jeg pengene tilbake.", "Yes, and luckily I got my money back."]],
+  quiz: [
+    Q("What happened to Mira's application at NAV?", ["Den ble godkjent.", "Den ble borte.", "Den kom for sent."], "Etter to uker fikk hun svar på søknaden. Den ble godkjent!"),
+    Q("\"The head teacher asked why he wanted to work there.\"", ["Rektoren spurte hvorfor han ville jobbe der.", "Rektoren spurte hvorfor ville han jobbe der.", "Rektoren spurte hvorfor han jobbe ville der."], "In an indirect question the subject comes before the verb: hvorfor han ville."),
+    Q("Why is a savings account better?", ["Den gir mer rente.", "Den er gratis.", "Den har et budsjett."], "En sparekonto gir mer rente enn en vanlig konto."),
+    Q("\"The test was easier than he had thought.\"", ["Prøven var lettere enn han hadde trodd.", "Prøven var lettere enn han har trodd.", "Prøven var mer lett enn han hadde trodd."], "Further back in the past: hadde + trodd."),
+    Q("What was wrong with the train when Mira got to the station?", ["Det var forsinket.", "Det var fullt.", "Det hadde gått."], "Da hun kom til stasjonen, var toget forsinket."),
+    Q("Why did the soup boil over?", ["Emil hadde glemt å skru ned varmen.", "Naboene kom for tidlig.", "Oppskriften var feil."], "Emil hadde glemt å skru ned varmen."),
+    Q("What did they do so they wouldn't get lost?", ["De fulgte de røde merkene.", "De ringte en venn.", "De gikk hjem igjen."], "De bestemte seg for å følge de røde merkene på steinene."),
+    Q("What did Emil take to the shop?", ["kvitteringen", "budsjettet", "oppskriften"], "Han tar med kvitteringen og går tilbake til butikken."),
+    Q("\"Even though it was difficult, she didn't give up.\"", ["Selv om det var vanskelig, ga hun ikke opp.", "Selv om det var vanskelig, hun ga ikke opp.", "Likevel det var vanskelig, ga hun ikke opp."], "After a selv om clause, the verb comes first: ga hun.")
+  ],
+  review: ["som, selv om, mens, da: after a clause, the verb comes first.", "hadde + verb: hadde søkt, hadde glemt.", "Passive: ble godkjent, må røres."]
+}
+];
+
+export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2), ...asExtra("B1", B1)];
