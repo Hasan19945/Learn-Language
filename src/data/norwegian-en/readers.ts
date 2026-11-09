@@ -77,4 +77,44 @@ const A1: LessonDef[] = [
 }
 ];
 
-export default [...asExtra("A0", A0), ...asExtra("A1", A1)];
+const A2: LessonDef[] = [
+{
+  id: "ne-a2-story", title: "Six short stories", no: "Seks korte historier", icon: "spark", stories: readingStories("a2", "en"),
+  intro: "Six stories using what you learned in A2: Mira's weekend, Emil's two years in Norway, a visit to the doctor, a new job, finding a flat and summer plans.",
+  notes: [
+    { h: "What do the stories practise?", p: "The past: var, gikk, spiste, ringte. The perfect: har bodd, har lært, har aldri vært. Clauses with fordi: fordi han ikke får mange pauser. om (whether): spør om leiligheten er ledig. The future: skal reise, det kommer til å regne." },
+    { h: "How to practise", p: "Watch each story with the translation first, then hide it and watch again. Finally, read aloud. The red words are this lesson's words." }
+  ],
+  tip: "After fordi, ikke comes before the verb: \"fordi han ikke får mange pauser\". And \"for two years\" is i to år, never for to år.",
+  words: [
+    W("var", "was, were", "var", "I helgen var Mira i Bergen.", "At the weekend, Mira was in Bergen.", { note: "være – var" }),
+    W("gikk", "went", "yik", "Hun gikk på kino.", "She went to the cinema.", { note: "gå – gikk" }),
+    W("i går", "yesterday", "ee gawr", "I går kom hun hjem.", "Yesterday she came home."),
+    N("en", "helg", "helgen", "helger", "weekend", "helg", "Det var en fin helg.", "It was a nice weekend."),
+    W("har bodd", "has lived", "har bood", "Emil har bodd i Bergen i to år.", "Emil has lived in Bergen for two years."),
+    W("aldri", "never", "AHL-dree", "Han har aldri vært i Tromsø.", "He has never been to Tromsø."),
+    N("en", "lege", "legen", "leger", "doctor", "LEH-geh", "Hun ringte legen.", "She called the doctor."),
+    W("feber", "fever", "FEH-ber", "Hun hadde også feber.", "She also had a fever."),
+    W("vondt", "pain, sore", "vont", "Hun våknet med vondt i halsen.", "She woke up with a sore throat."),
+    W("fordi", "because", "for-DEE", "Han liker jobben fordi han lærer mye.", "He likes the job because he learns a lot."),
+    N("en", "sjef", "sjefen", "sjefer", "boss", "shayf", "Sjefen hans er hyggelig.", "His boss is nice."),
+    W("sliten", "tired", "SLEE-ten", "Han er ofte sliten.", "He is often tired."),
+    W("ledig", "available", "LEH-dee", "Er leiligheten ledig?", "Is the flat available?"),
+    W("husleie", "rent", "HEWS-lay-eh", "Hun betaler 11 000 kroner i husleie.", "She pays 11,000 kroner in rent."),
+    W("kommer til å", "is going to (prediction)", "KOM-mer til aw", "Det kommer til å regne litt.", "It's going to rain a bit."),
+    N("en", "ferie", "ferien", "ferier", "holiday", "FEH-ree-eh", "Emil gleder seg til ferien.", "Emil is looking forward to the holiday.")
+  ],
+  dialogue: [["A", "Hva gjorde du i helgen?", "What did you do at the weekend?"], ["B", "Jeg gikk på kino. Og du?", "I went to the cinema. And you?"], ["A", "Jeg var hjemme, fordi jeg hadde feber.", "I was at home, because I had a fever."], ["B", "Så synd! Nå føler du deg bedre, håper jeg.", "What a pity! I hope you feel better now."]],
+  quiz: [
+    Q("Where did Mira go on Saturday?", ["på kino", "på jobb", "til legen"], "På lørdag gikk hun på kino med en venn."),
+    Q("\"Yesterday she came home.\"", ["I går kom hun hjem.", "I går hun kom hjem.", "I går har hun kommet hjem."], "A finished time takes the past; the verb stays second."),
+    Q("How long has Emil lived in Bergen?", ["to år", "tre år", "ett år"], "Emil har bodd i Bergen i to år."),
+    Q("\"... because he doesn't get many breaks\"", ["fordi han ikke får mange pauser", "fordi han får ikke mange pauser", "fordi ikke han får mange pauser"], "In a clause, ikke comes before the verb."),
+    Q("How does Mira ask whether the flat is available?", ["Hun spør om leiligheten er ledig.", "Hun spør hvis leiligheten er ledig.", "Hun spør er leiligheten ledig."], "\"whether\" is om."),
+    Q("A prediction: \"It's going to rain a bit.\"", ["Det kommer til å regne litt.", "Det vil regne litt.", "Det skal regner litt."], "Predictions use kommer til å.")
+  ],
+  review: ["Past: var, gikk, spiste. Perfect: har bodd, har aldri vært.", "fordi + ikke + verb: fordi han ikke får.", "om = whether; prediction: kommer til å."]
+}
+];
+
+export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2)];

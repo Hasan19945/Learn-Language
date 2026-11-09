@@ -77,4 +77,44 @@ const A1: LessonDef[] = [
 }
 ];
 
-export default [...asExtra("A0", A0), ...asExtra("A1", A1)];
+const A2: LessonDef[] = [
+{
+  id: "a2-story", title: "Altı kısa hikâye", no: "Seks korte historier", icon: "spark", stories: readingStories("a2", "tr"),
+  intro: "A2'de öğrendiklerinle altı hikâye: Mira'nın hafta sonu, Emil'in Norveç'teki iki yılı, doktor, yeni bir iş, daire aramak ve yaz planları.",
+  notes: [
+    { h: "Hikâyelerde neleri tekrar ediyorsun?", p: "Geçmiş zaman: var, gikk, spiste, ringte. Perfektum: har bodd, har lært, har aldri vært. fordi ile yan cümle: fordi han ikke får mange pauser. om (-ip -mediğini): spør om leiligheten er ledig. Gelecek: skal reise, det kommer til å regne." },
+    { h: "Nasıl çalışmalı?", p: "Her hikâyeyi önce çeviriyle izle, sonra çeviriyi gizleyip tekrar izle. En son yüksek sesle oku. Kırmızı kelimeler bu dersin kelimeleri." }
+  ],
+  tip: "fordi'den sonra ikke fiilden önce gelir: \"fordi han ikke får mange pauser\". \"fordi han får ikke\" en sık yapılan hatadır.",
+  words: [
+    W("var", "-di (olmak, geçmiş)", "var", "I helgen var Mira i Bergen.", "Hafta sonu Mira Bergen'deydi.", { note: "være – var" }),
+    W("gikk", "gitti", "yik", "Hun gikk på kino.", "Sinemaya gitti.", { note: "gå – gikk" }),
+    W("i går", "dün", "i gor", "I går kom hun hjem.", "Dün eve döndü."),
+    N("en", "helg", "helgen", "helger", "hafta sonu", "helg", "Det var en fin helg.", "Güzel bir hafta sonuydu."),
+    W("har bodd", "-dir yaşıyor", "har bud", "Emil har bodd i Bergen i to år.", "Emil iki yıldır Bergen'de yaşıyor."),
+    W("aldri", "hiç, asla", "aldri", "Han har aldri vært i Tromsø.", "Tromsø'ya hiç gitmedi."),
+    N("en", "lege", "legen", "leger", "doktor", "lege", "Hun ringte legen.", "Doktoru aradı."),
+    W("feber", "ateş", "feber", "Hun hadde også feber.", "Ateşi de vardı."),
+    W("vondt", "ağrı, acı", "vont", "Hun våknet med vondt i halsen.", "Boğaz ağrısıyla uyandı."),
+    W("fordi", "çünkü", "fordi", "Han liker jobben fordi han lærer mye.", "İşi seviyor, çünkü çok şey öğreniyor."),
+    N("en", "sjef", "sjefen", "sjefer", "patron, şef", "şef", "Sjefen hans er hyggelig.", "Patronu nazik biri."),
+    W("sliten", "yorgun", "sliten", "Han er ofte sliten.", "Sık sık yoruluyor."),
+    W("ledig", "boş, müsait", "ledi", "Er leiligheten ledig?", "Daire boş mu?"),
+    W("husleie", "kira", "hüsleye", "Hun betaler 11 000 kroner i husleie.", "Kira olarak 11 000 kron ödüyor."),
+    W("kommer til å", "-ecek (tahmin)", "kommer til o", "Det kommer til å regne litt.", "Biraz yağmur yağacak."),
+    N("en", "ferie", "ferien", "ferier", "tatil", "ferie", "Emil gleder seg til ferien.", "Emil tatili dört gözle bekliyor.")
+  ],
+  dialogue: [["A", "Hva gjorde du i helgen?", "Hafta sonu ne yaptın?"], ["B", "Jeg gikk på kino. Og du?", "Sinemaya gittim. Ya sen?"], ["A", "Jeg var hjemme, fordi jeg hadde feber.", "Evdeydim, çünkü ateşim vardı."], ["B", "Så synd! Nå føler du deg bedre, håper jeg.", "Ne yazık! Umarım şimdi daha iyisindir."]],
+  quiz: [
+    Q("Hafta sonu Mira cumartesi nereye gitti?", ["på kino", "på jobb", "til legen"], "På lørdag gikk hun på kino med en venn."),
+    Q("\"Dün eve döndü.\"", ["I går kom hun hjem.", "I går hun kom hjem.", "I går har hun kommet hjem."], "Belirli geçmiş zaman: preteritum; fiil ikinci sırada."),
+    Q("Emil kaç yıldır Bergen'de yaşıyor?", ["to år", "tre år", "ett år"], "Emil har bodd i Bergen i to år."),
+    Q("\"... çünkü fazla molası olmuyor.\"", ["fordi han ikke får mange pauser", "fordi han får ikke mange pauser", "fordi ikke han får mange pauser"], "Yan cümlede ikke fiilden önce."),
+    Q("Mira dairenin boş olup olmadığını nasıl soruyor?", ["Hun spør om leiligheten er ledig.", "Hun spør hvis leiligheten er ledig.", "Hun spør er leiligheten ledig."], "-ip -mediğini = om."),
+    Q("Tahmin: \"Biraz yağmur yağacak.\"", ["Det kommer til å regne litt.", "Det vil regne litt.", "Det skal regner litt."], "Tahmin için kommer til å.")
+  ],
+  review: ["Geçmiş: var, gikk, spiste. Perfektum: har bodd, har aldri vært.", "fordi + ikke + fiil: fordi han ikke får.", "om = -ip -mediğini; tahmin: kommer til å."]
+}
+];
+
+export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2)];
