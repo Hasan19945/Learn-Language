@@ -164,4 +164,53 @@ const B1: LessonDef[] = [
 }
 ];
 
-export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2), ...asExtra("B1", B1)];
+const B2: LessonDef[] = [
+{
+  id: "ne-b2-story", title: "Eight B2 stories", no: "Åtte historier på B2-nivå", icon: "spark", stories: readingStories("b2", "en"),
+  intro: "Eight stories using what you learned in B2: a formal email, a public meeting, idioms at a café, moving day, the right to overtime pay, a dinner party, a half marathon and a beach clean-up.",
+  notes: [
+    { h: "What do the stories practise?", p: "Formal language: Dersom hun ikke får svar innen fjorten dager… / ber om at saken blir behandlet. Arguing: på den ene siden … på den andre siden, ettersom, heller. Idioms: verdens undergang, som smurt, midt i blinken, få bakoversveis. Particle verbs: flytte inn, finne ut av, sette opp, pakke ut, kutte ned på. Little words: jo, nok, da. The -s passive: brytes ned." },
+    { h: "How to practise", p: "Watch each story with the translation first, then hide it and watch again. Don't translate idioms word for word; learn what they mean as a whole. The red words are this lesson's words." }
+  ],
+  tip: "In particle verbs the particle is stressed and changes the meaning: finne = find, finne ut av = sort out. pakke ned = pack, pakke ut = unpack.",
+  words: [
+    W("dersom", "if (formal)", "DASH-om", "Dersom hun ikke får svar, kontakter hun foreningen.", "If she gets no answer, she will contact the association.", { note: "formal alternative to hvis" }),
+    W("beklager", "apologises; sorry", "beh-KLAH-ger", "Utleieren ringer og beklager.", "The landlord calls and apologises.", { note: "beklage – beklaget" }),
+    W("ettersom", "since, as", "ET-ter-shom", "Det er bra, ettersom det hjelper miljøet.", "It's good, since it helps the environment."),
+    W("på den ene siden", "on the one hand", "paw den EH-neh SEE-den", "På den ene siden blir det lettere å reise.", "On the one hand, it will be easier to travel.", { note: "… på den andre siden = on the other hand" }),
+    N("et", "forslag", "forslaget", "forslag", "proposal, suggestion", "FOSH-lahg", "Politikerne vurderer forslaget hans.", "The politicians are considering his proposal."),
+    W("satse", "invest in, go for", "SAHT-seh", "Kommunen bør satse på bussen.", "The council should invest in the bus.", { note: "satse på noe" }),
+    N("et", "uttrykk", "uttrykket", "uttrykk", "expression, idiom", "EWT-trewk", "Ola elsker faste uttrykk.", "Ola loves idioms."),
+    W("midt i blinken", "spot on, perfect", "mit ee BLIN-ken", "Det passer midt i blinken!", "That suits me perfectly!"),
+    W("flytte inn", "move in", "FLEWT-teh in", "De skal flytte inn i et nytt hus.", "They are moving into a new house."),
+    W("finne ut av", "sort out, figure out", "FIN-neh ewt ahv", "Emil må finne ut av det.", "Emil has to sort it out."),
+    W("pakke ut", "unpack", "PAHK-keh ewt", "Det tar uker å pakke ut alt.", "It takes weeks to unpack everything."),
+    W("overtid", "overtime", "AW-ver-teed", "Hun har jobbet mye overtid.", "She has worked a lot of overtime."),
+    N("en", "tillitsvalgt", "tillitsvalgte", "tillitsvalgte", "union representative", "TIL-lits-valt", "Hun snakker med den tillitsvalgte.", "She talks to the union representative."),
+    N("en", "rettighet", "rettigheten", "rettigheter", "right (legal)", "RET-tee-hayt", "Hun vet hvilke rettigheter hun har.", "She knows what rights she has."),
+    W("innrømme", "admit", "IN-ruhm-meh", "Lederen innrømmer feilen.", "The manager admits the mistake."),
+    W("nok", "probably; enough", "nok", "Han snakker nok bedre enn han tror.", "He probably speaks better than he thinks."),
+    W("skuffet", "disappointed", "SKUF-fet", "Mira er skuffet.", "Mira is disappointed."),
+    W("i stedet for", "instead of", "ee STEH-deh for", "I stedet for å løpe, svømmer hun.", "Instead of running, she swims."),
+    W("frivillig", "volunteer; voluntary", "FREE-vil-lee", "Det er mange frivillige på stranda.", "There are many volunteers on the beach."),
+    W("bakoversveis", "astonishment", "BAH-kaw-ver-shvays", "Emil får bakoversveis.", "Emil is stunned.", { note: "få bakoversveis = be blown away" }),
+    W("kutte ned på", "cut down on", "KEWT-teh neh paw", "Han vil kutte ned på plast.", "He wants to cut down on plastic."),
+    W("bidra", "contribute", "BEE-drah", "Alle kan bidra.", "Everyone can contribute.")
+  ],
+  dialogue: [["A", "Hørte du at kommunen vil bygge vei gjennom parken?", "Did you hear that the council wants to build a road through the park?"], ["B", "Ja, men jeg synes de heller bør satse på bussen.", "Yes, but I think they should invest in the bus instead."], ["A", "Enig. På den ene siden sparer vi tid, på den andre siden mister barna parken.", "I agree. On the one hand we save time, on the other hand the children lose the park."], ["B", "Vi får nok si fra på folkemøtet i kveld.", "I suppose we'll have to speak up at the public meeting tonight."]],
+  quiz: [
+    Q("When will Mira contact the Tenants' Association?", ["Dersom hun ikke får svar innen fjorten dager.", "Dersom utleieren beklager.", "Innen to dager."], "Dersom hun ikke får svar innen fjorten dager, vil hun kontakte Leieboerforeningen."),
+    Q("\"On the other hand, the children will lose an important place.\"", ["På den andre siden vil barna miste et viktig sted.", "På den andre siden barna vil miste et viktig sted.", "På andre siden vil barna miste et viktig sted."], "When an adverbial comes first, the verb is second: vil barna."),
+    Q("What does \"Det er ikke verdens undergang\" mean?", ["Det er ikke så farlig.", "Verden går under.", "Det er veldig farlig."], "It means 'it's not that bad'."),
+    Q("What does \"Alt går som smurt\" mean?", ["Alt går veldig greit.", "Alt er fullt av smør.", "Ingenting fungerer."], "som smurt = smoothly, like clockwork."),
+    Q("\"Emil has to sort it out quickly.\"", ["Emil må finne ut av det i en fart.", "Emil må finne det ut av i en fart.", "Emil må ut finne av det i en fart."], "finne ut av + object."),
+    Q("Who helped Mira with her overtime pay?", ["den tillitsvalgte", "utleieren", "fysioterapeuten"], "Hun tar kontakt med den tillitsvalgte."),
+    Q("In \"Han snakker nok bedre norsk enn han tror\", what does nok mean?", ["probably", "enough", "never"], "Here nok = probably."),
+    Q("What did the physiotherapist advise Mira to do?", ["å ta det med ro", "å løpe mer", "å kutte ned på plast"], "Fysioterapeuten råder henne til å ta det med ro."),
+    Q("Passive: \"The plastic breaks down into microplastics.\"", ["Plasten brytes ned til mikroplast.", "Plasten bryter ned til mikroplast.", "Plasten blir bryter ned til mikroplast."], "The -s passive: brytes ned.")
+  ],
+  review: ["Formal language: dersom, innen, beklager.", "Arguing: på den ene siden … på den andre siden, ettersom.", "Particle verbs and idioms: finne ut av, pakke ut, midt i blinken."]
+}
+];
+
+export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2), ...asExtra("B1", B1), ...asExtra("B2", B2)];

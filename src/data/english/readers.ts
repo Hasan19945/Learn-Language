@@ -163,4 +163,53 @@ const B1: LessonDef[] = [
 }
 ];
 
-export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2), ...asExtra("B1", B1)];
+const B2: LessonDef[] = [
+{
+  id: "en-b2-story", title: "Sekiz B2 hikâyesi", no: "Eight B2 stories", icon: "spark", stories: readingStories("b2", "tr"),
+  intro: "B2'de öğrendiklerinle sekiz hikâye: resmî bir e-posta, halk toplantısı, kafede deyimler, taşınma günü, fazla mesai hakkı, bir akşam yemeği, yarı maraton ve sahil temizliği.",
+  notes: [
+    { h: "Hikâyelerde neleri tekrar ediyorsun?", p: "Resmî dil: she asks for the matter to be dealt with / If she does not receive a reply within fourteen days… Tartışma: on the one hand … on the other hand, since, instead. Deyimler: not the end of the world, like clockwork, suit someone down to the ground, over the moon, an eye-opener. Phrasal verbs: sort out, set up, unpack, end up, cut down on. Kibar kalıplar: You shouldn't have!" },
+    { h: "Nasıl çalışmalı?", p: "Her hikâyeyi önce çeviriyle izle, sonra çeviriyi gizleyip tekrar izle. Deyimleri kelime kelime çevirme; anlamlarını bütün olarak öğren. Kırmızı kelimeler bu dersin kelimeleri." }
+  ],
+  tip: "Phrasal verb'lerde edat anlamı tamamen değiştirebilir: sort = sıralamak, sort out = çözmek. cut = kesmek, cut down on = azaltmak. pack = toplamak, unpack = açıp yerleştirmek.",
+  words: [
+    W("landlord", "ev sahibi", "lendlord", "Her landlord hasn't replied.", "Ev sahibi cevap vermedi."),
+    W("attach", "eklemek (dosya)", "ıteç", "She attaches photos of the wall.", "Duvarın fotoğraflarını ekliyor."),
+    W("apologise", "özür dilemek", "ıpolıcayz", "The landlord calls and apologises.", "Ev sahibi arayıp özür diliyor."),
+    W("on the one hand", "bir yandan", "on dı wan hend", "On the one hand, the road would help.", "Bir yandan yol yardımcı olurdu.", { note: "… on the other hand = öte yandan" }),
+    W("argue", "savunmak, tartışmak", "argyu", "He argues that buses are better.", "Otobüslerin daha iyi olduğunu savunuyor."),
+    W("proposal", "öneri", "prıpouzıl", "They will consider his proposal.", "Önerisini değerlendirecekler."),
+    W("benefit", "yararına olmak, fayda", "benıfit", "It would benefit the environment.", "Çevreye yararı olurdu."),
+    W("idiom", "deyim", "idiım", "Ollie loves idioms.", "Ollie deyimlere bayılıyor."),
+    W("the end of the world", "dünyanın sonu (felaket)", "dı end ıv dı wörld", "It's not the end of the world.", "Dünyanın sonu değil."),
+    W("like clockwork", "saat gibi, sorunsuz", "layk klokwörk", "Everything is running like clockwork.", "Her şey saat gibi işliyor."),
+    W("sort out", "çözmek, halletmek", "sort aut", "Emil has to sort out the problem.", "Emil'in sorunu çözmesi gerekiyor."),
+    W("unpack", "(koliden, bavuldan) çıkarmak", "anpek", "It will take weeks to unpack everything.", "Her şeyi çıkarmak haftalar sürecek."),
+    W("overtime", "fazla mesai", "ouvırtaym", "She has worked a lot of overtime.", "Çok fazla mesai yaptı."),
+    W("union", "sendika", "yuuniın", "She contacts her union representative.", "Sendika temsilcisiyle iletişime geçiyor."),
+    W("admit", "kabul etmek, itiraf etmek", "ıdmit", "The manager admits the mistake.", "Müdür hatayı kabul ediyor."),
+    W("polite", "kibar", "pılayt", "It's a polite way of saying thank you.", "Teşekkür etmenin kibar bir yolu."),
+    W("probably", "muhtemelen", "probıbli", "He probably speaks better than he thinks.", "Muhtemelen sandığından daha iyi konuşuyor."),
+    W("disappointed", "hayal kırıklığına uğramış", "disıpoyntıd", "Mira is disappointed.", "Mira hayal kırıklığına uğradı."),
+    W("instead of", "yerine", "insted ıv", "Instead of running, she swims.", "Koşmak yerine yüzüyor."),
+    W("volunteer", "gönüllü", "volıntiır", "There are lots of volunteers on the beach.", "Sahilde çok sayıda gönüllü var."),
+    W("eye-opener", "göz açıcı şey, ders", "ay oupınır", "For Emil, it is a real eye-opener.", "Bu, Emil'in gözlerini açıyor."),
+    W("cut down on", "azaltmak", "kat daun on", "He wants to cut down on plastic.", "Plastiği azaltmak istiyor.")
+  ],
+  dialogue: [["A", "Did you hear that the council wants to build a road through the park?", "Belediyenin parkın içinden yol yapmak istediğini duydun mu?"], ["B", "Yes, but I think they should invest in buses instead.", "Evet, ama bence bunun yerine otobüslere yatırım yapmalılar."], ["A", "I agree. On the one hand we'd save time, but on the other hand the children would lose the park.", "Katılıyorum. Bir yandan zaman kazanırız ama öte yandan çocuklar parkı kaybeder."], ["B", "We should probably speak up at the meeting tonight.", "Bu akşamki toplantıda herhalde sesimizi duyurmalıyız."]],
+  quiz: [
+    Q("Mira belediyeye ne zaman başvuracak?", ["If she does not receive a reply within fourteen days.", "If the landlord apologises.", "Within two days."], "If she does not receive a reply within fourteen days, she will contact the council."),
+    Q("\"Öte yandan çocuklar önemli bir yeri kaybedecek.\"", ["On the other hand, children would lose an important place.", "In the other hand, children would lose an important place.", "On other hand, children would lose an important place."], "Kalıp: on the other hand."),
+    Q("\"It's not the end of the world\" ne demek?", ["It's not so bad.", "The world is ending.", "It's very dangerous."], "Bu deyim 'o kadar da kötü değil' demektir."),
+    Q("\"like clockwork\" ne demek?", ["very smoothly", "very slowly", "very late"], "like clockwork = saat gibi, sorunsuz."),
+    Q("\"Emil'in sorunu hemen çözmesi gerekiyor.\"", ["Emil has to sort out the problem quickly.", "Emil has to sort out of the problem quickly.", "Emil has to sort up the problem quickly."], "sort out = çözmek."),
+    Q("Mira fazla mesai için kimden yardım aldı?", ["her union representative", "her landlord", "the physiotherapist"], "She contacts her union representative."),
+    Q("Kate neden \"You shouldn't have brought anything\" diyor?", ["It's a polite way of saying thank you.", "She is angry with Emil.", "Emil forgot the cake."], "Emil knows that this is just a polite way of saying thank you."),
+    Q("Fizyoterapist Mira'ya ne tavsiye etti?", ["to take it easy", "to run more", "to cut down on plastic"], "The physiotherapist advises her to take it easy."),
+    Q("Edilgen: \"Konunun ele alınmasını rica ediyor.\"", ["She asks for the matter to be dealt with.", "She asks for the matter to deal with.", "She asks for the matter dealing with."], "Edilgen: to be + dealt with.")
+  ],
+  review: ["Resmî dil: If she does not receive a reply within…, to be dealt with.", "Tartışma: on the one hand … on the other hand, since.", "Phrasal verb ve deyimler: sort out, unpack, like clockwork."]
+}
+];
+
+export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2), ...asExtra("B1", B1), ...asExtra("B2", B2)];

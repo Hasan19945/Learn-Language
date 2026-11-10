@@ -164,4 +164,53 @@ const B1: LessonDef[] = [
 }
 ];
 
-export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2), ...asExtra("B1", B1)];
+const B2: LessonDef[] = [
+{
+  id: "b2-story", title: "Sekiz B2 hikâyesi", no: "Åtte historier på B2-nivå", icon: "spark", stories: readingStories("b2", "tr"),
+  intro: "B2'de öğrendiklerinle sekiz hikâye: resmî bir e-posta, halk toplantısı, kafede deyimler, taşınma günü, fazla mesai hakkı, bir akşam yemeği, yarı maraton ve sahil temizliği.",
+  notes: [
+    { h: "Hikâyelerde neleri tekrar ediyorsun?", p: "Resmî dil: Dersom hun ikke får svar innen fjorten dager… / ber om at saken blir behandlet. Tartışma: på den ene siden … på den andre siden, ettersom, heller. Deyimler: verdens undergang, som smurt, midt i blinken, få bakoversveis. Edatlı fiiller: flytte inn, finne ut av, sette opp, pakke ut, kutte ned på. Küçük kelimeler: jo, nok, da. Edilgen -s: brytes ned." },
+    { h: "Nasıl çalışmalı?", p: "Her hikâyeyi önce çeviriyle izle, sonra çeviriyi gizleyip tekrar izle. Deyimleri kelime kelime çevirme; anlamlarını bütün olarak öğren. Kırmızı kelimeler bu dersin kelimeleri." }
+  ],
+  tip: "Edatlı fiillerde edat vurguyu taşır ve anlamı değiştirir: finne = bulmak, finne ut av = çözmek, halletmek. pakke ned = kolilemek, pakke ut = koliden çıkarmak.",
+  words: [
+    W("dersom", "eğer (resmî)", "dæşom", "Dersom hun ikke får svar, kontakter hun foreningen.", "Cevap alamazsa derneğe başvuracak.", { note: "resmî dilde hvis yerine" }),
+    W("beklager", "özür diler, üzgünüm", "beklaager", "Utleieren ringer og beklager.", "Ev sahibi arayıp özür diliyor.", { note: "beklage – beklaget" }),
+    W("ettersom", "çünkü, -diği için", "etterşom", "Det er bra, ettersom det hjelper miljøet.", "İyi, çünkü çevreye yardımcı oluyor."),
+    W("på den ene siden", "bir yandan", "po den eene siiden", "På den ene siden blir det lettere å reise.", "Bir yandan seyahat etmek kolaylaşacak.", { note: "… på den andre siden = öte yandan" }),
+    N("et", "forslag", "forslaget", "forslag", "öneri", "foşlaag", "Politikerne vurderer forslaget hans.", "Politikacılar önerisini değerlendiriyor."),
+    W("satse", "yatırım yapmak, ağırlık vermek", "satse", "Kommunen bør satse på bussen.", "Belediye otobüse yatırım yapmalı.", { note: "satse på noe" }),
+    N("et", "uttrykk", "uttrykket", "uttrykk", "ifade, deyim", "ütrük", "Ola elsker faste uttrykk.", "Ola deyimlere bayılıyor."),
+    W("midt i blinken", "tam isabet, tam yerinde", "mit i blinken", "Det passer midt i blinken!", "Bu tam on ikiden vurdu!"),
+    W("flytte inn", "taşınmak (bir yere)", "flütte in", "De skal flytte inn i et nytt hus.", "Yeni bir eve taşınacaklar."),
+    W("finne ut av", "çözmek, halletmek", "finne üt av", "Emil må finne ut av det.", "Emil'in bunu çözmesi gerekiyor."),
+    W("pakke ut", "(koliden) çıkarmak", "pakke üt", "Det tar uker å pakke ut alt.", "Her şeyi çıkarmak haftalar sürer."),
+    W("overtid", "fazla mesai", "overtiid", "Hun har jobbet mye overtid.", "Çok fazla mesai yaptı."),
+    N("en", "tillitsvalgt", "tillitsvalgte", "tillitsvalgte", "sendika temsilcisi", "tillitsvalt", "Hun snakker med den tillitsvalgte.", "Sendika temsilcisiyle konuşuyor."),
+    N("en", "rettighet", "rettigheten", "rettigheter", "hak", "rettiheet", "Hun vet hvilke rettigheter hun har.", "Hangi haklara sahip olduğunu biliyor."),
+    W("innrømme", "kabul etmek, itiraf etmek", "inrömme", "Lederen innrømmer feilen.", "Müdür hatayı kabul ediyor."),
+    W("nok", "muhtemelen; yeterince", "nok", "Han snakker nok bedre enn han tror.", "Muhtemelen sandığından daha iyi konuşuyor."),
+    W("skuffet", "hayal kırıklığına uğramış", "skuffet", "Mira er skuffet.", "Mira hayal kırıklığına uğradı."),
+    W("i stedet for", "yerine", "i steede for", "I stedet for å løpe, svømmer hun.", "Koşmak yerine yüzüyor."),
+    W("frivillig", "gönüllü", "friivilli", "Det er mange frivillige på stranda.", "Sahilde çok sayıda gönüllü var."),
+    W("bakoversveis", "şaşkınlık (ağzı açık kalmak)", "baakoveşveys", "Emil får bakoversveis.", "Emil'in ağzı açık kalıyor.", { note: "få bakoversveis = çok şaşırmak" }),
+    W("kutte ned på", "azaltmak", "kütte need po", "Han vil kutte ned på plast.", "Plastiği azaltmak istiyor."),
+    W("bidra", "katkıda bulunmak", "biidra", "Alle kan bidra.", "Herkes katkıda bulunabilir.")
+  ],
+  dialogue: [["A", "Hørte du at kommunen vil bygge vei gjennom parken?", "Belediyenin parkın içinden yol yapmak istediğini duydun mu?"], ["B", "Ja, men jeg synes de heller bør satse på bussen.", "Evet, ama bence bunun yerine otobüse yatırım yapmalılar."], ["A", "Enig. På den ene siden sparer vi tid, på den andre siden mister barna parken.", "Katılıyorum. Bir yandan zaman kazanıyoruz, öte yandan çocuklar parkı kaybediyor."], ["B", "Vi får nok si fra på folkemøtet i kveld.", "Bu akşamki halk toplantısında herhalde sesimizi duyurmalıyız."]],
+  quiz: [
+    Q("Mira ne zaman Kiracılar Derneği'ne başvuracak?", ["Dersom hun ikke får svar innen fjorten dager.", "Dersom utleieren beklager.", "Innen to dager."], "Dersom hun ikke får svar innen fjorten dager, vil hun kontakte Leieboerforeningen."),
+    Q("\"Öte yandan çocuklar önemli bir yeri kaybedecek.\"", ["På den andre siden vil barna miste et viktig sted.", "På den andre siden barna vil miste et viktig sted.", "På andre siden vil barna miste et viktig sted."], "Cümle zarfla başlarsa fiil ikinci sırada gelir: vil barna."),
+    Q("\"Det er ikke verdens undergang\" ne demek?", ["Det er ikke så farlig.", "Verden går under.", "Det er veldig farlig."], "Bu deyim 'felaket değil, o kadar kötü değil' demektir."),
+    Q("\"Alt går som smurt\" ne demek?", ["Alt går veldig greit.", "Alt er fullt av smør.", "Ingenting fungerer."], "som smurt = sorunsuz, yağ gibi."),
+    Q("\"Emil'in bunu hemen çözmesi gerekiyor.\"", ["Emil må finne ut av det i en fart.", "Emil må finne det ut av i en fart.", "Emil må ut finne av det i en fart."], "finne ut av + nesne."),
+    Q("Mira fazla mesai için kimden yardım aldı?", ["den tillitsvalgte", "utleieren", "fysioterapeuten"], "Hun tar kontakt med den tillitsvalgte."),
+    Q("\"Han snakker nok bedre norsk enn han tror\" cümlesinde nok ne anlama gelir?", ["muhtemelen", "yeterince", "asla"], "Burada nok = muhtemelen, herhalde."),
+    Q("Fizyoterapist Mira'ya ne tavsiye etti?", ["å ta det med ro", "å løpe mer", "å kutte ned på plast"], "Fysioterapeuten råder henne til å ta det med ro."),
+    Q("Edilgen: \"Plastik mikroplastiğe dönüşüyor.\"", ["Plasten brytes ned til mikroplast.", "Plasten bryter ned til mikroplast.", "Plasten blir bryter ned til mikroplast."], "-s ile edilgen: brytes ned.")
+  ],
+  review: ["Resmî dil: dersom, innen, beklager.", "Tartışma: på den ene siden … på den andre siden, ettersom.", "Edatlı fiiller ve deyimler: finne ut av, pakke ut, midt i blinken."]
+}
+];
+
+export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2), ...asExtra("B1", B1), ...asExtra("B2", B2)];

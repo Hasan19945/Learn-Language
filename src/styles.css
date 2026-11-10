@@ -237,6 +237,20 @@ button.chip{border:0}
 .vid-train{animation:vidtrain 10s linear infinite}
 .vid-snow{animation:vidsnow 6s linear infinite}
 .vid-tick{animation:vidtick 10s linear infinite;transform-box:fill-box;transform-origin:center}
+.vid-wave{animation:vidwave 4s ease-in-out infinite alternate}
+.vid-fly{animation:vidfly 16s linear infinite}
+.vid-flap{animation:vidflap .45s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+.vid-flicker{animation:vidflicker .3s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 100%}
+.vid-mail{animation:vidmail 3.4s ease-in infinite}
+.vid-sway{animation:vidsway 2.4s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 0}
+.vid-glow{animation:vidglow 3s ease-in-out infinite alternate}
+@keyframes vidwave{from{transform:translateX(-16px)}to{transform:translateX(16px)}}
+@keyframes vidfly{from{transform:translate(0,0)}to{transform:translate(-820px,-50px)}}
+@keyframes vidflap{to{transform:scaleY(.35)}}
+@keyframes vidflicker{from{transform:scale(1,1)}to{transform:scale(.82,1.14)}}
+@keyframes vidmail{0%{transform:translate(0,0) scale(.6);opacity:0}15%{opacity:1}100%{transform:translate(110px,-120px) scale(1.1);opacity:0}}
+@keyframes vidsway{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}
+@keyframes vidglow{from{opacity:.55}to{opacity:1}}
 @keyframes vidtrain{0%{transform:translateX(380px)}60%,100%{transform:translateX(-1000px)}}
 @keyframes vidsnow{from{transform:translateY(-60px)}to{transform:translateY(400px)}}
 @keyframes vidtick{to{transform:rotate(360deg)}}
