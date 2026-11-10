@@ -212,4 +212,61 @@ const B2: LessonDef[] = [
 }
 ];
 
-export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2), ...asExtra("B1", B1), ...asExtra("B2", B2)];
+const C1: LessonDef[] = [
+{
+  id: "en-c1-story", title: "On C1 hikâyesi", no: "Ten C1 stories", icon: "spark", stories: readingStories("c1", "tr"),
+  intro: "C1'in bütün konularını içeren on hikâye: akademik dil, vurgu ve devrik yapı, varsayımlar ve pişmanlıklar, müzakere, toplum ve medya, aksanlar ve argo, iş hayatında deyimler ve atasözleri.",
+  notes: [
+    { h: "Akademik dil, vurgu ve varsayımlar", p: "Akademik: outline the research question, give an account of the methodology, the findings indicate, acknowledge a limitation, nonetheless. Devrik yapı: Never before had anything like that happened. Not only are those locks expensive, but … Vurgu: It was his neighbour who … What she finds hardest is … Varsayım ve pişmanlık: If only she had got up … Had she not been so stubborn, she could have …" },
+    { h: "Müzakere, medya, aksanlar ve deyimler", p: "Müzakere: refuse to budge, propose a compromise, back down, meet halfway, walk away satisfied. Medya: opinion piece, freedom of speech, media literacy, regulate, broadcast. Aksan ve argo: a Glaswegian accent, wee, aye, pure dead brilliant, cheers pal. İş deyimleri: butterflies in her stomach, back to the drawing board, hit the nail on the head, onto a winner, roll up their sleeves. Atasözleri: Rome wasn't built in a day. Every cloud has a silver lining. Where there's a will, there's a way." }
+  ],
+  tip: "Never before, not only, had (if yerine) gibi ifadeler cümle başına gelince yardımcı fiil özneden önce gelir: \"Never before had he …\", \"Had she not been …\". Bu, resmî ve vurgulu bir üsluptur.",
+  words: [
+    W("methodology", "yöntem bilimi, metodoloji", "methıdolıci", "She gives an account of her methodology.", "Yöntemini açıklıyor."),
+    W("findings", "bulgular", "fayndingz", "The findings indicate a clear link.", "Bulgular açık bir bağlantıya işaret ediyor."),
+    W("acknowledge", "kabul etmek", "ıknolic", "Mira acknowledges that the sample is limited.", "Mira örneklemin sınırlı olduğunu kabul ediyor."),
+    W("nonetheless", "yine de, buna rağmen", "nanzıles", "The findings are nonetheless significant.", "Bulgular yine de önemli."),
+    W("never before", "daha önce hiç", "nevır bifor", "Never before had that happened to him.", "Daha önce başına hiç böyle bir şey gelmemişti.", { note: "devrik yapı: had + özne" }),
+    W("theft", "hırsızlık", "teft", "He went to report the theft.", "Hırsızlığı bildirmeye gitti."),
+    W("precisely", "tam olarak", "prisaysli", "That was precisely what was so strange.", "Tuhaf olan tam olarak buydu."),
+    W("not only", "sadece … değil", "not ounli", "Not only are they expensive, but they are also weak.", "Sadece pahalı değiller, aynı zamanda zayıflar."),
+    W("if only", "keşke", "if ounli", "If only she had got up earlier!", "Keşke daha erken kalksaydı!"),
+    W("regret", "pişman olmak", "rigret", "She regrets pressing the snooze button.", "Erteleme düğmesine bastığına pişman."),
+    W("stubborn", "inatçı", "stabırn", "She was too stubborn to take a taxi.", "Taksiye binmeyecek kadar inatçıydı."),
+    W("spilt milk", "olan olmuş şey", "spilt milk", "There's no point crying over spilt milk.", "Olan olmuşa ağlamanın anlamı yok."),
+    W("supplier", "tedarikçi", "sıplayır", "The supplier wants higher prices.", "Tedarikçi daha yüksek fiyat istiyor."),
+    W("budge", "yerinden kıpırdamak, taviz vermek", "bac", "The other side refuses to budge.", "Karşı taraf taviz vermiyor."),
+    W("compromise", "uzlaşma", "kompromayz", "Emil proposes a compromise.", "Emil bir uzlaşma öneriyor."),
+    W("meet halfway", "orta yolda buluşmak", "miit haafwey", "They meet halfway at seven per cent.", "Yüzde yedide orta yolda buluşuyorlar."),
+    W("opinion piece", "köşe yazısı, görüş yazısı", "ıpinyın piis", "She has written an opinion piece.", "Bir köşe yazısı yazdı."),
+    W("freedom of speech", "ifade özgürlüğü", "friidım ıv spiiç", "It could threaten freedom of speech.", "İfade özgürlüğünü tehdit edebilir."),
+    W("media literacy", "medya okuryazarlığı", "miidiı litırısi", "Media literacy matters more than bans.", "Medya okuryazarlığı yasaklardan önemli."),
+    W("accent", "aksan", "eksınt", "She has a strong Glaswegian accent.", "Güçlü bir Glasgow aksanı var."),
+    W("get used to", "alışmak", "get yuuzd tu", "He starts to get used to the accent.", "Aksana alışmaya başlıyor."),
+    W("slang", "argo", "sleng", "He picks up some slang.", "Biraz argo kapıyor."),
+    W("butterflies", "midede kelebekler (heyecan)", "batırflayz", "Mira has butterflies in her stomach.", "Mira'nın midesinde kelebekler uçuşuyor."),
+    W("back to the drawing board", "en baştan başlamak", "bek tu dı drooing bord", "They had to go back to the drawing board.", "En baştan başlamak zorunda kaldılar."),
+    W("proverb", "atasözü", "provörb", "She has a proverb for every occasion.", "Her duruma uygun bir atasözü var."),
+    W("silver lining", "her işteki hayır", "silvır layning", "Every cloud has a silver lining.", "Her işte bir hayır vardır."),
+    W("reliable", "güvenilir", "rilayıbıl", "She looks for reliable sources.", "Güvenilir kaynaklar arıyor."),
+    W("actually", "aslında", "ekçuıli", "It was actually Emil who introduced them.", "Onları tanıştıran aslında Emil'di."),
+    W("best man", "sağdıç", "best men", "Emil is the best man.", "Emil sağdıç.")
+  ],
+  dialogue: [["A", "Did you see the debate about freedom of speech last night?", "Dün geceki ifade özgürlüğü tartışmasını izledin mi?"], ["B", "Yes, and it was actually Mira who made the best points.", "Evet, en iyi noktaları aslında Mira yakaladı."], ["A", "If only I had watched the whole thing! I only caught the end.", "Keşke hepsini izleseydim! Sadece sonuna yetişebildim."], ["B", "It's online, so you haven't missed the boat.", "İnternette var, yani fırsatı kaçırmadın."]],
+  quiz: [
+    Q("\"The findings indicate that …\" ne anlama gelir?", ["Bulgular … olduğuna işaret ediyor.", "Bulgular … olduğunu kesin olarak kanıtlıyor.", "Bulgular … hakkında hiçbir şey söylemiyor."], "indicate = işaret etmek; kesin kanıt değildir."),
+    Q("\"Daha önce başına hiç böyle bir şey gelmemişti.\"", ["Never before had anything like that happened to him.", "Never before anything like that had happened to him.", "Never before did anything like that happened to him."], "Never before başta: had + özne."),
+    Q("\"Keşke kalksaydı!\"", ["If only she had got up!", "If only she got up yesterday!", "If only she has got up!"], "Geçmişle ilgili pişmanlık: if only + past perfect."),
+    Q("\"Had she not been so stubborn, …\" ne demek?", ["O kadar inatçı olmasaydı …", "O çok inatçıydı ve …", "İnatçı olmayacak …"], "Had + özne + not = if she had not (devrik koşul)."),
+    Q("Müzakerede \"meet halfway\" ne demek?", ["İki taraf da taviz verip ortada buluşmak", "Yolun yarısında randevulaşmak", "Toplantıyı yarıda bırakmak"], "They meet halfway at seven per cent."),
+    Q("Mira'ya göre yasaklardan daha önemli olan nedir?", ["media literacy", "freedom of speech", "propaganda"], "Mira responds that media literacy matters more than bans."),
+    Q("Glasgow'da small yerine ne deniyor?", ["wee", "aye", "pal"], "She says wee instead of small and aye instead of yes."),
+    Q("\"back to the drawing board\" ne demek?", ["en baştan başlamak", "resim yapmak", "tahtaya not yazmak"], "Bir plan başarısız olunca yeniden başlamak."),
+    Q("\"Every cloud has a silver lining\" ne demek?", ["Her kötü şeyde bir iyilik vardır.", "Yağmur yakında durur.", "Bulutlar çok güzeldir."], "Türkçedeki 'Her işte bir hayır vardır' sözüne yakın."),
+    Q("\"Not only are those locks expensive, but …\" cümlesinde neden \"are those locks\" deniyor?", ["Not only başta olduğu için devrik yapı kullanılır.", "Bu bir soru cümlesi olduğu için.", "Geçmiş zaman olduğu için."], "Olumsuz/kısıtlayıcı ifade başta: yardımcı fiil özneden önce gelir.")
+  ],
+  review: ["Akademik dil: methodology, findings, acknowledge, nonetheless.", "Devrik yapı ve pişmanlık: Never before had …; If only …; Had she not …", "Medya, aksan, deyim ve atasözü: opinion piece, accent, back to the drawing board, every cloud has a silver lining."]
+}
+];
+
+export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2), ...asExtra("B1", B1), ...asExtra("B2", B2), ...asExtra("C1", C1)];

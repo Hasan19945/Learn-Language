@@ -420,7 +420,445 @@ function Listener({ x, body, hair }: { x: number; body: string; hair: string }) 
 
 const wavePath = (y: number, amp: number) => `M-60 ${y}` + Array.from({ length: 20 }, () => ` q20 -${amp} 40 0`).join("");
 
+function Cone({ x, color, delay, h = 300 }: { x: number; color: string; delay: number; h?: number }) {
+  return <path className="vid-sweep" style={{ animationDelay: `${delay}s` }} d={`M${x - 8} 0 H${x + 8} L${x + 70} ${h} H${x - 70}Z`} fill={color} />;
+}
+
+function Butterfly({ x, y, delay, color }: { x: number; y: number; delay: number; color: string }) {
+  return (
+    <g transform={`translate(${x} ${y})`}>
+      <g className="vid-fly" style={{ animationDelay: `${delay}s`, animationDuration: "22s" }}>
+        <path className="vid-flap" d="M0 0 Q-14 -16 -18 -4 Q-14 6 0 2 Q14 6 18 -4 Q14 -16 0 0Z" fill={color} stroke="#5a2a18" strokeWidth="1.5" />
+      </g>
+    </g>
+  );
+}
+
+const SHELF = ["#c2183a", "#3a6ea8", "#2c7a54", "#c9a227", "#8d7bf0", "#e8755a", "#59a8e8", "#f28da0", "#6b4a30"];
+
+function Bookcase({ x, w }: { x: number; w: number }) {
+  return (
+    <g>
+      <rect x={x} y="16" width={w} height="284" fill="#5a3a2a" />
+      {[0, 1, 2, 3, 4].map(r => {
+        const base = 70 + r * 56;
+        let cx = x + 6, k = r * 3;
+        const books = [];
+        while (cx < x + w - 14) {
+          const bw = 8 + ((k * 7) % 6), bh = 32 + ((k * 13) % 16);
+          books.push(<rect key={k} x={cx} y={base - bh} width={bw} height={bh} fill={SHELF[k % SHELF.length]} />);
+          cx += bw + 1;
+          k++;
+        }
+        return (
+          <g key={r}>
+            {books}
+            <rect x={x} y={base} width={w} height="6" fill="#3d2a1c" />
+          </g>
+        );
+      })}
+    </g>
+  );
+}
+
 function Backdrop({ place }: { place: StoryPlace }) {
+  if (place === "lecture") {
+    return (
+      <g>
+        <defs>
+          <linearGradient id="lc-wall" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#2a2f4f" />
+            <stop offset="1" stopColor="#1d2138" />
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="url(#lc-wall)" />
+        {[0, 1, 2, 3, 4, 5, 6, 7].map(i => <rect key={i} x={i * 80 + 6} y="190" width="68" height="104" rx="4" fill="#262b48" />)}
+        <path d="M0 300 H640 V360 H0Z" fill="#3a2f2a" />
+        <rect x="296" y="22" width="258" height="158" rx="4" fill="#0f1330" />
+        <rect x="300" y="26" width="250" height="150" fill="#f4f8fb" />
+        <rect x="300" y="26" width="250" height="18" fill="#3a6ea8" />
+        <path d="M310 35 H420" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
+        <path d="M316 60 V160 H410" fill="none" stroke="#8c95a6" strokeWidth="2" />
+        {[0, 1, 2, 3].map(i => <rect key={i} x={324 + i * 21} y={158 - (i + 1) * 22} width="14" height={(i + 1) * 22} fill={i === 3 ? "#2c9c5a" : "#9fd8bc"} />)}
+        <path d="M424 60 V160 H540" fill="none" stroke="#8c95a6" strokeWidth="2" />
+        <path className="vid-draw" d="M430 150 L456 132 L478 140 L500 104 L518 112 L536 70" fill="none" stroke="#d6283d" strokeWidth="4" strokeLinejoin="round" strokeLinecap="round" />
+        {[[456, 132], [500, 104], [536, 70]].map(([x, y]) => <circle key={x} className="vid-glow" cx={x} cy={y} r="4" fill="#d6283d" />)}
+        <path d="M425 0 V22" stroke="#5a5a66" strokeWidth="3" />
+        <path d="M560 196 H632 L626 300 H566Z" fill="#4a3228" />
+        <rect x="556" y="188" width="80" height="12" rx="3" fill="#6b4a3a" />
+        <circle cx="596" cy="246" r="18" fill="#c9a227" stroke="#f4e3a0" strokeWidth="3" />
+        <path d="M586 252 V242 L596 236 L606 242 V252Z M584 254 H608" fill="none" stroke="#fff" strokeWidth="2.5" />
+        <path d="M576 188 L584 174 H616 L622 188Z" fill="#2c3350" />
+        <rect x="586" y="176" width="28" height="8" fill="#7fe8dc" opacity=".6" />
+      </g>
+    );
+  }
+  if (place === "police") {
+    return (
+      <g>
+        <rect width="640" height="360" fill="#dfe6ee" />
+        <rect x="0" y="200" width="640" height="100" fill="#b8c4d4" />
+        <path d="M0 200 H640" stroke="#1f3a6e" strokeWidth="5" />
+        <path d="M0 300 H640 V360 H0Z" fill="#8c95a6" />
+        <path d="M330 34 H374 V64 Q374 92 352 102 Q330 92 330 64Z" fill="#1f3a6e" stroke="#c9a227" strokeWidth="3" />
+        <path d="M352 50 l4 9 10 1 -7.5 6.5 2 10 -8.5 -5 -8.5 5 2 -10 -7.5 -6.5 10 -1z" fill="#c9a227" />
+        <rect x="392" y="36" width="112" height="92" rx="4" fill="#c9a77a" stroke="#8a5a3a" strokeWidth="4" />
+        <rect x="402" y="46" width="56" height="70" fill="#fff" transform="rotate(-3 430 81)" />
+        <g transform="rotate(-3 430 81)" fill="none" stroke="#241c4f" strokeWidth="2.5">
+          <circle cx="417" cy="80" r="9" />
+          <circle cx="443" cy="80" r="9" />
+          <path d="M417 80 L427 66 H438 L443 80 M427 66 L432 80 H443 M424 62 H431" />
+        </g>
+        <path d="M410 100 H450M410 108 H440" stroke="#9fb1c8" strokeWidth="3" transform="rotate(-3 430 81)" />
+        <circle cx="430" cy="48" r="4" fill="#d6283d" />
+        <rect x="468" y="54" width="30" height="40" fill="#fffbe0" transform="rotate(4 483 74)" />
+        <circle cx="483" cy="56" r="3.5" fill="#3a6ea8" />
+        <clipPath id="po-win"><rect x="520" y="36" width="112" height="112" /></clipPath>
+        <rect x="520" y="36" width="112" height="112" fill="#bfe2ff" />
+        <g clipPath="url(#po-win)">
+          <rect x="520" y="122" width="112" height="26" fill="#9aa0aa" />
+          <rect x="530" y="98" width="96" height="26" rx="8" fill="#fff" />
+          <path d="M542 98 L552 84 H596 L606 98Z" fill="#fff" />
+          <path d="M556 87 H594 L600 97 H550Z" fill="#bfe3ff" />
+          <rect x="530" y="108" width="96" height="7" fill="#1f3a6e" />
+          <rect x="566" y="76" width="12" height="8" rx="2" className="vid-led" fill="#3a8bff" />
+          <rect x="578" y="76" width="12" height="8" rx="2" className="vid-led" style={{ animationDelay: ".8s" }} fill="#ff3a4a" />
+          <circle cx="572" cy="80" r="16" className="vid-led" fill="#3a8bff" opacity=".3" />
+          <circle cx="584" cy="80" r="16" className="vid-led" style={{ animationDelay: ".8s" }} fill="#ff3a4a" opacity=".3" />
+          {[546, 610].map(x => <circle key={x} cx={x} cy="124" r="7" fill="#2b2f38" />)}
+        </g>
+        <rect x="520" y="36" width="112" height="112" fill="none" stroke="#fff" strokeWidth="7" />
+        <rect x="320" y="172" width="70" height="128" rx="3" fill="#9aa5b5" stroke="#7d8ba5" strokeWidth="2" />
+        {[0, 1, 2].map(i => (
+          <g key={i}>
+            <rect x="326" y={180 + i * 40} width="58" height="34" rx="2" fill="#aeb8c6" />
+            <rect x="345" y={192 + i * 40} width="20" height="6" rx="3" fill="#5d6f8f" />
+          </g>
+        ))}
+        <Clock x={452} y={170} r={22} rim="#1f3a6e" />
+      </g>
+    );
+  }
+  if (place === "airport") {
+    return (
+      <g>
+        <defs>
+          <linearGradient id="ap-sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#8fd3ff" />
+            <stop offset="1" stopColor="#ffe9c9" />
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="#e8edf3" />
+        <path d="M0 296 H640 V360 H0Z" fill="#c9d1dc" />
+        <path d="M320 310 L300 360M420 310 L410 360M520 310 L530 360" stroke="#dfe5ee" strokeWidth="3" />
+        <clipPath id="ap-win"><rect x="290" y="16" width="350" height="200" /></clipPath>
+        <rect x="290" y="16" width="350" height="200" fill="url(#ap-sky)" />
+        <g clipPath="url(#ap-win)">
+          <g className="vid-cloud"><ellipse cx="360" cy="56" rx="34" ry="10" fill="#fff" /><ellipse cx="384" cy="48" rx="22" ry="9" fill="#fff" /></g>
+          <path d="M290 186 Q380 166 470 182 T640 176 V216 H290Z" fill="#9cc49a" />
+          <rect x="290" y="192" width="350" height="24" fill="#7c8696" />
+          <path d="M290 204 H640" stroke="#fff" strokeWidth="2.5" strokeDasharray="18 12" />
+          <g className="vid-plane">
+            <g transform="translate(560 178)">
+              <path d="M-56 0 Q-60 -9 -44 -10 H44 Q60 -9 58 0 Q56 6 44 6 H-44 Q-56 6 -56 0Z" fill="#fff" stroke="#b8c4d4" strokeWidth="1.5" />
+              <path d="M30 -10 L46 -34 H56 L50 -10Z" fill="#d6283d" />
+              <path d="M-6 0 L22 22 H32 L16 0Z" fill="#dfe6ee" stroke="#b8c4d4" strokeWidth="1.5" />
+              <path d="M-50 -4 Q-46 -9 -38 -8 V-2 H-50Z" fill="#3a6ea8" />
+              {[-28, -18, -8, 2, 12, 22, 32].map(x => <circle key={x} cx={x} cy="-4" r="2" fill="#3a6ea8" />)}
+              <ellipse cx="10" cy="12" rx="9" ry="4" fill="#9aa5b5" />
+            </g>
+          </g>
+        </g>
+        <rect x="290" y="16" width="350" height="200" fill="none" stroke="#5d6f8f" strokeWidth="6" />
+        {[360, 430, 500, 570].map(x => <path key={x} d={`M${x} 16 V216`} stroke="#5d6f8f" strokeWidth="4" />)}
+        <rect x="468" y="228" width="164" height="66" rx="5" fill="#111a2c" stroke="#5d6f8f" strokeWidth="3" />
+        {[0, 1, 2].map(i => (
+          <g key={i}>
+            <rect x="478" y={238 + i * 18} width="34" height="9" rx="2" fill="#ffd34d" />
+            <rect x="518" y={238 + i * 18} width="64" height="9" rx="2" fill="#ffd34d" opacity=".7" />
+            <rect className={i === 1 ? "vid-led" : undefined} x="588" y={238 + i * 18} width="34" height="9" rx="2" fill={i === 1 ? "#ff5d5d" : "#46f0b4"} />
+          </g>
+        ))}
+        {[300, 344, 388].map(x => (
+          <g key={x}>
+            <rect x={x} y="246" width="40" height="30" rx="6" fill="#5d6f8f" />
+            <rect x={x - 2} y="272" width="44" height="8" rx="3" fill="#47566f" />
+            <path d={`M${x + 20} 280 V296`} stroke="#47566f" strokeWidth="4" />
+          </g>
+        ))}
+      </g>
+    );
+  }
+  if (place === "boardroom") {
+    return (
+      <g>
+        <defs>
+          <linearGradient id="br-sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#3a2f6e" />
+            <stop offset=".6" stopColor="#c86f8a" />
+            <stop offset="1" stopColor="#ffb38a" />
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="#2b2f3e" />
+        <clipPath id="br-win"><rect x="290" y="0" width="350" height="240" /></clipPath>
+        <rect x="290" y="0" width="350" height="240" fill="url(#br-sky)" />
+        <g clipPath="url(#br-win)">
+          <circle cx="600" cy="190" r="30" fill="#ffd9a0" opacity=".9" />
+          <g transform="translate(290 70) scale(1.5 1.15)" opacity=".9"><Skyline y={150} /></g>
+          {Array.from({ length: 22 }, (_, i) => (
+            <rect key={i} className={i % 4 === 0 ? "vid-led" : undefined} style={{ animationDelay: `${i * 0.3}s` }} x={300 + (i * 53) % 330} y={130 + (i * 31) % 100} width="5" height="6" fill="#ffd36b" />
+          ))}
+          <path d="M300 0 L380 240M420 0 L500 240" stroke="#fff" strokeWidth="14" opacity=".08" />
+        </g>
+        {[290, 405, 520, 636].map(x => <path key={x} d={`M${x} 0 V240`} stroke="#1d2029" strokeWidth="8" />)}
+        <path d="M290 240 H640" stroke="#1d2029" strokeWidth="8" />
+        <rect x="318" y="40" width="150" height="92" rx="6" fill="#111a2c" stroke="#3a4f7a" strokeWidth="4" />
+        <text x="352" y="96" textAnchor="middle" fontSize="26" fontWeight="700" fill="#ff5d5d">15%</text>
+        <path d="M326 88 L380 74" stroke="#ff5d5d" strokeWidth="4" strokeLinecap="round" />
+        <path d="M388 84 H406M400 77 L408 84 L400 91" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+        <text x="438" y="96" textAnchor="middle" fontSize="26" fontWeight="700" fill="#46f0b4">7%</text>
+        <path className="vid-draw" d="M330 120 H456" stroke="#46f0b4" strokeWidth="4" strokeLinecap="round" />
+        <path d="M0 300 H640 V360 H0Z" fill="#1d2029" />
+      </g>
+    );
+  }
+  if (place === "tvstudio") {
+    return (
+      <g>
+        <defs>
+          <radialGradient id="tv-bg" cx=".6" cy=".4" r=".8">
+            <stop offset="0" stopColor="#2a3a7a" />
+            <stop offset="1" stopColor="#0d1238" />
+          </radialGradient>
+          <linearGradient id="tv-cone" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#fff6d6" stopOpacity=".42" />
+            <stop offset="1" stopColor="#fff6d6" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="url(#tv-bg)" />
+        <path d="M0 300 H640 V360 H0Z" fill="#0a0e2a" />
+        <rect x="0" y="0" width="640" height="12" fill="#1b2147" />
+        {[340, 420, 500, 580].map(x => <rect key={x} x={x - 9} y="10" width="18" height="12" rx="3" fill="#3a4170" />)}
+        <rect x="300" y="34" width="232" height="140" rx="8" fill="#12205a" stroke="#3a4f9a" strokeWidth="4" />
+        <g fill="none" stroke="#59c8ff" strokeWidth="2.5" opacity=".9">
+          <circle cx="416" cy="98" r="42" />
+          <ellipse cx="416" cy="98" rx="18" ry="42" />
+          <path d="M374 98 H458M380 78 H452M380 118 H452" />
+        </g>
+        <g className="vid-float"><rect x="322" y="54" width="34" height="24" rx="6" fill="#fff" /><path d="M339 72 l-6 -6 a4 4 0 0 1 6 -5 a4 4 0 0 1 6 5z" fill="#ff5d73" /></g>
+        <g className="vid-float" style={{ animationDelay: "-1.2s" }}><rect x="476" y="62" width="40" height="24" rx="6" fill="#fff" /><path d="M484 70 H508M484 78 H500" stroke="#3a6ea8" strokeWidth="3" /></g>
+        <g className="vid-float" style={{ animationDelay: "-2s" }}><circle cx="488" cy="128" r="12" fill="#ffd34d" /><path d="M483 128 h10 M488 123 v10" stroke="#a8761a" strokeWidth="2.5" /></g>
+        <rect x="300" y="152" width="232" height="22" fill="#d6283d" />
+        <path d="M310 163 H380M392 163 H470M482 163 H524" stroke="#fff" strokeWidth="4" strokeLinecap="round" opacity=".85" />
+        <rect className="vid-led" x="548" y="34" width="84" height="30" rx="6" fill="#d6283d" />
+        <rect x="548" y="34" width="84" height="30" rx="6" fill="none" stroke="#ff9aa6" strokeWidth="2" />
+        <text x="590" y="55" textAnchor="middle" fontSize="15" fontWeight="700" fill="#fff">ON AIR</text>
+        <Cone x={360} color="url(#tv-cone)" delay={0} />
+        <Cone x={590} color="url(#tv-cone)" delay={-2.2} />
+        <path d="M596 300 L580 236M596 300 L612 236M596 300 V236" stroke="#5a5a66" strokeWidth="4" />
+        <rect x="562" y="196" width="68" height="44" rx="6" fill="#2b2f38" />
+        <rect x="540" y="204" width="24" height="28" rx="4" fill="#3a4170" />
+        <circle cx="540" cy="218" r="13" fill="#141a24" stroke="#59c8ff" strokeWidth="3" />
+        <circle className="vid-led" cx="620" cy="204" r="4" fill="#ff3a4a" />
+      </g>
+    );
+  }
+  if (place === "fjord") {
+    return (
+      <g>
+        <defs>
+          <linearGradient id="fj-sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#8cc8f2" />
+            <stop offset="1" stopColor="#e8f4ff" />
+          </linearGradient>
+          <linearGradient id="fj-water" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#2f6fa8" />
+            <stop offset="1" stopColor="#59a8d8" />
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="url(#fj-sky)" />
+        <g className="vid-cloud"><ellipse cx="380" cy="40" rx="36" ry="10" fill="#fff" /><ellipse cx="406" cy="32" rx="24" ry="9" fill="#fff" /></g>
+        <path d="M240 210 L320 96 L372 150 L440 76 L520 170 L640 110 V220 H240Z" fill="#8aa0c4" />
+        <path d="M320 96 L338 122 L326 118 L316 128 L306 116Z M440 76 L462 106 L448 102 L438 114 L424 98Z" fill="#fff" />
+        <path d="M0 220 L60 60 L150 40 L240 220Z" fill="#4f7060" />
+        <path d="M470 220 L520 52 L580 66 L640 30 V220Z" fill="#46695a" />
+        <path d="M520 52 L536 96 L548 80 L560 110 L580 66Z" fill="#5a7d6c" />
+        <path className="vid-fall" d="M548 92 V216" stroke="#fff" strokeWidth="7" strokeLinecap="round" />
+        <path className="vid-fall" style={{ animationDelay: "-.3s" }} d="M556 100 V216" stroke="#dff3ff" strokeWidth="3" strokeLinecap="round" />
+        <ellipse cx="552" cy="218" rx="16" ry="5" fill="#fff" opacity=".85" />
+        {[[300, 206], [326, 210], [354, 204]].map(([x, y]) => (
+          <g key={x}>
+            <rect x={x} y={y} width="18" height="12" fill="#c2183a" />
+            <path d={`M${x - 2} ${y} L${x + 9} ${y - 8} L${x + 20} ${y}Z`} fill="#3a2a24" />
+          </g>
+        ))}
+        <rect x="0" y="216" width="640" height="90" fill="url(#fj-water)" />
+        <g className="vid-wave" fill="none" stroke="#fff" strokeWidth="2" opacity=".6">
+          <path d={wavePath(240, 4)} />
+          <path d={wavePath(268, 5)} transform="translate(18 0)" />
+        </g>
+        <g className="vid-ferry">
+          <path d="M486 248 H604 L590 268 H500Z" fill="#fff" stroke="#b8c4d4" strokeWidth="1.5" />
+          <rect x="486" y="252" width="118" height="6" fill="#c2183a" />
+          <rect x="506" y="230" width="64" height="18" rx="3" fill="#f4f8fb" stroke="#b8c4d4" strokeWidth="1.5" />
+          {[512, 526, 540, 554].map(x => <rect key={x} x={x} y="235" width="9" height="7" rx="1" fill="#3a6ea8" />)}
+          <rect x="574" y="220" width="10" height="28" fill="#c2183a" />
+          <path d="M604 262 q16 4 30 0" fill="none" stroke="#fff" strokeWidth="2.5" opacity=".8" />
+        </g>
+        <Bird x={600} y={70} delay={-3} />
+        <Bird x={680} y={110} delay={-9} />
+      </g>
+    );
+  }
+  if (place === "stage") {
+    return (
+      <g>
+        <defs>
+          <linearGradient id="sg-cone" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#ffe9a8" stopOpacity=".5" />
+            <stop offset="1" stopColor="#ffe9a8" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="#140f24" />
+        <path d="M600 0 H640 V300 H600 Q612 200 604 100 Q612 40 600 0Z" fill="#a8182e" />
+        <path d="M612 0 V300M626 0 V300" stroke="#7a0f20" strokeWidth="3" />
+        <path d={"M0 0 H640 V30" + Array.from({ length: 16 }, (_, i) => ` Q${632 - i * 40} 50 ${620 - i * 40} 30`).join("") + " V0Z"} fill="#a8182e" />
+        <path d="M0 26 H640" stroke="#c9a227" strokeWidth="3" />
+        <rect x="320" y="56" width="240" height="140" rx="6" fill="#f4f8fb" stroke="#3a4170" strokeWidth="4" />
+        <rect x="340" y="78" width="56" height="56" rx="14" fill="#2c9c5a" />
+        <path d="M368 122 l-14 -14 a8 8 0 0 1 14 -10 a8 8 0 0 1 14 10z" fill="#fff" />
+        <path d="M410 88 H500M410 104 H484M410 120 H492" stroke="#3a4170" strokeWidth="5" strokeLinecap="round" />
+        <path d="M344 182 V150 M364 182 V160 M384 182 V142 M404 182 V130" stroke="#59c8ff" strokeWidth="10" />
+        <path className="vid-draw" d="M424 180 L460 166 L490 170 L540 132" fill="none" stroke="#d6283d" strokeWidth="4" strokeLinecap="round" />
+        <g className="vid-float">
+          <path d="M520 150 Q532 126 548 118 Q544 136 524 156Z" fill="#fff" stroke="#3a4170" strokeWidth="2" />
+          <circle cx="538" cy="132" r="3.5" fill="#59c8ff" />
+          <path d="M522 152 L512 162 L520 154 L516 166 L528 156" fill="#ff8a3d" />
+        </g>
+        <Cone x={380} color="url(#sg-cone)" delay={0} h={290} />
+        <Cone x={560} color="url(#sg-cone)" delay={-2.5} h={290} />
+        <path d="M0 282 H640 V300 H0Z" fill="#6b4228" />
+        <path d="M0 282 H640" stroke="#a8764e" strokeWidth="3" />
+        <path d="M0 300 H640 V360 H0Z" fill="#0d0a18" />
+      </g>
+    );
+  }
+  if (place === "garden") {
+    return (
+      <g>
+        <defs>
+          <linearGradient id="gd-sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#7fc4ff" />
+            <stop offset="1" stopColor="#e6f6ff" />
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="url(#gd-sky)" />
+        <g className="vid-spin">
+          {Array.from({ length: 12 }, (_, i) => (
+            <path key={i} d="M560 22 V8" stroke="#ffd34d" strokeWidth="4" strokeLinecap="round" transform={`rotate(${i * 30} 560 56)`} />
+          ))}
+          <circle cx="560" cy="56" r="48" fill="transparent" />
+        </g>
+        <circle cx="560" cy="56" r="26" fill="#ffe680" />
+        <g className="vid-cloud"><ellipse cx="380" cy="50" rx="34" ry="10" fill="#fff" /><ellipse cx="404" cy="42" rx="22" ry="9" fill="#fff" /></g>
+        <path d="M-20 220 Q160 180 340 210 T680 200 V360 H-20Z" fill="#8fce7a" />
+        {Array.from({ length: 15 }, (_, i) => (
+          <g key={i}>
+            <path d={`M${296 + i * 24} 252 V206 L${304 + i * 24} 198 L${312 + i * 24} 206 V252Z`} fill="#fff" stroke="#d9d3c4" strokeWidth="1.5" />
+          </g>
+        ))}
+        <path d="M290 218 H640M290 240 H640" stroke="#fff" strokeWidth="5" />
+        <path d="M602 252 V140" stroke="#8a5a3a" strokeWidth="5" />
+        <path d="M584 144 L602 124 L620 144Z" fill="#c2183a" />
+        <rect x="588" y="144" width="28" height="26" fill="#e8b25c" />
+        <circle cx="602" cy="156" r="5" fill="#3a2a24" />
+        {[316, 346].map((x, i) => (
+          <g key={x}>
+            <path d={`M${x} 300 Q${x - 4} 220 ${x} 160`} fill="none" stroke="#3f8f4a" strokeWidth="4" />
+            <path d={`M${x} 230 q-16 -6 -20 4 q12 6 20 -4Z`} fill="#46b078" />
+            <g className="vid-sway" style={{ animationDelay: `${i * 0.6}s` }}>
+              {Array.from({ length: 10 }, (_, k) => <ellipse key={k} cx={x} cy={160 - 15} rx="6" ry="13" fill="#ffd34d" transform={`rotate(${k * 36} ${x} 160)`} />)}
+              <circle cx={x} cy="160" r="9" fill="#7a4a2a" />
+            </g>
+          </g>
+        ))}
+        <path d="M376 296 V262 H612 V296Z" fill="#7a4e3a" />
+        <path d="M376 262 H612" stroke="#5a3a2a" strokeWidth="4" />
+        {[400, 448, 496, 544, 590].map((x, i) => (
+          <g key={x}>
+            <path d={`M${x} 264 V222 M${x} 240 L${x - 12} 230 M${x} 232 L${x + 12} 224`} stroke="#3f8f4a" strokeWidth="3" fill="none" />
+            {i % 2 ? (
+              <circle cx={x} cy="252" r="12" fill="#5cc58c" stroke="#3f8f4a" strokeWidth="2" />
+            ) : (
+              [[x - 8, 238], [x + 9, 232], [x + 2, 250]].map(([cx, cy]) => <circle key={cx} cx={cx} cy={cy} r="6" fill="#e23b3b" />)
+            )}
+          </g>
+        ))}
+        <Butterfly x={640} y={150} delay={0} color="#ff8a3d" />
+        <Butterfly x={700} y={110} delay={-11} color="#8d7bf0" />
+      </g>
+    );
+  }
+  if (place === "library") {
+    return (
+      <g>
+        <defs>
+          <linearGradient id="lb-ray" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#fff2c4" stopOpacity=".5" />
+            <stop offset="1" stopColor="#fff2c4" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="#3d2a22" />
+        <path d="M0 300 H640 V360 H0Z" fill="#2a1c16" />
+        <ellipse cx="470" cy="330" rx="150" ry="18" fill="#8a1f2c" />
+        <Bookcase x={290} w={102} />
+        <Bookcase x={540} w={100} />
+        <path d="M410 180 V70 Q450 20 490 70 V180Z" fill="#cfe8ff" stroke="#8a5a3a" strokeWidth="6" />
+        <path d="M450 36 V180M410 120 H490" stroke="#8a5a3a" strokeWidth="4" />
+        <path className="vid-glow" d="M410 120 L490 70 L560 300 H380Z" fill="url(#lb-ray)" />
+        <path d="M556 40 L604 296M584 40 L632 296" stroke="#b37a4a" strokeWidth="5" />
+        {[0, 1, 2, 3, 4, 5].map(i => <path key={i} d={`M${561 + i * 7.6} ${68 + i * 40} H${589 + i * 7.6}`} stroke="#b37a4a" strokeWidth="4" />)}
+        {[[432, 220, 0], [470, 196, -1], [500, 240, -2]].map(([x, y, d]) => (
+          <g key={x} className="vid-float" style={{ animationDelay: `${d}s` }}>
+            <rect x={x} y={y} width="26" height="32" rx="2" fill="#fffaf0" stroke="#d9d3c4" />
+            <path d={`M${x + 5} ${y + 8} H${x + 21}M${x + 5} ${y + 14} H${x + 19}M${x + 5} ${y + 20} H${x + 21}`} stroke="#9fb1c8" strokeWidth="1.5" />
+          </g>
+        ))}
+      </g>
+    );
+  }
+  if (place === "wedding") {
+    return (
+      <g>
+        <defs>
+          <linearGradient id="wd-sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#2a2f6e" />
+            <stop offset=".7" stopColor="#c86f8a" />
+            <stop offset="1" stopColor="#ffb38a" />
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="url(#wd-sky)" />
+        {[[320, 40], [400, 24], [470, 56], [620, 30]].map(([x, y], i) => <circle key={x} className="vid-led" style={{ animationDelay: `${i * 0.5}s` }} cx={x} cy={y} r="1.8" fill="#fff" />)}
+        <path d="M-10 236 Q60 200 120 226 Q180 190 250 222 Q320 196 400 224 Q470 192 540 222 Q600 200 660 226 V260 H-10Z" fill="#2c3d4a" />
+        <path d="M-10 250 H660 V360 H-10Z" fill="#3f6f4a" />
+        <path d="M290 30 Q460 80 640 36" fill="none" stroke="#3a2a24" strokeWidth="2" />
+        {Array.from({ length: 12 }, (_, i) => {
+          const t = (i + 0.5) / 12, x = 290 + t * 350, y = (1 - t) * (1 - t) * 30 + 2 * (1 - t) * t * 80 + t * t * 36;
+          return <circle key={i} className="vid-led" style={{ animationDelay: `${(i % 4) * 0.4}s`, animationDuration: "2.4s" }} cx={x} cy={y + 6} r="5" fill={["#ffd36b", "#fff3b8", "#ffb38a"][i % 3]} />;
+        })}
+        <path d="M440 290 V170 A80 80 0 0 1 600 170 V290" fill="none" stroke="#f4efe6" strokeWidth="10" />
+        <path d="M440 290 V170 A80 80 0 0 1 600 170 V290" fill="none" stroke="#5c8a4a" strokeWidth="5" strokeDasharray="6 10" />
+        {Array.from({ length: 13 }, (_, i) => {
+          const a = Math.PI - (i / 12) * Math.PI, x = 520 + Math.cos(a) * 80, y = 170 - Math.sin(a) * 80;
+          return <circle key={i} cx={x} cy={y} r={i % 2 ? 7 : 9} fill={i % 3 ? "#ffd9e6" : "#fff"} stroke="#f28da0" strokeWidth="1.5" />;
+        })}
+        {[200, 240, 280].map((y, i) => <circle key={y} cx={i % 2 ? 600 : 440} cy={y} r="8" fill="#ffd9e6" stroke="#f28da0" strokeWidth="1.5" />)}
+        {Array.from({ length: 22 }, (_, i) => (
+          <rect key={i} className="vid-snow" style={{ animationDelay: `${-(i * 0.43) % 6}s`, animationDuration: `${5 + (i % 3)}s` }} x={(i * 71 + 15) % 640} y={(i * 23) % 60} width="6" height="4" fill={["#ffd34d", "#ff6f7d", "#8fd6ff", "#fff", "#c9bdf0"][i % 5]} />
+        ))}
+      </g>
+    );
+  }
   if (place === "study") {
     return (
       <g>
@@ -1186,6 +1624,191 @@ function Foreground({ place }: { place: StoryPlace }) {
         </g>
         <path d="M570 312 L560 270 H606 L596 312Z" fill="#e8755a" />
         <path d="M583 270 C572 240 548 232 540 216 C566 216 582 232 584 252 C588 226 604 212 622 208 C618 232 602 248 588 270Z" fill="#46b078" />
+      </g>
+    );
+  }
+  if (place === "lecture") {
+    return (
+      <g>
+        <Listener x={380} body="#3a3f5c" hair="#b9b4c8" />
+        <Listener x={466} body="#5a3a3c" hair="#2b2f38" />
+        <Listener x={552} body="#2c4a5a" hair="#7a4a2a" />
+        <rect x="300" y="322" width="340" height="12" fill="#6b4a3a" />
+        <rect x="300" y="334" width="340" height="26" fill="#4a3228" />
+        {[352, 438, 524].map(x => (
+          <g key={x}>
+            <rect x={x} y="308" width="40" height="16" fill="#fff" stroke="#d9d3c4" transform={`rotate(-4 ${x + 20} 316)`} />
+            <path d={`M${x + 6} 314 H${x + 32}M${x + 6} 319 H${x + 26}`} stroke="#9fb1c8" strokeWidth="1.5" transform={`rotate(-4 ${x + 20} 316)`} />
+          </g>
+        ))}
+        <rect x="602" y="294" width="12" height="28" rx="3" fill="#bfe3ff" stroke="#8fb4d4" />
+        <rect x="604" y="290" width="8" height="5" fill="#3a6ea8" />
+      </g>
+    );
+  }
+  if (place === "police") {
+    return (
+      <g>
+        <rect x="290" y="300" width="350" height="14" fill="#cfd6e0" />
+        <rect x="290" y="314" width="350" height="46" fill="#1f3a6e" />
+        <path d="M290 324 H640" stroke="#c9a227" strokeWidth="3" />
+        <rect x="350" y="280" width="70" height="22" fill="#fff" stroke="#d9d3c4" transform="rotate(-4 385 291)" />
+        <g transform="rotate(-4 385 291)">
+          <path d="M358 287 H404M358 294 H396" stroke="#9fb1c8" strokeWidth="2" />
+          <rect x="406" y="284" width="8" height="8" fill="none" stroke="#1f3a6e" strokeWidth="1.5" />
+          <path d="M407 288 l2 2 4 -5" fill="none" stroke="#2c9c5a" strokeWidth="1.5" />
+        </g>
+        <path d="M430 300 L466 284" stroke="#2b2f38" strokeWidth="4" strokeLinecap="round" />
+        <path d="M520 300 V270 A18 18 0 0 1 548 262" fill="none" stroke="#9aa5b5" strokeWidth="7" strokeLinecap="round" />
+        <path d="M562 270 V300" stroke="#9aa5b5" strokeWidth="7" strokeLinecap="round" />
+        <path d="M546 256 l6 -6 M556 262 l7 -3" stroke="#ffd34d" strokeWidth="2.5" strokeLinecap="round" />
+        <rect x="510" y="288" width="64" height="14" rx="4" fill="#c2183a" />
+      </g>
+    );
+  }
+  if (place === "airport") {
+    return (
+      <g>
+        <g transform="translate(-220 0)">
+          <rect x="540" y="258" width="60" height="78" rx="9" fill="#3a6ea8" />
+          <path d="M556 258 V232 H584 V258" fill="none" stroke="#2b2f38" strokeWidth="5" />
+          <path d="M552 268 V326M570 268 V326M588 268 V326" stroke="#2b5585" strokeWidth="3" />
+          <circle cx="560" cy="290" r="9" fill="#ffd34d" />
+          <rect x="574" y="300" width="18" height="12" rx="2" fill="#f28da0" transform="rotate(10 583 306)" />
+          <circle cx="550" cy="340" r="5" fill="#241c4f" />
+          <circle cx="590" cy="340" r="5" fill="#241c4f" />
+        </g>
+        <g transform="translate(60 0) rotate(-12 430 328)">
+          <rect x="390" y="314" width="84" height="30" rx="4" fill="#fff" stroke="#b8c4d4" strokeWidth="1.5" />
+          <rect x="390" y="314" width="84" height="8" rx="3" fill="#3a6ea8" />
+          <path d="M398 330 H430M398 336 H422" stroke="#9fb1c8" strokeWidth="2" />
+          {[440, 444, 447, 451, 455, 458, 462, 466].map(x => <path key={x} d={`M${x} 326 V340`} stroke="#241c4f" strokeWidth={x % 2 ? 1.5 : 2.5} />)}
+        </g>
+      </g>
+    );
+  }
+  if (place === "boardroom") {
+    return (
+      <g>
+        <path d="M290 296 H640 V360 H290Z" fill="#3a2a24" />
+        <path d="M290 296 H640" stroke="#7a5a48" strokeWidth="4" />
+        <path d="M340 302 L420 302" stroke="#fff" strokeWidth="3" opacity=".12" />
+        <path d="M330 296 L340 254 H420 L430 296Z" fill="#9aa5b5" />
+        <circle cx="380" cy="274" r="6" fill="#dfe6ee" />
+        <path d="M534 296 L544 254 H624 L634 296Z" fill="#9aa5b5" />
+        <circle cx="584" cy="274" r="6" fill="#dfe6ee" />
+        <rect x="446" y="282" width="64" height="16" fill="#fff" stroke="#d9d3c4" transform="rotate(5 478 290)" />
+        <path d="M456 292 q5 -6 9 0 t9 0 t9 -2" fill="none" stroke="#3a6ea8" strokeWidth="2" transform="rotate(5 478 290)" />
+        <rect x="494" y="272" width="16" height="20" rx="4" fill="#fff" />
+        <path d="M510 278 q7 4 0 9" fill="none" stroke="#fff" strokeWidth="3" />
+        <g className="vid-steam" stroke="#fff" strokeWidth="2" fill="none" opacity=".6"><path d="M500 268 Q497 260 502 254" /></g>
+      </g>
+    );
+  }
+  if (place === "tvstudio") {
+    return (
+      <g>
+        <path d="M290 306 Q470 286 640 306 V360 H290Z" fill="#1f2f6e" />
+        <path d="M290 306 Q470 286 640 306" fill="none" stroke="#59c8ff" strokeWidth="3" />
+        <path d="M290 330 Q470 312 640 330" fill="none" stroke="#59c8ff" strokeWidth="1.5" opacity=".4" />
+        <path d="M420 296 V266" stroke="#2b2f38" strokeWidth="3" />
+        <rect x="414" y="250" width="12" height="20" rx="6" fill="#2b2f38" />
+        <ellipse cx="420" cy="298" rx="14" ry="4" fill="#2b2f38" />
+        <rect x="500" y="276" width="22" height="22" rx="4" fill="#ffd34d" />
+        <path d="M522 281 q8 5 0 11" fill="none" stroke="#ffd34d" strokeWidth="3" />
+        <rect x="554" y="288" width="54" height="12" fill="#fff" transform="rotate(-3 581 294)" />
+      </g>
+    );
+  }
+  if (place === "fjord") {
+    return (
+      <g>
+        <rect x="290" y="304" width="350" height="56" fill="#8a5a3a" />
+        {[330, 380, 430, 480, 530, 580, 630].map(x => <path key={x} d={`M${x} 304 V360`} stroke="#6b4228" strokeWidth="2.5" />)}
+        <path d="M290 304 H640" stroke="#a8764e" strokeWidth="4" />
+        {[320, 470].map(x => (
+          <g key={x}>
+            <rect x={x - 8} y="286" width="16" height="20" rx="4" fill="#2b2f38" />
+            <rect x={x - 10} y="282" width="20" height="6" rx="3" fill="#3a4170" />
+          </g>
+        ))}
+        <path d="M608 306 V218" stroke="#6b4a30" strokeWidth="5" />
+        <path d="M608 226 H568 L558 236 L568 246 H608Z" fill="#fff" stroke="#3a6ea8" strokeWidth="2" />
+        <path d="M572 236 H600" stroke="#3a6ea8" strokeWidth="3" />
+        <path d="M608 252 H636 L644 262 L636 272 H608Z" fill="#fff" stroke="#3a6ea8" strokeWidth="2" />
+        <path d="M614 262 H632" stroke="#3a6ea8" strokeWidth="3" />
+      </g>
+    );
+  }
+  if (place === "stage") {
+    return (
+      <g>
+        <Listener x={330} body="#1d1830" hair="#2b2f38" />
+        <Listener x={400} body="#241c3a" hair="#3a2a24" />
+        <Listener x={470} body="#1d1830" hair="#5a3a2a" />
+        <rect x="508" y="262" width="20" height="32" rx="4" fill="#2b2f38" transform="rotate(14 518 278)" />
+        <rect x="511" y="266" width="14" height="22" rx="2" fill="#8fd6ff" className="vid-glow" transform="rotate(14 518 278)" />
+        <Listener x={540} body="#241c3a" hair="#1d1830" />
+        <Listener x={610} body="#1d1830" hair="#3a2a24" />
+      </g>
+    );
+  }
+  if (place === "garden") {
+    return (
+      <g>
+        <path d="M404 300 Q400 340 420 344 H476 Q496 340 492 300Z" fill="#c9a06a" stroke="#a8764e" strokeWidth="2" />
+        <path d="M404 312 H492M402 326 H494" stroke="#a8764e" strokeWidth="2" />
+        <path d="M404 300 Q448 250 492 300" fill="none" stroke="#a8764e" strokeWidth="5" />
+        <path d="M416 300 L428 276 L436 300Z" fill="#ff8a3d" />
+        <path d="M428 276 l-4 -8 M428 276 l4 -8" stroke="#46b078" strokeWidth="2.5" />
+        <circle cx="452" cy="294" r="9" fill="#e23b3b" />
+        <circle cx="470" cy="296" r="8" fill="#e23b3b" />
+        <path d="M478 300 Q482 278 494 284 Q490 296 478 300Z" fill="#5cc58c" />
+        <path d="M548 336 H606 L600 294 H554Z" fill="#2c9c5a" />
+        <path d="M554 304 Q580 270 600 304" fill="none" stroke="#1f7f46" strokeWidth="5" />
+        <path d="M554 316 L522 296" stroke="#2c9c5a" strokeWidth="7" strokeLinecap="round" />
+        <ellipse cx="518" cy="294" rx="6" ry="8" fill="#1f7f46" transform="rotate(-30 518 294)" />
+      </g>
+    );
+  }
+  if (place === "library") {
+    return (
+      <g>
+        <rect x="290" y="302" width="350" height="14" fill="#6b4228" />
+        <rect x="290" y="316" width="350" height="44" fill="#4a2c1c" />
+        <path d="M360 300 Q382 290 404 296 Q426 290 448 300 V304 Q426 296 404 302 Q382 296 360 304Z" fill="#fffaf0" stroke="#d9d3c4" strokeWidth="1.5" />
+        <path d="M404 296 V302" stroke="#d9d3c4" strokeWidth="1.5" />
+        <path d="M368 298 l16 -3 M368 301 l14 -3 M414 296 l16 3 M414 299 l14 3" stroke="#9fb1c8" strokeWidth="1.2" />
+        <rect x="466" y="292" width="54" height="10" rx="2" fill="#3a6ea8" />
+        <rect x="468" y="284" width="50" height="8" rx="2" fill="#c2183a" />
+        <rect x="464" y="276" width="56" height="8" rx="2" fill="#2c7a54" />
+        <path d="M592 302 V262" stroke="#c9a227" strokeWidth="4" />
+        <ellipse cx="592" cy="302" rx="16" ry="4" fill="#c9a227" />
+        <path className="vid-glow" d="M572 262 L556 300 H628 L612 262Z" fill="#fff2c4" opacity=".22" />
+        <path d="M566 262 Q592 238 618 262Z" fill="#2c7a54" />
+        <ellipse className="vid-glow" cx="592" cy="263" rx="12" ry="3" fill="#fff3b8" />
+      </g>
+    );
+  }
+  if (place === "wedding") {
+    return (
+      <g>
+        <path d="M290 300 H640 V360 H290Z" fill="#f4efe6" />
+        <path d="M290 300 H640" stroke="#e2d9c8" strokeWidth="3" />
+        {[320, 360, 400, 440, 480, 520, 560, 600].map((x, i) => <path key={x} d={`M${x} 300 Q${x + 20} ${i % 2 ? 316 : 312} ${x + 40} 300`} fill="none" stroke="#ffd9e6" strokeWidth="3" />)}
+        <rect x="532" y="270" width="72" height="30" rx="3" fill="#fff" stroke="#f28da0" strokeWidth="2" />
+        <rect x="542" y="244" width="52" height="26" rx="3" fill="#fff" stroke="#f28da0" strokeWidth="2" />
+        <rect x="552" y="222" width="32" height="22" rx="3" fill="#fff" stroke="#f28da0" strokeWidth="2" />
+        <path d="M532 282 q9 6 18 0 q9 6 18 0 q9 6 18 0 q9 6 18 0M542 254 q6.5 5 13 0 q6.5 5 13 0 q6.5 5 13 0 q6.5 5 13 0" fill="none" stroke="#f28da0" strokeWidth="2" />
+        <path d="M568 216 l-6 -6 a4 4 0 0 1 6 -5 a4 4 0 0 1 6 5z" fill="#d6283d" />
+        {[[410, -12], [446, 12]].map(([x, r]) => (
+          <g key={x} transform={`rotate(${r} ${x} 290)`}>
+            <path d={`M${x - 9} 244 H${x + 9} L${x + 6} 274 H${x - 6}Z`} fill="#ffe9a8" opacity=".85" stroke="#fff" strokeWidth="1.5" />
+            <path d={`M${x} 274 V294M${x - 8} 296 H${x + 8}`} stroke="#fff" strokeWidth="3" />
+          </g>
+        ))}
+        {[[424, 236, 0], [432, 226, -.8], [428, 214, -1.6]].map(([x, y, d]) => <circle key={y} className="vid-float" style={{ animationDelay: `${d}s` }} cx={x} cy={y} r="2.5" fill="#fff3b8" />)}
+        <path className="vid-glow" d="M428 222 l3 -8 3 8 8 3 -8 3 -3 8 -3 -8 -8 -3z" fill="#fff" />
       </g>
     );
   }

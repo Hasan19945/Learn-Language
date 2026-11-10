@@ -212,4 +212,61 @@ const B2: LessonDef[] = [
 }
 ];
 
-export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2), ...asExtra("B1", B1), ...asExtra("B2", B2)];
+const C1: LessonDef[] = [
+{
+  id: "nb-c1-story", title: "Ti historier på C1-nivå", no: "Ten C1 stories", icon: "spark", stories: readingStories("c1", "nb"),
+  intro: "Ti historier som dekker alle C1-temaene: akademisk språk, trykk og inversjon, hypotetiske setninger og anger, forhandlinger, samfunn og medier, aksenter og slang, uttrykk i arbeidslivet og ordtak.",
+  notes: [
+    { h: "Akademisk språk, trykk og hypotetiske setninger", p: "Akademisk: outline the research question, give an account of the methodology, the findings indicate, acknowledge a limitation, nonetheless. Inversjon: Never before had anything like that happened. Not only are those locks expensive, but … Trykk: It was his neighbour who … What she finds hardest is … Hypotetisk og anger: If only she had got up … Had she not been so stubborn, she could have …" },
+    { h: "Forhandlinger, medier, aksenter og faste uttrykk", p: "Forhandlinger: refuse to budge, propose a compromise, back down, meet halfway, walk away satisfied. Medier: opinion piece, freedom of speech, media literacy, regulate, broadcast. Aksent og slang: a Glaswegian accent, wee, aye, pure dead brilliant, cheers pal. Uttrykk i arbeidslivet: butterflies in her stomach, back to the drawing board, hit the nail on the head, onto a winner, roll up their sleeves. Ordtak: Rome wasn't built in a day. Every cloud has a silver lining. Where there's a will, there's a way." }
+  ],
+  tip: "Engelsk «Had she not been …» fungerer akkurat som norsk «Hadde hun ikke vært …»: verbet først, uten if. Men etter «Never before» og «Not only» må engelsk også ha hjelpeverb først: «Never before had he …», noe norsk ikke krever på samme måte.",
+  words: [
+    W("methodology", "metode", "methedålledsji", "She gives an account of her methodology.", "Hun redegjør for metoden."),
+    W("findings", "funn", "faindings", "The findings indicate a clear link.", "Funnene tyder på en klar sammenheng."),
+    W("acknowledge", "innrømme, anerkjenne", "ekknållidsj", "Mira acknowledges that the sample is limited.", "Mira innrømmer at utvalget er begrenset."),
+    W("nonetheless", "likevel", "nanndhelless", "The findings are nonetheless significant.", "Funnene er likevel viktige."),
+    W("never before", "aldri før", "nevver bifår", "Never before had that happened to him.", "Aldri før hadde det skjedd ham.", { note: "inversjon: had + subjekt" }),
+    W("theft", "tyveri", "theft", "He went to report the theft.", "Han dro for å anmelde tyveriet."),
+    W("precisely", "nettopp, nøyaktig", "prisaisli", "That was precisely what was so strange.", "Det var nettopp det som var så rart."),
+    W("not only", "ikke bare", "nått ounli", "Not only are they expensive, but they are also weak.", "Ikke bare er de dyre, men de er også svake."),
+    W("if only", "hadde bare …, om bare", "iff ounli", "If only she had got up earlier!", "Hadde hun bare stått opp tidligere!"),
+    W("regret", "angre", "rigrett", "She regrets pressing the snooze button.", "Hun angrer på at hun trykket på slumreknappen."),
+    W("stubborn", "sta", "stabbern", "She was too stubborn to take a taxi.", "Hun var for sta til å ta taxi."),
+    W("spilt milk", "spilt melk", "spilt milk", "There's no point crying over spilt milk.", "Det nytter ikke å gråte over spilt melk."),
+    W("supplier", "leverandør", "sepplaier", "The supplier wants higher prices.", "Leverandøren vil ha høyere priser."),
+    W("budge", "rikke seg, gi etter", "badsj", "The other side refuses to budge.", "Motparten nekter å rikke seg."),
+    W("compromise", "kompromiss", "kåmpromais", "Emil proposes a compromise.", "Emil foreslår et kompromiss."),
+    W("meet halfway", "møtes på midten", "miit haafwei", "They meet halfway at seven per cent.", "De møtes på midten med sju prosent."),
+    W("opinion piece", "kronikk", "epinnjen piis", "She has written an opinion piece.", "Hun har skrevet en kronikk."),
+    W("freedom of speech", "ytringsfrihet", "friidem åv spiitsj", "It could threaten freedom of speech.", "Det kan true ytringsfriheten."),
+    W("media literacy", "mediekompetanse", "miidie litterasi", "Media literacy matters more than bans.", "Mediekompetanse er viktigere enn forbud."),
+    W("accent", "aksent", "æksent", "She has a strong Glaswegian accent.", "Hun har en sterk Glasgow-aksent."),
+    W("get used to", "venne seg til", "gett juuzd tu", "He starts to get used to the accent.", "Han begynner å venne seg til aksenten."),
+    W("slang", "slang", "slæng", "He picks up some slang.", "Han plukker opp litt slang."),
+    W("butterflies", "sommerfugler (i magen)", "batterflais", "Mira has butterflies in her stomach.", "Mira har sommerfugler i magen."),
+    W("back to the drawing board", "tilbake til tegnebrettet", "bæk tu dhe dråoing bård", "They had to go back to the drawing board.", "De måtte tilbake til tegnebrettet."),
+    W("proverb", "ordtak", "pråvørb", "She has a proverb for every occasion.", "Hun har et ordtak for enhver anledning."),
+    W("silver lining", "lyspunkt", "silver laining", "Every cloud has a silver lining.", "Ingen skyer uten en sølvkant."),
+    W("reliable", "pålitelig", "rilaiebel", "She looks for reliable sources.", "Hun leter etter pålitelige kilder."),
+    W("actually", "faktisk", "æktsjuelli", "It was actually Emil who introduced them.", "Det var faktisk Emil som introduserte dem."),
+    W("best man", "forlover (for brudgommen)", "best mæn", "Emil is the best man.", "Emil er forlover.")
+  ],
+  dialogue: [["A", "Did you see the debate about freedom of speech last night?", "Så du debatten om ytringsfrihet i går kveld?"], ["B", "Yes, and it was actually Mira who made the best points.", "Ja, og det var faktisk Mira som kom med de beste poengene."], ["A", "If only I had watched the whole thing! I only caught the end.", "Hadde jeg bare sett hele! Jeg rakk bare slutten."], ["B", "It's online, so you haven't missed the boat.", "Den ligger på nettet, så du har ikke gått glipp av noe."]],
+  quiz: [
+    Q("Hva betyr «The findings indicate that …»?", ["Funnene tyder på at …", "Funnene beviser helt sikkert at …", "Funnene sier ingenting om …"], "indicate = tyde på; det er ikke et sikkert bevis."),
+    Q("«Aldri før hadde noe sånt skjedd ham.»", ["Never before had anything like that happened to him.", "Never before anything like that had happened to him.", "Never before did anything like that happened to him."], "Never before først: had + subjekt."),
+    Q("«Hadde hun bare stått opp!»", ["If only she had got up!", "If only she got up yesterday!", "If only she has got up!"], "Anger om fortiden: if only + past perfect."),
+    Q("Hva betyr «Had she not been so stubborn, …»?", ["Hadde hun ikke vært så sta, …", "Hun var veldig sta, og …", "Hun kommer ikke til å være sta …"], "Had + subjekt + not = if she had not (inversjon)."),
+    Q("Hva betyr «meet halfway» i en forhandling?", ["Møtes på midten", "Avtale å møtes halvveis på veien", "Avbryte møtet halvveis"], "They meet halfway at seven per cent."),
+    Q("Hva er viktigere enn forbud, ifølge Mira?", ["media literacy", "freedom of speech", "propaganda"], "Mira responds that media literacy matters more than bans."),
+    Q("Hva sier man i Glasgow i stedet for small?", ["wee", "aye", "pal"], "She says wee instead of small and aye instead of yes."),
+    Q("Hva betyr «back to the drawing board»?", ["tilbake til tegnebrettet", "å tegne et bilde", "å skrive på tavla"], "Å begynne på nytt etter at en plan har slått feil."),
+    Q("Hva betyr «Every cloud has a silver lining»?", ["Det finnes noe positivt i alt som er vanskelig.", "Regnet stopper snart.", "Skyer er veldig vakre."], "Et lyspunkt i noe negativt."),
+    Q("Hvorfor står det «are those locks» i «Not only are those locks expensive, but …»?", ["Not only står først, så vi får inversjon.", "Fordi det er et spørsmål.", "Fordi det er fortid."], "Begrensende uttrykk først: hjelpeverb før subjekt.")
+  ],
+  review: ["Akademisk språk: methodology, findings, acknowledge, nonetheless.", "Inversjon og anger: Never before had …; If only …; Had she not …", "Medier, aksenter, uttrykk og ordtak: opinion piece, accent, back to the drawing board, every cloud has a silver lining."]
+}
+];
+
+export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2), ...asExtra("B1", B1), ...asExtra("B2", B2), ...asExtra("C1", C1)];

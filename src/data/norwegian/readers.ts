@@ -213,4 +213,60 @@ const B2: LessonDef[] = [
 }
 ];
 
-export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2), ...asExtra("B1", B1), ...asExtra("B2", B2)];
+const C1: LessonDef[] = [
+{
+  id: "c1-story", title: "On C1 hikâyesi", no: "Ti historier på C1-nivå", icon: "spark", stories: readingStories("c1", "tr"),
+  intro: "C1'in bütün konularını içeren on hikâye: akademik dil, vurgu yapıları, varsayımlar ve pişmanlıklar, müzakere, toplum ve medya, lehçeler ve argo, iş hayatında deyimler ve atasözleri.",
+  notes: [
+    { h: "Akademik dil, vurgu ve varsayımlar", p: "Akademik: legge fram problemstillingen, redegjøre for metoden, resultatene tyder på, utvalget er begrenset. Vurgu (utbrytning): Det var naboen hans som hadde sett sykkelen. Det som er vanskeligst, er å … Varsayım ve pişmanlık: Hadde hun bare stått opp …, ville hun ha rukket flyet. Om hun hadde tatt en taxi, kunne hun ha kommet fram." },
+    { h: "Müzakere, medya, dil çeşitliliği ve deyimler", p: "Müzakere: holde på kravet, foreslå et kompromiss, påpeke, møtes på midten. Medya: kronikk, ytringsfrihet, kildekritikk, regulere. Dil çeşitliliği: nynorsk, sognedialekt (kor, eg), slang (sykt bra). İş deyimleri: sommerfugler i magen, tilbake til tegnebrettet, treffe spikeren på hodet, brette opp ermene. Atasözleri: Roma ble ikke bygd på én dag. Der det er vilje, er det vei." }
+  ],
+  tip: "\"Hadde hun bare …\" yapısında fiil başa gelir ve hvis kullanılmaz; anlamı \"keşke …\" olur. Aynı devrik yapı koşul için de kullanılır: \"Hadde han ikke invitert dem, hadde de aldri møttes.\"",
+  words: [
+    N("en", "problemstilling", "problemstillingen", "problemstillinger", "araştırma sorusu", "problemstilling", "Hun legger fram problemstillingen.", "Araştırma sorusunu sunuyor."),
+    W("redegjør for", "açıklar, hesabını verir", "reedeyör for", "Hun redegjør for metoden.", "Yöntemini açıklıyor.", { note: "redegjøre – redegjorde" }),
+    W("tyder på", "işaret eder, gösterir", "tüder po", "Resultatene tyder på en sammenheng.", "Sonuçlar bir ilişkiye işaret ediyor.", { note: "tyde på" }),
+    N("et", "funn", "funnet", "funn", "bulgu", "fün", "Funnene er relevante.", "Bulgular anlamlı."),
+    N("et", "utvalg", "utvalget", "utvalg", "örneklem; seçki", "ütvalg", "Utvalget er begrenset.", "Örneklem sınırlı."),
+    W("anmelde", "(polise) bildirmek, şikâyet etmek", "anmelle", "Han vil anmelde tyveriet.", "Hırsızlığı bildirmek istiyor."),
+    N("et", "tyveri", "tyveriet", "tyverier", "hırsızlık", "tüveri", "Tyveriet skjedde i går.", "Hırsızlık dün oldu."),
+    W("nettopp", "tam da, tam olarak; az önce", "nettop", "Det var nettopp det som var rart.", "Tuhaf olan tam da buydu."),
+    W("nemlig", "çünkü, işte (açıklama)", "nemli", "Det var nemlig en ny lås.", "Çünkü yeni bir kilitti."),
+    W("angrer", "pişman olur", "angrer", "Hun angrer på det.", "Buna pişman.", { note: "angre på noe" }),
+    W("rukket", "yetişmiş", "rükket", "Hun ville ha rukket flyet.", "Uçağa yetişmiş olurdu.", { note: "rekke – rakk – har rukket" }),
+    W("tidsnok", "tam zamanında", "titsnok", "Hun kom fram akkurat tidsnok.", "Tam zamanında vardı."),
+    W("forhandle", "müzakere etmek, pazarlık yapmak", "forhandle", "Han skal forhandle fram en avtale.", "Bir anlaşma için pazarlık yapacak."),
+    N("en", "leverandør", "leverandøren", "leverandører", "tedarikçi", "leverandör", "Leverandøren vil øke prisene.", "Tedarikçi fiyatları artırmak istiyor."),
+    N("et", "krav", "kravet", "krav", "talep", "kraav", "Motparten holder på kravet sitt.", "Karşı taraf talebinde ısrar ediyor."),
+    N("et", "kompromiss", "kompromisset", "kompromisser", "uzlaşma", "kumpromis", "Emil foreslår et kompromiss.", "Emil bir uzlaşma öneriyor."),
+    N("en", "kronikk", "kronikken", "kronikker", "köşe yazısı, görüş yazısı", "krunikk", "Hun skriver en kronikk.", "Bir köşe yazısı yazıyor."),
+    W("ytringsfrihet", "ifade özgürlüğü", "ütringsfriheet", "Det kan true ytringsfriheten.", "Bu, ifade özgürlüğünü tehdit edebilir.", { g: "en", def: "ytringsfriheten" }),
+    W("kildekritikk", "kaynak eleştirisi", "hildekritikk", "Kildekritikk er viktigere enn forbud.", "Kaynak eleştirisi yasaklardan önemli."),
+    W("nynorsk", "nynorsk (Norveççenin ikinci yazı dili)", "nünoşk", "Skiltene er skrevet på nynorsk.", "Tabelalar nynorsk ile yazılmış."),
+    W("venne seg til", "alışmak", "venne sæy til", "Han begynner å venne seg til uttalen.", "Telaffuza alışmaya başlıyor."),
+    W("sommerfugler i magen", "midede kelebekler (heyecan)", "sommerfügler i maagen", "Mira har sommerfugler i magen.", "Mira'nın midesinde kelebekler uçuşuyor."),
+    W("tilbake til tegnebrettet", "en baştan başlamak", "tilbaake til teynebrette", "De måtte tilbake til tegnebrettet.", "En baştan başlamak zorunda kaldılar."),
+    N("et", "ordtak", "ordtaket", "ordtak", "atasözü", "uurtaak", "Hun har et ordtak for alt.", "Her şey için bir atasözü var."),
+    W("forgjeves", "boşuna", "foryeeves", "Han venter ikke forgjeves.", "Boşuna beklemiyor."),
+    N("en", "sammenheng", "sammenhengen", "sammenhenger", "bağlantı, ilişki", "sammenheng", "Hun forklarer komplekse sammenhenger.", "Karmaşık ilişkileri açıklıyor."),
+    W("faktisk", "aslında, gerçekten", "faktisk", "Det var faktisk Emil som introduserte dem.", "Onları tanıştıran aslında Emil'di."),
+    N("et", "brudepar", "brudeparet", "brudepar", "gelin ve damat", "brüdepaar", "Han skåler for brudeparet.", "Gelin ve damat için kadeh kaldırıyor.")
+  ],
+  dialogue: [["A", "Hørte du debatten om ytringsfrihet i går?", "Dün ifade özgürlüğü tartışmasını dinledin mi?"], ["B", "Ja, og det var faktisk Mira som hadde de beste argumentene.", "Evet, en iyi argümanlar aslında Mira'nınkilerdi."], ["A", "Hadde jeg bare sett hele sendingen! Jeg rakk bare slutten.", "Keşke yayının tamamını izleseydim! Sadece sonuna yetişebildim."], ["B", "Den ligger på nettet, så det er ikke for sent.", "İnternette var, yani geç değil."]],
+  quiz: [
+    Q("\"Resultatene tyder på at …\" ne anlama gelir?", ["Sonuçlar … olduğuna işaret ediyor.", "Sonuçlar … olduğunu kesin olarak kanıtlıyor.", "Sonuçlar … hakkında hiçbir şey söylemiyor."], "tyde på = işaret etmek; kesin kanıt anlamı taşımaz."),
+    Q("\"Bisikleti gören komşusuydu.\"", ["Det var naboen hans som hadde sett sykkelen.", "Det var naboen hans hadde sett sykkelen.", "Naboen hans det var som hadde sett sykkelen."], "Vurgulu yapı: Det var … som …"),
+    Q("\"Keşke çalar saat çaldığında kalksaydı!\"", ["Hadde hun bare stått opp da vekkerklokka ringte!", "Hvis hun bare står opp da vekkerklokka ringte!", "Hun hadde bare stått opp da vekkerklokka ringer!"], "Hadde + özne + bare + partisipp = keşke."),
+    Q("\"Det nytter ikke å gråte over spilt melk\" ne demek?", ["Olan olmuşa üzülmenin faydası yok.", "Süt dökmek uğursuzluktur.", "Mutfakta dikkatli olmalısın."], "Geçmişte kalan bir şey için üzülmek işe yaramaz."),
+    Q("\"De møtes på midten\" müzakerede ne demek?", ["İki taraf da taviz verip ortada buluşuyor.", "Toplantı yarıda bitiyor.", "Masanın ortasında oturuyorlar."], "møtes på midten = orta yolda buluşmak."),
+    Q("Mira'ya göre yasaklardan daha önemli olan nedir?", ["kildekritikk", "ytringsfrihet", "propaganda"], "Mira svarer at kildekritikk er viktigere enn forbud."),
+    Q("Sogn lehçesinde hvor nasıl söyleniyor?", ["kor", "eg", "no"], "Hun sier kor i stedet for hvor og eg i stedet for jeg."),
+    Q("\"tilbake til tegnebrettet\" ne demek?", ["en baştan başlamak", "resim yapmak", "tahtaya not yazmak"], "Bir plan başarısız olunca yeniden başlamak."),
+    Q("\"Det finnes ikke dårlig vær, bare dårlige klær\" ne öğütler?", ["Hava nasıl olursa olsun uygun giyinip dışarı çık.", "Kötü havada evde kal.", "Pahalı giysiler satın al."], "Norveçlilerin en sevdiği atasözlerinden biri."),
+    Q("\"Det som er vanskeligst, er å forklare …\" yapısı ne işe yarar?", ["Cümlenin bir bölümünü vurgulamak", "Soru sormak", "Geçmişi anlatmak"], "Det som … er … = vurgulu yapı (utbrytning).")
+  ],
+  review: ["Akademik dil: problemstilling, redegjøre for, tyde på, funn.", "Vurgu ve varsayım: Det var … som …; Hadde hun bare …", "Medya, lehçe, deyim ve atasözü: kronikk, nynorsk, tilbake til tegnebrettet, Roma ble ikke bygd på én dag."]
+}
+];
+
+export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2), ...asExtra("B1", B1), ...asExtra("B2", B2), ...asExtra("C1", C1)];

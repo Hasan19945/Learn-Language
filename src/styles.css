@@ -244,6 +244,19 @@ button.chip{border:0}
 .vid-mail{animation:vidmail 3.4s ease-in infinite}
 .vid-sway{animation:vidsway 2.4s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 0}
 .vid-glow{animation:vidglow 3s ease-in-out infinite alternate}
+.vid-plane{animation:vidplane 9s ease-in infinite}
+.vid-ferry{animation:vidferry 18s ease-in-out infinite alternate}
+.vid-fall{stroke-dasharray:12 9;animation:vidfall .7s linear infinite}
+.vid-sweep{animation:vidsweep 4.5s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 0}
+.vid-float{animation:vidfloat 3s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+.vid-draw{stroke-dasharray:420;animation:viddraw 4.5s ease-out infinite}
+.vid-spin{animation:vidtick 24s linear infinite;transform-box:fill-box;transform-origin:center}
+@keyframes vidplane{0%,20%{transform:none;opacity:1}85%{transform:translate(-330px,-150px) scale(.45);opacity:1}100%{transform:translate(-380px,-175px) scale(.4);opacity:0}}
+@keyframes vidferry{from{transform:translateX(0)}to{transform:translateX(-170px)}}
+@keyframes vidfall{to{stroke-dashoffset:-21}}
+@keyframes vidsweep{from{transform:rotate(-16deg)}to{transform:rotate(16deg)}}
+@keyframes vidfloat{from{transform:translateY(0) rotate(-6deg)}to{transform:translateY(-16px) rotate(6deg)}}
+@keyframes viddraw{from{stroke-dashoffset:420}60%,to{stroke-dashoffset:0}}
 @keyframes vidwave{from{transform:translateX(-16px)}to{transform:translateX(16px)}}
 @keyframes vidfly{from{transform:translate(0,0)}to{transform:translate(-820px,-50px)}}
 @keyframes vidflap{to{transform:scaleY(.35)}}

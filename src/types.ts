@@ -41,7 +41,8 @@ export interface Note {
 
 export type StoryPlace = "desk" | "servers" | "meeting" | "home" | "clinic" | "ward" | "emergency"
   | "office" | "interview" | "bank" | "classroom" | "station" | "kitchen" | "mountain" | "shop"
-  | "study" | "townhall" | "cafe" | "moving" | "reception" | "dinner" | "stadium" | "beach";
+  | "study" | "townhall" | "cafe" | "moving" | "reception" | "dinner" | "stadium" | "beach"
+  | "lecture" | "police" | "airport" | "boardroom" | "tvstudio" | "fjord" | "stage" | "garden" | "library" | "wedding";
 export type StoryHero = "mira" | "emil" | "sara" | "hansen" | "berg";
 export type StoryMood = "happy" | "worried" | "surprised" | "thinking" | "proud";
 
