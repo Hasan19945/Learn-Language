@@ -213,4 +213,60 @@ const B2: LessonDef[] = [
 }
 ];
 
-export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2), ...asExtra("B1", B1), ...asExtra("B2", B2)];
+const C1: LessonDef[] = [
+{
+  id: "ne-c1-story", title: "Ten C1 stories", no: "Ti historier på C1-nivå", icon: "spark", stories: readingStories("c1", "en"),
+  intro: "Ten stories covering every C1 topic: academic language, emphasis, hypotheticals and regrets, negotiation, society and the media, dialects and slang, business idioms and proverbs.",
+  notes: [
+    { h: "Academic language, emphasis and hypotheticals", p: "Academic: legge fram problemstillingen, redegjøre for metoden, resultatene tyder på, utvalget er begrenset. Emphasis (utbrytning): Det var naboen hans som hadde sett sykkelen. Det som er vanskeligst, er å … Hypotheticals and regrets: Hadde hun bare stått opp …, ville hun ha rukket flyet. Om hun hadde tatt en taxi, kunne hun ha kommet fram." },
+    { h: "Negotiation, media, language variation and idioms", p: "Negotiation: holde på kravet, foreslå et kompromiss, påpeke, møtes på midten. Media: kronikk, ytringsfrihet, kildekritikk, regulere. Language variation: nynorsk, sognedialekt (kor, eg), slang (sykt bra). Business idioms: sommerfugler i magen, tilbake til tegnebrettet, treffe spikeren på hodet, brette opp ermene. Proverbs: Roma ble ikke bygd på én dag. Der det er vilje, er det vei." }
+  ],
+  tip: "In \"Hadde hun bare …\" the verb comes first and there is no hvis; it means \"if only …\". The same inverted pattern works for conditions: \"Hadde han ikke invitert dem, hadde de aldri møttes.\"",
+  words: [
+    N("en", "problemstilling", "problemstillingen", "problemstillinger", "research question", "proh-BLEM-stil-ling", "Hun legger fram problemstillingen.", "She presents the research question."),
+    W("redegjør for", "gives an account of", "REH-deh-yur for", "Hun redegjør for metoden.", "She gives an account of the method.", { note: "redegjøre – redegjorde" }),
+    W("tyder på", "suggests, indicates", "TEW-der paw", "Resultatene tyder på en sammenheng.", "The results suggest a connection.", { note: "tyde på" }),
+    N("et", "funn", "funnet", "funn", "finding", "fewn", "Funnene er relevante.", "The findings are relevant."),
+    N("et", "utvalg", "utvalget", "utvalg", "sample; selection", "EWT-valg", "Utvalget er begrenset.", "The sample is limited."),
+    W("anmelde", "report (to the police)", "AHN-mel-leh", "Han vil anmelde tyveriet.", "He wants to report the theft."),
+    N("et", "tyveri", "tyveriet", "tyverier", "theft", "tew-veh-REE", "Tyveriet skjedde i går.", "The theft happened yesterday."),
+    W("nettopp", "exactly, precisely; just", "NET-top", "Det var nettopp det som var rart.", "That was exactly what was strange."),
+    W("nemlig", "you see, namely", "NEM-lee", "Det var nemlig en ny lås.", "It was, you see, a new lock."),
+    W("angrer", "regrets", "AHN-grer", "Hun angrer på det.", "She regrets it.", { note: "angre på noe" }),
+    W("rukket", "caught, made it in time", "ROOK-ket", "Hun ville ha rukket flyet.", "She would have caught the plane.", { note: "rekke – rakk – har rukket" }),
+    W("tidsnok", "in time", "TEETS-nok", "Hun kom fram akkurat tidsnok.", "She arrived just in time."),
+    W("forhandle", "negotiate", "for-HAHN-dleh", "Han skal forhandle fram en avtale.", "He is going to negotiate an agreement."),
+    N("en", "leverandør", "leverandøren", "leverandører", "supplier", "leh-veh-rahn-DUR", "Leverandøren vil øke prisene.", "The supplier wants to raise prices."),
+    N("et", "krav", "kravet", "krav", "demand, requirement", "krahv", "Motparten holder på kravet sitt.", "The other side sticks to its demand."),
+    N("et", "kompromiss", "kompromisset", "kompromisser", "compromise", "kom-proh-MISS", "Emil foreslår et kompromiss.", "Emil suggests a compromise."),
+    N("en", "kronikk", "kronikken", "kronikker", "opinion piece", "kroo-NIK", "Hun skriver en kronikk.", "She is writing an opinion piece."),
+    W("ytringsfrihet", "freedom of expression", "EWT-rings-free-hayt", "Det kan true ytringsfriheten.", "It could threaten freedom of expression.", { g: "en", def: "ytringsfriheten" }),
+    W("kildekritikk", "critical evaluation of sources", "KHIL-deh-kri-tik", "Kildekritikk er viktigere enn forbud.", "Evaluating sources matters more than bans."),
+    W("nynorsk", "Nynorsk (the second written standard)", "NEW-noshk", "Skiltene er skrevet på nynorsk.", "The signs are written in Nynorsk."),
+    W("venne seg til", "get used to", "VEN-neh say til", "Han begynner å venne seg til uttalen.", "He starts to get used to the pronunciation."),
+    W("sommerfugler i magen", "butterflies in the stomach", "SOM-mer-fewg-ler ee MAH-gen", "Mira har sommerfugler i magen.", "Mira has butterflies in her stomach."),
+    W("tilbake til tegnebrettet", "back to the drawing board", "til-BAH-keh til TAY-neh-bret-teh", "De måtte tilbake til tegnebrettet.", "They had to go back to the drawing board."),
+    N("et", "ordtak", "ordtaket", "ordtak", "proverb", "OOR-tahk", "Hun har et ordtak for alt.", "She has a proverb for everything."),
+    W("forgjeves", "in vain", "for-YEH-ves", "Han venter ikke forgjeves.", "He isn't waiting in vain."),
+    N("en", "sammenheng", "sammenhengen", "sammenhenger", "connection, context", "SAHM-men-heng", "Hun forklarer komplekse sammenhenger.", "She explains complex connections."),
+    W("faktisk", "actually, in fact", "FAHK-tisk", "Det var faktisk Emil som introduserte dem.", "It was actually Emil who introduced them."),
+    N("et", "brudepar", "brudeparet", "brudepar", "bride and groom", "BREW-deh-pahr", "Han skåler for brudeparet.", "He toasts the bride and groom.")
+  ],
+  dialogue: [["A", "Hørte du debatten om ytringsfrihet i går?", "Did you hear the debate about freedom of expression yesterday?"], ["B", "Ja, og det var faktisk Mira som hadde de beste argumentene.", "Yes, and it was actually Mira who had the best arguments."], ["A", "Hadde jeg bare sett hele sendingen! Jeg rakk bare slutten.", "If only I had watched the whole broadcast! I only caught the end."], ["B", "Den ligger på nettet, så det er ikke for sent.", "It's online, so it's not too late."]],
+  quiz: [
+    Q("What does \"Resultatene tyder på at …\" mean?", ["The results suggest that …", "The results prove beyond doubt that …", "The results say nothing about …"], "tyde på = suggest, indicate; it is not absolute proof."),
+    Q("\"It was his neighbour who had seen the bike.\"", ["Det var naboen hans som hadde sett sykkelen.", "Det var naboen hans hadde sett sykkelen.", "Naboen hans det var som hadde sett sykkelen."], "Emphasis: Det var … som …"),
+    Q("\"If only she had got up when the alarm rang!\"", ["Hadde hun bare stått opp da vekkerklokka ringte!", "Hvis hun bare står opp da vekkerklokka ringte!", "Hun hadde bare stått opp da vekkerklokka ringer!"], "Hadde + subject + bare + participle = if only."),
+    Q("What does \"Det nytter ikke å gråte over spilt melk\" mean?", ["There's no use crying over spilt milk.", "Spilling milk brings bad luck.", "You must be careful in the kitchen."], "It's pointless to be upset about something that can't be changed."),
+    Q("In a negotiation, what does \"De møtes på midten\" mean?", ["They meet halfway.", "The meeting ends halfway through.", "They sit in the middle of the table."], "møtes på midten = both sides give a little."),
+    Q("According to Mira, what is more important than bans?", ["kildekritikk", "ytringsfrihet", "propaganda"], "Mira svarer at kildekritikk er viktigere enn forbud."),
+    Q("How is hvor said in the Sogn dialect?", ["kor", "eg", "no"], "Hun sier kor i stedet for hvor og eg i stedet for jeg."),
+    Q("What does \"tilbake til tegnebrettet\" mean?", ["back to the drawing board", "doing a drawing", "writing on the board"], "Starting again after a plan fails."),
+    Q("What does \"Det finnes ikke dårlig vær, bare dårlige klær\" advise?", ["Dress properly and go out whatever the weather.", "Stay in when the weather is bad.", "Buy expensive clothes."], "One of Norway's favourite sayings."),
+    Q("What is the pattern \"Det som er vanskeligst, er å forklare …\" used for?", ["Emphasising part of the sentence", "Asking a question", "Talking about the past"], "Det som … er … = cleft sentence (utbrytning).")
+  ],
+  review: ["Academic language: problemstilling, redegjøre for, tyde på, funn.", "Emphasis and hypotheticals: Det var … som …; Hadde hun bare …", "Media, dialects, idioms and proverbs: kronikk, nynorsk, tilbake til tegnebrettet, Roma ble ikke bygd på én dag."]
+}
+];
+
+export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2), ...asExtra("B1", B1), ...asExtra("B2", B2), ...asExtra("C1", C1)];

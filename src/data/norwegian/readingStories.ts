@@ -9,7 +9,7 @@ interface Source {
   scenes: { place: StoryPlace; mood: StoryMood; text: string; tr: string; en: string }[];
 }
 
-const STORIES: Record<"a0" | "a1" | "a2" | "b1" | "b2", Source[]> = {
+const STORIES: Record<"a0" | "a1" | "a2" | "b1" | "b2" | "c1", Source[]> = {
   a0: [
     {
       hero: "mira",
@@ -655,6 +655,233 @@ const STORIES: Record<"a0" | "a1" | "a2" | "b1" | "b2", Source[]> = {
           text: "Etter denne dagen bestemmer han seg for å kutte ned på engangsplast. Han mener at alle kan bidra, selv om det bare er med små endringer.",
           tr: "Bu günden sonra tek kullanımlık plastiği azaltmaya karar veriyor. Küçük değişikliklerle de olsa herkesin katkıda bulunabileceğini düşünüyor.",
           en: "After that day, he decides to cut down on single-use plastic. He thinks everyone can contribute, even if it's only with small changes." }
+      ]
+    }
+  ],
+  c1: [
+    {
+      hero: "mira",
+      title: { tr: "Mira tezini savunuyor", en: "Mira defends her thesis" },
+      scenes: [
+        { place: "lecture", mood: "worried",
+          text: "I dag skal Mira forsvare masteroppgaven sin om integrering på arbeidsmarkedet. Salen er full, og sensorene sitter på første rad.",
+          tr: "Bugün Mira, işgücü piyasasında entegrasyon üzerine yazdığı yüksek lisans tezini savunacak. Salon dolu ve jüri üyeleri ön sırada oturuyor.",
+          en: "Today Mira is defending her master's thesis on integration in the labour market. The hall is full, and the examiners are sitting in the front row." },
+        { place: "lecture", mood: "thinking",
+          text: "Hun legger fram problemstillingen og redegjør for metoden. Resultatene tyder på at språkkunnskaper har stor betydning for hvor raskt innvandrere får jobb.",
+          tr: "Araştırma sorusunu sunuyor ve yöntemini açıklıyor. Sonuçlar, dil bilgisinin göçmenlerin ne kadar hızlı iş bulduğu üzerinde büyük önem taşıdığına işaret ediyor.",
+          en: "She presents the research question and gives an account of the method. The results suggest that language skills are of great importance for how quickly immigrants find work." },
+        { place: "lecture", mood: "surprised",
+          text: "En av sensorene stiller et kritisk spørsmål om utvalget. Mira innrømmer at utvalget er begrenset, men argumenterer for at funnene likevel er relevante.",
+          tr: "Jüri üyelerinden biri örneklemle ilgili eleştirel bir soru soruyor. Mira örneklemin sınırlı olduğunu kabul ediyor ama bulguların yine de anlamlı olduğunu savunuyor.",
+          en: "One of the examiners asks a critical question about the sample. Mira admits that the sample is limited, but argues that the findings are nevertheless relevant." },
+        { place: "lecture", mood: "proud",
+          text: "Etter en time med diskusjon får hun beskjed om at oppgaven er bestått med karakteren A. Det var verdt alle de sene kveldene på lesesalen!",
+          tr: "Bir saatlik tartışmanın ardından tezinin A notuyla kabul edildiği bildiriliyor. Okuma salonundaki onca geç saate değdi!",
+          en: "After an hour of discussion, she is told that the thesis has passed with an A. It was worth all those late evenings in the reading room!" }
+      ]
+    },
+    {
+      hero: "emil",
+      casual: true,
+      title: { tr: "Çalınan bisiklet", en: "The stolen bike" },
+      scenes: [
+        { place: "police", mood: "worried",
+          text: "Da Emil kom ut fra jobben i går, var sykkelen hans borte. Det var ikke første gang det skjedde i det strøket.",
+          tr: "Emil dün işten çıktığında bisikleti yoktu. O semtte bu ilk kez olmuyordu.",
+          en: "When Emil came out of work yesterday, his bike was gone. It wasn't the first time it had happened in that area." },
+        { place: "police", mood: "thinking",
+          text: "Han dro til politistasjonen for å anmelde tyveriet. Betjenten spurte om sykkelen hadde vært låst, og Emil svarte at det var nettopp det som var så rart.",
+          tr: "Hırsızlığı bildirmek için karakola gitti. Polis memuru bisikletin kilitli olup olmadığını sordu, Emil de tuhaf olanın tam da bu olduğunu söyledi.",
+          en: "He went to the police station to report the theft. The officer asked whether the bike had been locked, and Emil answered that that was exactly what was so strange." },
+        { place: "police", mood: "surprised",
+          text: "Det var nemlig en ny og dyr lås han hadde kjøpt bare uka før. Det er slike låser tyvene klipper opp på sekunder, forklarte betjenten.",
+          tr: "Çünkü sadece bir hafta önce aldığı yeni ve pahalı bir kilitti. Hırsızların saniyeler içinde kestiği kilitler tam da bunlar, diye açıkladı memur.",
+          en: "You see, it was a new and expensive lock that he had bought only the week before. It's locks like that the thieves cut open in seconds, the officer explained." },
+        { place: "police", mood: "proud",
+          text: "Tre dager senere ringte politiet. Det var naboen hans som hadde sett sykkelen bak et kjøpesenter!",
+          tr: "Üç gün sonra polis aradı. Bisikleti bir alışveriş merkezinin arkasında gören, komşusuydu!",
+          en: "Three days later, the police called. It was his neighbour who had seen the bike behind a shopping centre!" }
+      ]
+    },
+    {
+      hero: "mira",
+      title: { tr: "Kaçan uçak", en: "The missed flight" },
+      scenes: [
+        { place: "airport", mood: "worried",
+          text: "Mira skulle fly til Istanbul for å feire bursdagen til mora. Men da hun kom til Gardermoen, hadde flyet allerede gått.",
+          tr: "Mira annesinin doğum gününü kutlamak için İstanbul'a uçacaktı. Ama Gardermoen'e vardığında uçak çoktan kalkmıştı.",
+          en: "Mira was going to fly to Istanbul to celebrate her mother's birthday. But when she got to Gardermoen, the plane had already left." },
+        { place: "airport", mood: "thinking",
+          text: "Hadde hun bare stått opp da vekkerklokka ringte, ville hun ha rukket flyet. Hun angrer på at hun trykket på slumreknappen tre ganger.",
+          tr: "Keşke çalar saat çaldığında kalksaydı, o zaman uçağa yetişirdi. Erteleme düğmesine üç kez bastığına pişman.",
+          en: "If only she had got up when the alarm clock rang, she would have caught the plane. She regrets pressing the snooze button three times." },
+        { place: "airport", mood: "thinking",
+          text: "Om hun hadde tatt en taxi i stedet for toget, kunne hun kanskje ha kommet fram i tide. Men det nytter ikke å gråte over spilt melk.",
+          tr: "Tren yerine taksiye binseydi belki zamanında varabilirdi. Ama olan olmuş, ağlamanın faydası yok.",
+          en: "If she had taken a taxi instead of the train, she might have arrived in time. But there's no use crying over spilt milk." },
+        { place: "airport", mood: "proud",
+          text: "Heldigvis fant hun et nytt fly samme kveld. Hun kom fram akkurat tidsnok til å synge bursdagssangen.",
+          tr: "Neyse ki aynı akşam başka bir uçak buldu. Doğum günü şarkısını söylemeye tam zamanında yetişti.",
+          en: "Luckily, she found another flight the same evening. She arrived just in time to sing the birthday song." }
+      ]
+    },
+    {
+      hero: "emil",
+      casual: true,
+      title: { tr: "Zorlu pazarlık", en: "A tough negotiation" },
+      scenes: [
+        { place: "boardroom", mood: "thinking",
+          text: "Emil har fått ansvaret for å forhandle fram en ny avtale med en leverandør. Leverandøren vil øke prisene med femten prosent.",
+          tr: "Emil'e bir tedarikçiyle yeni bir anlaşma için müzakere yapma sorumluluğu verildi. Tedarikçi fiyatları yüzde on beş artırmak istiyor.",
+          en: "Emil has been given responsibility for negotiating a new agreement with a supplier. The supplier wants to raise prices by fifteen per cent." },
+        { place: "boardroom", mood: "worried",
+          text: "I møtet holder motparten hardt på kravet sitt. Emil foreslår et kompromiss, men de vil ikke gi seg.",
+          tr: "Toplantıda karşı taraf talebinden vazgeçmiyor. Emil bir uzlaşma öneriyor ama onlar geri adım atmıyor.",
+          en: "In the meeting, the other side holds firmly to its demand. Emil suggests a compromise, but they won't back down." },
+        { place: "boardroom", mood: "thinking",
+          text: "Da påpeker Emil at de har vært kunder i ti år og kan tenke seg en lengre avtale. Hvis de får fem prosent, binder firmaet seg i tre år.",
+          tr: "Bunun üzerine Emil, on yıldır müşteri olduklarını ve daha uzun bir anlaşmaya açık olduklarını belirtiyor. Yüzde beş verirlerse firma kendini üç yıllığına bağlayacak.",
+          en: "Then Emil points out that they have been customers for ten years and would consider a longer agreement. If they get five per cent, the company will commit for three years." },
+        { place: "boardroom", mood: "proud",
+          text: "Etter en kort pause sier leverandøren seg enig. De møtes på midten med sju prosent, og begge parter går fornøyde fra bordet.",
+          tr: "Kısa bir aradan sonra tedarikçi kabul ediyor. Ortada, yüzde yedide buluşuyorlar ve iki taraf da masadan memnun kalkıyor.",
+          en: "After a short break, the supplier agrees. They meet halfway at seven per cent, and both parties leave the table satisfied." }
+      ]
+    },
+    {
+      hero: "mira",
+      title: { tr: "Canlı yayında", en: "Live on air" },
+      scenes: [
+        { place: "tvstudio", mood: "surprised",
+          text: "Mira blir invitert til en TV-debatt om falske nyheter i sosiale medier. Hun har nemlig skrevet en kronikk om temaet som har fått mye oppmerksomhet.",
+          tr: "Mira, sosyal medyadaki sahte haberlerle ilgili bir televizyon tartışmasına davet ediliyor. Çünkü bu konuda çok ilgi gören bir köşe yazısı yazdı.",
+          en: "Mira is invited to a TV debate on fake news on social media. She has, you see, written an opinion piece on the subject that has attracted a lot of attention." },
+        { place: "tvstudio", mood: "worried",
+          text: "Programlederen spør om ikke staten burde regulere plattformene strengere. En annen gjest mener at det vil true ytringsfriheten.",
+          tr: "Program sunucusu, devletin platformları daha sıkı denetlemesi gerekip gerekmediğini soruyor. Başka bir konuk bunun ifade özgürlüğünü tehdit edeceğini düşünüyor.",
+          en: "The presenter asks whether the state shouldn't regulate the platforms more strictly. Another guest thinks that would threaten freedom of expression." },
+        { place: "tvstudio", mood: "thinking",
+          text: "Mira svarer at kildekritikk er viktigere enn forbud. Hun mener at skolen må lære barna å skille mellom fakta og propaganda.",
+          tr: "Mira, kaynak eleştirisinin yasaklardan daha önemli olduğunu söylüyor. Okulun çocuklara gerçeklerle propagandayı ayırt etmeyi öğretmesi gerektiğini düşünüyor.",
+          en: "Mira replies that critical evaluation of sources is more important than bans. She believes that schools must teach children to distinguish between facts and propaganda." },
+        { place: "tvstudio", mood: "proud",
+          text: "Etter sendingen får hun hundrevis av meldinger. De fleste er positive, selv om noen kaller henne naiv.",
+          tr: "Yayından sonra yüzlerce mesaj alıyor. Bazıları ona saf dese de çoğu olumlu.",
+          en: "After the broadcast she receives hundreds of messages. Most are positive, even though some call her naive." }
+      ]
+    },
+    {
+      hero: "emil",
+      casual: true,
+      title: { tr: "Batı Norveç lehçesi", en: "A dialect in western Norway" },
+      scenes: [
+        { place: "fjord", mood: "happy",
+          text: "I sommerferien tar Emil ferja over Sognefjorden for å besøke en kollega. Skiltene på kaia er skrevet på nynorsk.",
+          tr: "Yaz tatilinde Emil bir iş arkadaşını ziyaret etmek için feribotla Sognefjord'u geçiyor. İskeledeki tabelalar nynorsk ile yazılmış.",
+          en: "In the summer holidays, Emil takes the ferry across the Sognefjord to visit a colleague. The signs on the quay are written in Nynorsk." },
+        { place: "fjord", mood: "surprised",
+          text: "Kollegaen snakker sognedialekt, og Emil forstår nesten ingenting. Hun sier kor i stedet for hvor og eg i stedet for jeg.",
+          tr: "İş arkadaşı Sogn lehçesiyle konuşuyor ve Emil neredeyse hiçbir şey anlamıyor. Hvor yerine kor, jeg yerine eg diyor.",
+          en: "His colleague speaks the Sogn dialect, and Emil understands almost nothing. She says kor instead of hvor and eg instead of jeg." },
+        { place: "fjord", mood: "thinking",
+          text: "Etter noen dager begynner Emil å venne seg til uttalen. Han plukker også opp litt slang fra ungdommene i bygda, som sier at alt er sykt bra.",
+          tr: "Birkaç gün sonra Emil telaffuza alışmaya başlıyor. Köydeki gençlerden biraz argo da kapıyor; onlar her şeye sykt bra diyor.",
+          en: "After a few days, Emil starts to get used to the pronunciation. He also picks up some slang from the young people in the village, who say that everything is sykt bra." },
+        { place: "fjord", mood: "proud",
+          text: "Da han reiser hjem, kan han si takk for no på ekte sognedialekt. Han skjønner at det ikke finnes én riktig måte å snakke norsk på.",
+          tr: "Eve dönerken gerçek Sogn lehçesiyle takk for no diyebiliyor. Norveççe konuşmanın tek bir doğru yolu olmadığını anlıyor.",
+          en: "When he travels home, he can say takk for no in genuine Sogn dialect. He realises that there is no single correct way of speaking Norwegian." }
+      ]
+    },
+    {
+      hero: "mira",
+      title: { tr: "Yatırımcılara sunum", en: "The pitch" },
+      scenes: [
+        { place: "stage", mood: "worried",
+          text: "Mira og to venner har laget en app som kobler eldre med frivillige. I kveld skal de pitche ideen for investorer, og Mira har sommerfugler i magen.",
+          tr: "Mira ve iki arkadaşı, yaşlıları gönüllülerle buluşturan bir uygulama geliştirdi. Bu akşam fikirlerini yatırımcılara sunacaklar ve Mira'nın midesinde kelebekler uçuşuyor.",
+          en: "Mira and two friends have made an app that connects older people with volunteers. Tonight they are pitching the idea to investors, and Mira has butterflies in her stomach." },
+        { place: "stage", mood: "thinking",
+          text: "Den første versjonen floppet, så de måtte tilbake til tegnebrettet. Nå har de tenkt nytt og satser alt på brukervennlighet.",
+          tr: "İlk sürüm başarısız oldu, bu yüzden en baştan başlamak zorunda kaldılar. Şimdi yeniden düşündüler ve her şeyi kullanım kolaylığına yatırıyorlar.",
+          en: "The first version flopped, so they had to go back to the drawing board. Now they have rethought everything and are betting everything on user-friendliness." },
+        { place: "stage", mood: "happy",
+          text: "Mira snakker engasjert, og hun treffer spikeren på hodet når hun forklarer behovet. En investor sier at de har gode kort på hånden.",
+          tr: "Mira tutkuyla konuşuyor ve ihtiyacı anlatırken tam üstüne basıyor. Bir yatırımcı ellerinde güçlü kozlar olduğunu söylüyor.",
+          en: "Mira speaks passionately, and she hits the nail on the head when she explains the need. One investor says that they hold a strong hand." },
+        { place: "stage", mood: "proud",
+          text: "Etter pitchen får de et tilbud på to millioner kroner. Nå er det bare å brette opp ermene!",
+          tr: "Sunumdan sonra iki milyon kronluk bir teklif alıyorlar. Artık tek yapmaları gereken kolları sıvamak!",
+          en: "After the pitch, they get an offer of two million kroner. Now it's just a matter of rolling up their sleeves!" }
+      ]
+    },
+    {
+      hero: "emil",
+      casual: true,
+      title: { tr: "Ingrid'in atasözleri", en: "Ingrid's proverbs" },
+      scenes: [
+        { place: "garden", mood: "happy",
+          text: "Om våren hjelper Emil naboen sin, Ingrid, i hagen. Hun er åtti år og har et ordtak for enhver anledning.",
+          tr: "Baharda Emil komşusu Ingrid'e bahçede yardım ediyor. Ingrid seksen yaşında ve her duruma uygun bir atasözü var.",
+          en: "In spring, Emil helps his neighbour, Ingrid, in her garden. She is eighty and has a proverb for every occasion." },
+        { place: "garden", mood: "thinking",
+          text: "Da Emil vil plante alt på én dag, minner hun ham på at Roma ikke ble bygd på én dag. Når han klager over regnet, svarer hun at det ikke finnes dårlig vær, bare dårlige klær.",
+          tr: "Emil her şeyi bir günde dikmek isteyince Ingrid ona Roma'nın bir günde kurulmadığını hatırlatıyor. Yağmurdan şikâyet ettiğinde ise kötü hava diye bir şey olmadığını, sadece kötü giysiler olduğunu söylüyor.",
+          en: "When Emil wants to plant everything in one day, she reminds him that Rome wasn't built in a day. When he complains about the rain, she replies that there's no such thing as bad weather, only bad clothes." },
+        { place: "garden", mood: "surprised",
+          text: "Om sommeren er hagen full av tomater og bær. Ingrid smiler og sier at den som venter på noe godt, ikke venter forgjeves.",
+          tr: "Yazın bahçe domates ve meyvelerle dolu. Ingrid gülümseyip güzel bir şey bekleyenin boşuna beklemediğini söylüyor.",
+          en: "In summer, the garden is full of tomatoes and berries. Ingrid smiles and says that good things come to those who wait." },
+        { place: "garden", mood: "proud",
+          text: "Emil tar med seg en kurv med grønnsaker hjem. Han tenker at ordtakene inneholder mye livsvisdom.",
+          tr: "Emil eve bir sepet sebze götürüyor. Atasözlerinin çok fazla hayat bilgeliği içerdiğini düşünüyor.",
+          en: "Emil takes a basket of vegetables home. He thinks that the proverbs contain a lot of wisdom about life." }
+      ]
+    },
+    {
+      hero: "mira",
+      title: { tr: "Kütüphanede köşe yazısı", en: "An opinion piece at the library" },
+      scenes: [
+        { place: "library", mood: "thinking",
+          text: "Mira skal skrive en kronikk om klimatilpasning for en stor avis. Hun tilbringer hele lørdagen på Deichman for å finne gode kilder.",
+          tr: "Mira büyük bir gazete için iklime uyum üzerine bir köşe yazısı yazacak. İyi kaynaklar bulmak için bütün cumartesiyi Deichman kütüphanesinde geçiriyor.",
+          en: "Mira is going to write an opinion piece on climate adaptation for a major newspaper. She spends all of Saturday at the Deichman library to find good sources." },
+        { place: "library", mood: "thinking",
+          text: "Hun leser forskningsrapporter og noterer hovedpunktene. Det er viktig å skille mellom egne meninger og det forskningen faktisk viser.",
+          tr: "Araştırma raporlarını okuyup ana noktaları not ediyor. Kendi görüşleriyle araştırmanın gerçekte gösterdiğini birbirinden ayırmak önemli.",
+          en: "She reads research reports and notes down the main points. It is important to distinguish between her own opinions and what the research actually shows." },
+        { place: "library", mood: "worried",
+          text: "Det som er vanskeligst, er å forklare komplekse sammenhenger på en enkel måte. Hun skriver innledningen fem ganger før hun er fornøyd.",
+          tr: "En zor olan, karmaşık ilişkileri basit bir şekilde açıklamak. Memnun kalana kadar girişi beş kez yazıyor.",
+          en: "What is hardest is explaining complex connections in a simple way. She writes the introduction five times before she is satisfied." },
+        { place: "library", mood: "proud",
+          text: "Kronikken blir publisert på mandag og delt flere tusen ganger. Flere politikere henviser til den i debatten.",
+          tr: "Köşe yazısı pazartesi günü yayımlanıyor ve binlerce kez paylaşılıyor. Birçok politikacı tartışmada ona atıfta bulunuyor.",
+          en: "The opinion piece is published on Monday and shared several thousand times. Several politicians refer to it in the debate." }
+      ]
+    },
+    {
+      hero: "emil",
+      casual: true,
+      title: { tr: "Düğün konuşması", en: "The wedding speech" },
+      scenes: [
+        { place: "wedding", mood: "happy",
+          text: "Emils beste venn, Jonas, gifter seg med Sofie, og Emil skal holde tale. Han har øvd foran speilet i en hel uke.",
+          tr: "Emil'in en iyi arkadaşı Jonas, Sofie ile evleniyor ve Emil konuşma yapacak. Bir hafta boyunca aynanın karşısında prova yaptı.",
+          en: "Emil's best friend, Jonas, is marrying Sofie, and Emil is giving a speech. He has practised in front of the mirror for a whole week." },
+        { place: "wedding", mood: "thinking",
+          text: "Det var faktisk Emil som introduserte dem for hverandre for fem år siden. Hvis han ikke hadde invitert dem på den samme festen, hadde de kanskje aldri møttes.",
+          tr: "Aslında onları beş yıl önce birbiriyle tanıştıran Emil'di. Onları aynı partiye davet etmeseydi belki de hiç tanışmayacaklardı.",
+          en: "In fact, it was Emil who introduced them to each other five years ago. If he hadn't invited them to the same party, they might never have met." },
+        { place: "wedding", mood: "happy",
+          text: "Gjestene ler når han forteller om den første daten, da Jonas gikk seg vill og kom en time for sent. Sofie ventet likevel, for der det er vilje, er det vei.",
+          tr: "İlk buluşmayı, Jonas'ın kaybolup bir saat geç kaldığını anlattığında konuklar gülüyor. Sofie yine de bekledi, çünkü isteyen her şeyi başarır.",
+          en: "The guests laugh when he tells them about the first date, when Jonas got lost and arrived an hour late. Sofie waited anyway, because where there's a will, there's a way." },
+        { place: "wedding", mood: "proud",
+          text: "Til slutt løfter Emil glasset og ønsker brudeparet lykke til. Alle reiser seg og skåler for kjærligheten.",
+          tr: "Sonunda Emil kadehini kaldırıp gelin ve damada mutluluklar diliyor. Herkes ayağa kalkıp aşk için kadeh kaldırıyor.",
+          en: "Finally, Emil raises his glass and wishes the bride and groom good luck. Everyone stands up and drinks a toast to love." }
       ]
     }
   ]
