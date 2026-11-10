@@ -9,7 +9,7 @@ interface Source {
   scenes: { place: StoryPlace; mood: StoryMood; text: string; tr: string; en: string }[];
 }
 
-const STORIES: Record<"a0" | "a1" | "a2" | "b1", Source[]> = {
+const STORIES: Record<"a0" | "a1" | "a2" | "b1" | "b2", Source[]> = {
   a0: [
     {
       hero: "mira",
@@ -473,6 +473,188 @@ const STORIES: Record<"a0" | "a1" | "a2" | "b1", Source[]> = {
           text: "Han velger en ny jakke som er både varmere og lettere. Han er fornøyd med servicen.",
           tr: "Hem daha sıcak hem daha hafif olan yeni bir mont seçiyor. Hizmetten memnun.",
           en: "He chooses a new jacket that is both warmer and lighter. He is satisfied with the service." }
+      ]
+    }
+  ],
+  b2: [
+    {
+      hero: "mira",
+      title: { tr: "Ev sahibine resmî e-posta", en: "A formal email to the landlord" },
+      scenes: [
+        { place: "study", mood: "worried",
+          text: "Det har vært fuktig på badet til Mira i flere måneder, og nå har det kommet mugg på veggen. Utleieren har ikke svart på meldingene hennes.",
+          tr: "Mira'nın banyosu aylardır nemli ve artık duvarda küf oluştu. Ev sahibi mesajlarına cevap vermedi.",
+          en: "Mira's bathroom has been damp for several months, and now mould has appeared on the wall. The landlord hasn't answered her messages." },
+        { place: "study", mood: "thinking",
+          text: "Derfor bestemmer hun seg for å skrive en formell e-post. Hun holder seg til fakta og legger ved bilder av veggen.",
+          tr: "Bu yüzden resmî bir e-posta yazmaya karar veriyor. Sadece gerçeklere bağlı kalıyor ve duvarın fotoğraflarını ekliyor.",
+          en: "So she decides to write a formal email. She sticks to the facts and attaches photos of the wall." },
+        { place: "study", mood: "thinking",
+          text: "I e-posten ber hun om at saken blir behandlet så snart som mulig. Dersom hun ikke får svar innen fjorten dager, vil hun kontakte Leieboerforeningen.",
+          tr: "E-postada konunun en kısa sürede ele alınmasını rica ediyor. On dört gün içinde cevap alamazsa Kiracılar Derneği'ne başvuracak.",
+          en: "In the email she asks for the matter to be dealt with as soon as possible. If she doesn't get an answer within fourteen days, she will contact the Tenants' Association." },
+        { place: "study", mood: "proud",
+          text: "Allerede dagen etter ringer utleieren og beklager. En håndverker kommer neste uke for å fikse problemet.",
+          tr: "Daha ertesi gün ev sahibi arayıp özür diliyor. Gelecek hafta sorunu çözmek için bir usta gelecek.",
+          en: "The very next day, the landlord calls and apologises. A tradesman is coming next week to fix the problem." }
+      ]
+    },
+    {
+      hero: "emil",
+      casual: true,
+      title: { tr: "Halk toplantısı", en: "The public meeting" },
+      scenes: [
+        { place: "townhall", mood: "happy",
+          text: "Kommunen vil bygge en ny vei gjennom parken i bydelen der Emil bor. I kveld er det folkemøte om saken.",
+          tr: "Belediye, Emil'in yaşadığı semtteki parkın içinden yeni bir yol yapmak istiyor. Bu akşam konuyla ilgili bir halk toplantısı var.",
+          en: "The council wants to build a new road through the park in the district where Emil lives. Tonight there is a public meeting about it." },
+        { place: "townhall", mood: "thinking",
+          text: "På den ene siden vil veien gjøre det lettere å komme seg til sentrum. På den andre siden vil barna miste et viktig sted å leke.",
+          tr: "Bir yandan yol, şehir merkezine ulaşmayı kolaylaştıracak. Öte yandan çocuklar oyun oynayabilecekleri önemli bir yeri kaybedecek.",
+          en: "On the one hand, the road will make it easier to get to the city centre. On the other hand, the children will lose an important place to play." },
+        { place: "townhall", mood: "worried",
+          text: "Emil er nervøs, men han tar ordet likevel. Han mener at kommunen heller bør satse på et bedre busstilbud, ettersom det er bra både for miljøet og for folkehelsen.",
+          tr: "Emil gergin ama yine de söz alıyor. Belediyenin bunun yerine daha iyi otobüs hizmetine yatırım yapması gerektiğini savunuyor, çünkü bu hem çevre hem de halk sağlığı için iyi.",
+          en: "Emil is nervous, but he speaks up anyway. He thinks the council should rather invest in better bus services, since that is good both for the environment and for public health." },
+        { place: "townhall", mood: "proud",
+          text: "Mange i salen klapper og sier seg enige. Politikerne lover å vurdere forslaget hans nøye.",
+          tr: "Salondaki birçok kişi alkışlıyor ve katıldığını söylüyor. Politikacılar önerisini dikkatle değerlendirmeye söz veriyor.",
+          en: "Many people in the hall clap and say they agree. The politicians promise to consider his proposal carefully." }
+      ]
+    },
+    {
+      hero: "mira",
+      title: { tr: "Kafede deyimler", en: "Idioms at the café" },
+      scenes: [
+        { place: "cafe", mood: "happy",
+          text: "Mira har begynt å jobbe deltid på en kafé i sentrum. Kollegaen hennes, Ola, elsker faste uttrykk.",
+          tr: "Mira şehir merkezindeki bir kafede yarı zamanlı çalışmaya başladı. İş arkadaşı Ola deyimlere bayılıyor.",
+          en: "Mira has started working part-time at a café in the city centre. Her colleague, Ola, loves idioms." },
+        { place: "cafe", mood: "surprised",
+          text: "Den første dagen er det kø helt ut døra, og Mira søler kaffe på en gjest. Ola smiler og sier at det ikke er verdens undergang.",
+          tr: "İlk gün kapıya kadar kuyruk var ve Mira bir müşterinin üstüne kahve döküyor. Ola gülümseyip bunun dünyanın sonu olmadığını söylüyor.",
+          en: "On the first day the queue goes all the way out the door, and Mira spills coffee on a customer. Ola smiles and says it isn't the end of the world." },
+        { place: "cafe", mood: "thinking",
+          text: "Etter en uke går alt som smurt. Mira skjønner at uttrykket betyr at alt går veldig greit.",
+          tr: "Bir hafta sonra her şey yağ gibi akıyor. Mira bu deyimin her şeyin çok iyi gittiği anlamına geldiğini anlıyor.",
+          en: "After a week, everything is going like clockwork. Mira realises that the expression means that everything is going very smoothly." },
+        { place: "cafe", mood: "proud",
+          text: "Nå bruker hun uttrykkene selv. Da sjefen spør om hun vil ha flere vakter, svarer hun at det passer midt i blinken!",
+          tr: "Artık deyimleri kendisi de kullanıyor. Patronu daha fazla vardiya isteyip istemediğini sorunca, bunun tam on ikiden vurduğunu söylüyor!",
+          en: "Now she uses the expressions herself. When the boss asks if she wants more shifts, she answers that it suits her down to the ground!" }
+      ]
+    },
+    {
+      hero: "emil",
+      casual: true,
+      title: { tr: "Taşınma günü", en: "Moving day" },
+      scenes: [
+        { place: "moving", mood: "happy",
+          text: "Emil og familien skal flytte inn i et større hus på lørdag. Hele uka har de pakket ting ned i esker.",
+          tr: "Emil ve ailesi cumartesi günü daha büyük bir eve taşınacak. Bütün hafta eşyaları kolilere yerleştirdiler.",
+          en: "Emil and his family are moving into a bigger house on Saturday. All week they have been packing things into boxes." },
+        { place: "moving", mood: "worried",
+          text: "På lørdag morgen ringer firmaet som skulle leie ut flyttebilen, og sier at de må avlyse. Emil må finne ut av det i en fart.",
+          tr: "Cumartesi sabahı nakliye aracını kiralayacak olan firma arayıp iptal etmek zorunda olduğunu söylüyor. Emil'in sorunu hemen çözmesi gerekiyor.",
+          en: "On Saturday morning, the company that was going to rent out the removal van calls and says they have to cancel. Emil has to sort it out quickly." },
+        { place: "moving", mood: "thinking",
+          text: "Han ringer naboen, som tilbyr seg å låne dem tilhengeren sin. Sammen klarer de å bære ut sofaen og sette opp sengene i det nye huset.",
+          tr: "Komşusunu arıyor; komşusu onlara römorkunu ödünç vermeyi teklif ediyor. Birlikte koltuğu dışarı taşımayı ve yeni evde yatakları kurmayı başarıyorlar.",
+          en: "He calls his neighbour, who offers to lend them his trailer. Together they manage to carry out the sofa and put up the beds in the new house." },
+        { place: "moving", mood: "proud",
+          text: "Om kvelden er de slitne, men fornøyde. Det tar nok noen uker å pakke ut alt, men nå er de endelig på plass.",
+          tr: "Akşam yorgunlar ama memnunlar. Her şeyi açmak muhtemelen birkaç hafta sürecek ama artık sonunda yerleştiler.",
+          en: "In the evening they are tired but happy. It will probably take a few weeks to unpack everything, but now they are finally settled." }
+      ]
+    },
+    {
+      hero: "mira",
+      title: { tr: "Fazla mesai hakkı", en: "The right to overtime pay" },
+      scenes: [
+        { place: "reception", mood: "worried",
+          text: "Mira jobber i resepsjonen på et hotell i Oslo. De siste månedene har hun jobbet mye overtid uten å få betalt for det.",
+          tr: "Mira Oslo'daki bir otelin resepsiyonunda çalışıyor. Son aylarda karşılığını almadan çok fazla mesai yaptı.",
+          en: "Mira works at the reception of a hotel in Oslo. In recent months she has worked a lot of overtime without being paid for it." },
+        { place: "reception", mood: "thinking",
+          text: "Hun leser arbeidskontrakten sin nøye. Der står det at overtid skal betales med minst førti prosent tillegg.",
+          tr: "İş sözleşmesini dikkatle okuyor. Orada fazla mesainin en az yüzde kırk ek ücretle ödenmesi gerektiği yazıyor.",
+          en: "She reads her employment contract carefully. It says that overtime must be paid with at least a forty per cent supplement." },
+        { place: "reception", mood: "thinking",
+          text: "Hun tar kontakt med den tillitsvalgte, som forklarer hvilke rettigheter hun har. Sammen tar de opp saken med lederen.",
+          tr: "Sendika temsilcisiyle iletişime geçiyor; temsilci ona hangi haklara sahip olduğunu açıklıyor. Birlikte konuyu müdürle görüşüyorlar.",
+          en: "She contacts the union representative, who explains what rights she has. Together they raise the matter with the manager." },
+        { place: "reception", mood: "proud",
+          text: "Lederen innrømmer at det har skjedd en feil. Mira får etterbetalt lønnen, og hotellet lover å følge reglene i framtiden.",
+          tr: "Müdür bir hata yapıldığını kabul ediyor. Mira'nın maaş farkı ödeniyor ve otel gelecekte kurallara uyacağına söz veriyor.",
+          en: "The manager admits that a mistake has been made. Mira gets her back pay, and the hotel promises to follow the rules in future." }
+      ]
+    },
+    {
+      hero: "emil",
+      casual: true,
+      title: { tr: "Kari'de akşam yemeği", en: "Dinner at Kari's" },
+      scenes: [
+        { place: "dinner", mood: "happy",
+          text: "Emil er invitert på middag hos kollegaen sin, Kari. Han har med seg blomster og en kake som han har bakt selv.",
+          tr: "Emil iş arkadaşı Kari'ye akşam yemeğine davetli. Yanında çiçek ve kendi yaptığı bir pasta getirdi.",
+          en: "Emil is invited to dinner at his colleague Kari's place. He brings flowers and a cake that he has baked himself." },
+        { place: "dinner", mood: "surprised",
+          text: "Kari sier at han da ikke trengte å ta med noe. Emil vet at småordet da gjør setningen vennligere, ikke strengere.",
+          tr: "Kari, bir şey getirmesine hiç gerek olmadığını söylüyor. Emil, da kelimesinin cümleyi sertleştirmediğini, aksine daha sıcak yaptığını biliyor.",
+          en: "Kari says that he really didn't need to bring anything. Emil knows that the little word da makes the sentence friendlier, not stricter." },
+        { place: "dinner", mood: "thinking",
+          text: "Under middagen snakker de om alt mulig. Kari sier at Emil jo har bodd i Norge lenge, og at han nok snakker bedre norsk enn han tror.",
+          tr: "Yemek boyunca her şeyden konuşuyorlar. Kari, Emil'in zaten uzun zamandır Norveç'te yaşadığını ve muhtemelen sandığından daha iyi Norveççe konuştuğunu söylüyor.",
+          en: "During dinner they talk about all sorts of things. Kari says that Emil has, after all, lived in Norway for a long time, and that he probably speaks better Norwegian than he thinks." },
+        { place: "dinner", mood: "proud",
+          text: "Da han går, takker han for maten og for en hyggelig kveld. Neste gang skal han invitere Kari og familien hennes hjem til seg.",
+          tr: "Giderken yemek ve güzel akşam için teşekkür ediyor. Bir dahaki sefere Kari'yi ve ailesini kendi evine davet edecek.",
+          en: "When he leaves, he thanks her for the meal and for a lovely evening. Next time he is going to invite Kari and her family to his home." }
+      ]
+    },
+    {
+      hero: "mira",
+      title: { tr: "Yarı maraton", en: "The half marathon" },
+      scenes: [
+        { place: "stadium", mood: "happy",
+          text: "Mira har trent til Oslo Maraton i et halvt år. Målet hennes er å løpe halvmaraton på under to timer.",
+          tr: "Mira altı aydır Oslo Maratonu için antrenman yapıyor. Hedefi yarı maratonu iki saatin altında koşmak.",
+          en: "Mira has been training for the Oslo Marathon for half a year. Her goal is to run the half marathon in under two hours." },
+        { place: "stadium", mood: "worried",
+          text: "To uker før løpet får hun vondt i kneet. Fysioterapeuten råder henne til å ta det med ro, ellers kan skaden bli verre.",
+          tr: "Yarıştan iki hafta önce dizi ağrımaya başlıyor. Fizyoterapist ona yavaşlamasını tavsiye ediyor, yoksa sakatlık kötüleşebilir.",
+          en: "Two weeks before the race, her knee starts to hurt. The physiotherapist advises her to take it easy, otherwise the injury could get worse." },
+        { place: "stadium", mood: "thinking",
+          text: "Mira er skuffet, men hun følger rådet. I stedet for å løpe sykler og svømmer hun for å holde formen ved like.",
+          tr: "Mira hayal kırıklığına uğruyor ama tavsiyeye uyuyor. Koşmak yerine formunu korumak için bisiklete biniyor ve yüzüyor.",
+          en: "Mira is disappointed, but she follows the advice. Instead of running, she cycles and swims to keep in shape." },
+        { place: "stadium", mood: "proud",
+          text: "På løpsdagen er kneet bra igjen. Hun krysser målstreken etter én time og femtiåtte minutter, og hun er stolt som en hane!",
+          tr: "Yarış günü dizi yine iyi. Bitiş çizgisini bir saat elli sekiz dakikada geçiyor ve gururdan göğsü kabarıyor!",
+          en: "On race day, her knee is fine again. She crosses the finish line after one hour and fifty-eight minutes, and she is as proud as a peacock!" }
+      ]
+    },
+    {
+      hero: "emil",
+      casual: true,
+      title: { tr: "Sahil temizliği", en: "The beach clean-up" },
+      scenes: [
+        { place: "beach", mood: "happy",
+          text: "En lørdag i mai blir Emil med på strandrydding sammen med en miljøorganisasjon. Været er strålende, og det er mange frivillige der.",
+          tr: "Mayıs ayında bir cumartesi günü Emil bir çevre örgütüyle sahil temizliğine katılıyor. Hava harika ve orada çok sayıda gönüllü var.",
+          en: "One Saturday in May, Emil joins a beach clean-up with an environmental organisation. The weather is brilliant, and there are lots of volunteers there." },
+        { place: "beach", mood: "surprised",
+          text: "Etter bare en time har de fylt tjue sekker med søppel. Mesteparten er plast som har drevet i land fra havet.",
+          tr: "Sadece bir saat sonra yirmi torbayı çöple doldurmuşlar. Çoğu denizden kıyıya vurmuş plastik.",
+          en: "After only an hour, they have filled twenty bags with rubbish. Most of it is plastic that has drifted ashore from the sea." },
+        { place: "beach", mood: "worried",
+          text: "En av de frivillige forteller at plasten brytes ned til mikroplast, som havner i fisken vi spiser. Emil får bakoversveis.",
+          tr: "Gönüllülerden biri plastiğin mikroplastiğe dönüştüğünü ve yediğimiz balıklara karıştığını anlatıyor. Emil'in ağzı açık kalıyor.",
+          en: "One of the volunteers explains that the plastic breaks down into microplastics, which end up in the fish we eat. Emil is stunned." },
+        { place: "beach", mood: "proud",
+          text: "Etter denne dagen bestemmer han seg for å kutte ned på engangsplast. Han mener at alle kan bidra, selv om det bare er med små endringer.",
+          tr: "Bu günden sonra tek kullanımlık plastiği azaltmaya karar veriyor. Küçük değişikliklerle de olsa herkesin katkıda bulunabileceğini düşünüyor.",
+          en: "After that day, he decides to cut down on single-use plastic. He thinks everyone can contribute, even if it's only with small changes." }
       ]
     }
   ]

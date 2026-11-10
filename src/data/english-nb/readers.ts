@@ -163,4 +163,53 @@ const B1: LessonDef[] = [
 }
 ];
 
-export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2), ...asExtra("B1", B1)];
+const B2: LessonDef[] = [
+{
+  id: "nb-b2-story", title: "Åtte historier på B2-nivå", no: "Eight B2 stories", icon: "spark", stories: readingStories("b2", "nb"),
+  intro: "Åtte historier med det du har lært på B2: en formell e-post, et folkemøte, faste uttrykk på en kafé, flyttedagen, retten til overtidsbetaling, et middagsselskap, et halvmaraton og strandrydding.",
+  notes: [
+    { h: "Hva øver du på i historiene?", p: "Formelt språk: she asks for the matter to be dealt with / If she does not receive a reply within fourteen days… Argumentasjon: on the one hand … on the other hand, since, instead. Faste uttrykk: not the end of the world, like clockwork, suit someone down to the ground, over the moon, an eye-opener. Phrasal verbs: sort out, set up, unpack, end up, cut down on. Høflige fraser: You shouldn't have!" },
+    { h: "Slik øver du", p: "Se hver historie med oversettelse først, skjul så oversettelsen og se den igjen. Ikke oversett faste uttrykk ord for ord; lær hva de betyr som helhet. De røde ordene er ordene i denne leksjonen." }
+  ],
+  tip: "Mange phrasal verbs ligner norske partikkelverb: sort out = finne ut av, cut down on = kutte ned på, unpack = pakke ut. Men «on the other hand» heter aldri «in the other hand».",
+  words: [
+    W("landlord", "utleier", "lændlård", "Her landlord hasn't replied.", "Utleieren har ikke svart."),
+    W("attach", "legge ved", "ætætsj", "She attaches photos of the wall.", "Hun legger ved bilder av veggen."),
+    W("apologise", "beklage, be om unnskyldning", "epålledsjais", "The landlord calls and apologises.", "Utleieren ringer og beklager."),
+    W("on the one hand", "på den ene siden", "ån dhe wann hænd", "On the one hand, the road would help.", "På den ene siden ville veien hjelpe.", { note: "… on the other hand = på den andre siden" }),
+    W("argue", "argumentere, krangle", "aagju", "He argues that buses are better.", "Han argumenterer for at busser er bedre."),
+    W("proposal", "forslag", "propousel", "They will consider his proposal.", "De skal vurdere forslaget hans."),
+    W("benefit", "være bra for, fordel", "benefitt", "It would benefit the environment.", "Det ville være bra for miljøet."),
+    W("idiom", "fast uttrykk", "iddiem", "Ollie loves idioms.", "Ollie elsker faste uttrykk."),
+    W("the end of the world", "verdens undergang", "dhi end åv dhe wørld", "It's not the end of the world.", "Det er ikke verdens undergang."),
+    W("like clockwork", "som smurt", "laik klåkkwørk", "Everything is running like clockwork.", "Alt går som smurt."),
+    W("sort out", "ordne, finne ut av", "sårt aut", "Emil has to sort out the problem.", "Emil må finne ut av problemet."),
+    W("unpack", "pakke ut", "anpæk", "It will take weeks to unpack everything.", "Det tar uker å pakke ut alt."),
+    W("overtime", "overtid", "ouvertaim", "She has worked a lot of overtime.", "Hun har jobbet mye overtid."),
+    W("union", "fagforening", "juunien", "She contacts her union representative.", "Hun tar kontakt med den tillitsvalgte."),
+    W("admit", "innrømme", "ædmitt", "The manager admits the mistake.", "Lederen innrømmer feilen."),
+    W("polite", "høflig", "pelait", "It's a polite way of saying thank you.", "Det er en høflig måte å si takk på."),
+    W("probably", "sannsynligvis, nok", "pråbbebli", "He probably speaks better than he thinks.", "Han snakker nok bedre enn han tror."),
+    W("disappointed", "skuffet", "disseppåintid", "Mira is disappointed.", "Mira er skuffet."),
+    W("instead of", "i stedet for", "instedd åv", "Instead of running, she swims.", "I stedet for å løpe, svømmer hun."),
+    W("volunteer", "frivillig", "vålentiir", "There are lots of volunteers on the beach.", "Det er mange frivillige på stranda."),
+    W("eye-opener", "tankevekker", "ai-ouppener", "For Emil, it is a real eye-opener.", "For Emil er det en real tankevekker."),
+    W("cut down on", "kutte ned på", "katt daun ån", "He wants to cut down on plastic.", "Han vil kutte ned på plast.")
+  ],
+  dialogue: [["A", "Did you hear that the council wants to build a road through the park?", "Hørte du at kommunen vil bygge vei gjennom parken?"], ["B", "Yes, but I think they should invest in buses instead.", "Ja, men jeg synes de heller bør satse på busser."], ["A", "I agree. On the one hand we'd save time, but on the other hand the children would lose the park.", "Enig. På den ene siden ville vi spart tid, men på den andre siden ville barna miste parken."], ["B", "We should probably speak up at the meeting tonight.", "Vi bør nok si fra på møtet i kveld."]],
+  quiz: [
+    Q("Når vil Mira kontakte kommunen?", ["If she does not receive a reply within fourteen days.", "If the landlord apologises.", "Within two days."], "If she does not receive a reply within fourteen days, she will contact the council."),
+    Q("«På den andre siden ville barna miste et viktig sted.»", ["On the other hand, children would lose an important place.", "In the other hand, children would lose an important place.", "On other hand, children would lose an important place."], "Fast uttrykk: on the other hand."),
+    Q("Hva betyr «It's not the end of the world»?", ["It's not so bad.", "The world is ending.", "It's very dangerous."], "Det betyr «det er ikke så farlig»."),
+    Q("Hva betyr «like clockwork»?", ["very smoothly", "very slowly", "very late"], "like clockwork = som smurt."),
+    Q("«Emil må finne ut av problemet i en fart.»", ["Emil has to sort out the problem quickly.", "Emil has to sort out of the problem quickly.", "Emil has to sort up the problem quickly."], "sort out = finne ut av, ordne."),
+    Q("Hvem fikk Mira hjelp av med overtiden?", ["her union representative", "her landlord", "the physiotherapist"], "She contacts her union representative."),
+    Q("Hvorfor sier Kate «You shouldn't have brought anything»?", ["It's a polite way of saying thank you.", "She is angry with Emil.", "Emil forgot the cake."], "Emil knows that this is just a polite way of saying thank you."),
+    Q("Hva rådet fysioterapeuten Mira til?", ["to take it easy", "to run more", "to cut down on plastic"], "The physiotherapist advises her to take it easy."),
+    Q("Passiv: «Hun ber om at saken blir behandlet.»", ["She asks for the matter to be dealt with.", "She asks for the matter to deal with.", "She asks for the matter dealing with."], "Passiv: to be + dealt with.")
+  ],
+  review: ["Formelt språk: If she does not receive a reply within…, to be dealt with.", "Argumentasjon: on the one hand … on the other hand, since.", "Phrasal verbs og faste uttrykk: sort out, unpack, like clockwork."]
+}
+];
+
+export default [...asExtra("A0", A0), ...asExtra("A1", A1), ...asExtra("A2", A2), ...asExtra("B1", B1), ...asExtra("B2", B2)];
