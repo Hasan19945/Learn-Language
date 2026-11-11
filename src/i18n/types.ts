@@ -148,6 +148,8 @@ export interface Strings {
     next: string;
     showTr: string;
     hideTr: string;
+    slow: string;
+    normalSpeed: string;
     hint: (name: string) => string;
     ended: string;
     noVoice: string;
