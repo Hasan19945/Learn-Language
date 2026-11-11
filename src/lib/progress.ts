@@ -41,6 +41,7 @@ export const startLevel = (p: Progress) => Math.max(p.startLevel || 0, ...(p.pla
 
 export function isUnlocked(course: Course, p: Progress, i: number) {
   const { lessons } = course;
+  if (lessonProgress(p, lessons[i].id).done) return true;
   if (lessons[i].extra) return isUnlocked(course, p, lessons.findIndex(L => L.level === lessons[i].level));
   if (i === 0 || lessonProgress(p, lessons[i - 1].id).done) return true;
   const lv = levelIndex(course, lessons[i]);

@@ -1,4 +1,4 @@
-import { Q, W } from "../helpers";
+import { Q, W, inLevelOrder } from "../helpers";
 import type { CourseDef } from "../../types";
 import a0 from "./a0";
 import a1 from "./a1";
@@ -6,6 +6,7 @@ import a2 from "./a2";
 import b1 from "./b1";
 import b2 from "./b2";
 import c1 from "./c1";
+import prepositions from "./prepositions";
 import readers from "./readers";
 import topics from "./topics";
 
@@ -16,7 +17,7 @@ export const englishNb: CourseDef = {
   sub: "Forklaringer på norsk, eksempler på engelsk",
   about: "Denne versjonen er laget for norsktalende. Leksjonene viser spesielt forskjellene mellom norsk og engelsk og de typiske feilene nordmenn gjør.",
   sentenceNote: "Nye verb: watch (se på), play (spille), pay (betale), buy (kjøpe). Med he/she/it får alle -s: he watches, she plays.",
-  lessons: [...a0, ...a1, ...a2, ...b1, ...b2, ...c1, ...topics, ...readers],
+  lessons: [...inLevelOrder([...a0, ...a1, ...a2, ...b1, ...b2, ...c1, ...prepositions, ...topics]), ...readers],
   levels: [
     { id: "A0", title: "Nybegynner", d: "Uttale, hilsener, enkle setninger" },
     { id: "A1", title: "Grunnleggende", d: "Familie, handel, klokka, hjemmet, transport" },

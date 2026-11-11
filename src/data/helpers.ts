@@ -14,3 +14,8 @@ export const Q = (q: string, o: string[], e: string): QuizItem => ({ q, o, a: 0,
 export const atLevel = (level: LevelId, lessons: LessonDef[]) => lessons.map(L => ({ ...L, level }));
 
 export const asExtra = (level: LevelId, lessons: LessonDef[]) => lessons.map(L => ({ ...L, level, extra: true }));
+
+const LEVEL_ORDER: LevelId[] = ["A0", "A1", "A2", "B1", "B2", "C1"];
+
+export const inLevelOrder = <T extends { level: LevelId }>(lessons: T[]) =>
+  [...lessons].sort((a, b) => LEVEL_ORDER.indexOf(a.level) - LEVEL_ORDER.indexOf(b.level));

@@ -100,7 +100,7 @@ const A2: LessonDef[] = [
     N("en", "sjef", "sjefen", "sjefer", "boss", "shayf", "Sjefen hans er hyggelig.", "His boss is nice."),
     W("sliten", "tired", "SLEE-ten", "Han er ofte sliten.", "He is often tired."),
     W("ledig", "available", "LEH-dee", "Er leiligheten ledig?", "Is the flat available?"),
-    W("husleie", "rent", "HEWS-lay-eh", "Hun betaler 11 000 kroner i husleie.", "She pays 11,000 kroner in rent."),
+    W("husleie", "rent", "HEWS-lay-eh", "Hun betaler elleve tusen kroner i husleie.", "She pays eleven thousand kroner in rent."),
     W("kommer til å", "is going to (prediction)", "KOM-mer til aw", "Det kommer til å regne litt.", "It's going to rain a bit."),
     N("en", "ferie", "ferien", "ferier", "holiday", "FEH-ree-eh", "Emil gleder seg til ferien.", "Emil is looking forward to the holiday.")
   ],
@@ -120,7 +120,7 @@ const A2: LessonDef[] = [
 const B1: LessonDef[] = [
 {
   id: "ne-b1-story", title: "Eight stories from life", no: "Åtte historier fra livet", icon: "spark", stories: readingStories("b1", "en"),
-  intro: "Eight stories using what you learned in B1: NAV, a job interview, the bank, a Norwegian test, a delayed train, the kitchen, snow in the mountains and a complaint in a shop.",
+  intro: "Eight stories using what you learned in B1: Nav, a job interview, the bank, a Norwegian test, a delayed train, the kitchen, snow in the mountains and a complaint in a shop.",
   notes: [
     { h: "What do the stories practise?", p: "Relative clauses with som: saksbehandleren som hjalp henne. selv om and likevel: Selv om det var vanskelig, ga hun ikke opp. mens and da: Mens barna sover… Da hun kom til stasjonen… The past perfect: hadde søkt, hadde trodd, hadde glemt. The passive: ble godkjent, må røres. Indirect questions: spurte hvorfor han ville jobbe der. jo … jo: Jo mer hun sparer, jo gladere blir hun." },
     { h: "How to practise", p: "Watch each story with the translation first, then hide it and watch again. Finally, read aloud. The red words are this lesson's words." }
@@ -150,7 +150,7 @@ const B1: LessonDef[] = [
   ],
   dialogue: [["A", "Hvorfor kom du så sent?", "Why were you so late?"], ["B", "Toget var forsinket, og jeg måtte vente i en time.", "The train was delayed, and I had to wait for an hour."], ["A", "Så kjedelig! Likevel er det bra at du kom.", "How annoying! Still, it's good that you came."], ["B", "Ja, og heldigvis fikk jeg pengene tilbake.", "Yes, and luckily I got my money back."]],
   quiz: [
-    Q("What happened to Mira's application at NAV?", ["Den ble godkjent.", "Den ble borte.", "Den kom for sent."], "Etter to uker fikk hun svar på søknaden. Den ble godkjent!"),
+    Q("What happened to Mira's application at Nav?", ["Den ble godkjent.", "Den ble borte.", "Den kom for sent."], "Etter to uker fikk hun svar på søknaden. Den ble godkjent!"),
     Q("\"The head teacher asked why he wanted to work there.\"", ["Rektoren spurte hvorfor han ville jobbe der.", "Rektoren spurte hvorfor ville han jobbe der.", "Rektoren spurte hvorfor han jobbe ville der."], "In an indirect question the subject comes before the verb: hvorfor han ville."),
     Q("Why is a savings account better?", ["Den gir mer rente.", "Den er gratis.", "Den har et budsjett."], "En sparekonto gir mer rente enn en vanlig konto."),
     Q("\"The test was easier than he had thought.\"", ["Prøven var lettere enn han hadde trodd.", "Prøven var lettere enn han har trodd.", "Prøven var mer lett enn han hadde trodd."], "Further back in the past: hadde + trodd."),

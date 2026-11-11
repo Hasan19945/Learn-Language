@@ -7,6 +7,9 @@ import { buildCues, HERO_NAMES, HERO_PITCH, markWords, readingTime } from "../..
 import { useApp } from "../../state/AppContext";
 import type { Lesson, Story, Word } from "../../types";
 
+const SLOW_RATE = 0.6;
+const SLOW_TIME = 1.5;
+
 function Marked({ text, words }: { text: string; words: Word[] }) {
   return <>{markWords(text, words).map((p, i) => p.word ? <b key={i} className="story-word">{p.text}</b> : <span key={i}>{p.text}</span>)}</>;
 }
@@ -21,6 +24,7 @@ export function StoryVideo({ lesson, story }: { lesson: Lesson; story: Story }) 
   const [playing, setPlaying] = useState(false);
   const [ended, setEnded] = useState(false);
   const [showTr, setShowTr] = useState(true);
+  const [slow, setSlow] = useState(false);
   const cue = cues[pos];
   const talking = playing && cue.kind === "line";
 
@@ -40,14 +44,15 @@ export function StoryVideo({ lesson, story }: { lesson: Lesson; story: Story }) 
       }
     };
     const spoken = c.kind === "line" && !!voice;
-    timer = setTimeout(next, readingTime(c.text) * (spoken ? 3 : 1));
-    if (spoken) speak(voice, c.text, next, talk && c.who !== undefined ? HERO_PITCH[talk.cast[c.who]] : 1);
+    timer = setTimeout(next, readingTime(c.text) * (spoken ? 3 : 1) * (slow ? SLOW_TIME : 1));
+    const pitch = talk && c.who !== undefined ? HERO_PITCH[talk.cast[c.who]] : HERO_PITCH[story.hero];
+    if (spoken) speak(voice, c.text, next, pitch, slow ? SLOW_RATE : undefined);
     return () => {
       active = false;
       clearTimeout(timer);
       if (spoken) speechSynthesis.cancel();
     };
-  }, [playing, pos, cues, voice, talk]);
+  }, [playing, pos, cues, voice, talk, slow, story.hero]);
 
   const jump = (to: number) => {
     setEnded(false);
@@ -111,6 +116,9 @@ export function StoryVideo({ lesson, story }: { lesson: Lesson; story: Story }) 
         <button className="btn" onClick={toggle}>{playing ? t.story.pause : ended ? t.story.again : t.story.play}</button>
         <button className="icon-btn" onClick={() => jump(pos + 1)} aria-label={t.story.next}><Icon name="next" /></button>
         <button className="chip acc" onClick={() => setShowTr(!showTr)}>{showTr ? t.story.hideTr : t.story.showTr}</button>
+        <button className={`chip ${slow ? "go" : "acc"}`} aria-pressed={slow} onClick={() => setSlow(!slow)}>
+          {slow ? t.story.normalSpeed : t.story.slow}
+        </button>
       </div>
       {!voice && <p className="muted" style={{ fontSize: ".85rem" }}>{t.story.noVoice}</p>}
       {talk && (

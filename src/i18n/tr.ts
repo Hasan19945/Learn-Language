@@ -161,6 +161,8 @@ export const tr: Strings = {
     next: "Sonraki sahne",
     showTr: "Çeviriyi göster",
     hideTr: "Çeviriyi gizle",
+    slow: "Yavaş oku",
+    normalSpeed: "Normal hız",
     hint: name => `Oynat'a bas. ${name} hikâyeyi anlatırken yeni kelimeler ekranda belirecek.`,
     ended: "Bitti! Aşağıdaki hikâyeyi okuyup kelimeleri tekrar görebilirsin.",
     noVoice: "Bu cihazda uygun ses bulunamadı. Animasyon sessiz oynar, altyazıyı takip et.",

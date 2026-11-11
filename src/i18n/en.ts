@@ -161,6 +161,8 @@ export const en: Strings = {
     next: "Next scene",
     showTr: "Show translation",
     hideTr: "Hide translation",
+    slow: "Read slowly",
+    normalSpeed: "Normal speed",
     hint: name => `Press Play. New words appear on screen while ${name} tells the story.`,
     ended: "Done! Read the story below to see the words again.",
     noVoice: "No suitable voice was found on this device. The animation plays silently, so follow the subtitles.",

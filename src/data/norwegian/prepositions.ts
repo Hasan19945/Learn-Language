@@ -1,0 +1,146 @@
+import { Q, W, atLevel } from "../helpers";
+import type { LessonDef } from "../../types";
+
+const A2: LessonDef[] = [
+{
+  id: "a2-prep", title: "Edatlar: yer, yön ve zaman", no: "Preposisjoner: sted, retning og tid", icon: "path",
+  intro: "Türkçede -de, -e, -den gibi ekler kelimenin sonuna gelir. Norveççede ise küçük edatlar kelimenin önüne gelir: i Oslo (Oslo'da), til Oslo (Oslo'ya), fra Oslo (Oslo'dan). Bu derste en sık kullanılan edatları, özellikle i, på, hos ve ved'i bol örnekle öğreniyorsun.",
+  notes: [
+    { h: "Edat nedir?", p: "Türkçede yer ve yön kelimenin sonuna eklenen eklerle gösterilir: evde, eve, evden. Norveççede bunun yerine ismin önüne ayrı bir kelime, yani edat gelir. İsmin kendisi değişmez, edat da değişmez. Hangi edatın geleceği çoğu zaman yerin türüne bağlıdır; bu yüzden edatı isimle birlikte öğrenmek en kolay yoldur.",
+      table: [["Türkçe", "Norveççe", "Örnek"], ["-de, -da", "i, på, hos, ved", "i Oslo = Oslo'da"], ["-e, -a", "til", "til Oslo = Oslo'ya"], ["-den, -dan", "fra", "fra Oslo = Oslo'dan"], ["ile", "med", "med tog = trenle"], ["-sız, -siz", "uten", "uten sukker = şekersiz"]] },
+    { h: "i: bir şeyin İÇİNDE", p: "i, sınırları olan bir alanın içini gösterir: ülkeler, şehirler, semtler, kapalı yerler ve kaplar. Bir şeyin içinde olduğunu düşünebiliyorsan genellikle i kullanılır. Ayrıca gazete, kitap gibi metinlerin içi için de i denir.",
+      table: [["Norveççe", "Türkçe"], ["Jeg bor i Norge.", "Norveç'te oturuyorum."], ["Hun jobber i Bergen.", "Bergen'de çalışıyor."], ["Vi sitter i stua.", "Salonda oturuyoruz."], ["Barna leker i hagen.", "Çocuklar bahçede oynuyor."], ["Melken står i kjøleskapet.", "Süt buzdolabında."], ["Nøklene er i lomma mi.", "Anahtarlar cebimde."], ["Jeg leste det i avisen.", "Bunu gazetede okudum."], ["Vi skal handle i byen.", "Şehirde alışveriş yapacağız."]] },
+    { h: "på: bir şeyin ÜSTÜNDE ya da bir yerde", p: "på önce yüzey bildirir: masanın üstü, duvar, zemin. Ama en çok, belli bir işin yapıldığı yerlerde kullanılır: iş, okul, sinema, hastane, kütüphane, postane. Adalar ve bazı iç bölge kasabaları da på alır (på Island, på Lillehammer). Diller, medya ve bazı etkinlikler de på ile söylenir: på norsk, på TV, på ferie.",
+      table: [["Norveççe", "Türkçe"], ["Koppen står på bordet.", "Fincan masanın üstünde."], ["Bildet henger på veggen.", "Resim duvarda asılı."], ["Jeg er på jobb til fire.", "Saat dörde kadar işteyim."], ["Barna er på skolen.", "Çocuklar okulda."], ["Vi møtes på kafeen.", "Kafede buluşuyoruz."], ["Hun ligger på sykehuset.", "Hastanede yatıyor."], ["Jeg lånte boka på biblioteket.", "Kitabı kütüphaneden ödünç aldım."], ["De bor på Island.", "İzlanda'da oturuyorlar."], ["Han bor på Lillehammer.", "Lillehammer'de oturuyor."], ["Hva heter det på norsk?", "Bunun Norveççesi ne?"], ["Jeg så det på TV.", "Bunu televizyonda gördüm."], ["Vi er på ferie.", "Tatildeyiz."]] },
+    { h: "Evdeki odalar: i mi, på mı?", p: "Odalarda kural tutarlı değildir; en iyisi ezberlemektir. Mutfak, banyo, yatak odası ve çalışma odası på alır. Salon, koridor ve bodrum i alır.",
+      table: [["Norveççe", "Türkçe"], ["på kjøkkenet", "mutfakta"], ["på badet", "banyoda"], ["på soverommet", "yatak odasında"], ["på kontoret", "ofiste, çalışma odasında"], ["på rommet mitt", "odamda"], ["i stua", "salonda"], ["i gangen", "koridorda"], ["i kjelleren", "bodrumda"]] },
+    { h: "hos: birinin YANINDA, EVİNDE, İŞ YERİNDE", p: "hos her zaman bir kişiden ya da bir meslekten önce gelir, bir yerden önce değil. Türkçede \"doktorda\", \"kuaförde\", \"annemlerde\", \"bizde\" dediğimiz durumların karşılığıdır. Oraya giderken til kullanılır, oradayken hos. \"på legen\" ya da \"i legen\" demek yanlıştır.",
+      table: [["Norveççe", "Türkçe"], ["Jeg er hos legen.", "Doktordayım."], ["Jeg går til legen.", "Doktora gidiyorum."], ["Hun er hos frisøren.", "Kuaförde."], ["Jeg har time hos tannlegen.", "Dişçide randevum var."], ["Vi spiser middag hos besteforeldrene.", "Büyükannemlerde akşam yemeği yiyoruz."], ["Du kan sove hos oss.", "Bizde kalabilirsin."], ["Hun bor hos foreldrene sine.", "Annesiyle babasının yanında oturuyor."], ["Kom hjem til meg i kveld!", "Bu akşam bana gel!"]] },
+    { h: "ved: bir şeyin YANINDA, KENARINDA", p: "ved bir şeyin hemen yanında ya da kenarında olmayı gösterir, içinde değil. Deniz, göl, pencere, kapı ve masa ile sık kullanılır. Üniversite gibi büyük kurumlarda \"orada okumak/çalışmak\" anlamı taşır. Saatle kullanılınca \"civarında\" demektir. ved siden av ise iki şeyin tam yan yana olduğunu söyler.",
+      table: [["Norveççe", "Türkçe"], ["Hun sitter ved vinduet.", "Pencerenin yanında oturuyor."], ["Vi har en hytte ved sjøen.", "Deniz kenarında bir kulübemiz var."], ["Han står ved døra.", "Kapının yanında duruyor."], ["Familien sitter ved bordet.", "Aile masanın başında oturuyor."], ["Hotellet ligger ved stasjonen.", "Otel istasyonun yakınında."], ["Hun studerer ved universitetet.", "Üniversitede okuyor."], ["Jeg kommer ved femtiden.", "Saat beş civarında gelirim."], ["Jeg sitter ved siden av Emil.", "Emil'in hemen yanında oturuyorum."]] },
+    { h: "Yön: til ve fra; hjem/hjemme, ut/ute, inn/inne", p: "Bir yere gidiyorsan til, bir yerden geliyorsan fra kullanılır. Ev, dışarı ve içeri için ikişer kelime vardır: hareket bildiren hjem, ut, inn ve bir yerde olmayı bildiren hjemme, ute, inne. Türkçedeki \"eve\" ile \"evde\" farkı gibi düşün.",
+      table: [["Norveççe", "Türkçe"], ["Jeg går hjem.", "Eve gidiyorum."], ["Jeg er hjemme.", "Evdeyim."], ["Barna går ut.", "Çocuklar dışarı çıkıyor."], ["Barna leker ute.", "Çocuklar dışarıda oynuyor."], ["Kom inn!", "İçeri gel!"], ["Det er varmt inne.", "İçerisi sıcak."], ["Toget går fra Oslo til Bergen.", "Tren Oslo'dan Bergen'e gidiyor."], ["Hun kommer fra Tyrkia.", "Türkiye'den geliyor."]] },
+    { h: "Zaman edatları", p: "Zaman ifadelerinde edatlar Türkçeden çok farklıdır. Belirli bir gün için på, tekrarlanan dönemler için om, \"bu akşam, bu yaz\" gibi yakın zamanlar için i kullanılır. Gelecekte bir süre sonrası om, geçmişte bir süre öncesi for … siden ile söylenir. Bir şeyin ne kadar sürdüğü i ile söylenir.",
+      table: [["Norveççe", "Türkçe"], ["på mandag", "pazartesi (bu ya da geçen)"], ["om mandagen", "her pazartesi"], ["i dag / i kveld / i morgen", "bugün / bu akşam / yarın"], ["i sommer", "bu yaz"], ["om sommeren", "yazları, her yaz"], ["om morgenen", "sabahları"], ["om to dager", "iki gün sonra"], ["for to dager siden", "iki gün önce"], ["i tre år", "üç yıl (boyunca)"], ["fra ni til fire", "dokuzdan dörde"], ["til klokka fem", "saat beşe kadar"]] },
+    { h: "Diğer yer edatları", p: "Bunlar Türkçedeki \"altında, üstünde, önünde\" gibi kelimelere denk gelir ve her zaman ismin önüne gelir.",
+      table: [["Norveççe", "Türkçe"], ["Katten sover under senga.", "Kedi yatağın altında uyuyor."], ["Lampa henger over bordet.", "Lamba masanın üstünde asılı."], ["Bussen stopper foran skolen.", "Otobüs okulun önünde duruyor."], ["Sykkelen står bak huset.", "Bisiklet evin arkasında."], ["Banken ligger mellom posten og kafeen.", "Banka postaneyle kafenin arasında."], ["Vi går gjennom parken.", "Parkın içinden yürüyoruz."], ["Vi sitter rundt bålet.", "Ateşin etrafında oturuyoruz."]] }
+  ],
+  tip: "Türkçede \"doktora gidiyorum\" ve \"doktordayım\" sadece ekle değişir. Norveççede edat değişir: Jeg går til legen. Jeg er hos legen. Yer söylerken de önce yerin türünü düşün: içi olan bir yer mi (i), bir iş yeri ya da yüzey mi (på), bir kişi mi (hos), yoksa bir şeyin kenarı mı (ved)?",
+  words: [
+    W("i", "-de, içinde (ülke, şehir, oda)", "i", "Jeg bor i Oslo.", "Oslo'da oturuyorum."),
+    W("på", "-de, üstünde (yüzey, iş, okul)", "po", "Boka ligger på bordet.", "Kitap masanın üstünde."),
+    W("til", "-e, -a (yön)", "til", "Vi drar til Bergen i morgen.", "Yarın Bergen'e gidiyoruz."),
+    W("fra", "-den, -dan", "fra", "Hun kommer fra Tyrkia.", "Türkiye'den geliyor."),
+    W("hos", "birinin evinde, yanında", "hus", "Jeg er hos legen.", "Doktordayım."),
+    W("ved", "yanında, kenarında", "ve", "Vi har en hytte ved sjøen.", "Deniz kenarında bir kulübemiz var."),
+    W("med", "ile, birlikte", "me", "Jeg reiser med tog.", "Trenle seyahat ediyorum."),
+    W("uten", "-sız, olmadan", "üten", "Jeg drikker kaffe uten sukker.", "Kahveyi şekersiz içerim."),
+    W("under", "altında", "ünner", "Katten sover under senga.", "Kedi yatağın altında uyuyor."),
+    W("over", "üstünde, yukarısında", "over", "Lampa henger over bordet.", "Lamba masanın üstünde asılı."),
+    W("foran", "önünde", "foran", "Bussen stopper foran skolen.", "Otobüs okulun önünde duruyor."),
+    W("bak", "arkasında", "baak", "Sykkelen står bak huset.", "Bisiklet evin arkasında."),
+    W("mellom", "arasında", "mellom", "Banken ligger mellom posten og kafeen.", "Banka postaneyle kafenin arasında."),
+    W("ved siden av", "hemen yanında", "ve siiden aav", "Jeg sitter ved siden av Emil.", "Emil'in yanında oturuyorum."),
+    W("gjennom", "içinden (geçerek)", "yennom", "Vi går gjennom parken.", "Parkın içinden yürüyoruz."),
+    W("rundt", "etrafında", "rünt", "Vi sitter rundt bålet.", "Ateşin etrafında oturuyoruz."),
+    W("om", "-ları (günün bölümü); ... sonra", "om", "Jeg trener om morgenen.", "Sabahları spor yapıyorum.", { note: "om to dager = iki gün sonra" }),
+    W("hjem", "eve (hareket)", "yem", "Jeg går hjem nå.", "Şimdi eve gidiyorum."),
+    W("hjemme", "evde", "yemme", "Er du hjemme i kveld?", "Bu akşam evde misin?"),
+    W("ute", "dışarıda", "üte", "Barna leker ute.", "Çocuklar dışarıda oynuyor.", { note: "ut = dışarı (hareket)" }),
+    W("inne", "içeride", "inne", "Det er varmt inne.", "İçerisi sıcak.", { note: "inn = içeri (hareket)" }),
+    W("for … siden", "… önce", "for … siiden", "Jeg kom til Norge for to år siden.", "İki yıl önce Norveç'e geldim.")
+  ],
+  dialogue: [["A", "Hei! Hvor er du nå?", "Selam! Şimdi neredesin?"], ["B", "Jeg er hos tannlegen, men jeg er ferdig om ti minutter.", "Dişçideyim ama on dakika sonra işim bitiyor."], ["A", "Skal vi møtes på kafeen ved stasjonen?", "İstasyonun yanındaki kafede buluşalım mı?"], ["B", "Ja! Den som ligger mellom banken og biblioteket?", "Olur! Bankayla kütüphanenin arasındaki mi?"], ["A", "Nettopp. Jeg sitter ved vinduet.", "Aynen. Pencerenin yanında oturuyorum."], ["B", "Flott, da kommer jeg dit om et kvarter.", "Harika, o zaman çeyrek saat sonra oradayım."]],
+  quiz: [
+    Q("\"Oslo'da oturuyorum.\"", ["Jeg bor i Oslo.", "Jeg bor på Oslo.", "Jeg bor til Oslo."], "Şehir ve ülkelerle i kullanılır."),
+    Q("\"İşteyim.\"", ["Jeg er på jobb.", "Jeg er i jobb.", "Jeg er til jobb."], "jobb, skole, kino gibi yerlerle på kullanılır."),
+    Q("\"Mutfaktayım.\"", ["Jeg er på kjøkkenet.", "Jeg er til kjøkkenet.", "Jeg er fra kjøkkenet."], "kjøkken ve bad på alır; bunu ezberle."),
+    Q("\"Çocuklar bahçede oynuyor.\"", ["Barna leker i hagen.", "Barna leker hos hagen.", "Barna leker til hagen."], "Bahçe sınırları olan bir alan: i hagen."),
+    Q("\"Doktordayım.\"", ["Jeg er hos legen.", "Jeg er på legen.", "Jeg er med legen."], "Birinin yanında: hos."),
+    Q("\"Doktora gidiyorum.\"", ["Jeg går til legen.", "Jeg går hos legen.", "Jeg går på legen."], "Hareket varsa til, oradaysan hos."),
+    Q("\"Pencerenin yanında oturuyor.\"", ["Hun sitter ved vinduet.", "Hun sitter til vinduet.", "Hun sitter hos vinduet."], "Bir şeyin kenarında, yanında: ved."),
+    Q("\"Deniz kenarında bir kulübemiz var.\"", ["Vi har en hytte ved sjøen.", "Vi har en hytte hos sjøen.", "Vi har en hytte til sjøen."], "Deniz, göl kenarı: ved."),
+    Q("\"Eve gidiyorum.\"", ["Jeg går hjem.", "Jeg går hjemme.", "Jeg går til hjemme."], "Hareket: hjem. Durum: hjemme."),
+    Q("\"Çocuklar dışarıda oynuyor.\"", ["Barna leker ute.", "Barna leker ut.", "Barna leker til ute."], "Bir yerde olmak: ute. Dışarı çıkmak: ut."),
+    Q("\"İki gün sonra geliyor.\"", ["Hun kommer om to dager.", "Hun kommer for to dager siden.", "Hun kommer i to dager."], "Gelecekte bir süre sonra: om."),
+    Q("\"Pazartesi günü sinemaya gidiyoruz.\"", ["Vi går på kino på mandag.", "Vi går på kino i mandag.", "Vi går på kino om mandag."], "Gün adlarıyla på kullanılır."),
+    Q("\"Bunun Norveççesi ne?\"", ["Hva heter det på norsk?", "Hva heter det i norsk?", "Hva heter det med norsk?"], "Dillerle på kullanılır."),
+    Q("\"Yazları (her yaz) kulübeye gideriz.\"", ["Om sommeren drar vi på hytta.", "For sommeren siden drar vi på hytta.", "Fra sommeren drar vi på hytta."], "Tekrarlanan dönem: om sommeren.")
+  ],
+  review: ["i = içinde (i Oslo, i stua); på = üstünde, iş yerinde (på jobb, på kjøkkenet).", "hos = birinin yanında (hos legen); ved = kenarında (ved vinduet, ved sjøen).", "til / fra; hjem–hjemme, ut–ute, inn–inne; på mandag, om morgenen, om to dager."]
+}
+];
+
+const B1: LessonDef[] = [
+{
+  id: "b1-prep", title: "Edatlar 2: sabit edatlar", no: "Faste preposisjoner", icon: "key",
+  intro: "Birçok Norveççe fiil ve sıfat hep aynı edatla kullanılır: tenke på (düşünmek), glede seg til (dört gözle beklemek). Bu derste bu sabit edatları ve på, i, hos, ved'in yer anlamı dışındaki kullanımlarını örneklerle öğreniyorsun.",
+  notes: [
+    { h: "Sabit edatlar neden önemli?", p: "Norveççede birçok fiil ve sıfat belirli bir edatla birlikte kullanılır. Edat çoğu zaman Türkçedeki hal ekine benzemez ve mantıkla tahmin edilemez: \"seni düşünüyorum\" Norveççede \"senin üstünü düşünüyorum\" gibi söylenir: Jeg tenker på deg. Bu yüzden fiili tek başına değil, edatıyla birlikte öğren: tenke på, vente på, glede seg til." },
+    { h: "på ile kullanılan fiiller", p: "En kalabalık grup budur. Bir şeye dikkat yöneltmek, bir şeyi beklemek ya da bir şeye tepki vermek çoğunlukla på alır.",
+      table: [["Norveççe", "Türkçe", "Örnek"], ["tenke på", "-i düşünmek", "Jeg tenker på deg."], ["vente på", "-i beklemek", "Vi venter på bussen."], ["høre på", "-i dinlemek", "Hør på meg!"], ["se på", "-e bakmak, -i izlemek", "Vi ser på TV."], ["svare på", "-e cevap vermek", "Kan du svare på e-posten?"], ["lure på", "-i merak etmek", "Jeg lurer på hva klokka er."], ["søke på", "-e başvurmak", "Hun søker på en ny jobb."], ["stole på", "-e güvenmek", "Du kan stole på meg."], ["tro på", "-e inanmak", "Jeg tror på deg."], ["passe på", "-e göz kulak olmak", "Kan du passe på barna?"], ["være sint på", "-e kızgın olmak", "Hun er sint på meg."]] },
+    { h: "Başka edatlarla kullanılan fiiller", p: "om genellikle bir konudan söz ederken, til bir hedefe yönelirken, for teşekkür ve kararlarda, etter ararken kullanılır.",
+      table: [["Norveççe", "Türkçe", "Örnek"], ["snakke om", "hakkında konuşmak", "Vi snakket om filmen."], ["drømme om", "-i hayal etmek", "Hun drømmer om å bli lege."], ["be om", "-i istemek, rica etmek", "Kan jeg be om regningen?"], ["bry seg om", "-i önemsemek", "Han bryr seg om miljøet."], ["glede seg til", "-i dört gözle beklemek", "Jeg gleder meg til helgen."], ["ha lyst til", "-mak istemek", "Jeg har lyst til å danse."], ["takke for", "için teşekkür etmek", "Takk for maten!"], ["bestemme seg for", "-e karar vermek", "Vi bestemte oss for å flytte."], ["lete etter", "-i aramak", "Jeg leter etter nøklene mine."], ["bli kjent med", "ile tanışmak", "Jeg ble kjent med Kari på kurset."], ["delta i", "-e katılmak", "Alle må delta i møtet."]] },
+    { h: "være + sıfat + edat", p: "Duygular, beceriler ve alışkanlıklar da sabit edat alır. Edat değişince anlam da değişebilir: glad i (sevmek) ile glad for (sevinmek) farklıdır.",
+      table: [["Norveççe", "Türkçe", "Örnek"], ["være glad i", "-i sevmek", "Jeg er glad i deg."], ["være glad for", "-e sevinmek", "Jeg er glad for hjelpen."], ["være redd for", "-den korkmak", "Hun er redd for å fly."], ["være interessert i", "-e ilgi duymak", "Han er interessert i fotball."], ["være flink til", "-de iyi olmak", "Hun er flink til å tegne."], ["være lei av", "-den bıkmak", "Jeg er lei av snøen."], ["være fornøyd med", "-den memnun olmak", "Er du fornøyd med leiligheten?"], ["være vant til", "-e alışkın olmak", "Jeg er ikke vant til mørket."], ["være stolt av", "-le gurur duymak", "Vi er stolte av deg."], ["være opptatt av", "-e önem vermek", "Hun er opptatt av helse."], ["være forelsket i", "-e âşık olmak", "Han er forelsket i Sofie."]] },
+    { h: "på, i, hos ve ved'in yer dışındaki anlamları", p: "A2'de bu edatların yer anlamlarını öğrendin. B1'de kalıplaşmış ifadelerde de çok sık karşına çıkarlar. Bu ifadeleri tek bir kelime gibi öğren.",
+      table: [["Norveççe", "Türkçe", "Örnek"], ["på grunn av", "yüzünden", "Toget er forsinket på grunn av snøen."], ["på vei", "yolda", "Jeg er på vei hjem."], ["på samme måte", "aynı şekilde", "Vi tenker på samme måte."], ["i stedet for", "yerine", "Jeg tar sykkelen i stedet for bussen."], ["i tillegg", "ayrıca, buna ek olarak", "I tillegg må du betale depositum."], ["i hvert fall", "en azından, her halükârda", "Jeg kommer i hvert fall i morgen."], ["i forhold til", "-e göre, -e kıyasla", "Oslo er dyrt i forhold til Bergen."], ["hos oss", "bizde (ülkemizde, evimizde)", "Hos oss spiser vi middag klokka fem."], ["hos + kişi", "birinde (karakterinde)", "Det jeg liker hos ham, er humoren."], ["ved hjelp av", "yardımıyla", "Hun lærte norsk ved hjelp av apper."], ["ved siden av", "-in yanı sıra", "Ved siden av jobben studerer hun."], ["ved behov", "gerektiğinde", "Ring legevakten ved behov."]] },
+    { h: "Edat + å + fiil", p: "Edattan sonra bir fiil geliyorsa, fiil å ile mastar halinde kullanılır. Türkçedeki \"-mayı, -mekten, -meye\" eklerinin karşılığıdır.",
+      table: [["Norveççe", "Türkçe"], ["Jeg gleder meg til å se deg.", "Seni görmeyi dört gözle bekliyorum."], ["Hun er redd for å fly.", "Uçmaktan korkuyor."], ["Han er flink til å lage mat.", "Yemek yapmakta iyi."], ["Jeg har lyst til å reise.", "Seyahat etmek istiyorum."], ["Vi er lei av å vente.", "Beklemekten bıktık."], ["Takk for at du kom!", "Geldiğin için teşekkürler!"]] },
+    { h: "Edat sona kalır", p: "Sorularda ve ilgi cümlelerinde edat fiilin yanında kalmaz, cümlenin sonuna gider. Bu Türkçede olmayan bir yapıdır, bu yüzden bol pratik ister.",
+      table: [["Norveççe", "Türkçe"], ["Hva tenker du på?", "Ne düşünüyorsun?"], ["Hvem venter du på?", "Kimi bekliyorsun?"], ["Hva er du redd for?", "Neden korkuyorsun?"], ["Hva snakker dere om?", "Ne hakkında konuşuyorsunuz?"], ["Det er noe jeg gleder meg til.", "Dört gözle beklediğim bir şey."], ["Jobben jeg søkte på, var interessant.", "Başvurduğum iş ilginçti."]] },
+    { h: "Zaman: siden, innen, i løpet av, etter, før, gjennom", p: "Bu edatlar zamanı daha ayrıntılı anlatır. siden bir başlangıç noktasından beri, innen en geç bir zamana kadar, i løpet av bir süre içinde demektir. siden ile for … siden'ı karıştırma.",
+      table: [["Norveççe", "Türkçe", "Örnek"], ["siden 2020", "2020'den beri", "Jeg har bodd her siden 2020."], ["for to år siden", "iki yıl önce", "Jeg kom for to år siden."], ["innen fredag", "en geç cumaya kadar", "Send søknaden innen fredag."], ["i løpet av uka", "hafta içinde", "Jeg ringer i løpet av uka."], ["etter jobben", "işten sonra", "Vi trener etter jobben."], ["før middag", "yemekten önce", "Vask hendene før middag."], ["gjennom hele året", "bütün yıl boyunca", "Butikken er åpen gjennom hele året."]] }
+  ],
+  tip: "\"være glad i\" ile \"være glad for\" farklıdır: Jeg er glad i deg = Seni seviyorum. Jeg er glad for gaven = Hediyeye sevindim. Yeni bir fiil öğrenirken her zaman edatını da sor: \"Hangi edatla kullanılıyor?\"",
+  words: [
+    W("tenke på", "-i düşünmek", "tenke po", "Jeg tenker ofte på familien min.", "Ailemi sık sık düşünüyorum."),
+    W("vente på", "-i beklemek", "vente po", "Vi venter på bussen.", "Otobüsü bekliyoruz."),
+    W("høre på", "-i dinlemek", "höre po", "Hør på meg!", "Beni dinle!"),
+    W("svare på", "-e cevap vermek", "svaare po", "Kan du svare på e-posten?", "E-postaya cevap verebilir misin?"),
+    W("lure på", "-i merak etmek", "lüre po", "Jeg lurer på om butikken er åpen.", "Mağazanın açık olup olmadığını merak ediyorum."),
+    W("søke på", "-e başvurmak", "sööke po", "Hun søker på en ny jobb.", "Yeni bir işe başvuruyor."),
+    W("glede seg til", "-i dört gözle beklemek", "glede sæy til", "Barna gleder seg til jul.", "Çocuklar Noel'i dört gözle bekliyor."),
+    W("ha lyst til", "-mak istemek", "ha lüst til", "Jeg har lyst til å danse.", "Dans etmek istiyorum."),
+    W("lete etter", "-i aramak", "leete etter", "Jeg leter etter nøklene mine.", "Anahtarlarımı arıyorum."),
+    W("bry seg om", "-i önemsemek", "brü sæy om", "Han bryr seg om miljøet.", "Çevreyi önemsiyor."),
+    W("be om", "-i istemek, rica etmek", "be om", "Kan jeg be om regningen?", "Hesabı isteyebilir miyim?"),
+    W("være glad i", "-i sevmek", "være glad i", "Jeg er glad i deg.", "Seni seviyorum.", { note: "glad for = -e sevinmek" }),
+    W("være redd for", "-den korkmak", "være red for", "Hun er redd for hunder.", "Köpeklerden korkuyor."),
+    W("være interessert i", "-e ilgi duymak", "være interesert i", "Han er interessert i historie.", "Tarihe ilgi duyuyor."),
+    W("være flink til", "-de iyi olmak", "være flink til", "Hun er flink til å lage mat.", "Yemek yapmakta iyi."),
+    W("være lei av", "-den bıkmak", "være læy av", "Jeg er lei av regnet.", "Yağmurdan bıktım."),
+    W("være fornøyd med", "-den memnun olmak", "være fornöyd me", "Sjefen er fornøyd med arbeidet.", "Patron işten memnun."),
+    W("være vant til", "-e alışkın olmak", "være vant til", "Jeg er ikke vant til mørket.", "Karanlığa alışkın değilim."),
+    W("være sint på", "-e kızgın olmak", "være sint po", "Hun er sint på meg.", "Bana kızgın."),
+    W("bli kjent med", "-ile tanışmak", "bli şent me", "Vi ble kjent med naboene.", "Komşularla tanıştık."),
+    W("på grunn av", "yüzünden", "po grün aav", "Toget er forsinket på grunn av snøen.", "Tren kar yüzünden rötarlı."),
+    W("i stedet for", "yerine", "i steede for", "Jeg tar sykkelen i stedet for bussen.", "Otobüs yerine bisiklete biniyorum."),
+    W("ved hjelp av", "yardımıyla", "ve yelp aav", "Hun lærte norsk ved hjelp av apper.", "Uygulamalar yardımıyla Norveççe öğrendi."),
+    W("siden", "-den beri", "siiden", "Jeg har bodd her siden 2020.", "2020'den beri burada oturuyorum."),
+    W("innen", "-e kadar, en geç", "innen", "Du må svare innen fredag.", "En geç cumaya kadar cevap vermelisin."),
+    W("i løpet av", "boyunca, içinde", "i lööpet av", "Jeg skal ringe i løpet av dagen.", "Gün içinde arayacağım.")
+  ],
+  dialogue: [["A", "Hva tenker du på?", "Ne düşünüyorsun?"], ["B", "Jeg lurer på om jeg skal søke på en ny jobb.", "Yeni bir işe başvurup başvurmamayı düşünüyorum."], ["A", "Er du ikke fornøyd med den du har?", "Şu anki işinden memnun değil misin?"], ["B", "Jo, men jeg er lei av å pendle på grunn av køene.", "Memnunum ama trafik yüzünden yolda gidip gelmekten bıktım."], ["A", "Kunne du jobbe hjemmefra i stedet for å kjøre hver dag?", "Her gün araba kullanmak yerine evden çalışamaz mısın?"], ["B", "Kanskje. Jeg skal i hvert fall snakke med sjefen om det i løpet av uka.", "Belki. Her halükârda hafta içinde patronla bunu konuşacağım."]],
+  quiz: [
+    Q("\"Seni düşünüyorum.\"", ["Jeg tenker på deg.", "Jeg tenker om deg.", "Jeg tenker til deg."], "tenke på = -i düşünmek."),
+    Q("\"Tatili dört gözle bekliyorum.\"", ["Jeg gleder meg til ferien.", "Jeg gleder meg på ferien.", "Jeg gleder meg for ferien."], "glede seg til."),
+    Q("\"Annemi çok seviyorum.\"", ["Jeg er glad i mora mi.", "Jeg er glad for mora mi.", "Jeg er glad på mora mi."], "være glad i = sevmek; glad for = sevinmek."),
+    Q("\"Köpeklerden korkuyor.\"", ["Hun er redd for hunder.", "Hun er redd av hunder.", "Hun er redd på hunder."], "være redd for."),
+    Q("\"Ne düşünüyorsun?\"", ["Hva tenker du på?", "Hva på tenker du?", "Hva du tenker på?"], "Soruda edat sona kalır, fiil ikinci sırada gelir."),
+    Q("\"Anahtarlarımı arıyorum.\"", ["Jeg leter etter nøklene mine.", "Jeg leter på nøklene mine.", "Jeg leter for nøklene mine."], "lete etter = -i aramak."),
+    Q("\"Hesabı isteyebilir miyim?\"", ["Kan jeg be om regningen?", "Kan jeg be på regningen?", "Kan jeg be for regningen?"], "be om = -i istemek."),
+    Q("\"Karanlığa alışkın değilim.\"", ["Jeg er ikke vant til mørket.", "Jeg er ikke vant med mørket.", "Jeg er ikke vant på mørket."], "være vant til."),
+    Q("\"2020'den beri burada oturuyorum.\"", ["Jeg har bodd her siden 2020.", "Jeg har bodd her fra 2020 siden.", "Jeg bor her for 2020 siden."], "siden + başlangıç noktası, perfektum ile."),
+    Q("\"En geç cumaya kadar cevap vermelisin.\"", ["Du må svare innen fredag.", "Du må svare siden fredag.", "Du må svare for fredag siden."], "Son tarih: innen."),
+    Q("\"Yemek yapmakta iyi.\"", ["Hun er flink til å lage mat.", "Hun er flink på å lage mat.", "Hun er flink med å lage mat."], "være flink til + å + fiil."),
+    Q("\"Tren kar yüzünden rötarlı.\"", ["Toget er forsinket på grunn av snøen.", "Toget er forsinket i grunn av snøen.", "Toget er forsinket ved grunn av snøen."], "på grunn av = yüzünden."),
+    Q("\"Otobüs yerine bisiklete biniyorum.\"", ["Jeg tar sykkelen i stedet for bussen.", "Jeg tar sykkelen på stedet for bussen.", "Jeg tar sykkelen ved stedet for bussen."], "i stedet for = yerine."),
+    Q("\"Uygulamalar yardımıyla Norveççe öğrendi.\"", ["Hun lærte norsk ved hjelp av apper.", "Hun lærte norsk på hjelp av apper.", "Hun lærte norsk i hjelp av apper."], "ved hjelp av = yardımıyla."),
+    Q("\"Bizde (Norveç'te) akşam yemeği erken yenir.\"", ["Hos oss spiser vi middag tidlig.", "På oss spiser vi middag tidlig.", "Ved oss spiser vi middag tidlig."], "hos oss = bizde, bizim ülkemizde/evimizde.")
+  ],
+  review: ["på: tenke på, vente på, høre på, svare på, stole på; til: glede seg til; om: snakke om, be om.", "glad i, redd for, interessert i, flink til, lei av, vant til; edat + å + fiil.", "på grunn av, i stedet for, hos oss, ved hjelp av; Hva tenker du på? siden, innen, i løpet av."]
+}
+];
+
+export default [...atLevel("A2", A2), ...atLevel("B1", B1)];

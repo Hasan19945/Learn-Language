@@ -1,0 +1,146 @@
+import { Q, W, atLevel } from "../helpers";
+import type { LessonDef } from "../../types";
+
+const A2: LessonDef[] = [
+{
+  id: "ne-a2-prep", title: "Prepositions: place, direction and time", no: "Preposisjoner: sted, retning og tid", icon: "path",
+  intro: "Norwegian prepositions look a lot like English ones, but they are often used differently: i Oslo (in Oslo), but på jobb (at work) and på kjøkkenet (in the kitchen). This lesson goes through the most common ones, especially i, på, hos and ved, with plenty of examples.",
+  notes: [
+    { h: "How Norwegian prepositions differ", p: "Like English, Norwegian puts a preposition in front of the noun: i huset (in the house), til huset (to the house), fra huset (from the house). The difficulty is that the choice often doesn't match English. 'At' can be på, hos or ved; 'in' can be i or på. The safest approach is to learn each place together with its preposition.",
+      table: [["English", "Norwegian", "Example"], ["in", "i, på", "i Oslo, på kjøkkenet"], ["at", "på, hos, ved", "på jobb, hos legen, ved døra"], ["to", "til", "til Oslo"], ["from", "fra", "fra Oslo"], ["with / by", "med", "med tog = by train"]] },
+    { h: "i: INSIDE something", p: "i means inside an area with borders: countries, cities, districts, enclosed spaces and containers. If you can picture being inside it, i is usually right. It is also used for the inside of texts like newspapers and books.",
+      table: [["Norwegian", "English"], ["Jeg bor i Norge.", "I live in Norway."], ["Hun jobber i Bergen.", "She works in Bergen."], ["Vi sitter i stua.", "We're sitting in the living room."], ["Barna leker i hagen.", "The children are playing in the garden."], ["Melken står i kjøleskapet.", "The milk is in the fridge."], ["Nøklene er i lomma mi.", "The keys are in my pocket."], ["Jeg leste det i avisen.", "I read it in the newspaper."], ["Vi skal handle i byen.", "We're going shopping in town."]] },
+    { h: "på: ON something, or AT a place", p: "på first means on a surface: the table, the wall, the floor. But it is used most for places where an activity happens: work, school, the cinema, hospital, the library, the post office. Islands and some inland towns take på (på Island, på Lillehammer). Languages, media and some activities take på too: på norsk, på TV, på ferie.",
+      table: [["Norwegian", "English"], ["Koppen står på bordet.", "The cup is on the table."], ["Bildet henger på veggen.", "The picture is on the wall."], ["Jeg er på jobb til fire.", "I'm at work until four."], ["Barna er på skolen.", "The children are at school."], ["Vi møtes på kafeen.", "We're meeting at the café."], ["Hun ligger på sykehuset.", "She's in hospital."], ["Jeg lånte boka på biblioteket.", "I borrowed the book from the library."], ["De bor på Island.", "They live in Iceland."], ["Han bor på Lillehammer.", "He lives in Lillehammer."], ["Hva heter det på norsk?", "What's that called in Norwegian?"], ["Jeg så det på TV.", "I saw it on TV."], ["Vi er på ferie.", "We're on holiday."]] },
+    { h: "Rooms at home: i or på?", p: "There's no reliable rule for rooms, so learn them by heart. The kitchen, bathroom, bedroom and study take på, even though English says 'in'. The living room, hall and basement take i.",
+      table: [["Norwegian", "English"], ["på kjøkkenet", "in the kitchen"], ["på badet", "in the bathroom"], ["på soverommet", "in the bedroom"], ["på kontoret", "in the office, in the study"], ["på rommet mitt", "in my room"], ["i stua", "in the living room"], ["i gangen", "in the hall"], ["i kjelleren", "in the basement"]] },
+    { h: "hos: AT someone's place", p: "hos always comes before a person or a profession, never a place. It's like French 'chez' or English 'at the doctor's', 'at my parents''. When you are going there, use til; when you are there, use hos. Saying 'på legen' or 'i legen' is wrong.",
+      table: [["Norwegian", "English"], ["Jeg er hos legen.", "I'm at the doctor's."], ["Jeg går til legen.", "I'm going to the doctor's."], ["Hun er hos frisøren.", "She's at the hairdresser's."], ["Jeg har time hos tannlegen.", "I have an appointment at the dentist's."], ["Vi spiser middag hos besteforeldrene.", "We're having dinner at our grandparents'."], ["Du kan sove hos oss.", "You can sleep at our place."], ["Hun bor hos foreldrene sine.", "She lives with her parents."], ["Kom hjem til meg i kveld!", "Come round to my place tonight!"]] },
+    { h: "ved: BY, NEXT TO, AT the edge of", p: "ved means right by or at the edge of something, not inside it. It's common with the sea, lakes, windows, doors and tables. With universities and big institutions it means studying or working there. With clock times it means 'around'. ved siden av means directly next to, side by side.",
+      table: [["Norwegian", "English"], ["Hun sitter ved vinduet.", "She's sitting by the window."], ["Vi har en hytte ved sjøen.", "We have a cabin by the sea."], ["Han står ved døra.", "He's standing at the door."], ["Familien sitter ved bordet.", "The family are sitting at the table."], ["Hotellet ligger ved stasjonen.", "The hotel is near the station."], ["Hun studerer ved universitetet.", "She studies at the university."], ["Jeg kommer ved femtiden.", "I'll come at around five."], ["Jeg sitter ved siden av Emil.", "I'm sitting next to Emil."]] },
+    { h: "Direction: til and fra; hjem/hjemme, ut/ute, inn/inne", p: "til means to and fra means from. Home, out and in each have two words: hjem, ut and inn for movement, and hjemme, ute and inne for being somewhere. It's like the difference between 'go home' and 'be at home'.",
+      table: [["Norwegian", "English"], ["Jeg går hjem.", "I'm going home."], ["Jeg er hjemme.", "I'm at home."], ["Barna går ut.", "The children are going out."], ["Barna leker ute.", "The children are playing outside."], ["Kom inn!", "Come in!"], ["Det er varmt inne.", "It's warm inside."], ["Toget går fra Oslo til Bergen.", "The train goes from Oslo to Bergen."], ["Hun kommer fra England.", "She comes from England."]] },
+    { h: "Time", p: "Time expressions are where English speakers make most mistakes. Days take på, repeated periods take om, and 'this evening, this summer' take i. 'In two days' (future) is om, 'two days ago' is for … siden, and 'for three years' (duration) is i. Never translate English 'for' with Norwegian for here.",
+      table: [["Norwegian", "English"], ["på mandag", "on Monday (this or last)"], ["om mandagen", "on Mondays, every Monday"], ["i dag / i kveld / i morgen", "today / this evening / tomorrow"], ["i sommer", "this summer"], ["om sommeren", "in summer, every summer"], ["om morgenen", "in the morning"], ["om to dager", "in two days"], ["for to dager siden", "two days ago"], ["i tre år", "for three years"], ["fra ni til fire", "from nine to four"], ["til klokka fem", "until five o'clock"]] },
+    { h: "Other prepositions of place", p: "These work much like English and always come before the noun.",
+      table: [["Norwegian", "English"], ["Katten sover under senga.", "The cat is sleeping under the bed."], ["Lampa henger over bordet.", "The lamp hangs above the table."], ["Bussen stopper foran skolen.", "The bus stops in front of the school."], ["Sykkelen står bak huset.", "The bike is behind the house."], ["Banken ligger mellom posten og kafeen.", "The bank is between the post office and the café."], ["Vi går gjennom parken.", "We walk through the park."], ["Vi sitter rundt bålet.", "We're sitting around the fire."]] }
+  ],
+  tip: "Before you choose, think about what kind of place it is: something you are inside (i), a workplace, activity or surface (på), a person (hos), or the edge of something (ved). And remember: 'for three years' is i tre år and 'in two days' is om to dager.",
+  words: [
+    W("i", "in (countries, cities, rooms)", "ee", "Jeg bor i Oslo.", "I live in Oslo."),
+    W("på", "on, at (surfaces, work, school)", "paw", "Boka ligger på bordet.", "The book is on the table."),
+    W("til", "to (direction)", "til", "Vi drar til Bergen i morgen.", "We're going to Bergen tomorrow."),
+    W("fra", "from", "frah", "Hun kommer fra England.", "She comes from England."),
+    W("hos", "at someone's place", "hoos", "Jeg er hos legen.", "I'm at the doctor's."),
+    W("ved", "by, at the edge of", "veh", "Vi har en hytte ved sjøen.", "We have a cabin by the sea."),
+    W("med", "with, by (transport)", "meh", "Jeg reiser med tog.", "I'm travelling by train."),
+    W("uten", "without", "EW-ten", "Jeg drikker kaffe uten sukker.", "I drink coffee without sugar."),
+    W("under", "under", "UN-ner", "Katten sover under senga.", "The cat is sleeping under the bed."),
+    W("over", "above, over", "AW-ver", "Lampa henger over bordet.", "The lamp hangs above the table."),
+    W("foran", "in front of", "FOR-ahn", "Bussen stopper foran skolen.", "The bus stops in front of the school."),
+    W("bak", "behind", "bahk", "Sykkelen står bak huset.", "The bike is behind the house."),
+    W("mellom", "between", "MEL-lom", "Banken ligger mellom posten og kafeen.", "The bank is between the post office and the café."),
+    W("ved siden av", "next to", "veh SEE-den ahv", "Jeg sitter ved siden av Emil.", "I'm sitting next to Emil."),
+    W("gjennom", "through", "YEN-nom", "Vi går gjennom parken.", "We walk through the park."),
+    W("rundt", "around", "runt", "Vi sitter rundt bålet.", "We're sitting around the fire."),
+    W("om", "in (part of day; future time)", "om", "Jeg trener om morgenen.", "I train in the morning.", { note: "om to dager = in two days" }),
+    W("hjem", "home (movement)", "yem", "Jeg går hjem nå.", "I'm going home now."),
+    W("hjemme", "at home", "YEM-meh", "Er du hjemme i kveld?", "Are you at home tonight?"),
+    W("ute", "outside", "EW-teh", "Barna leker ute.", "The children are playing outside.", { note: "ut = out (movement)" }),
+    W("inne", "inside", "IN-neh", "Det er varmt inne.", "It's warm inside.", { note: "inn = in (movement)" }),
+    W("for … siden", "… ago", "for … SEE-den", "Jeg kom til Norge for to år siden.", "I came to Norway two years ago.")
+  ],
+  dialogue: [["A", "Hei! Hvor er du nå?", "Hi! Where are you now?"], ["B", "Jeg er hos tannlegen, men jeg er ferdig om ti minutter.", "I'm at the dentist's, but I'll be done in ten minutes."], ["A", "Skal vi møtes på kafeen ved stasjonen?", "Shall we meet at the café by the station?"], ["B", "Ja! Den som ligger mellom banken og biblioteket?", "Yes! The one between the bank and the library?"], ["A", "Nettopp. Jeg sitter ved vinduet.", "Exactly. I'm sitting by the window."], ["B", "Flott, da kommer jeg dit om et kvarter.", "Great, I'll be there in a quarter of an hour."]],
+  quiz: [
+    Q("\"I live in Oslo.\"", ["Jeg bor i Oslo.", "Jeg bor på Oslo.", "Jeg bor til Oslo."], "Cities and countries take i."),
+    Q("\"I'm at work.\"", ["Jeg er på jobb.", "Jeg er i jobb.", "Jeg er til jobb."], "Work, school and the cinema take på."),
+    Q("\"I'm in the kitchen.\"", ["Jeg er på kjøkkenet.", "Jeg er til kjøkkenet.", "Jeg er fra kjøkkenet."], "kjøkken and bad take på; learn it by heart."),
+    Q("\"The children are playing in the garden.\"", ["Barna leker i hagen.", "Barna leker hos hagen.", "Barna leker til hagen."], "A garden is an area with borders: i hagen."),
+    Q("\"I'm at the doctor's.\"", ["Jeg er hos legen.", "Jeg er på legen.", "Jeg er med legen."], "At someone's place: hos."),
+    Q("\"I'm going to the doctor's.\"", ["Jeg går til legen.", "Jeg går hos legen.", "Jeg går på legen."], "Movement: til. Being there: hos."),
+    Q("\"She's sitting by the window.\"", ["Hun sitter ved vinduet.", "Hun sitter til vinduet.", "Hun sitter hos vinduet."], "By, at the edge of: ved."),
+    Q("\"We have a cabin by the sea.\"", ["Vi har en hytte ved sjøen.", "Vi har en hytte hos sjøen.", "Vi har en hytte til sjøen."], "By the sea or a lake: ved."),
+    Q("\"I'm going home.\"", ["Jeg går hjem.", "Jeg går hjemme.", "Jeg går til hjemme."], "Movement: hjem. Location: hjemme."),
+    Q("\"The children are playing outside.\"", ["Barna leker ute.", "Barna leker ut.", "Barna leker til ute."], "Being outside: ute. Going out: ut."),
+    Q("\"She's coming in two days.\"", ["Hun kommer om to dager.", "Hun kommer for to dager siden.", "Hun kommer i to dager."], "In the future, 'in' + time = om."),
+    Q("\"We're going to the cinema on Monday.\"", ["Vi går på kino på mandag.", "Vi går på kino i mandag.", "Vi går på kino om mandag."], "Days take på."),
+    Q("\"I've lived here for three years.\"", ["Jeg har bodd her i tre år.", "Jeg har bodd her for tre år.", "Jeg har bodd her om tre år."], "'for' + duration = i."),
+    Q("\"What's that called in Norwegian?\"", ["Hva heter det på norsk?", "Hva heter det i norsk?", "Hva heter det med norsk?"], "Languages take på.")
+  ],
+  review: ["i = inside (i Oslo, i stua); på = on, at a workplace (på jobb, på kjøkkenet).", "hos = at someone's place (hos legen); ved = by, at the edge (ved vinduet, ved sjøen).", "til / fra; hjem–hjemme, ut–ute, inn–inne; på mandag, om morgenen, om to dager, i tre år."]
+}
+];
+
+const B1: LessonDef[] = [
+{
+  id: "ne-b1-prep", title: "Prepositions 2: fixed prepositions", no: "Faste preposisjoner", icon: "key",
+  intro: "Many Norwegian verbs and adjectives always go with a particular preposition: tenke på (think about), glede seg til (look forward to). This lesson covers these fixed prepositions and the non-place uses of på, i, hos and ved, with lots of examples.",
+  notes: [
+    { h: "Why fixed prepositions matter", p: "English has fixed prepositions too (wait for, afraid of), but the Norwegian ones are often different: 'wait for' is vente på, 'think about' is tenke på, 'afraid of' is redd for. Translating word for word from English is the most common mistake. Learn every verb together with its preposition." },
+    { h: "Verbs with på", p: "This is the biggest group. Directing attention to something, waiting for something or reacting to something usually takes på.",
+      table: [["Norwegian", "English", "Example"], ["tenke på", "think about/of", "Jeg tenker på deg."], ["vente på", "wait for", "Vi venter på bussen."], ["høre på", "listen to", "Hør på meg!"], ["se på", "look at, watch", "Vi ser på TV."], ["svare på", "answer, reply to", "Kan du svare på e-posten?"], ["lure på", "wonder about", "Jeg lurer på hva klokka er."], ["søke på", "apply for", "Hun søker på en ny jobb."], ["stole på", "trust, rely on", "Du kan stole på meg."], ["tro på", "believe in", "Jeg tror på deg."], ["passe på", "look after", "Kan du passe på barna?"], ["være sint på", "be angry with", "Hun er sint på meg."]] },
+    { h: "Verbs with other prepositions", p: "om is often used for a topic, til for a goal, for for thanks and decisions, and etter for looking for something.",
+      table: [["Norwegian", "English", "Example"], ["snakke om", "talk about", "Vi snakket om filmen."], ["drømme om", "dream of/about", "Hun drømmer om å bli lege."], ["be om", "ask for", "Kan jeg be om regningen?"], ["bry seg om", "care about", "Han bryr seg om miljøet."], ["glede seg til", "look forward to", "Jeg gleder meg til helgen."], ["ha lyst til", "want to, feel like", "Jeg har lyst til å danse."], ["takke for", "thank for", "Takk for maten!"], ["bestemme seg for", "decide to/on", "Vi bestemte oss for å flytte."], ["lete etter", "look for", "Jeg leter etter nøklene mine."], ["bli kjent med", "get to know", "Jeg ble kjent med Kari på kurset."], ["delta i", "take part in", "Alle må delta i møtet."]] },
+    { h: "være + adjective + preposition", p: "Feelings, abilities and habits take fixed prepositions too. A different preposition can change the meaning: glad i (love) is not the same as glad for (happy about).",
+      table: [["Norwegian", "English", "Example"], ["være glad i", "love, be fond of", "Jeg er glad i deg."], ["være glad for", "be happy about", "Jeg er glad for hjelpen."], ["være redd for", "be afraid of", "Hun er redd for å fly."], ["være interessert i", "be interested in", "Han er interessert i fotball."], ["være flink til", "be good at", "Hun er flink til å tegne."], ["være lei av", "be tired of", "Jeg er lei av snøen."], ["være fornøyd med", "be satisfied with", "Er du fornøyd med leiligheten?"], ["være vant til", "be used to", "Jeg er ikke vant til mørket."], ["være stolt av", "be proud of", "Vi er stolte av deg."], ["være opptatt av", "care about, be into", "Hun er opptatt av helse."], ["være forelsket i", "be in love with", "Han er forelsket i Sofie."]] },
+    { h: "på, i, hos and ved beyond place", p: "In A2 you learned how these prepositions describe place. At B1 they also appear in many fixed expressions. Learn each one as a single unit.",
+      table: [["Norwegian", "English", "Example"], ["på grunn av", "because of", "Toget er forsinket på grunn av snøen."], ["på vei", "on the way", "Jeg er på vei hjem."], ["på samme måte", "in the same way", "Vi tenker på samme måte."], ["i stedet for", "instead of", "Jeg tar sykkelen i stedet for bussen."], ["i tillegg", "in addition", "I tillegg må du betale depositum."], ["i hvert fall", "at least, in any case", "Jeg kommer i hvert fall i morgen."], ["i forhold til", "compared to", "Oslo er dyrt i forhold til Bergen."], ["hos oss", "where we live, in our country", "Hos oss spiser vi middag klokka fem."], ["hos + person", "in someone (character)", "Det jeg liker hos ham, er humoren."], ["ved hjelp av", "with the help of", "Hun lærte norsk ved hjelp av apper."], ["ved siden av", "besides, alongside", "Ved siden av jobben studerer hun."], ["ved behov", "if needed", "Ring legevakten ved behov."]] },
+    { h: "Preposition + å + verb", p: "Where English uses an -ing form after a preposition (afraid of flying), Norwegian uses å + infinitive.",
+      table: [["Norwegian", "English"], ["Jeg gleder meg til å se deg.", "I'm looking forward to seeing you."], ["Hun er redd for å fly.", "She's afraid of flying."], ["Han er flink til å lage mat.", "He's good at cooking."], ["Jeg har lyst til å reise.", "I'd like to travel."], ["Vi er lei av å vente.", "We're tired of waiting."], ["Takk for at du kom!", "Thanks for coming!"]] },
+    { h: "The preposition goes to the end", p: "Just as in informal English, questions and relative clauses leave the preposition at the end of the sentence. Unlike English, Norwegian almost never moves it to the front ('About what…?').",
+      table: [["Norwegian", "English"], ["Hva tenker du på?", "What are you thinking about?"], ["Hvem venter du på?", "Who are you waiting for?"], ["Hva er du redd for?", "What are you afraid of?"], ["Hva snakker dere om?", "What are you talking about?"], ["Det er noe jeg gleder meg til.", "It's something I'm looking forward to."], ["Jobben jeg søkte på, var interessant.", "The job I applied for was interesting."]] },
+    { h: "Time: siden, innen, i løpet av, etter, før, gjennom", p: "These describe time more precisely. siden means since a starting point, innen means by a deadline, i løpet av means during or within a period. Don't confuse siden (since) with for … siden (ago).",
+      table: [["Norwegian", "English", "Example"], ["siden 2020", "since 2020", "Jeg har bodd her siden 2020."], ["for to år siden", "two years ago", "Jeg kom for to år siden."], ["innen fredag", "by Friday", "Send søknaden innen fredag."], ["i løpet av uka", "during the week", "Jeg ringer i løpet av uka."], ["etter jobben", "after work", "Vi trener etter jobben."], ["før middag", "before dinner", "Vask hendene før middag."], ["gjennom hele året", "all year round", "Butikken er åpen gjennom hele året."]] }
+  ],
+  tip: "\"være glad i\" and \"være glad for\" are different: Jeg er glad i deg = I love you. Jeg er glad for gaven = I'm happy about the present. Whenever you learn a new verb, ask: which preposition does it take?",
+  words: [
+    W("tenke på", "think about/of", "TEN-keh paw", "Jeg tenker ofte på familien min.", "I often think about my family."),
+    W("vente på", "wait for", "VEN-teh paw", "Vi venter på bussen.", "We're waiting for the bus."),
+    W("høre på", "listen to", "HUR-reh paw", "Hør på meg!", "Listen to me!"),
+    W("svare på", "answer, reply to", "SVAH-reh paw", "Kan du svare på e-posten?", "Can you reply to the email?"),
+    W("lure på", "wonder about", "LEW-reh paw", "Jeg lurer på om butikken er åpen.", "I wonder whether the shop is open."),
+    W("søke på", "apply for", "SUR-keh paw", "Hun søker på en ny jobb.", "She's applying for a new job."),
+    W("glede seg til", "look forward to", "GLEH-deh say til", "Barna gleder seg til jul.", "The children are looking forward to Christmas."),
+    W("ha lyst til", "want to, feel like", "hah lewst til", "Jeg har lyst til å danse.", "I feel like dancing."),
+    W("lete etter", "look for", "LEH-teh ET-ter", "Jeg leter etter nøklene mine.", "I'm looking for my keys."),
+    W("bry seg om", "care about", "brew say om", "Han bryr seg om miljøet.", "He cares about the environment."),
+    W("be om", "ask for", "beh om", "Kan jeg be om regningen?", "Can I ask for the bill?"),
+    W("være glad i", "love, be fond of", "VEH-reh glahd ee", "Jeg er glad i deg.", "I love you.", { note: "glad for = happy about" }),
+    W("være redd for", "be afraid of", "VEH-reh red for", "Hun er redd for hunder.", "She's afraid of dogs."),
+    W("være interessert i", "be interested in", "VEH-reh in-teh-reh-SEHRT ee", "Han er interessert i historie.", "He's interested in history."),
+    W("være flink til", "be good at", "VEH-reh flink til", "Hun er flink til å lage mat.", "She's good at cooking."),
+    W("være lei av", "be tired of", "VEH-reh lay ahv", "Jeg er lei av regnet.", "I'm tired of the rain."),
+    W("være fornøyd med", "be satisfied with", "VEH-reh for-NOYD meh", "Sjefen er fornøyd med arbeidet.", "The boss is satisfied with the work."),
+    W("være vant til", "be used to", "VEH-reh vahnt til", "Jeg er ikke vant til mørket.", "I'm not used to the darkness."),
+    W("være sint på", "be angry with", "VEH-reh sint paw", "Hun er sint på meg.", "She's angry with me."),
+    W("bli kjent med", "get to know", "blee shent meh", "Vi ble kjent med naboene.", "We got to know the neighbours."),
+    W("på grunn av", "because of", "paw grewn ahv", "Toget er forsinket på grunn av snøen.", "The train is delayed because of the snow."),
+    W("i stedet for", "instead of", "ee STEH-deh for", "Jeg tar sykkelen i stedet for bussen.", "I take the bike instead of the bus."),
+    W("ved hjelp av", "with the help of", "veh yelp ahv", "Hun lærte norsk ved hjelp av apper.", "She learned Norwegian with the help of apps."),
+    W("siden", "since", "SEE-den", "Jeg har bodd her siden 2020.", "I've lived here since 2020."),
+    W("innen", "by (deadline), within", "IN-nen", "Du må svare innen fredag.", "You must answer by Friday."),
+    W("i løpet av", "during, in the course of", "ee LUR-peh ahv", "Jeg skal ringe i løpet av dagen.", "I'll call during the day.")
+  ],
+  dialogue: [["A", "Hva tenker du på?", "What are you thinking about?"], ["B", "Jeg lurer på om jeg skal søke på en ny jobb.", "I'm wondering whether to apply for a new job."], ["A", "Er du ikke fornøyd med den du har?", "Aren't you happy with the one you've got?"], ["B", "Jo, men jeg er lei av å pendle på grunn av køene.", "Yes, but I'm tired of commuting because of the traffic jams."], ["A", "Kunne du jobbe hjemmefra i stedet for å kjøre hver dag?", "Could you work from home instead of driving every day?"], ["B", "Kanskje. Jeg skal i hvert fall snakke med sjefen om det i løpet av uka.", "Maybe. In any case, I'll talk to my boss about it during the week."]],
+  quiz: [
+    Q("\"I'm thinking about you.\"", ["Jeg tenker på deg.", "Jeg tenker om deg.", "Jeg tenker til deg."], "tenke på = think about."),
+    Q("\"I'm looking forward to the holiday.\"", ["Jeg gleder meg til ferien.", "Jeg gleder meg på ferien.", "Jeg gleder meg for ferien."], "glede seg til."),
+    Q("\"I love my mother.\"", ["Jeg er glad i mora mi.", "Jeg er glad for mora mi.", "Jeg er glad på mora mi."], "være glad i = love; glad for = happy about."),
+    Q("\"She's afraid of dogs.\"", ["Hun er redd for hunder.", "Hun er redd av hunder.", "Hun er redd på hunder."], "være redd for."),
+    Q("\"What are you thinking about?\"", ["Hva tenker du på?", "Hva på tenker du?", "Hva du tenker på?"], "The preposition goes to the end, and the verb comes second."),
+    Q("\"I'm looking for my keys.\"", ["Jeg leter etter nøklene mine.", "Jeg leter på nøklene mine.", "Jeg leter for nøklene mine."], "lete etter = look for."),
+    Q("\"Can I ask for the bill?\"", ["Kan jeg be om regningen?", "Kan jeg be på regningen?", "Kan jeg be for regningen?"], "be om = ask for."),
+    Q("\"I'm not used to the darkness.\"", ["Jeg er ikke vant til mørket.", "Jeg er ikke vant med mørket.", "Jeg er ikke vant på mørket."], "være vant til."),
+    Q("\"I've lived here since 2020.\"", ["Jeg har bodd her siden 2020.", "Jeg har bodd her fra 2020 siden.", "Jeg bor her for 2020 siden."], "siden + starting point, with the perfect."),
+    Q("\"You must answer by Friday.\"", ["Du må svare innen fredag.", "Du må svare siden fredag.", "Du må svare for fredag siden."], "Deadline: innen."),
+    Q("\"She's good at cooking.\"", ["Hun er flink til å lage mat.", "Hun er flink på å lage mat.", "Hun er flink med å lage mat."], "være flink til + å + verb."),
+    Q("\"The train is delayed because of the snow.\"", ["Toget er forsinket på grunn av snøen.", "Toget er forsinket i grunn av snøen.", "Toget er forsinket ved grunn av snøen."], "på grunn av = because of."),
+    Q("\"I take the bike instead of the bus.\"", ["Jeg tar sykkelen i stedet for bussen.", "Jeg tar sykkelen på stedet for bussen.", "Jeg tar sykkelen ved stedet for bussen."], "i stedet for = instead of."),
+    Q("\"She learned Norwegian with the help of apps.\"", ["Hun lærte norsk ved hjelp av apper.", "Hun lærte norsk på hjelp av apper.", "Hun lærte norsk i hjelp av apper."], "ved hjelp av = with the help of."),
+    Q("\"Where we live (in Norway), we eat dinner early.\"", ["Hos oss spiser vi middag tidlig.", "På oss spiser vi middag tidlig.", "Ved oss spiser vi middag tidlig."], "hos oss = where we live, in our country or home.")
+  ],
+  review: ["på: tenke på, vente på, høre på, svare på, stole på; til: glede seg til; om: snakke om, be om.", "glad i, redd for, interessert i, flink til, lei av, vant til; preposition + å + verb.", "på grunn av, i stedet for, hos oss, ved hjelp av; Hva tenker du på? siden, innen, i løpet av."]
+}
+];
+
+export default [...atLevel("A2", A2), ...atLevel("B1", B1)];

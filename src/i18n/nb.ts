@@ -163,6 +163,8 @@ export const nb: Strings = {
     next: "Neste scene",
     showTr: "Vis oversettelse",
     hideTr: "Skjul oversettelse",
+    slow: "Les sakte",
+    normalSpeed: "Normal fart",
     hint: name => `Trykk på Spill av. Nye ord dukker opp på skjermen mens ${name} forteller historien.`,
     ended: "Ferdig! Les historien nedenfor for å se ordene igjen.",
     noVoice: "Fant ingen passende stemme på denne enheten. Animasjonen spilles uten lyd, så følg med på tekstingen.",

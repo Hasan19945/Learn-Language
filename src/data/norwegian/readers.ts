@@ -100,7 +100,7 @@ const A2: LessonDef[] = [
     N("en", "sjef", "sjefen", "sjefer", "patron, şef", "şef", "Sjefen hans er hyggelig.", "Patronu nazik biri."),
     W("sliten", "yorgun", "sliten", "Han er ofte sliten.", "Sık sık yoruluyor."),
     W("ledig", "boş, müsait", "ledi", "Er leiligheten ledig?", "Daire boş mu?"),
-    W("husleie", "kira", "hüsleye", "Hun betaler 11 000 kroner i husleie.", "Kira olarak 11 000 kron ödüyor."),
+    W("husleie", "kira", "hüsleye", "Hun betaler elleve tusen kroner i husleie.", "Kira olarak on bir bin kron ödüyor."),
     W("kommer til å", "-ecek (tahmin)", "kommer til o", "Det kommer til å regne litt.", "Biraz yağmur yağacak."),
     N("en", "ferie", "ferien", "ferier", "tatil", "ferie", "Emil gleder seg til ferien.", "Emil tatili dört gözle bekliyor.")
   ],
@@ -120,7 +120,7 @@ const A2: LessonDef[] = [
 const B1: LessonDef[] = [
 {
   id: "b1-story", title: "Hayattan sekiz hikâye", no: "Åtte historier fra livet", icon: "spark", stories: readingStories("b1", "tr"),
-  intro: "B1'de öğrendiklerinle sekiz hikâye: NAV, iş görüşmesi, banka, Norveççe sınavı, rötarlı tren, mutfak, dağda kar ve mağazada şikâyet.",
+  intro: "B1'de öğrendiklerinle sekiz hikâye: Nav, iş görüşmesi, banka, Norveççe sınavı, rötarlı tren, mutfak, dağda kar ve mağazada şikâyet.",
   notes: [
     { h: "Hikâyelerde neleri tekrar ediyorsun?", p: "som ile ilgi cümlesi: saksbehandleren som hjalp henne. selv om ve likevel: Selv om det var vanskelig, ga hun ikke opp. mens ve da: Mens barna sover… Da hun kom til stasjonen… Pluskvamperfektum: hadde søkt, hadde trodd, hadde glemt. Edilgen: ble godkjent, må røres. Dolaylı soru: spurte hvorfor han ville jobbe der. jo … jo: Jo mer hun sparer, jo gladere blir hun." },
     { h: "Nasıl çalışmalı?", p: "Her hikâyeyi önce çeviriyle izle, sonra çeviriyi gizleyip tekrar izle. En son yüksek sesle oku. Kırmızı kelimeler bu dersin kelimeleri." }
@@ -150,7 +150,7 @@ const B1: LessonDef[] = [
   ],
   dialogue: [["A", "Hvorfor kom du så sent?", "Neden bu kadar geç geldin?"], ["B", "Toget var forsinket, og jeg måtte vente i en time.", "Tren rötarlıydı ve bir saat beklemek zorunda kaldım."], ["A", "Så kjedelig! Likevel er det bra at du kom.", "Ne sıkıcı! Yine de gelmen iyi oldu."], ["B", "Ja, og heldigvis fikk jeg pengene tilbake.", "Evet, ve neyse ki paramı geri aldım."]],
   quiz: [
-    Q("Mira'nın NAV'daki başvurusuna ne oldu?", ["Den ble godkjent.", "Den ble borte.", "Den kom for sent."], "Etter to uker fikk hun svar på søknaden. Den ble godkjent!"),
+    Q("Mira'nın Nav'daki başvurusuna ne oldu?", ["Den ble godkjent.", "Den ble borte.", "Den kom for sent."], "Etter to uker fikk hun svar på søknaden. Den ble godkjent!"),
     Q("\"Müdür neden orada çalışmak istediğini sordu.\"", ["Rektoren spurte hvorfor han ville jobbe der.", "Rektoren spurte hvorfor ville han jobbe der.", "Rektoren spurte hvorfor han jobbe ville der."], "Dolaylı soruda özne fiilden önce gelir: hvorfor han ville."),
     Q("Birikim hesabı neden daha iyi?", ["Den gir mer rente.", "Den er gratis.", "Den har et budsjett."], "En sparekonto gir mer rente enn en vanlig konto."),
     Q("\"Sınav sandığından daha kolaydı.\"", ["Prøven var lettere enn han hadde trodd.", "Prøven var lettere enn han har trodd.", "Prøven var mer lett enn han hadde trodd."], "Geçmişten daha önceki bir an: hadde + trodd."),
