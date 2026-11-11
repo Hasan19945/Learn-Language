@@ -1,3 +1,4 @@
+import { inLevelOrder } from "../helpers";
 import type { CourseDef } from "../../types";
 import a0 from "./a0";
 import a1 from "./a1";
@@ -7,6 +8,7 @@ import b2 from "./b2";
 import c1 from "./c1";
 import { interests } from "./interests";
 import { placement } from "./placement";
+import prepositions from "./prepositions";
 import readers from "./readers";
 import topics from "./topics";
 
@@ -17,7 +19,7 @@ export const norwegianEn: CourseDef = {
   sub: "Explanations in English, examples in Norwegian (Bokmål)",
   about: "This version is made for English speakers. The lessons point out where Norwegian and English differ and the mistakes English speakers tend to make.",
   sentenceNote: "New verbs: ser (watches), spiller (plays), betaler (pays), kjøper (buys). All add -r in the present, whoever the subject is.",
-  lessons: [...a0, ...a1, ...a2, ...b1, ...b2, ...c1, ...topics, ...readers],
+  lessons: [...inLevelOrder([...a0, ...a1, ...a2, ...b1, ...b2, ...c1, ...prepositions, ...topics]), ...readers],
   levels: [
     { id: "A0", title: "Beginner", d: "The alphabet, greetings, first sentences" },
     { id: "A1", title: "Elementary", d: "Family, shopping, time, home, transport" },

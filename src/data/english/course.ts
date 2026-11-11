@@ -1,4 +1,4 @@
-import { Q, W } from "../helpers";
+import { Q, W, inLevelOrder } from "../helpers";
 import type { CourseDef } from "../../types";
 import a0 from "./a0";
 import a1 from "./a1";
@@ -16,7 +16,7 @@ export const english: CourseDef = {
   sub: "Açıklamalar Türkçe, örnekler İngilizce",
   about: "Bu sürüm Türkçe konuşanlar için hazırlandı. Dersler Türkçe ile İngilizce arasındaki farkları özellikle gösteriyor.",
   sentenceNote: "Yeni fiiller: watch (izlemek), play (oynamak), pay (ödemek), buy (satın almak). he/she/it ile hepsi -s alır: he watches, she plays.",
-  lessons: [...a0, ...a1, ...a2, ...b1, ...b2, ...c1, ...topics, ...readers],
+  lessons: [...inLevelOrder([...a0, ...a1, ...a2, ...b1, ...b2, ...c1, ...topics]), ...readers],
   levels: [
     { id: "A0", title: "Başlangıç", d: "Alfabe, selamlaşma, temel cümleler" },
     { id: "A1", title: "Temel", d: "Aile, alışveriş, saat, ev, ulaşım" },

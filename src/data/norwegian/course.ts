@@ -1,3 +1,4 @@
+import { inLevelOrder } from "../helpers";
 import type { CourseDef } from "../../types";
 import a0 from "./a0";
 import a1 from "./a1";
@@ -8,6 +9,7 @@ import c1 from "./c1";
 import { interests } from "./interests";
 import { levels } from "./levels";
 import { placement } from "./placement";
+import prepositions from "./prepositions";
 import readers from "./readers";
 import topics from "./topics";
 
@@ -18,6 +20,6 @@ export const norwegian: CourseDef = {
   sub: "Açıklamalar Türkçe, örnekler Norveççe (Bokmål)",
   about: "Bu sürüm Türkçe konuşanlar için hazırlandı. Dersler Türkçe ile Norveççe arasındaki farkları özellikle gösteriyor.",
   sentenceNote: "Yeni fiiller: ser (izler), spiller (oynar), betaler (öder), kjøper (satın alır). Hepsi mastar + r kuralına uyar.",
-  lessons: [...a0, ...a1, ...a2, ...b1, ...b2, ...c1, ...topics, ...readers],
+  lessons: [...inLevelOrder([...a0, ...a1, ...a2, ...b1, ...b2, ...c1, ...prepositions, ...topics]), ...readers],
   interests, levels, placement
 };

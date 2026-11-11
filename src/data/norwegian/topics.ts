@@ -1,4 +1,4 @@
-import { N, Q, W, asExtra } from "../helpers";
+import { N, Q, W, atLevel } from "../helpers";
 import type { LessonDef } from "../../types";
 import { HEALTH_STORIES } from "./healthStories";
 import { IT_STORIES } from "./itStories";
@@ -230,4 +230,4 @@ const C1: LessonDef[] = [
 }
 ];
 
-export default [...asExtra("B1", B1), ...asExtra("B2", B2), ...asExtra("C1", C1)];
+export default [...atLevel("B1", B1), ...atLevel("B2", B2), ...atLevel("C1", C1)];
